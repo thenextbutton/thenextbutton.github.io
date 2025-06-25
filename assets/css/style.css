@@ -1,0 +1,15 @@
+.container {
+  display: flow-root;
+}
+
+.profile-image {
+  float: left;
+  margin-right: 15px;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}
+
+.text-content {
+  overflow: hidden;
+}
