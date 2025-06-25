@@ -13,3 +13,12 @@
 .text-content {
   overflow: hidden;
 }
+
+.corner-logo-fixed {
+  position: fixed; /* Key property: fixed to the viewport */
+  bottom: 20px;    /* Distance from the bottom edge of the viewport */
+  right: 20px;     /* Distance from the right edge of the viewport */
+  width: 150px;    /* Adjust size as needed */
+  height: auto;    /* Maintain aspect ratio */
+  z-index: 1000;   /* Ensures it stays on top of other content */
+}
