@@ -6,10 +6,15 @@ h1 {
   text-align: center; 
 }
 
-.container {
-  display: flow-root;
+.profile-image {
+  position: fixed;
+  top: 20px;       
+  left: 20px;   
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  z-index: 999; 
 }
-
 .profile-image {
   float: left;
   margin-right: 15px;
