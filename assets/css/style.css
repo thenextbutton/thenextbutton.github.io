@@ -1,3 +1,11 @@
+body {
+  font-family: "Consolas", monospace; /* Sets Consolas, with monospace as a fallback */
+}
+
+h1 {
+  text-align: center; 
+}
+
 .container {
   display: flow-root;
 }
@@ -23,6 +31,28 @@
   z-index: 1000;
 }
 
-h1 {
-  text-align: center; 
+.github-promo {
+  text-align: left;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding: 15px 20px;
+  background-color: #f0f8ff;
+  border: 1px solid #cceeff;
+  border-radius: 8px;
+  font-size: 1.1em;
+  line-height: 1.6;
+  color: #333;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.github-promo a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.github-promo a:hover {
+  text-decoration: underline;
 }
