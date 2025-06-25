@@ -39,6 +39,11 @@ h1 {
 
 .github-promo {
   text-align: left;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .github-promo a {
@@ -48,5 +53,23 @@ h1 {
 }
 
 .github-promo a:hover {
+  text-decoration: underline;
+}
+
+.powered-by-github {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  font-size: 0.8em;
+  color: #888;
+  z-index: 990;
+}
+
+.powered-by-github a {
+  color: #888;
+  text-decoration: none;
+}
+
+.powered-by-github a:hover {
   text-decoration: underline;
 }
