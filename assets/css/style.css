@@ -86,22 +86,59 @@ h1 {
   bottom: 70px;
   right: 20px;
   z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-#theme-toggle {
-  background-color: #333;
-  color: #f0f0f0;
-  border: 1px solid #555;
-  border-radius: 5px;
-  padding: 8px 12px;
+.theme-switch-checkbox {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+}
+
+.theme-switch-label {
   cursor: pointer;
-  font-size: 0.9em;
-  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  width: 50px;
+  height: 25px;
+  background: #333;
+  display: block;
+  border-radius: 25px;
+  position: relative;
+  transition: background-color 0.2s, border-color 0.2s;
+  border: 1px solid #555;
 }
 
-#theme-toggle:hover {
-  background-color: #555;
+.theme-switch-label:after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 21px;
+  height: 21px;
+  background: #f0f0f0;
+  border-radius: 50%;
+  transition: 0.2s;
 }
+
+.theme-switch-checkbox:checked + .theme-switch-label {
+  background: #bbb;
+  border-color: #999;
+}
+
+.theme-switch-checkbox:checked + .theme-switch-label:after {
+  left: calc(100% - 2px);
+  transform: translateX(-100%);
+  background: #1a1a1a;
+}
+
+.theme-switch-text {
+  color: #f0f0f0;
+  font-size: 0.9em;
+  user-select: none;
+  transition: color 0.2s;
+}
+
 
 .font-controls {
   position: fixed;
@@ -156,14 +193,12 @@ body.light-mode .powered-by-github a:hover {
     color: #444;
 }
 
-body.light-mode .font-controls span,
-body.light-mode #theme-toggle {
+body.light-mode .font-controls span {
   background-color: #eee;
   color: #1a1a1a;
   border-color: #bbb;
 }
 
-body.light-mode .font-controls span:hover,
-body.light-mode #theme-toggle:hover {
-  background-color: #ddd;
+body.light-mode .theme-switch-text {
+    color: #1a1a1a;
 }
