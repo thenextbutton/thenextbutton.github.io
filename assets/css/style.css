@@ -12,12 +12,14 @@ body {
   margin-right: auto;
   padding: 20px;
   box-sizing: border-box;
+  padding-top: 150px;
 }
 
 h1 {
   text-align: center;
   color: #a0a0a0;
-  margin-bottom: 120px;
+  margin-top: 0;
+  margin-bottom: 20px;
 }
 
 .profile-image {
@@ -74,4 +76,34 @@ h1 {
 
 .powered-by-github a:hover {
   text-decoration: underline;
+}
+
+.font-controls {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  gap: 10px;
+}
+
+.font-controls span {
+  width: 30px;
+  height: 30px;
+  background-color: #333;
+  color: #f0f0f0;
+  border: 1px solid #555;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2em;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s;
+}
+
+.font-controls span:hover {
+  background-color: #555;
 }
