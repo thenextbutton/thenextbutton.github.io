@@ -101,12 +101,13 @@ h1 {
   cursor: pointer;
   width: 50px;
   height: 25px;
-  background: #333;
+  background: #282a36;
   display: block;
   border-radius: 25px;
   position: relative;
-  transition: background-color 0.2s, border-color 0.2s;
+  transition: background 0.2s;
   border: 1px solid #555;
+  overflow: hidden;
 }
 
 .theme-switch-label:after {
@@ -119,11 +120,12 @@ h1 {
   background: #f0f0f0;
   border-radius: 50%;
   transition: 0.2s;
+  z-index: 1;
 }
 
 .theme-switch-checkbox:checked + .theme-switch-label {
-  background: #bbb;
-  border-color: #999;
+  background: linear-gradient(to right, #00C6FF, #0072FF);
+  border-color: #0072FF;
 }
 
 .theme-switch-checkbox:checked + .theme-switch-label:after {
