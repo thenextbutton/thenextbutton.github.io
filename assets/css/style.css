@@ -34,7 +34,7 @@ h1 {
 
 .corner-logo-fixed {
   position: fixed;
-  bottom: 20px;
+  top: 20px;
   right: 20px;
   width: 150px;
   height: auto;
@@ -80,7 +80,7 @@ h1 {
 
 .font-controls {
   position: fixed;
-  top: 20px;
+  bottom: 20px;
   right: 20px;
   z-index: 1000;
   display: flex;
