@@ -87,8 +87,9 @@ h1 {
   right: 20px;
   z-index: 1000;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 5px;
 }
 
 .theme-switch-checkbox {
