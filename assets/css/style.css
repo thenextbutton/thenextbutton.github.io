@@ -84,7 +84,7 @@ h1 {
 
 .theme-toggle-container {
   position: fixed;
-  bottom: 70px;
+  bottom: 20px;
   right: 20px;
   z-index: 1000;
   display: flex;
@@ -146,7 +146,7 @@ h1 {
 
 .font-controls {
   position: fixed;
-  bottom: 20px;
+  bottom: 70px;
   right: 20px;
   z-index: 1000;
   display: flex;
@@ -163,11 +163,18 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.2em;
   font-weight: bold;
   cursor: pointer;
   user-select: none;
   transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+#font-minus {
+  font-size: 0.9em;
+}
+
+#font-plus {
+  font-size: 1.5em;
 }
 
 .font-controls span:hover {
