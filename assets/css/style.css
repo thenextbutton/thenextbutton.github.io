@@ -48,13 +48,47 @@ h1 {
   transition: transform 0.3s ease-out;
 }
 
-/* New classes to slide logos to the sides */
 .profile-image.hidden {
-  transform: translateX(-150%); /* Slides the left logo further left */
+  transform: translateX(-150%);
 }
 
 .corner-logo-fixed.hidden {
-  transform: translateX(150%); /* Slides the right logo further right */
+  transform: translateX(150%);
+}
+
+/* New Menu Styles */
+.main-nav {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.main-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.main-nav li a {
+  text-decoration: none;
+  color: #a0a0a0;
+  font-weight: bold;
+  font-size: 1.1em;
+  padding: 5px 10px;
+  transition: color 0.2s ease-in-out;
+}
+
+.main-nav li a:hover {
+  color: #8be9fd;
 }
 
 .github-promo {
@@ -203,6 +237,15 @@ body.light-mode {
 
 body.light-mode h1 {
   color: #333;
+}
+
+/* Light mode menu link adjustments */
+body.light-mode .main-nav li a {
+  color: #333;
+}
+
+body.light-mode .main-nav li a:hover {
+  color: #007bff;
 }
 
 body.light-mode .github-promo a {
