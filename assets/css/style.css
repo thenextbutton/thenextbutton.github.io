@@ -35,7 +35,7 @@ h1 {
   height: 100px;
   border-radius: 50%;
   z-index: 999;
-  transition: transform 0.3s ease-out; 
+  transition: transform 0.3s ease-out;
 }
 
 .corner-logo-fixed {
@@ -45,12 +45,16 @@ h1 {
   width: 150px;
   height: auto;
   z-index: 1000;
-  transition: transform 0.3s ease-out; 
+  transition: transform 0.3s ease-out;
 }
 
+/* New classes to slide logos to the sides */
+.profile-image.hidden {
+  transform: translateX(-150%); /* Slides the left logo further left */
+}
 
-.slide-up {
-  transform: translateY(-150%); 
+.corner-logo-fixed.hidden {
+  transform: translateX(150%); /* Slides the right logo further right */
 }
 
 .github-promo {
