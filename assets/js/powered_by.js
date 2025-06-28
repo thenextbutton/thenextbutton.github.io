@@ -5,10 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
         poweredByP.className = 'powered-by-github';
 
         const poweredByLink = document.createElement('a');
-        poweredByLink.href = 'https://github.com/';
+        poweredByLink.href = 'https://pages.github.com/';
         poweredByLink.target = '_blank';
         poweredByLink.rel = 'noopener noreferrer';
-        poweredByLink.textContent = 'Powered by GitHub';
+        poweredByLink.textContent = 'Powered by GitHub Pages';
 
         poweredByP.appendChild(poweredByLink);
         document.body.appendChild(poweredByP);
