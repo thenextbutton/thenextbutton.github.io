@@ -8,8 +8,8 @@ const DARK_MODE_MS_LOGO_SRC = 'assets/images/MS_Cert_Professional_logo_Wht_rgb.p
 const LIGHT_MODE_MS_LOGO_SRC = 'assets/images/MS_Cert_Professional_logo_Blk_rgb.png';
 
 // New: Separate profile image sources for dark and light modes
-const DARK_MODE_PROFILE_IMAGE_SRC = 'assets/images/Profile_Image_Dark_Mode.png';
-const LIGHT_MODE_PROFILE_IMAGE_SRC = 'assets/images/Profile_Image_Light_Mode.png'; 
+const DARK_MODE_PROFILE_IMAGE_SRC = 'assets/images/Profile_Image_Dark_Mode.webp';
+const LIGHT_MODE_PROFILE_IMAGE_SRC = 'assets/images/Profile_Image_Light_Mode.webp'; 
 
 function applyTheme(isDarkMode) {
     if (isDarkMode) {
