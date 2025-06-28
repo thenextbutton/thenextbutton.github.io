@@ -21,7 +21,7 @@ const PROFILE_IMAGE_SOURCES = [
     'assets/images/proflie_10.webp', 
     'assets/images/proflie_11.webp', 
     'assets/images/proflie_12.webp', 
-    'assets/images/proflie_13.webp', 
+    'assets/images/proflie_13.webp'
 ];
 
 // Function to get a random profile image URL
