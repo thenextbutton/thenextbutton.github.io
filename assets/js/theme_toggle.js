@@ -4,8 +4,8 @@ const body = document.body;
 const msCertLogo = document.querySelector('.corner-logo-fixed');
 const profileImage = document.querySelector('.profile-image');
 
-const DARK_MODE_MS_LOGO_SRC = 'assets/images/MS_Cert_Professional_logo_Wht_rgb.png';
-const LIGHT_MODE_MS_LOGO_SRC = 'assets/images/MS_Cert_Professional_logo_Blk_rgb.png';
+const DARK_MODE_MS_LOGO_SRC = 'assets/images/MS_Cert_Professional_logo_Wht_rgb.webp';
+const LIGHT_MODE_MS_LOGO_SRC = 'assets/images/MS_Cert_Professional_logo_Blk_rgb.webp';
 
 // New: Separate profile image sources for dark and light modes
 const DARK_MODE_PROFILE_IMAGE_SRC = 'assets/images/Profile_Image_Dark_Mode.webp';
