@@ -1,27 +1,35 @@
-const fontMinusBtn = document.getElementById('font-minus');
-const fontPlusBtn = document.getElementById('font-plus');
+const fontMinus = document.getElementById('font-minus');
+const fontReset = document.getElementById('font-reset');
+const fontPlus = document.getElementById('font-plus');
 const contentColumn = document.querySelector('.content-column');
+
+const DEFAULT_FONT_SIZE = 14;
 
 let currentFontSize = parseFloat(getComputedStyle(contentColumn).fontSize);
 
-const MIN_FONT_SIZE = 14;
-const MAX_FONT_SIZE = 24;
-const FONT_SIZE_STEP = 1;
-
-function updateFontSize() {
-    contentColumn.style.fontSize = currentFontSize + 'px';
+const savedFontSize = localStorage.getItem('fontSize');
+if (savedFontSize) {
+    currentFontSize = parseFloat(savedFontSize);
+} else {
+    currentFontSize = DEFAULT_FONT_SIZE;
 }
+contentColumn.style.fontSize = currentFontSize + 'px';
 
-fontMinusBtn.addEventListener('click', () => {
-    if (currentFontSize > MIN_FONT_SIZE) {
-        currentFontSize -= FONT_SIZE_STEP;
-        updateFontSize();
-    }
+
+fontMinus.addEventListener('click', () => {
+    currentFontSize = Math.max(8, currentFontSize - 1);
+    contentColumn.style.fontSize = currentFontSize + 'px';
+    localStorage.setItem('fontSize', currentFontSize);
 });
 
-fontPlusBtn.addEventListener('click', () => {
-    if (currentFontSize < MAX_FONT_SIZE) {
-        currentFontSize += FONT_SIZE_STEP;
-        updateFontSize();
-    }
+fontReset.addEventListener('click', () => {
+    currentFontSize = DEFAULT_FONT_SIZE;
+    contentColumn.style.fontSize = currentFontSize + 'px';
+    localStorage.setItem('fontSize', currentFontSize);
+});
+
+fontPlus.addEventListener('click', () => {
+    currentFontSize = Math.min(30, currentFontSize + 1);
+    contentColumn.style.fontSize = currentFontSize + 'px';
+    localStorage.setItem('fontSize', currentFontSize);
 });
