@@ -8,26 +8,21 @@
 <body class="page-container">
 
 <img alt="My Profile Picture" class="profile-image">
+<img alt="MS Certification Logo" class="corner-logo-fixed">
 
-<h1>Hello World</h1>
+<header class="main-header-fixed">
+  <h1>Hello World</h1>
+  <nav class="main-nav">
+    <ul>
+      <li><a href="#" data-page="home">Home</a></li>
+      <li><a href="#" data-page="about_me">About Me</a></li>
+      <li><a href="#" data-page="github">GitHub</a></li>
+    </ul>
+  </nav>
+</header>
 
-<nav class="main-nav">
-  <ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="about_me.html">About Me</a></li>
-    <li><a href="github.html">GitHub</a></li>
-  </ul>
-</nav>
-
-<div class="content-column">
-
-  <p>I'm sure I could be more creative than this, but I am just testing this out</p>
-
-  <p class="github-promo">
-    Hey there! Since you've landed on my little corner of the web, why not swing by my GitHub? I've got some Home Assistant blueprints brewing that you might find super handy. There's one for catching those pesky offline Frigate cameras, plus neat setups for Plex and Jellyfin webhooks.
-    <a href="https://github.com/thenextbutton/home_assistant/tree/main/blueprints" target="_blank" rel="noopener noreferrer">Go on, have a look – your smart home might just thank you!</a>
-  </p>
-
+<div id="content-area">
+  <!-- Dynamic content will be loaded here by JavaScript -->
 </div>
 
 <div class="theme-toggle-container">
@@ -42,12 +37,11 @@
   <span id="font-plus">A</span>
 </div>
 
-<img alt="MS Certification Logo" class="corner-logo-fixed">
-
 <script src="assets/js/font_controls.js"></script>
 <script src="assets/js/theme_toggle.js"></script>
 <script src="assets/js/header_scroll.js"></script>
 <script src="assets/js/powered_by.js"></script>
+<script src="assets/js/spa_loader.js"></script> <!-- NEW SCRIPT LINK -->
 
 </body>
 </html>
