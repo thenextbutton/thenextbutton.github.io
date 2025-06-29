@@ -110,25 +110,6 @@ h1 {
   color: #8be9fd;
 }
 
-.github-promo {
-  text-align: left;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.github-promo a {
-  color: #8be9fd;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.github-promo a:hover {
-  text-decoration: underline;
-}
-
 .powered-by-github {
   position: fixed;
   bottom: 0;
@@ -269,10 +250,6 @@ body.light-mode .main-nav li a {
 }
 
 body.light-mode .main-nav li a:hover {
-  color: #007bff;
-}
-
-body.light-mode .github-promo a {
   color: #007bff;
 }
 
