@@ -54,7 +54,7 @@ h1 {
   height: 100px;
   border-radius: 50%;
   z-index: 999;
-  transition: transform 0.3s ease-out;
+  transition: transform 0.5s ease-out; /* Slower transition */
 }
 
 .corner-logo-fixed {
@@ -64,7 +64,7 @@ h1 {
   width: 150px;
   height: auto;
   z-index: 1000;
-  transition: transform 0.3s ease-out;
+  transition: transform 0.5s ease-out; /* Slower transition */
 }
 
 .profile-image.hidden {
@@ -102,7 +102,7 @@ h1 {
   font-weight: bold;
   font-size: 1.1em;
   padding: 5px 10px;
-  transition: color 0.2s ease-in-out;
+  transition: color 0.3s ease-in-out; /* Slower transition for color change */
 }
 
 .main-nav li a:hover {
@@ -162,7 +162,7 @@ h1 {
   display: block;
   border-radius: 25px;
   position: relative;
-  transition: background 0.2s;
+  transition: background 0.7s; /* Slower transition for background */
   border: 1px solid #555;
   overflow: hidden;
 }
@@ -176,7 +176,7 @@ h1 {
   height: 21px;
   background: #f0f0f0;
   border-radius: 50%;
-  transition: 0.2s;
+  transition: 0.7s; /* Slower transition for thumb */
   z-index: 1;
 }
 
@@ -221,7 +221,7 @@ h1 {
   font-weight: bold;
   cursor: pointer;
   user-select: none;
-  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Slower transition */
 }
 
 #font-minus {
@@ -286,28 +286,19 @@ body.light-mode .main-header-fixed {
 }
 
 
-/*
-   ========================================
-   Mobile Responsiveness - Media Queries
-   ========================================
-*/
 @media (max-width: 768px) {
-  /* Adjustments for smaller screens (e.g., tablets and mobile phones) */
 
-  /* Ensure body padding is sufficient for fixed elements on mobile */
   body {
     padding-top: 180px;
   }
 
-  /* Fixed Header Container */
   .main-header-fixed {
     padding: 10px 0;
     min-height: 120px;
   }
 
-  /* --- MOBILE H1 FONT SIZE --- */
   h1 {
-    font-size: 3.5em; /* This controls the "Hello World" font size on mobile */
+    font-size: 2.5em;
     padding: 0 15px;
     white-space: normal;
     overflow: visible;
@@ -324,13 +315,11 @@ body.light-mode .main-header-fixed {
     gap: 20px;
   }
 
-  /* --- MOBILE NAVIGATION LINKS FONT SIZE --- */
   .main-nav li a {
-    font-size: 2.3em; /* This controls the "Home | About Me | GitHub" font size on mobile */
+    font-size: 1.3em;
     padding: 5px 12px;
   }
 
-  /* Logos - make them even smaller and closer to the edges */
   .profile-image {
     top: 5px;
     left: 5px;
@@ -344,7 +333,6 @@ body.light-mode .main-header-fixed {
     width: 80px;
   }
 
-  /* Theme Toggle Button */
   .theme-toggle-container {
     bottom: 30px;
     right: 10px;
@@ -364,7 +352,6 @@ body.light-mode .main-header-fixed {
     left: 2px;
   }
 
-  /* Font Resize Buttons */
   .font-controls {
     bottom: 80px;
     right: 10px;
@@ -381,16 +368,15 @@ body.light-mode .main-header-fixed {
   }
 
   #font-reset {
-    font-size: 2.3em;
+    font-size: 1.3em;
   }
 
   #font-plus {
-    font-size: 3.8em;
+    font-size: 1.8em;
   }
 
-  /* --- MOBILE MAIN CONTENT FONT SIZE --- */
   .content-column {
     padding: 10px;
-    font-size: 2.3em; /* This controls the main paragraph text font size on mobile */
+    font-size: 1.3em;
   }
 }
