@@ -302,26 +302,26 @@ body.light-mode .theme-switch-text {
   }
 
   h1 {
-    font-size: 1.6em;
-    padding: 0 10px;
+    font-size: 2em; /* Increased font size for mobile h1 */
+    padding: 0 15px; /* Slightly increased horizontal padding for h1 */
     white-space: normal;
     overflow: visible;
     text-overflow: clip;
-    margin-bottom: 5px;
+    margin-bottom: 8px; /* Adjusted space below h1 */
   }
 
   .main-nav {
-    margin-top: 5px;
-    padding: 0 10px;
+    margin-top: 8px; /* Adjusted space above nav */
+    padding: 0 15px; /* Slightly increased horizontal padding for nav */
   }
 
   .main-nav ul {
-    gap: 10px;
+    gap: 15px; /* Increased gap between menu items */
   }
 
   .main-nav li a {
-    font-size: 0.9em;
-    padding: 3px 5px;
+    font-size: 1.1em; /* Increased font size for menu links */
+    padding: 5px 8px;
   }
 
   /* Logos - make them even smaller and closer to the edges */
@@ -385,6 +385,6 @@ body.light-mode .theme-switch-text {
   /* MAIN CONTENT FONT SIZE FOR MOBILE */
   .content-column {
     padding: 10px;
-    font-size: 1.1em; /* Increased font size for readability on mobile */
+    font-size: 1.2em; /* Further increased font size for readability on mobile */
   }
 }
