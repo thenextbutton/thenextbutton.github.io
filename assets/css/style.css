@@ -110,6 +110,16 @@ h1 {
   color: #8be9fd;
 }
 
+.content-column a {
+  color: #8be9fd;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.content-column a:hover {
+  text-decoration: underline;
+}
+
 .powered-by-github {
   position: fixed;
   bottom: 0;
@@ -250,6 +260,10 @@ body.light-mode .main-nav li a {
 }
 
 body.light-mode .main-nav li a:hover {
+  color: #007bff;
+}
+
+body.light-mode .content-column a { /* Re-added this block */
   color: #007bff;
 }
 
