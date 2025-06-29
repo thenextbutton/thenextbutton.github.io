@@ -13,7 +13,7 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #1a1a1a;
+  background-color: #1a1a1a; /* Default (Dark Mode) background */
   padding: 10px 0;
   box-sizing: border-box;
   z-index: 900;
@@ -282,6 +282,12 @@ body.light-mode .theme-switch-text {
     color: #1a1a1a;
 }
 
+/* Add this new rule for light mode header background */
+body.light-mode .main-header-fixed {
+  background-color: #f0f0f0; /* Light mode background */
+}
+
+
 /*
    ========================================
    Mobile Responsiveness - Media Queries
@@ -302,26 +308,26 @@ body.light-mode .theme-switch-text {
   }
 
   h1 {
-    font-size: 2.2em; /* Significantly increased font size for mobile h1 */
+    font-size: 2.2em;
     padding: 0 15px;
     white-space: normal;
     overflow: visible;
     text-overflow: clip;
-    margin-bottom: 10px; /* Adjusted space below h1 */
+    margin-bottom: 10px;
   }
 
   .main-nav {
-    margin-top: 10px; /* Adjusted space above nav */
+    margin-top: 10px;
     padding: 0 15px;
   }
 
   .main-nav ul {
-    gap: 18px; /* Increased gap between menu items */
+    gap: 18px;
   }
 
   .main-nav li a {
-    font-size: 1.2em; /* Significantly increased font size for menu links */
-    padding: 5px 10px; /* Adjusted padding for better touch targets */
+    font-size: 1.2em;
+    padding: 5px 10px;
   }
 
   /* Logos - make them even smaller and closer to the edges */
@@ -382,9 +388,4 @@ body.light-mode .theme-switch-text {
     font-size: 1.8em;
   }
 
-  /* MAIN CONTENT FONT SIZE FOR MOBILE */
-  .content-column {
-    padding: 10px;
-    font-size: 1.2em;
-  }
-}
+  /* MAIN CONTENT FONT SIZE FOR MOBILE
