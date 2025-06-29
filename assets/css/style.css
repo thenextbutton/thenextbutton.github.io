@@ -34,17 +34,6 @@ body {
   font-size: 14px;
 }
 
-.content-area-fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-}
-
-.content-area-fade-in.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 h1 {
   text-align: center;
   color: #a0a0a0;
@@ -274,7 +263,7 @@ body.light-mode .main-nav li a:hover {
   color: #007bff;
 }
 
-body.light-mode .content-column a { /* Re-added this block */
+body.light-mode .content-column a {
   color: #007bff;
 }
 
