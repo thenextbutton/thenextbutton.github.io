@@ -34,6 +34,17 @@ body {
   font-size: 14px;
 }
 
+.content-area-fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.content-area-fade-in.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 h1 {
   text-align: center;
   color: #a0a0a0;
@@ -109,6 +120,9 @@ h1 {
 .main-nav li a:hover {
   color: #8be9fd;
 }
+
+/* Removed specific .github-promo block and its link styling */
+/* The link styling is now handled by .content-column a */
 
 .content-column a {
   color: #8be9fd;
