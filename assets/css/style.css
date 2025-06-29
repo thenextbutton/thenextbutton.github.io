@@ -127,10 +127,11 @@ h1 {
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   display: flex;
-  align-items: center; /* Changed from flex-start to center for vertical alignment */
+  align-items: center;
   gap: 20px;
   text-align: left;
   transition: background-color 0.7s ease-in-out, box-shadow 0.7s ease-in-out;
+  position: relative;
 }
 
 .project-image {
@@ -139,9 +140,9 @@ h1 {
   height: auto;
   border-radius: 8px;
   display: block;
-  margin: auto; /* Centers horizontally and vertically within its flex item space */
-  max-width: 100%; /* Ensures it doesn't overflow its 25% width */
-  object-fit: contain; /* Scales image down nicely without cropping */
+  margin: auto;
+  max-width: 100%;
+  object-fit: contain;
 }
 
 .project-details {
@@ -149,7 +150,7 @@ h1 {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  text-align: left; /* Explicitly ensure text is left-aligned */
+  text-align: left;
 }
 
 .github-project-item h3 {
@@ -161,6 +162,24 @@ h1 {
 
 .github-project-item p {
   margin-bottom: 15px;
+}
+
+.home-assistant-corner-logo {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+}
+
+.home-assistant-corner-logo img {
+  width: 40px;
+  height: auto;
+  border-radius: 4px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.home-assistant-corner-logo:hover img {
+  transform: scale(1.1);
 }
 
 
@@ -461,5 +480,13 @@ body.light-mode .main-header-fixed {
   .project-details {
     width: 100%;
     align-items: center;
+  }
+
+  .home-assistant-corner-logo {
+    top: 5px;
+    right: 5px;
+  }
+  .home-assistant-corner-logo img {
+    width: 30px;
   }
 }
