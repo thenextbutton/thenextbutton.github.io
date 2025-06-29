@@ -15,9 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 initFontControls();
             }
 
-
             if (pushState) {
-
                 const hashPath = pageName === 'home' ? '#/' : `/#/${pageName}.html`;
                 history.pushState({ page: pageName }, '', hashPath);
             }
@@ -30,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-
     navLinks.forEach(link => {
         link.addEventListener('click', (event) => {
             event.preventDefault(); 
@@ -41,14 +38,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-
     window.addEventListener('popstate', (event) => {
-
         const hash = window.location.hash;
         let pageNameFromHash = 'home'; 
 
-        if (hash.startsWith('#/')) {
-
+        if (hash === '#/') { 
+            pageNameFromHash = 'home';
+        } else if (hash.startsWith('#/')) {
             pageNameFromHash = hash.substring(2).replace('.html', '');
         } else if (hash === '#') {
             pageNameFromHash = 'home';
@@ -61,10 +57,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const initialHash = window.location.hash;
     let initialPage = 'home'; 
 
-    if (initialHash.startsWith('#/')) {
-
+    if (initialHash === '#/') { 
+        initialPage = 'home';
+    } else if (initialHash.startsWith('#/')) {
         initialPage = initialHash.substring(2).replace('.html', '');
-    } else if (initialHash === '#') { 
+    } else if (initialHash === '#') {
         initialPage = 'home';
     }
 
