@@ -5,10 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Helper function to get the current page name from the URL hash
     function getCurrentPageNameFromHash() {
         const hash = window.location.hash;
-        if (hash.startsWith('#/')) {
-            return hash.substring(2).replace('.html', '');
-        } else if (hash === '#') {
+        if (hash === '#/' || hash === '#') { // Correctly handle #/ and # as 'home'
             return 'home';
+        } else if (hash.startsWith('#/')) {
+            return hash.substring(2).replace('.html', '');
         }
         return 'home'; // Default to 'home' if no valid hash
     }
