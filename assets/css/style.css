@@ -7,13 +7,12 @@ body {
   padding-top: 120px;
 }
 
-/* New fixed header container */
 .main-header-fixed {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #1a1a1a; /* Default (Dark Mode) background */
+  background-color: #1a1a1a;
   padding: 10px 0;
   box-sizing: border-box;
   z-index: 900;
@@ -31,7 +30,7 @@ body {
   padding: 20px;
   box-sizing: border-box;
   margin-top: 0;
-  font-size: 14px; /* Default desktop font size */
+  font-size: 14px;
 }
 
 h1 {
@@ -282,33 +281,24 @@ body.light-mode .theme-switch-text {
     color: #1a1a1a;
 }
 
-/* Add this new rule for light mode header background */
 body.light-mode .main-header-fixed {
-  background-color: #f0f0f0; /* Light mode background */
+  background-color: #f0f0f0;
 }
 
 
-/*
-   ========================================
-   Mobile Responsiveness - Media Queries
-   ========================================
-*/
 @media (max-width: 768px) {
-  /* Adjustments for smaller screens (e.g., tablets and mobile phones) */
 
-  /* Ensure body padding is sufficient for fixed elements on mobile */
   body {
     padding-top: 180px;
   }
 
-  /* Fixed Header Container */
   .main-header-fixed {
     padding: 10px 0;
     min-height: 120px;
   }
 
   h1 {
-    font-size: 2.2em;
+    font-size: 2.5em;
     padding: 0 15px;
     white-space: normal;
     overflow: visible;
@@ -322,15 +312,14 @@ body.light-mode .main-header-fixed {
   }
 
   .main-nav ul {
-    gap: 18px;
+    gap: 20px;
   }
 
   .main-nav li a {
-    font-size: 1.2em;
-    padding: 5px 10px;
+    font-size: 1.3em;
+    padding: 5px 12px;
   }
 
-  /* Logos - make them even smaller and closer to the edges */
   .profile-image {
     top: 5px;
     left: 5px;
@@ -344,7 +333,6 @@ body.light-mode .main-header-fixed {
     width: 80px;
   }
 
-  /* Theme Toggle Button */
   .theme-toggle-container {
     bottom: 30px;
     right: 10px;
@@ -364,7 +352,6 @@ body.light-mode .main-header-fixed {
     left: 2px;
   }
 
-  /* Font Resize Buttons */
   .font-controls {
     bottom: 80px;
     right: 10px;
@@ -388,4 +375,8 @@ body.light-mode .main-header-fixed {
     font-size: 1.8em;
   }
 
-  /* MAIN CONTENT FONT SIZE FOR MOBILE
+  .content-column {
+    padding: 10px;
+    font-size: 1.3em;
+  }
+}
