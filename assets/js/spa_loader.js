@@ -3,6 +3,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.main-nav a');
 
     async function loadContent(pageName, pushState = true) {
+        contentArea.classList.remove('show');
+        contentArea.classList.add('content-area-fade-in');
+
+        await new Promise(resolve => setTimeout(resolve, 100));
+
         try {
             const response = await fetch(`content/${pageName}_content.html`);
             if (!response.ok) {
@@ -20,18 +25,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 history.pushState({ page: pageName }, '', hashPath);
             }
 
+            contentArea.classList.remove('content-area-fade-in');
+            contentArea.classList.add('show');
+
+
             contentArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
         } catch (error) {
             console.error('Error loading content:', error);
             contentArea.innerHTML = `<div class="content-column"><p>Error loading content. Please try again later.</p></div>`;
+            contentArea.classList.remove('content-area-fade-in');
+            contentArea.classList.add('show');
         }
     }
 
     navLinks.forEach(link => {
         link.addEventListener('click', (event) => {
-            event.preventDefault(); 
-            const pageName = event.target.dataset.page; 
+            event.preventDefault();
+            const pageName = event.target.dataset.page;
             if (pageName) {
                 loadContent(pageName);
             }
@@ -40,9 +51,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('popstate', (event) => {
         const hash = window.location.hash;
-        let pageNameFromHash = 'home'; 
+        let pageNameFromHash = 'home';
 
-        if (hash === '#/') { 
+        if (hash === '#/') {
             pageNameFromHash = 'home';
         } else if (hash.startsWith('#/')) {
             pageNameFromHash = hash.substring(2).replace('.html', '');
@@ -50,14 +61,13 @@ document.addEventListener('DOMContentLoaded', () => {
             pageNameFromHash = 'home';
         }
 
-        loadContent(pageNameFromHash, false); 
+        loadContent(pageNameFromHash, false);
     });
 
-
     const initialHash = window.location.hash;
-    let initialPage = 'home'; 
+    let initialPage = 'home';
 
-    if (initialHash === '#/') { 
+    if (initialHash === '#/') {
         initialPage = 'home';
     } else if (initialHash.startsWith('#/')) {
         initialPage = initialHash.substring(2).replace('.html', '');
@@ -65,5 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
         initialPage = 'home';
     }
 
-    loadContent(initialPage, false); 
+    contentArea.classList.add('content-area-fade-in');
+    loadContent(initialPage, false).then(() => {
+        contentArea.classList.add('show');
+    });
 });
