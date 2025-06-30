@@ -57,7 +57,7 @@ function initFontControls() {
     });
 
     clonePlus.addEventListener('click', () => {
-        currentFontSize = Math.min(30, currentFontSize + 1); // Maximum 30px
+        currentFontSize = Math.min(25, currentFontSize + 1); // Maximum 30px
         targetElement.style.fontSize = currentFontSize + 'px';
         localStorage.setItem('fontSize', currentFontSize);
         if (typeof window.triggerHeaderScrollCheck === 'function') {
