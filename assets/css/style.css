@@ -172,7 +172,7 @@ h1 {
 }
 
 .home-assistant-corner-logo img {
-  width: 30px;
+  width: 20px;
   height: auto;
   border-radius: 4px;
   transition: transform 0.3s ease-in-out;
@@ -383,39 +383,39 @@ body.light-mode .main-header-fixed {
   }
 
   h1 {
-    font-size: 2.5em;
+    font-size: 3em; /* Increased for mobile */
     padding: 0 15px;
     white-space: normal;
     overflow: visible;
     text-overflow: clip;
-    margin-bottom: 10px;
+    margin-bottom: 15px; /* Adjusted spacing */
   }
 
   .main-nav {
-    margin-top: 10px;
+    margin-top: 15px; /* Adjusted spacing */
     padding: 0 15px;
   }
 
   .main-nav ul {
-    gap: 20px;
+    gap: 25px; /* Increased gap */
   }
 
   .main-nav li a {
-    font-size: 1.3em;
-    padding: 5px 12px;
+    font-size: 1.5em; /* Increased for mobile */
+    padding: 8px 15px; /* Increased padding for better touch targets */
   }
 
   .profile-image {
     top: 5px;
     left: 5px;
-    width: 50px;
-    height: 50px;
+    width: 60px; /* Slightly larger on mobile */
+    height: 60px;
   }
 
   .corner-logo-fixed {
     top: 5px;
     right: 5px;
-    width: 80px;
+    width: 90px; /* Slightly larger on mobile */
   }
 
   .theme-toggle-container {
@@ -444,25 +444,26 @@ body.light-mode .main-header-fixed {
   }
 
   .font-controls span {
-    width: 40px;
-    height: 40px;
+    width: 45px; /* Larger touch target */
+    height: 45px; /* Larger touch target */
+    font-size: 1.2em; /* Adjusted font size for buttons */
   }
 
   #font-minus {
-    font-size: 1em;
+    font-size: 1.2em;
   }
 
   #font-reset {
-    font-size: 1.3em;
+    font-size: 1.5em;
   }
 
   #font-plus {
-    font-size: 1.8em;
+    font-size: 2em;
   }
 
   .content-column {
-    padding: 10px;
-    font-size: 1.3em;
+    padding: 15px; /* Increased padding */
+    font-size: 1.4em; /* Significantly increased for readability on mobile */
   }
 
   .github-project-item {
@@ -472,9 +473,17 @@ body.light-mode .main-header-fixed {
   }
 
   .project-image {
-    width: 80%;
-    max-width: 200px;
-    margin-bottom: 15px;
+    width: 90%; /* Make image larger on mobile when stacked */
+    max-width: 250px; /* Limit max size for very large screens in mobile view */
+    margin-bottom: 20px; /* Add more space below image when stacked */
+  }
+
+  .github-project-item h3 {
+    font-size: 1.8em; /* Larger heading on mobile */
+  }
+
+  .github-project-item p {
+    font-size: 1.1em; /* Ensure description is also readable */
   }
 
   .project-details {
@@ -483,10 +492,10 @@ body.light-mode .main-header-fixed {
   }
 
   .home-assistant-corner-logo {
-    top: 5px;
-    right: 5px;
+    top: 8px; /* Adjusted position for mobile */
+    right: 8px; /* Adjusted position for mobile */
   }
   .home-assistant-corner-logo img {
-    width: 15px; /* Made 50% smaller (from 30px) */
+    width: 20px; /* Keeping it consistent with desktop for now, or adjust if needed */
   }
 }
