@@ -372,123 +372,133 @@ body.light-mode .main-header-fixed {
 
 
 @media (max-width: 768px) {
-  /* Set a more moderate base font size for the HTML element on mobile */
   html {
-    font-size: 16px; /* A common and good base font size for mobile */
+    font-size: 16px; /* Base font size for mobile */
   }
 
   body {
-    padding-top: 150px; /* Adjusted padding to accommodate header */
+    padding-top: 180px; /* Adjusted padding to ensure content clears header */
   }
 
   .main-header-fixed {
     padding: 10px 0;
-    min-height: 120px; /* Adjusted min-height for header content */
+    min-height: 150px; /* Ensure enough height for header content */
   }
 
   h1 {
-    font-size: 2.5rem; /* More balanced heading size */
+    font-size: 2.2rem; /* Adjusted for better fit and readability */
     line-height: 1.2;
     padding: 0 10px;
-    margin-bottom: 20px;
+    margin-bottom: 15px; /* Reduced margin to bring nav closer */
+    position: relative; /* Added to ensure z-index works if needed */
+    z-index: 1; /* Ensure it's above other elements if they overlap */
   }
 
   .main-nav {
-    margin-top: 15px;
+    margin-top: 10px; /* Reduced margin */
     padding: 0 10px;
   }
 
   .main-nav ul {
-    gap: 25px;
+    gap: 20px; /* Adjusted gap */
   }
 
   .main-nav li a {
-    font-size: 1.2rem; /* More balanced navigation link size */
-    padding: 10px 18px;
+    font-size: 1.1rem; /* Adjusted for better fit */
+    padding: 8px 12px; /* Adjusted padding */
   }
 
   .profile-image {
     top: 10px;
     left: 10px;
-    width: 70px;
-    height: 70px;
+    width: 60px; /* Slightly smaller for better fit */
+    height: 60px;
+    z-index: 1001; /* Ensure it's above h1 */
   }
 
   .corner-logo-fixed {
     top: 10px;
     right: 10px;
-    width: 100px;
+    width: 90px; /* Slightly smaller for better fit */
+    z-index: 1001; /* Ensure it's above h1 */
   }
 
   .theme-toggle-container {
-    bottom: 30px;
+    bottom: 10px; /* Closer to the bottom */
     right: 10px;
-    gap: 10px;
+    gap: 8px; /* Smaller gap */
+    z-index: 1000; /* Ensure it's above content */
   }
 
   .theme-switch-label {
-    width: 60px;
-    height: 30px;
-    border-radius: 30px;
+    width: 50px; /* Smaller toggle switch */
+    height: 25px;
+    border-radius: 25px;
   }
 
   .theme-switch-label:after {
-    width: 26px;
-    height: 26px;
+    width: 21px;
+    height: 21px;
     top: 2px;
     left: 2px;
   }
 
+  .theme-switch-text {
+    font-size: 0.8em; /* Slightly smaller text next to toggle */
+  }
+
   .font-controls {
-    bottom: 80px;
+    bottom: 50px; /* Positioned above theme toggle */
     right: 10px;
-    gap: 10px;
+    gap: 8px; /* Smaller gap */
+    z-index: 1000; /* Ensure it's above content */
   }
 
   .font-controls span {
-    width: 45px;
-    height: 45px;
-    font-size: 1.2em;
+    width: 40px; /* Smaller touch target */
+    height: 40px;
+    font-size: 1em; /* Adjusted font size for buttons */
   }
 
   #font-minus {
-    font-size: 1.2em;
+    font-size: 1em;
   }
 
   #font-reset {
-    font-size: 1.5em;
+    font-size: 1.2em;
   }
 
   #font-plus {
-    font-size: 1.8em;
+    font-size: 1.5em;
   }
 
   .content-column {
-    padding: 15px;
-    font-size: 1rem; /* Base content font size, now 16px */
+    padding: 15px; /* Adjusted padding */
+    font-size: 1rem; /* Base content font size (16px) */
     line-height: 1.6;
+    margin-bottom: 100px; /* Add margin to prevent overlap with fixed controls */
   }
 
   .github-project-item {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 20px;
+    padding: 15px;
   }
 
   .project-image {
-    width: 90%;
-    max-width: 250px;
-    margin-bottom: 20px;
+    width: 80%; /* Adjusted width */
+    max-width: 200px; /* Adjusted max-width */
+    margin-bottom: 15px;
   }
 
   .github-project-item h3 {
-    font-size: 1.8rem; /* Adjusted heading size */
+    font-size: 1.5rem; /* Adjusted heading size */
   }
 
   .github-project-item p {
-    font-size: 1rem; /* Adjusted description size */
-    line-height: 1.5;
+    font-size: 0.95rem; /* Adjusted description size */
+    line-height: 1.4;
   }
 
   .project-details {
@@ -497,10 +507,10 @@ body.light-mode .main-header-fixed {
   }
 
   .home-assistant-corner-logo {
-    top: 10px;
-    right: 10px;
+    top: 8px;
+    right: 8px;
   }
   .home-assistant-corner-logo img {
-    width: 25px;
+    width: 20px;
   }
 }
