@@ -374,117 +374,117 @@ body.light-mode .main-header-fixed {
 @media (max-width: 768px) {
 
   body {
-    padding-top: 180px;
+    padding-top: 200px; /* Increased padding to accommodate larger header */
   }
 
   .main-header-fixed {
-    padding: 10px 0;
-    min-height: 120px;
+    padding: 15px 0; /* Increased padding */
+    min-height: 150px; /* Increased min-height for larger header content */
   }
 
   h1 {
-    font-size: 3.5em; /* Significantly increased for mobile */
-    padding: 0 15px;
-    white-space: normal;
-    overflow: visible;
-    text-overflow: clip;
-    margin-bottom: 20px; /* Adjusted spacing */
+    font-size: 4em; /* Significantly increased for mobile */
+    line-height: 1.1; /* Tighter line height for large headings */
+    padding: 0 10px;
+    margin-bottom: 25px; /* Adjusted spacing */
   }
 
   .main-nav {
-    margin-top: 15px; /* Adjusted spacing */
-    padding: 0 15px;
+    margin-top: 20px; /* Increased spacing */
+    padding: 0 10px;
   }
 
   .main-nav ul {
-    gap: 25px; /* Increased gap */
+    gap: 30px; /* Increased gap */
   }
 
   .main-nav li a {
-    font-size: 1.8em; /* Significantly increased for mobile */
-    padding: 10px 18px; /* Increased padding for better touch targets */
+    font-size: 2em; /* Significantly increased for mobile */
+    padding: 12px 20px; /* Increased padding for better touch targets */
   }
 
   .profile-image {
-    top: 5px;
-    left: 5px;
-    width: 70px; /* Larger on mobile */
-    height: 70px;
+    top: 10px; /* Adjusted position */
+    left: 10px;
+    width: 80px; /* Larger on mobile */
+    height: 80px;
   }
 
   .corner-logo-fixed {
-    top: 5px;
-    right: 5px;
-    width: 100px; /* Larger on mobile */
+    top: 10px; /* Adjusted position */
+    right: 10px;
+    width: 120px; /* Larger on mobile */
   }
 
   .theme-toggle-container {
-    bottom: 30px;
-    right: 10px;
-    gap: 10px;
+    bottom: 40px; /* Adjusted position */
+    right: 15px; /* Adjusted position */
+    gap: 15px; /* Increased gap */
   }
 
   .theme-switch-label {
-    width: 70px; /* Larger toggle switch */
-    height: 35px;
-    border-radius: 35px;
+    width: 80px; /* Larger toggle switch */
+    height: 40px;
+    border-radius: 40px;
   }
 
   .theme-switch-label:after {
-    width: 31px; /* Larger thumb */
-    height: 31px;
+    width: 36px; /* Larger thumb */
+    height: 36px;
     top: 2px;
     left: 2px;
   }
 
   .font-controls {
-    bottom: 80px;
-    right: 10px;
-    gap: 10px;
+    bottom: 100px; /* Adjusted position */
+    right: 15px; /* Adjusted position */
+    gap: 15px; /* Increased gap */
   }
 
   .font-controls span {
-    width: 50px; /* Larger touch target */
-    height: 50px; /* Larger touch target */
-    font-size: 1.5em; /* Adjusted font size for buttons */
+    width: 55px; /* Larger touch target */
+    height: 55px; /* Larger touch target */
+    font-size: 1.8em; /* Adjusted font size for buttons */
   }
 
   #font-minus {
-    font-size: 1.5em;
-  }
-
-  #font-reset {
     font-size: 1.8em;
   }
 
+  #font-reset {
+    font-size: 2em;
+  }
+
   #font-plus {
-    font-size: 2.2em;
+    font-size: 2.5em;
   }
 
   .content-column {
-    padding: 15px; /* Increased padding */
-    font-size: 1.5em; /* Significantly increased for readability on mobile */
+    padding: 20px; /* Increased padding */
+    font-size: 1.8em; /* Significantly increased for readability on mobile */
+    line-height: 1.6; /* Increased line height for better readability */
   }
 
   .github-project-item {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 15px; /* Adjusted padding for mobile */
+    padding: 20px; /* Adjusted padding for mobile */
   }
 
   .project-image {
     width: 90%;
-    max-width: 250px;
-    margin-bottom: 20px;
+    max-width: 280px; /* Increased max-width */
+    margin-bottom: 25px; /* More space below image */
   }
 
   .github-project-item h3 {
-    font-size: 2em; /* Even larger heading on mobile */
+    font-size: 2.5em; /* Even larger heading on mobile */
   }
 
   .github-project-item p {
-    font-size: 1.2em; /* Ensure description is very readable */
+    font-size: 1.5em; /* Ensure description is very readable */
+    line-height: 1.5; /* Adjusted line height */
   }
 
   .project-details {
@@ -493,10 +493,10 @@ body.light-mode .main-header-fixed {
   }
 
   .home-assistant-corner-logo {
-    top: 8px;
-    right: 8px;
+    top: 10px;
+    right: 10px;
   }
   .home-assistant-corner-logo img {
-    width: 25px; /* Slightly larger on mobile for better visibility */
+    width: 30px; /* Slightly larger on mobile for better visibility */
   }
 }
