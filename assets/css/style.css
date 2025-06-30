@@ -45,7 +45,7 @@ h1 {
   text-overflow: ellipsis;
   padding: 0 180px;
   box-sizing: border-box;
-  transition: transform 0.7s ease-out; /* Add transition for sliding effect */
+  transition: transform 0.7s ease-out;
 }
 
 .profile-image {
@@ -70,9 +70,9 @@ h1 {
 }
 
 .corner-logo-fixed img {
-  object-fit: contain; /* Ensure aspect ratio is maintained */
+  object-fit: contain;
   width: 100%;
-  height: 100%; /* Ensure height is also considered for object-fit */
+  height: 100%;
 }
 
 .profile-image.hidden {
@@ -386,7 +386,7 @@ body.light-mode .main-header-fixed {
   }
 
   body {
-    padding-top: 180px; /* Adjusted padding to ensure content clears header */
+    padding-top: 180px;
     font-size: 1rem;
   }
 
@@ -398,13 +398,13 @@ body.light-mode .main-header-fixed {
   h1 {
     font-size: 2.2rem;
     line-height: 1.2;
-    /* Increased horizontal padding to push text away from logos */
     padding: 0 120px;
-    margin-bottom: 15px;
+    /* Adjusted margin-bottom to create more space below h1 */
+    margin-bottom: 25px; /* Increased from 15px */
     position: relative;
     z-index: 1;
-    /* Initial position: pushed down below logos */
-    transform: translateY(40px); /* Adjust this value as needed */
+    /* Adjusted initial position to center it better vertically */
+    transform: translateY(30px); /* Reduced from 40px */
   }
 
   /* New class for when h1 slides up */
@@ -413,7 +413,8 @@ body.light-mode .main-header-fixed {
   }
 
   .main-nav {
-    margin-top: 10px;
+    /* Adjusted margin-top to create less space above nav, pulling it closer to h1 */
+    margin-top: 5px; /* Reduced from 10px */
     padding: 0 10px;
   }
 
