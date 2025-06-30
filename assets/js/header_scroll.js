@@ -3,15 +3,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const msCertLogo = document.querySelector('.corner-logo-fixed');
 
     const SCROLL_THRESHOLD = 50;
-    let hideTimeoutId = null; // To store the ID of the setTimeout for cancelling
+    let hideTimeoutId = null;
     let isProfileImageActuallyHidden = false; // Tracks if the image is visually hidden (after transition)
 
     function handleScroll() {
         let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
         if (currentScrollTop > SCROLL_THRESHOLD) {
-            // Scrolling down, should hide logos
-            if (!isProfileImageActuallyHidden) { // If not already visually hidden
+            // If scrolled past the threshold, hide logos
+            // This block runs when the user scrolls down and the logos should go out of view.
+            if (!isProfileImageActuallyHidden) { // Only run if the image was previously visible
                 // Clear any pending timeout that might try to show the image prematurely
                 clearTimeout(hideTimeoutId);
 
@@ -36,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, profileImageTransitionDuration);
             }
         } else {
-            // Scrolling up, should show logos
+            // If scrolled near the top, show logos
             // If currently visually hidden OR has the 'hidden' class (meaning it's transitioning out)
             if (isProfileImageActuallyHidden || profileImage.classList.contains('hidden')) {
                 // Clear any pending timeout that would change the image source while it's coming back into view
@@ -53,9 +54,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Attach the scroll event listener
     window.addEventListener('scroll', handleScroll);
 
-    // Initial check on load (in case page loads scrolled down)
+    // Also attach a resize event listener to handle viewport height changes (like address bar hiding/showing)
+    window.addEventListener('resize', handleScroll);
+
+    // Initial check on load
     handleScroll();
 
-    // Expose handleScroll globally so other scripts (like font_controls.js) can trigger it
+    // Expose handleScroll globally
     window.triggerHeaderScrollCheck = handleScroll;
 });

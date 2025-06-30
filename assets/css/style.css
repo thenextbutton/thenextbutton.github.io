@@ -388,50 +388,52 @@ body.light-mode .main-header-fixed {
   h1 {
     font-size: 2.2rem; /* Adjusted for better fit and readability */
     line-height: 1.2;
-    padding: 0 10px;
-    margin-bottom: 15px; /* Reduced margin to bring nav closer */
-    position: relative; /* Added to ensure z-index works if needed */
-    z-index: 1; /* Ensure it's above other elements if they overlap */
+    /* Increased horizontal padding to push text away from logos */
+    padding: 0 120px; /* Increased from 10px */
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 1;
   }
 
   .main-nav {
-    margin-top: 10px; /* Reduced margin */
+    margin-top: 10px;
     padding: 0 10px;
   }
 
   .main-nav ul {
-    gap: 20px; /* Adjusted gap */
+    gap: 20px;
   }
 
   .main-nav li a {
-    font-size: 1.1rem; /* Adjusted for better fit */
-    padding: 8px 12px; /* Adjusted padding */
+    font-size: 1.1rem;
+    padding: 8px 12px;
   }
 
   .profile-image {
     top: 10px;
     left: 10px;
-    width: 60px; /* Slightly smaller for better fit */
+    width: 60px;
     height: 60px;
-    z-index: 1001; /* Ensure it's above h1 */
+    z-index: 1001;
   }
 
   .corner-logo-fixed {
     top: 10px;
     right: 10px;
-    width: 90px; /* Slightly smaller for better fit */
-    z-index: 1001; /* Ensure it's above h1 */
+    width: 90px;
+    height: 90px; /* Ensure height is set to maintain aspect ratio if width is constrained */
+    z-index: 1001;
   }
 
   .theme-toggle-container {
-    bottom: 10px; /* Closer to the bottom */
+    bottom: 10px;
     right: 10px;
-    gap: 8px; /* Smaller gap */
-    z-index: 1000; /* Ensure it's above content */
+    gap: 8px;
+    z-index: 1000;
   }
 
   .theme-switch-label {
-    width: 50px; /* Smaller toggle switch */
+    width: 50px;
     height: 25px;
     border-radius: 25px;
   }
@@ -444,20 +446,20 @@ body.light-mode .main-header-fixed {
   }
 
   .theme-switch-text {
-    font-size: 0.8em; /* Slightly smaller text next to toggle */
+    font-size: 0.8em;
   }
 
   .font-controls {
-    bottom: 50px; /* Positioned above theme toggle */
+    bottom: 50px;
     right: 10px;
-    gap: 8px; /* Smaller gap */
-    z-index: 1000; /* Ensure it's above content */
+    gap: 8px;
+    z-index: 1000;
   }
 
   .font-controls span {
-    width: 40px; /* Smaller touch target */
+    width: 40px;
     height: 40px;
-    font-size: 1em; /* Adjusted font size for buttons */
+    font-size: 1em;
   }
 
   #font-minus {
@@ -473,10 +475,10 @@ body.light-mode .main-header-fixed {
   }
 
   .content-column {
-    padding: 15px; /* Adjusted padding */
-    font-size: 1rem; /* Base content font size (16px) */
+    padding: 15px;
+    font-size: 1rem;
     line-height: 1.6;
-    margin-bottom: 100px; /* Add margin to prevent overlap with fixed controls */
+    margin-bottom: 100px; /* Ensure enough space for bottom fixed controls */
   }
 
   .github-project-item {
@@ -487,17 +489,17 @@ body.light-mode .main-header-fixed {
   }
 
   .project-image {
-    width: 80%; /* Adjusted width */
-    max-width: 200px; /* Adjusted max-width */
+    width: 80%;
+    max-width: 200px;
     margin-bottom: 15px;
   }
 
   .github-project-item h3 {
-    font-size: 1.5rem; /* Adjusted heading size */
+    font-size: 1.5rem;
   }
 
   .github-project-item p {
-    font-size: 0.95rem; /* Adjusted description size */
+    font-size: 0.95rem;
     line-height: 1.4;
   }
 
