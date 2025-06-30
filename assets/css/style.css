@@ -196,7 +196,7 @@ h1 {
   position: fixed;
   bottom: 0;
   left: 0;
-  font-size: 12px; /* Changed from 0.8rem to fixed pixels */
+  font-size: 12px;
   color: #888;
   z-index: 990;
 }
@@ -386,23 +386,23 @@ body.light-mode .main-header-fixed {
   }
 
   body {
-    padding-top: 180px;
+    padding-top: 170px; /* Reduced padding-top to bring content up */
     font-size: 1rem;
   }
 
   .main-header-fixed {
     padding: 10px 0;
-    min-height: 150px;
+    min-height: 140px; /* Slightly reduced min-height */
   }
 
   h1 {
     font-size: 2.2rem;
     line-height: 1.2;
     padding: 0 120px;
-    margin-bottom: 25px;
+    margin-bottom: 15px; /* Reduced margin-bottom to bring nav closer */
     position: relative;
     z-index: 1;
-    transform: translateY(30px);
+    transform: translateY(20px); /* Reduced translateY to bring h1 closer to logos */
   }
 
   h1.slide-up {
@@ -410,7 +410,7 @@ body.light-mode .main-header-fixed {
   }
 
   .main-nav {
-    margin-top: 5px;
+    margin-top: 10px; /* Increased margin-top to push nav down from h1 */
     padding: 0 10px;
   }
 
