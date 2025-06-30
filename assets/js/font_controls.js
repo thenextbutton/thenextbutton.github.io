@@ -3,12 +3,10 @@ function initFontControls() {
     const fontMinus = document.getElementById('font-minus');
     const fontReset = document.getElementById('font-reset');
     const fontPlus = document.getElementById('font-plus');
-    const contentColumn = document.querySelector('.content-column'); // Select contentColumn dynamically
+    const contentColumn = document.querySelector('.content-column');
 
-    // If contentColumn is not found (e.g., page still loading), exit
     if (!contentColumn) {
         console.warn("content-column not found for font controls. Retrying soon.");
-        // You might want to add a small delay and retry here if it's a common race condition
         return;
     }
 
@@ -36,21 +34,33 @@ function initFontControls() {
 
     // Re-add event listeners to the new cloned nodes
     cloneMinus.addEventListener('click', () => {
-        currentFontSize = Math.max(8, currentFontSize - 1); // Prevents font from going below 8px
+        currentFontSize = Math.max(8, currentFontSize - 1);
         contentColumn.style.fontSize = currentFontSize + 'px';
         localStorage.setItem('fontSize', currentFontSize);
+        // --- ADDED CALL HERE ---
+        if (typeof window.triggerHeaderScrollCheck === 'function') {
+            window.triggerHeaderScrollCheck();
+        }
     });
 
     cloneReset.addEventListener('click', () => {
         currentFontSize = DEFAULT_FONT_SIZE;
         contentColumn.style.fontSize = currentFontSize + 'px';
         localStorage.setItem('fontSize', currentFontSize);
+        // --- ADDED CALL HERE ---
+        if (typeof window.triggerHeaderScrollCheck === 'function') {
+            window.triggerHeaderScrollCheck();
+        }
     });
 
     clonePlus.addEventListener('click', () => {
-        currentFontSize = Math.min(30, currentFontSize + 1); // Prevents font from going above 30px
+        currentFontSize = Math.min(30, currentFontSize + 1);
         contentColumn.style.fontSize = currentFontSize + 'px';
         localStorage.setItem('fontSize', currentFontSize);
+        // --- ADDED CALL HERE ---
+        if (typeof window.triggerHeaderScrollCheck === 'function') {
+            window.triggerHeaderScrollCheck();
+        }
     });
 }
 
