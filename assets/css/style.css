@@ -28,7 +28,7 @@ body {
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
-  padding: 20px;
+  padding: 20px; /* Desktop padding */
   box-sizing: border-box;
   margin-top: 0;
   font-size: 1rem;
@@ -386,27 +386,23 @@ body.light-mode .main-header-fixed {
   }
 
   body {
-    /* Increased padding-top to ensure content clears header, adjusted for h1 position */
-    padding-top: 180px; /* Reverted to 180px from 170px */
+    padding-top: 170px;
     font-size: 1rem;
   }
 
   .main-header-fixed {
     padding: 10px 0;
-    /* Increased min-height to provide more vertical space for h1 and nav */
-    min-height: 150px; /* Reverted to 150px from 140px */
+    min-height: 140px;
   }
 
   h1 {
     font-size: 2.2rem;
     line-height: 1.2;
     padding: 0 120px;
-    /* Margin-bottom for h1 to nav */
-    margin-bottom: 15px; /* Reverted to 15px from 10px */
+    margin-bottom: 15px;
     position: relative;
     z-index: 1;
-    /* Adjusted translateY to push h1 down from logos */
-    transform: translateY(30px); /* Reverted to 30px from 20px */
+    transform: translateY(30px);
   }
 
   h1.slide-up {
@@ -414,8 +410,7 @@ body.light-mode .main-header-fixed {
   }
 
   .main-nav {
-    /* Margin-top for nav from h1 */
-    margin-top: 10px; /* Reverted to 10px from 0px */
+    margin-top: 10px;
     padding: 0 10px;
   }
 
@@ -494,7 +489,8 @@ body.light-mode .main-header-fixed {
   }
 
   .content-column {
-    padding: 15px;
+    /* Adjusted padding-top to reduce gap */
+    padding: 5px 15px 15px 15px; /* Top, Right, Bottom, Left */
     font-size: 1rem;
     line-height: 1.6;
     margin-bottom: 100px;
