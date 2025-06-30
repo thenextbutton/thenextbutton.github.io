@@ -8,19 +8,19 @@ const DARK_MODE_MS_LOGO_SRC = 'assets/images/MS_Cert_Professional_logo_Wht_rgb.p
 const LIGHT_MODE_MS_LOGO_SRC = 'assets/images/MS_Cert_Professional_logo_Blk_rgb.png';
 
 const PROFILE_IMAGE_SOURCES = [
-    'assets/images/proflie_01.webp', 
-    'assets/images/proflie_02.webp', 
-    'assets/images/proflie_03.webp',
-    'assets/images/proflie_04.webp', 
-    'assets/images/proflie_05.webp', 
-    'assets/images/proflie_06.webp', 
-    'assets/images/proflie_07.webp', 
-    'assets/images/proflie_08.webp', 
-    'assets/images/proflie_09.webp', 
-    'assets/images/proflie_10.webp', 
-    'assets/images/proflie_11.webp', 
-    'assets/images/proflie_12.webp', 
-    'assets/images/proflie_13.webp'
+    'assets/images/profile_01.webp', 
+    'assets/images/profile_02.webp', 
+    'assets/images/profile_03.webp',
+    'assets/images/profile_04.webp', 
+    'assets/images/profile_05.webp', 
+    'assets/images/profile_06.webp', 
+    'assets/images/profile_07.webp', 
+    'assets/images/profile_08.webp', 
+    'assets/images/profile_09.webp', 
+    'assets/images/profile_10.webp', 
+    'assets/images/profile_11.webp', 
+    'assets/images/profile_12.webp', 
+    'assets/images/profile_13.webp'
 ];
 
 // Make getRandomProfileImage globally accessible
