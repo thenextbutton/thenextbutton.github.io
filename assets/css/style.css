@@ -172,7 +172,7 @@ h1 {
 }
 
 .home-assistant-corner-logo img {
-  width: 40px;
+  width: 20px; /* Made 50% smaller (from 40px) */
   height: auto;
   border-radius: 4px;
   transition: transform 0.3s ease-in-out;
@@ -487,6 +487,6 @@ body.light-mode .main-header-fixed {
     right: 5px;
   }
   .home-assistant-corner-logo img {
-    width: 30px;
+    width: 15px; /* Made 50% smaller (from 30px) */
   }
 }
