@@ -3,17 +3,18 @@ function initFontControls() {
     const fontMinus = document.getElementById('font-minus');
     const fontReset = document.getElementById('font-reset');
     const fontPlus = document.getElementById('font-plus');
-    // Change target from contentColumn to body
-    const targetElement = document.body; // Target the body element for global font size control
+    // Change target from body to document.documentElement (the <html> element)
+    const targetElement = document.documentElement; // Target the HTML element for global font size control
 
     if (!targetElement) {
-        console.warn("Target element (body) not found for font controls.");
+        console.warn("Target element (html) not found for font controls.");
         return;
     }
 
-    // Define a default font size for the body
-    // This should ideally match your body's default font-size in style.css for desktop
-    const DEFAULT_BODY_FONT_SIZE = 14; // Assuming your desktop body font is 14px
+    // Define a default font size for the HTML element
+    // This should ideally match your html's default font-size in style.css for mobile (16px)
+    // On desktop, the browser's default html font-size (usually 16px) will be used if not explicitly set.
+    const DEFAULT_HTML_FONT_SIZE = 16; // Using 16px as the base for rem units
 
     let currentFontSize = parseFloat(getComputedStyle(targetElement).fontSize);
 
@@ -21,7 +22,8 @@ function initFontControls() {
     if (savedFontSize) {
         currentFontSize = parseFloat(savedFontSize);
     } else {
-        currentFontSize = DEFAULT_BODY_FONT_SIZE;
+        // If no saved font size, initialize with the default HTML font size
+        currentFontSize = DEFAULT_HTML_FONT_SIZE;
     }
     targetElement.style.fontSize = currentFontSize + 'px';
 
@@ -46,7 +48,7 @@ function initFontControls() {
     });
 
     cloneReset.addEventListener('click', () => {
-        currentFontSize = DEFAULT_BODY_FONT_SIZE;
+        currentFontSize = DEFAULT_HTML_FONT_SIZE;
         targetElement.style.fontSize = currentFontSize + 'px';
         localStorage.setItem('fontSize', currentFontSize);
         if (typeof window.triggerHeaderScrollCheck === 'function') {
