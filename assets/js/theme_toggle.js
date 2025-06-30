@@ -8,10 +8,19 @@ const DARK_MODE_MS_LOGO_SRC = 'assets/images/MS_Cert_Professional_logo_Wht_rgb.p
 const LIGHT_MODE_MS_LOGO_SRC = 'assets/images/MS_Cert_Professional_logo_Blk_rgb.png';
 
 const PROFILE_IMAGE_SOURCES = [
-    'https://avatars.githubusercontent.com/u/64163980?v=4',
-    'https://placehold.co/100x100/FF5733/FFFFFF?text=P1',
-    'https://placehold.co/100x100/33FF57/FFFFFF?text=P2',
-    'https://placehold.co/100x100/3357FF/FFFFFF?text=P3'
+    'assets/images/proflie_01.webp', 
+    'assets/images/proflie_02.webp', 
+    'assets/images/proflie_03.webp',
+    'assets/images/proflie_04.webp', 
+    'assets/images/proflie_05.webp', 
+    'assets/images/proflie_06.webp', 
+    'assets/images/proflie_07.webp', 
+    'assets/images/proflie_08.webp', 
+    'assets/images/proflie_09.webp', 
+    'assets/images/proflie_10.webp', 
+    'assets/images/proflie_11.webp', 
+    'assets/images/proflie_12.webp', 
+    'assets/images/proflie_13.webp'
 ];
 
 // Make getRandomProfileImage globally accessible
@@ -21,7 +30,7 @@ window.getRandomProfileImage = function() {
 };
 
 function applyTheme(isDarkMode) {
-//    profileImage.src = window.getRandomProfileImage(); 
+    profileImage.src = window.getRandomProfileImage();
 
     if (isDarkMode) {
         body.classList.remove('light-mode');
