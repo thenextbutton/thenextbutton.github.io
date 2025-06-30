@@ -196,7 +196,7 @@ h1 {
   position: fixed;
   bottom: 0;
   left: 0;
-  font-size: 0.8rem;
+  font-size: 12px; /* Changed from 0.8rem to fixed pixels */
   color: #888;
   z-index: 990;
 }
@@ -399,22 +399,18 @@ body.light-mode .main-header-fixed {
     font-size: 2.2rem;
     line-height: 1.2;
     padding: 0 120px;
-    /* Adjusted margin-bottom to create more space below h1 */
-    margin-bottom: 25px; /* Increased from 15px */
+    margin-bottom: 25px;
     position: relative;
     z-index: 1;
-    /* Adjusted initial position to center it better vertically */
-    transform: translateY(30px); /* Reduced from 40px */
+    transform: translateY(30px);
   }
 
-  /* New class for when h1 slides up */
   h1.slide-up {
     transform: translateY(0);
   }
 
   .main-nav {
-    /* Adjusted margin-top to create less space above nav, pulling it closer to h1 */
-    margin-top: 5px; /* Reduced from 10px */
+    margin-top: 5px;
     padding: 0 10px;
   }
 
@@ -439,7 +435,7 @@ body.light-mode .main-header-fixed {
     top: 10px;
     right: 10px;
     width: 90px;
-    height: 60px; /* Set a fixed height to maintain aspect ratio with object-fit */
+    height: 60px;
     z-index: 1001;
   }
 
