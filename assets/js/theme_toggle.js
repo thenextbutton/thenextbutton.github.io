@@ -30,7 +30,7 @@ window.getRandomProfileImage = function() {
 };
 
 function applyTheme(isDarkMode) {
-    profileImage.src = window.getRandomProfileImage();
+    // profileImage.src = window.getRandomProfileImage();
 
     if (isDarkMode) {
         body.classList.remove('light-mode');
