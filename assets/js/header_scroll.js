@@ -1,19 +1,31 @@
 document.addEventListener('DOMContentLoaded', () => {
     const profileImage = document.querySelector('.profile-image');
-    const cornerLogo = document.querySelector('.corner-logo-fixed');
-    const scrollThreshold = 100;
-    let lastScrollY = window.scrollY;
+    const msCertLogo = document.querySelector('.corner-logo-fixed');
 
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > scrollThreshold && window.scrollY > lastScrollY) {
-            // Scrolling down and past the threshold, add 'hidden' class
+    let lastScrollTop = 0; // Stores the last scroll position
+
+    function handleScroll() {
+        let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        // Determine scroll direction
+        if (currentScrollTop > lastScrollTop) {
+            // Scrolling down
             profileImage.classList.add('hidden');
-            cornerLogo.classList.add('hidden');
-        } else if (window.scrollY < lastScrollY || window.scrollY < scrollThreshold) {
-            // Scrolling up, or at the very top of the page, remove 'hidden' class
+            msCertLogo.classList.add('hidden');
+        } else {
+            // Scrolling up
             profileImage.classList.remove('hidden');
-            cornerLogo.classList.remove('hidden');
+            msCertLogo.classList.remove('hidden');
         }
-        lastScrollY = window.scrollY;
-    });
+        lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop; // For Mobile or negative scrolling
+    }
+
+    // Attach the scroll event listener
+    window.addEventListener('scroll', handleScroll);
+
+    // Initial check on load (in case page loads scrolled down)
+    handleScroll();
+
+    // Expose handleScroll globally so other scripts can trigger it
+    window.triggerHeaderScrollCheck = handleScroll;
 });
