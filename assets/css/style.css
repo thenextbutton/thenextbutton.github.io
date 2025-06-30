@@ -374,116 +374,116 @@ body.light-mode .main-header-fixed {
 @media (max-width: 768px) {
 
   body {
-    padding-top: 200px; /* Increased padding to accommodate larger header */
+    padding-top: 220px; /* Increased padding to accommodate larger header */
   }
 
   .main-header-fixed {
-    padding: 15px 0; /* Increased padding */
-    min-height: 150px; /* Increased min-height for larger header content */
+    padding: 20px 0; /* Increased padding */
+    min-height: 180px; /* Increased min-height for larger header content */
   }
 
   h1 {
-    font-size: 4em; /* Significantly increased for mobile */
-    line-height: 1.1; /* Tighter line height for large headings */
+    font-size: 4.5em; /* EVEN LARGER for mobile */
+    line-height: 1.1;
     padding: 0 10px;
-    margin-bottom: 25px; /* Adjusted spacing */
+    margin-bottom: 30px; /* Adjusted spacing */
   }
 
   .main-nav {
-    margin-top: 20px; /* Increased spacing */
+    margin-top: 25px; /* Increased spacing */
     padding: 0 10px;
   }
 
   .main-nav ul {
-    gap: 30px; /* Increased gap */
+    gap: 35px; /* Increased gap */
   }
 
   .main-nav li a {
-    font-size: 2em; /* Significantly increased for mobile */
-    padding: 12px 20px; /* Increased padding for better touch targets */
+    font-size: 2.2em; /* EVEN LARGER for mobile */
+    padding: 15px 22px; /* Increased padding for better touch targets */
   }
 
   .profile-image {
-    top: 10px; /* Adjusted position */
-    left: 10px;
-    width: 80px; /* Larger on mobile */
-    height: 80px;
+    top: 15px; /* Adjusted position */
+    left: 15px;
+    width: 90px; /* Larger on mobile */
+    height: 90px;
   }
 
   .corner-logo-fixed {
-    top: 10px; /* Adjusted position */
-    right: 10px;
-    width: 120px; /* Larger on mobile */
+    top: 15px; /* Adjusted position */
+    right: 15px;
+    width: 130px; /* Larger on mobile */
   }
 
   .theme-toggle-container {
-    bottom: 40px; /* Adjusted position */
-    right: 15px; /* Adjusted position */
-    gap: 15px; /* Increased gap */
+    bottom: 50px; /* Adjusted position */
+    right: 20px; /* Adjusted position */
+    gap: 20px; /* Increased gap */
   }
 
   .theme-switch-label {
-    width: 80px; /* Larger toggle switch */
-    height: 40px;
-    border-radius: 40px;
+    width: 90px; /* Larger toggle switch */
+    height: 45px;
+    border-radius: 45px;
   }
 
   .theme-switch-label:after {
-    width: 36px; /* Larger thumb */
-    height: 36px;
+    width: 41px; /* Larger thumb */
+    height: 41px;
     top: 2px;
     left: 2px;
   }
 
   .font-controls {
-    bottom: 100px; /* Adjusted position */
-    right: 15px; /* Adjusted position */
-    gap: 15px; /* Increased gap */
+    bottom: 120px; /* Adjusted position */
+    right: 20px; /* Adjusted position */
+    gap: 20px; /* Increased gap */
   }
 
   .font-controls span {
-    width: 55px; /* Larger touch target */
-    height: 55px; /* Larger touch target */
-    font-size: 1.8em; /* Adjusted font size for buttons */
+    width: 60px; /* Larger touch target */
+    height: 60px; /* Larger touch target */
+    font-size: 2em; /* Adjusted font size for buttons */
   }
 
   #font-minus {
-    font-size: 1.8em;
-  }
-
-  #font-reset {
     font-size: 2em;
   }
 
+  #font-reset {
+    font-size: 2.2em;
+  }
+
   #font-plus {
-    font-size: 2.5em;
+    font-size: 2.8em;
   }
 
   .content-column {
-    padding: 20px; /* Increased padding */
-    font-size: 1.8em; /* Significantly increased for readability on mobile */
-    line-height: 1.6; /* Increased line height for better readability */
+    padding: 25px; /* Increased padding */
+    font-size: 2em; /* SIGNIFICANTLY INCREASED for readability on mobile */
+    line-height: 1.6; /* Maintained line height for better readability */
   }
 
   .github-project-item {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 20px; /* Adjusted padding for mobile */
+    padding: 25px; /* Adjusted padding for mobile */
   }
 
   .project-image {
     width: 90%;
-    max-width: 280px; /* Increased max-width */
-    margin-bottom: 25px; /* More space below image */
+    max-width: 300px; /* Increased max-width */
+    margin-bottom: 30px; /* More space below image */
   }
 
   .github-project-item h3 {
-    font-size: 2.5em; /* Even larger heading on mobile */
+    font-size: 2.8em; /* Even larger heading on mobile */
   }
 
   .github-project-item p {
-    font-size: 1.5em; /* Ensure description is very readable */
+    font-size: 1.8em; /* Ensure description is very readable */
     line-height: 1.5; /* Adjusted line height */
   }
 
@@ -493,10 +493,10 @@ body.light-mode .main-header-fixed {
   }
 
   .home-assistant-corner-logo {
-    top: 10px;
-    right: 10px;
+    top: 12px; /* Adjusted position */
+    right: 12px;
   }
   .home-assistant-corner-logo img {
-    width: 30px; /* Slightly larger on mobile for better visibility */
+    width: 35px; /* Larger on mobile for better visibility */
   }
 }
