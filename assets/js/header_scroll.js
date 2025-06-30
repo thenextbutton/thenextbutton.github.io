@@ -8,13 +8,17 @@ document.addEventListener('DOMContentLoaded', () => {
         let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
         if (currentScrollTop > SCROLL_THRESHOLD) {
+
             profileImage.classList.add('hidden');
             msCertLogo.classList.add('hidden');
         } else {
+
+            const wasProfileImageHidden = profileImage.classList.contains('hidden');
+
             profileImage.classList.remove('hidden');
             msCertLogo.classList.remove('hidden');
-            // Load a new random image when the profile image becomes visible
-            if (typeof window.getRandomProfileImage === 'function') {
+
+            if (wasProfileImageHidden && typeof window.getRandomProfileImage === 'function') {
                 profileImage.src = window.getRandomProfileImage();
             }
         }
@@ -22,7 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', handleScroll);
 
+
     handleScroll();
+
 
     window.triggerHeaderScrollCheck = handleScroll;
 });
