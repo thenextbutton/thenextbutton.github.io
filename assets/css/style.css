@@ -386,24 +386,27 @@ body.light-mode .main-header-fixed {
   }
 
   body {
-    padding-top: 170px;
+    /* Reduced padding-top to bring content closer to the fixed header */
+    padding-top: 150px; /* Reduced from 170px */
     font-size: 1rem;
   }
 
   .main-header-fixed {
-    padding: 10px 0;
-    min-height: 140px;
+    /* Reduced min-height to make the header more compact */
+    min-height: 120px; /* Reduced from 140px */
+    padding: 10px 0; /* Keep padding consistent */
   }
 
   h1 {
     font-size: 2.2rem;
     line-height: 1.2;
     padding: 0 120px;
-    margin-bottom: 15px;
+    /* Reduced margin-bottom to bring navigation closer to h1 */
+    margin-bottom: 10px; /* Reduced from 15px */
     position: relative;
     z-index: 1;
-    /* Reverted translateY to 30px to increase space from logos */
-    transform: translateY(30px); /* Reverted from 20px */
+    /* Adjusted translateY to center h1 better within the smaller header */
+    transform: translateY(20px); /* Adjusted from 30px */
   }
 
   h1.slide-up {
@@ -411,7 +414,8 @@ body.light-mode .main-header-fixed {
   }
 
   .main-nav {
-    margin-top: 10px; /* Kept at 10px to maintain space from h1 */
+    /* Reduced margin-top to bring navigation closer to h1 */
+    margin-top: 0px; /* Reduced from 10px */
     padding: 0 10px;
   }
 
