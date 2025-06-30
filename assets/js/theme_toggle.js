@@ -7,33 +7,21 @@ const profileImage = document.querySelector('.profile-image');
 const DARK_MODE_MS_LOGO_SRC = 'assets/images/MS_Cert_Professional_logo_Wht_rgb.png';
 const LIGHT_MODE_MS_LOGO_SRC = 'assets/images/MS_Cert_Professional_logo_Blk_rgb.png';
 
-
 const PROFILE_IMAGE_SOURCES = [
-    'assets/images/profile_01.webp', 
-    'assets/images/profile_02.webp', 
-    'assets/images/profile_03.webp', 
-    'assets/images/profile_04.webp', 
-    'assets/images/profile_05.webp', 
-    'assets/images/profile_06.webp', 
-    'assets/images/profile_07.webp', 
-    'assets/images/profile_08.webp', 
-    'assets/images/profile_09.webp', 
-    'assets/images/profile_10.webp', 
-    'assets/images/profile_11.webp', 
-    'assets/images/profile_12.webp', 
-    'assets/images/profile_13.webp',
-    'assets/images/profile_14.webp'
+    'https://avatars.githubusercontent.com/u/64163980?v=4',
+    'https://placehold.co/100x100/FF5733/FFFFFF?text=P1',
+    'https://placehold.co/100x100/33FF57/FFFFFF?text=P2',
+    'https://placehold.co/100x100/3357FF/FFFFFF?text=P3'
 ];
 
-// Function to get a random profile image URL
-function getRandomProfileImage() {
+// Make getRandomProfileImage globally accessible
+window.getRandomProfileImage = function() {
     const randomIndex = Math.floor(Math.random() * PROFILE_IMAGE_SOURCES.length);
     return PROFILE_IMAGE_SOURCES[randomIndex];
-}
+};
 
 function applyTheme(isDarkMode) {
-    // Select a new random profile image on every theme toggle
-    profileImage.src = getRandomProfileImage();
+//    profileImage.src = window.getRandomProfileImage(); 
 
     if (isDarkMode) {
         body.classList.remove('light-mode');
@@ -49,15 +37,19 @@ function applyTheme(isDarkMode) {
 
 const savedTheme = localStorage.getItem('theme');
 
-// Apply theme on page load, which also sets the initial random profile image
 if (savedTheme === 'light') {
-    applyTheme(false); // Apply light mode
+    applyTheme(false);
 } else {
-    applyTheme(true); // Apply dark mode (default)
+    applyTheme(true);
 }
 
 themeToggleText.textContent = 'Dark Mode';
 
 themeSwitch.addEventListener('change', () => {
     applyTheme(themeSwitch.checked);
+});
+
+// Set initial profile image on load
+document.addEventListener('DOMContentLoaded', () => {
+    profileImage.src = window.getRandomProfileImage();
 });
