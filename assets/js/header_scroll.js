@@ -3,40 +3,49 @@ document.addEventListener('DOMContentLoaded', () => {
     const msCertLogo = document.querySelector('.corner-logo-fixed');
 
     const SCROLL_THRESHOLD = 50;
-    let isProfileImageVisible = true; // Tracks the current visual state of the profile image
+    let hideTimeoutId = null; // To store the ID of the setTimeout for cancelling
+    let isProfileImageActuallyHidden = false; // Tracks if the image is visually hidden (after transition)
 
     function handleScroll() {
         let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
         if (currentScrollTop > SCROLL_THRESHOLD) {
-            // If scrolled past the threshold, hide logos
-            // This block runs when the user scrolls down and the logos should go out of view.
-            if (isProfileImageVisible) { // Only run if the image was previously visible
+            // Scrolling down, should hide logos
+            if (!isProfileImageActuallyHidden) { // If not already visually hidden
+                // Clear any pending timeout that might try to show the image prematurely
+                clearTimeout(hideTimeoutId);
+
                 profileImage.classList.add('hidden');
                 msCertLogo.classList.add('hidden');
 
                 // Get the transition duration from CSS for the profile image transform
                 // This ensures we wait until it's fully out of view before changing the source.
+                // It's crucial that this matches the CSS transition duration for .profile-image.hidden
                 const profileImageTransitionDuration = parseFloat(getComputedStyle(profileImage).transitionDuration) * 1000;
 
-                // Change the image source AFTER the hide transition completes
-                setTimeout(() => {
-                    if (typeof window.getRandomProfileImage === 'function') {
+                // Set a timeout to change the image source *after* it's completely off-screen.
+                // This timeout will only proceed if the image *remains* hidden for the duration.
+                hideTimeoutId = setTimeout(() => {
+                    // Only change source if the image still has the 'hidden' class
+                    // (meaning it wasn't scrolled back into view before the timeout fired)
+                    if (profileImage.classList.contains('hidden') && typeof window.getRandomProfileImage === 'function') {
                         profileImage.src = window.getRandomProfileImage();
                     }
+                    isProfileImageActuallyHidden = true; // Mark as visually hidden after the transition
+                    hideTimeoutId = null; // Reset timeout ID
                 }, profileImageTransitionDuration);
-
-                isProfileImageVisible = false; // Update state to hidden
             }
         } else {
-            // If scrolled near the top, show logos
-            // This block runs when the user scrolls up and the logos should come into view.
-            if (!isProfileImageVisible) { // Only run if the image was previously hidden
+            // Scrolling up, should show logos
+            // If currently visually hidden OR has the 'hidden' class (meaning it's transitioning out)
+            if (isProfileImageActuallyHidden || profileImage.classList.contains('hidden')) {
+                // Clear any pending timeout that would change the image source while it's coming back into view
+                clearTimeout(hideTimeoutId);
+                hideTimeoutId = null; // Reset the timeout ID
+
                 profileImage.classList.remove('hidden');
                 msCertLogo.classList.remove('hidden');
-                // The image source has already been updated when it went out of view.
-                // No need to change it again here, just let it slide in with the new source.
-                isProfileImageVisible = true; // Update state to visible
+                isProfileImageActuallyHidden = false; // Mark as visible
             }
         }
     }
