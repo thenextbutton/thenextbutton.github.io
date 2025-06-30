@@ -5,6 +5,8 @@ body {
   margin: 0;
   padding: 0;
   padding-top: 120px;
+  /* Ensure body font-size is not fixed in px, so it inherits from html or is set in rem */
+  font-size: 1rem; /* Default body font size, relative to html */
 }
 
 .main-header-fixed {
@@ -30,14 +32,15 @@ body {
   padding: 20px;
   box-sizing: border-box;
   margin-top: 0;
-  font-size: 14px;
+  /* Ensure content-column font-size is not fixed in px, so it inherits from html or is set in rem */
+  font-size: 1rem; /* Default content column font size, relative to html */
 }
 
 h1 {
   text-align: center;
   color: #a0a0a0;
   margin: 0;
-  font-size: 2.5em;
+  font-size: 2.5rem; /* Changed to rem */
   line-height: 1.2;
   white-space: nowrap;
   overflow: hidden;
@@ -100,7 +103,7 @@ h1 {
   text-decoration: none;
   color: #a0a0a0;
   font-weight: bold;
-  font-size: 1.1em;
+  font-size: 1.1rem; /* Changed to rem */
   padding: 5px 10px;
   transition: color 0.5s ease-in-out;
 }
@@ -154,13 +157,14 @@ h1 {
 }
 
 .github-project-item h3 {
+  font-size: 1.5rem; /* Changed to rem */
   color: #8be9fd;
   margin-top: 0;
   margin-bottom: 10px;
-  font-size: 1.5em;
 }
 
 .github-project-item p {
+  font-size: 1rem; /* Changed to rem */
   margin-bottom: 15px;
 }
 
@@ -187,7 +191,7 @@ h1 {
   position: fixed;
   bottom: 0;
   left: 0;
-  font-size: 0.8em;
+  font-size: 0.8rem; /* Changed to rem */
   color: #888;
   z-index: 990;
 }
@@ -256,8 +260,8 @@ h1 {
 }
 
 .theme-switch-text {
+  font-size: 0.9rem; /* Changed to rem */
   color: #f0f0f0;
-  font-size: 0.9em;
   user-select: none;
   transition: color 0.2s;
 }
@@ -289,7 +293,7 @@ h1 {
 }
 
 #font-minus {
-  font-size: 0.9em;
+  font-size: 0.9em; /* Keep these as em, relative to the button's font size */
 }
 
 #font-reset {
@@ -377,19 +381,19 @@ body.light-mode .main-header-fixed {
   }
 
   body {
-    padding-top: 180px; /* Adjusted padding to ensure content clears header */
+    padding-top: 180px;
+    font-size: 1rem; /* Ensure body also uses rem as its base */
   }
 
   .main-header-fixed {
     padding: 10px 0;
-    min-height: 150px; /* Ensure enough height for header content */
+    min-height: 150px;
   }
 
   h1 {
-    font-size: 2.2rem; /* Adjusted for better fit and readability */
+    font-size: 2.2rem;
     line-height: 1.2;
-    /* Increased horizontal padding to push text away from logos */
-    padding: 0 120px; /* Increased from 10px */
+    padding: 0 120px;
     margin-bottom: 15px;
     position: relative;
     z-index: 1;
@@ -421,7 +425,7 @@ body.light-mode .main-header-fixed {
     top: 10px;
     right: 10px;
     width: 90px;
-    height: 90px; /* Ensure height is set to maintain aspect ratio if width is constrained */
+    height: 90px;
     z-index: 1001;
   }
 
@@ -446,7 +450,7 @@ body.light-mode .main-header-fixed {
   }
 
   .theme-switch-text {
-    font-size: 0.8em;
+    font-size: 0.8rem; /* Changed to rem */
   }
 
   .font-controls {
@@ -476,9 +480,9 @@ body.light-mode .main-header-fixed {
 
   .content-column {
     padding: 15px;
-    font-size: 1rem;
+    font-size: 1rem; /* This is the key: it's now explicitly 1rem (16px) relative to html */
     line-height: 1.6;
-    margin-bottom: 100px; /* Ensure enough space for bottom fixed controls */
+    margin-bottom: 100px;
   }
 
   .github-project-item {
@@ -495,11 +499,11 @@ body.light-mode .main-header-fixed {
   }
 
   .github-project-item h3 {
-    font-size: 1.5rem;
+    font-size: 1.5rem; /* Explicitly rem */
   }
 
   .github-project-item p {
-    font-size: 0.95rem;
+    font-size: 0.95rem; /* Explicitly rem */
     line-height: 1.4;
   }
 
