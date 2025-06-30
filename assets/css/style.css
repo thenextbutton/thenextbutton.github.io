@@ -490,7 +490,7 @@ body.light-mode .main-header-fixed {
 
   .content-column {
     /* Adjusted padding-top to reduce gap */
-    padding: 5px 15px 15px 15px; /* Top, Right, Bottom, Left */
+    padding: 0px 15px 15px 15px; /* Top, Right, Bottom, Left */
     font-size: 1rem;
     line-height: 1.6;
     margin-bottom: 100px;
