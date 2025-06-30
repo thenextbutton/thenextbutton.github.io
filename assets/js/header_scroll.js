@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Define a scroll threshold in pixels.
     // If the page is scrolled more than this, logos will hide.
     // Adjust this value if you want them to hide sooner or later.
-    const SCROLL_THRESHOLD = 50;
+    const SCROLL_THRESHOLD = 100;
 
     function handleScroll() {
         let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
