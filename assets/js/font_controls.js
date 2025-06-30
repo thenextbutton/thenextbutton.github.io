@@ -3,24 +3,27 @@ function initFontControls() {
     const fontMinus = document.getElementById('font-minus');
     const fontReset = document.getElementById('font-reset');
     const fontPlus = document.getElementById('font-plus');
-    const contentColumn = document.querySelector('.content-column');
+    // Change target from contentColumn to body
+    const targetElement = document.body; // Target the body element for global font size control
 
-    if (!contentColumn) {
-        console.warn("content-column not found for font controls. Retrying soon.");
+    if (!targetElement) {
+        console.warn("Target element (body) not found for font controls.");
         return;
     }
 
-    const DEFAULT_FONT_SIZE = 14;
+    // Define a default font size for the body
+    // This should ideally match your body's default font-size in style.css for desktop
+    const DEFAULT_BODY_FONT_SIZE = 14; // Assuming your desktop body font is 14px
 
-    let currentFontSize = parseFloat(getComputedStyle(contentColumn).fontSize);
+    let currentFontSize = parseFloat(getComputedStyle(targetElement).fontSize);
 
     const savedFontSize = localStorage.getItem('fontSize');
     if (savedFontSize) {
         currentFontSize = parseFloat(savedFontSize);
     } else {
-        currentFontSize = DEFAULT_FONT_SIZE;
+        currentFontSize = DEFAULT_BODY_FONT_SIZE;
     }
-    contentColumn.style.fontSize = currentFontSize + 'px';
+    targetElement.style.fontSize = currentFontSize + 'px';
 
     // IMPORTANT: Remove existing event listeners to prevent duplicates
     // This is crucial when re-initializing elements that might have been replaced
@@ -34,30 +37,27 @@ function initFontControls() {
 
     // Re-add event listeners to the new cloned nodes
     cloneMinus.addEventListener('click', () => {
-        currentFontSize = Math.max(8, currentFontSize - 1);
-        contentColumn.style.fontSize = currentFontSize + 'px';
+        currentFontSize = Math.max(8, currentFontSize - 1); // Minimum 8px
+        targetElement.style.fontSize = currentFontSize + 'px';
         localStorage.setItem('fontSize', currentFontSize);
-        // --- ADDED CALL HERE ---
         if (typeof window.triggerHeaderScrollCheck === 'function') {
             window.triggerHeaderScrollCheck();
         }
     });
 
     cloneReset.addEventListener('click', () => {
-        currentFontSize = DEFAULT_FONT_SIZE;
-        contentColumn.style.fontSize = currentFontSize + 'px';
+        currentFontSize = DEFAULT_BODY_FONT_SIZE;
+        targetElement.style.fontSize = currentFontSize + 'px';
         localStorage.setItem('fontSize', currentFontSize);
-        // --- ADDED CALL HERE ---
         if (typeof window.triggerHeaderScrollCheck === 'function') {
             window.triggerHeaderScrollCheck();
         }
     });
 
     clonePlus.addEventListener('click', () => {
-        currentFontSize = Math.min(30, currentFontSize + 1);
-        contentColumn.style.fontSize = currentFontSize + 'px';
+        currentFontSize = Math.min(30, currentFontSize + 1); // Maximum 30px
+        targetElement.style.fontSize = currentFontSize + 'px';
         localStorage.setItem('fontSize', currentFontSize);
-        // --- ADDED CALL HERE ---
         if (typeof window.triggerHeaderScrollCheck === 'function') {
             window.triggerHeaderScrollCheck();
         }
