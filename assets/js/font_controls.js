@@ -1,4 +1,4 @@
-
+// Wrap the font control logic in a function that can be called externally
 function initFontControls() {
     const fontMinus = document.getElementById('font-minus');
     const fontReset = document.getElementById('font-reset');
