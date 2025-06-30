@@ -3,35 +3,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const msCertLogo = document.querySelector('.corner-logo-fixed');
 
     const SCROLL_THRESHOLD = 50;
-    let nextProfileImageSrc = null; 
+    let isProfileImageVisible = true; 
 
     function handleScroll() {
         let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
         if (currentScrollTop > SCROLL_THRESHOLD) {
 
-            if (!profileImage.classList.contains('hidden')) {
+            if (isProfileImageVisible) { 
                 profileImage.classList.add('hidden');
                 msCertLogo.classList.add('hidden');
 
+
                 if (typeof window.getRandomProfileImage === 'function') {
-                    nextProfileImageSrc = window.getRandomProfileImage();
+                    profileImage.src = window.getRandomProfileImage();
                 }
+                isProfileImageVisible = false;
             }
         } else {
 
-            const wasProfileImageHidden = profileImage.classList.contains('hidden');
+            if (!isProfileImageVisible) { 
+                profileImage.classList.remove('hidden');
+                msCertLogo.classList.remove('hidden');
 
-
-            if (wasProfileImageHidden && nextProfileImageSrc) {
-                profileImage.src = nextProfileImageSrc;
-                nextProfileImageSrc = null; 
-            } else if (!wasProfileImageHidden && typeof window.getRandomProfileImage === 'function') {
-
+                isProfileImageVisible = true; 
             }
-
-            profileImage.classList.remove('hidden');
-            msCertLogo.classList.remove('hidden');
         }
     }
 
