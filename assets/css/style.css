@@ -282,7 +282,8 @@ h1 {
 }
 
 .theme-switch-text {
-  font-size: 0.9rem;
+  /* UPDATED: Set font-size to px to prevent scaling with font controls */
+  font-size: 14px;
   color: #f0f0f0;
   user-select: none;
   /* ADDED: Transition for theme switch text color */
@@ -481,7 +482,7 @@ body.light-mode .main-header-fixed {
   }
 
   .theme-switch-text {
-    font-size: 0.8rem;
+    font-size: 0.8rem; /* This will remain relative for mobile responsiveness */
   }
 
   .font-controls {
