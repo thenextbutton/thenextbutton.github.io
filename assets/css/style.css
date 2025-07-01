@@ -1,13 +1,11 @@
 body {
   font-family: "Consolas", monospace;
   background-color: #1a1a1a;
-  color: #f0f0f0;
+  color: #f0f0f0; /* Default body text color (light gray) */
   margin: 0;
   padding: 0;
   padding-top: 120px;
   font-size: 1rem;
-  /* Reverted: Removed transition for smooth theme changes */
-  /* transition: background-color 0.7s ease-in-out, color 0.7s ease-in-out; */
 }
 
 .main-header-fixed {
@@ -24,18 +22,7 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 120px;
-  /* Reverted: Removed initial hidden state and transition for animation */
-  /* opacity: 0; */
-  /* transform: translateY(-50px); */
-  /* transition: opacity 0.7s ease-out, transform 0.7s ease-out, background-color 0.7s ease-in-out; */
 }
-
-/* Reverted: Removed new class for when the header fades and slides into view */
-/* .main-header-fixed.fade-in { */
-/* opacity: 1; */
-/* transform: translateY(0); */
-/* } */
-
 
 .content-column {
   max-width: 800px;
@@ -45,6 +32,8 @@ body {
   box-sizing: border-box;
   margin-top: 0;
   font-size: 1rem;
+  /* Explicitly set color for content text to ensure visibility */
+  color: #f0f0f0; /* Light gray for dark mode */
 }
 
 h1 {
@@ -209,7 +198,7 @@ h1 {
   position: fixed;
   bottom: 0;
   left: 0;
-  font-size: 0.8rem; /* Reverted to rem */
+  font-size: 0.8rem;
   color: #888;
   z-index: 990;
 }
@@ -382,14 +371,12 @@ body.light-mode .main-header-fixed {
 }
 
 #content-area .content-column {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  /* Removed opacity: 0; and transform: translateY(20px); from default state */
+  /* Reverted: transition: opacity 0.7s ease-out, transform 0.7s ease-out; */
 }
 
 #content-area .content-column.fade-in {
-  opacity: 1;
-  transform: translateY(0);
+  /* Removed opacity: 1; and transform: translateY(0); as they are now default */
 }
 
 
