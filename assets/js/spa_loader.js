@@ -12,25 +12,19 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             const data = await response.text();
 
-            const contentColumn = contentArea.querySelector('.content-column');
+            let contentColumn = contentArea.querySelector('.content-column');
 
-            // Removed: Start fade out for content
-            // if (contentColumn) {
-            //     contentColumn.classList.remove('fade-in');
-            // }
-
-            // Removed outer setTimeout and requestAnimationFrame logic
+            // If contentColumn exists, update its content
             if (contentColumn) {
                 contentColumn.innerHTML = data;
-                contentColumn.classList.add('fade-in'); // Keep content fade-in
+                // Removed: contentColumn.classList.add('fade-in'); // No longer needed for immediate visibility
             } else {
-                const newContentColumn = document.createElement('div');
-                newContentColumn.classList.add('content-column');
-                newContentColumn.innerHTML = data;
-                contentArea.appendChild(newContentColumn);
-                setTimeout(() => { // Small delay to ensure reflow before animation
-                    newContentColumn.classList.add('fade-in');
-                }, 50);
+                // If contentColumn doesn't exist (e.g., initial load), create it
+                contentColumn = document.createElement('div');
+                contentColumn.classList.add('content-column');
+                contentArea.appendChild(contentColumn);
+                contentColumn.innerHTML = data;
+                // Removed: setTimeout(() => { newContentColumn.classList.add('fade-in'); }, 50);
             }
 
             // Re-initialize font controls and header scroll check after new content is loaded
