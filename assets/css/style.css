@@ -208,7 +208,8 @@ h1 {
   position: fixed;
   bottom: 0;
   left: 0;
-  font-size: 0.8rem;
+  /* UPDATED: Set font-size to px to prevent scaling with font controls */
+  font-size: 13px;
   color: #888;
   z-index: 990;
   /* ADDED: Transition for powered-by-github color */
