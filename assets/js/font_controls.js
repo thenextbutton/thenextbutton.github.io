@@ -14,7 +14,7 @@ function initFontControls() {
     // Define a default font size for the HTML element
     // This should ideally match your html's default font-size in style.css for mobile (16px)
     // On desktop, the browser's default html font-size (usually 16px) will be used if not explicitly set.
-    const DEFAULT_HTML_FONT_SIZE = 16; // Using 16px as the base for rem units
+    const DEFAULT_HTML_FONT_SIZE = 14; // Using 16px as the base for rem units
 
     let currentFontSize = parseFloat(getComputedStyle(targetElement).fontSize);
 
