@@ -23,12 +23,13 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 120px;
-
+  /* Add initial hidden state and transition for animation */
   opacity: 0;
-  transform: translateY(-50px); 
+  transform: translateY(-50px); /* Start slightly above its final position */
   transition: opacity 0.7s ease-out, transform 0.7s ease-out, background-color 0.7s ease-in-out;
 }
 
+/* New class for when the header fades and slides into view */
 .main-header-fixed.fade-in {
   opacity: 1;
   transform: translateY(0);
@@ -500,7 +501,7 @@ body.light-mode .main-header-fixed {
   }
 
   .content-column {
-    padding: 0px 15px 15px 15px; /* Top, Right, Bottom, Left */
+    padding: 0px 15px 15px 15px;
     font-size: 1rem;
     line-height: 1.6;
     margin-bottom: 100px;
