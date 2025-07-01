@@ -1,114 +1,87 @@
 document.addEventListener('DOMContentLoaded', () => {
     const contentArea = document.getElementById('content-area');
-    const navLinks = document.querySelectorAll('.main-nav a');
+    const mainHeader = document.querySelector('.main-header-fixed'); // Get the main header
 
-    // Helper function to get the current page name from the URL hash
-    function getCurrentPageNameFromHash() {
-        const hash = window.location.hash;
-        if (hash === '#/' || hash === '#') {
-            return 'home';
-        } else if (hash.startsWith('#/')) {
-            return hash.substring(2).replace('.html', '');
-        }
-        return 'home'; // Default to 'home' if no valid hash
-    }
-
-    // Function to load content into the content area with transitions
-    async function loadContent(pageName, pushState = true) {
-        // 1. Fade out current content (if any)
-        const currentContentColumn = contentArea.querySelector('.content-column');
-        if (currentContentColumn) {
-            currentContentColumn.classList.remove('fade-in');
-            await new Promise(resolve => {
-                const transitionDuration = parseFloat(getComputedStyle(currentContentColumn).transitionDuration) * 1000;
-                setTimeout(resolve, transitionDuration || 0);
-            });
-        }
-
+    // Function to load content
+    async function loadContent(url) {
         try {
-            const response = await fetch(`content/${pageName}_content.html`);
+            const response = await fetch(url);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-            const content = await response.text();
-            contentArea.innerHTML = content;
+            const data = await response.text();
 
-            // 2. Fade in new content
-            const newContentColumn = contentArea.querySelector('.content-column');
-            if (newContentColumn) {
-                void newContentColumn.offsetWidth;
-                newContentColumn.classList.add('fade-in');
+            const contentColumn = contentArea.querySelector('.content-column');
+
+            // Start fade out for both content and header
+            if (contentColumn) {
+                contentColumn.classList.remove('fade-in');
+            }
+            if (mainHeader) {
+                mainHeader.classList.remove('fade-in');
             }
 
-            // Re-initialize font controls for the newly loaded content
-            if (typeof initFontControls === 'function') {
-                initFontControls();
-            }
+            // After a short delay (matching CSS transition), swap content and fade in
+            setTimeout(() => {
+                if (contentColumn) {
+                    contentColumn.innerHTML = data;
+                    contentColumn.classList.add('fade-in'); // Fade in new content
+                } else {
+                    // If contentColumn doesn't exist (e.g., initial load), create it
+                    const newContentColumn = document.createElement('div');
+                    newContentColumn.classList.add('content-column');
+                    newContentColumn.innerHTML = data;
+                    contentArea.appendChild(newContentColumn);
+                    // Add fade-in after appending to trigger animation
+                    setTimeout(() => {
+                        newContentColumn.classList.add('fade-in');
+                    }, 50); // Small delay to ensure reflow before animation
+                }
 
-            // Update URL in browser history using hash-based routing
-            if (pushState) {
-                const hashPath = pageName === 'home' ? '#/' : `/#/${pageName}.html`;
-                history.pushState({ page: pageName }, '', hashPath);
-            }
+                // Fade in the header simultaneously
+                if (mainHeader) {
+                    mainHeader.classList.add('fade-in');
+                }
 
-            // --- MODIFICATION HERE ---
-            // Scroll the newly loaded content-column into view, rather than the contentArea
-            if (newContentColumn) { // Ensure the element exists
-                // Calculate the offset for the fixed header
-                const headerHeight = document.querySelector('.main-header-fixed').offsetHeight;
-                // Scroll to the top of the new content column, accounting for the fixed header
-                window.scrollTo({
-                    top: newContentColumn.offsetTop - headerHeight,
-                    behavior: 'smooth'
-                });
-            }
+                // Re-initialize font controls and header scroll check after new content is loaded
+                if (typeof initFontControls === 'function') {
+                    initFontControls();
+                }
+                if (typeof window.triggerHeaderScrollCheck === 'function') {
+                    window.triggerHeaderScrollCheck();
+                }
 
-
+            }, 700); // This delay should match the CSS transition duration for fade-out
         } catch (error) {
             console.error('Error loading content:', error);
-            contentArea.innerHTML = `<div class="content-column fade-in"><p>Error loading content. Please try again later.</p></div>`;
-            const errorMessageColumn = contentArea.querySelector('.content-column');
-            if (errorMessageColumn) {
-                void errorMessageColumn.offsetWidth;
-                errorMessageColumn.classList.add('fade-in');
-            }
+            contentArea.innerHTML = `<p>Error loading content: ${error.message}. Please try again.</p>`;
         }
     }
 
     // Handle navigation clicks
-    navLinks.forEach(link => {
+    document.querySelectorAll('.main-nav a').forEach(link => {
         link.addEventListener('click', (event) => {
             event.preventDefault();
-            const pageName = event.target.dataset.page;
-            const currentPage = getCurrentPageNameFromHash();
+            const page = event.target.getAttribute('data-page');
+            const url = `assets/content/${page}_content.html`;
+            loadContent(url);
 
-            if (pageName && pageName === currentPage) {
-                console.log(`Already on ${pageName} page. Not reloading.`);
-                // If already on the page, just scroll to top if not already there
-                const newContentColumn = contentArea.querySelector('.content-column');
-                if (newContentColumn) {
-                    const headerHeight = document.querySelector('.main-header-fixed').offsetHeight;
-                     window.scrollTo({
-                        top: newContentColumn.offsetTop - headerHeight,
-                        behavior: 'smooth'
-                    });
-                }
-                return;
-            }
-
-            if (pageName) {
-                loadContent(pageName);
-            }
+            // Update active class for navigation
+            document.querySelectorAll('.main-nav a').forEach(navLink => {
+                navLink.classList.remove('active');
+            });
+            event.target.classList.add('active');
         });
     });
 
-    // Handle browser back/forward buttons (popstate event)
-    window.addEventListener('popstate', (event) => {
-        const pageNameFromHash = getCurrentPageNameFromHash();
-        loadContent(pageNameFromHash, false);
-    });
+    // Initial content load (e.g., home page)
+    const initialPage = 'home'; // Default page to load
+    const initialUrl = `assets/content/${initialPage}_content.html`;
+    loadContent(initialUrl);
 
-    // Initial page load logic
-    const initialPage = getCurrentPageNameFromHash();
-    loadContent(initialPage, false);
+    // Set initial active class for home
+    const homeLink = document.querySelector('.main-nav a[data-page="home"]');
+    if (homeLink) {
+        homeLink.classList.add('active');
+    }
 });
