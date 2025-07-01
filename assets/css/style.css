@@ -6,15 +6,9 @@ body {
   padding: 0;
   padding-top: 120px;
   font-size: 1rem;
-  /* REVERTED: Removed scrollbar hiding properties */
-  /* -ms-overflow-style: none; */
-  /* scrollbar-width: none; */
+  /* ADDED: Transition for smooth theme changes */
+  transition: background-color 0.7s ease-in-out, color 0.7s ease-in-out;
 }
-
-/* REVERTED: Removed Webkit scrollbar hiding rule */
-/* body::-webkit-scrollbar { */
-/* display: none; */
-/* } */
 
 .main-header-fixed {
   position: fixed;
