@@ -5,7 +5,8 @@ body {
   margin: 0;
   padding: 0;
   padding-top: 120px;
-  font-size: 1rem;
+  /* UPDATED: Default font size for non-mobile devices */
+  font-size: 0.875rem;
   /* Transition for smooth theme changes */
   transition: background-color 1.5s ease-in-out, color 1.5s ease-in-out;
 }
