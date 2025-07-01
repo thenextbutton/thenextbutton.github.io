@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to load content
     async function loadContent(url) {
         try {
-            console.log('Attempting to fetch content from:', url);
+            console.log('Attempting to fetch content from:', url); // Log the URL being fetched
             const response = await fetch(url);
             if (!response.ok) {
                 console.error(`Failed to load content from: ${url}. HTTP error! status: ${response.status}`);
@@ -14,39 +14,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let contentColumn = contentArea.querySelector('.content-column');
 
-            // Remove fade-in class immediately to start fade-out (if already visible)
+            // If contentColumn exists, update its content
             if (contentColumn) {
-                contentColumn.classList.remove('fade-in');
+                contentColumn.innerHTML = data;
+                // Removed: contentColumn.classList.add('fade-in'); // No longer needed for immediate visibility
+            } else {
+                // If contentColumn doesn't exist (e.g., initial load), create it
+                contentColumn = document.createElement('div');
+                contentColumn.classList.add('content-column');
+                contentArea.appendChild(contentColumn);
+                contentColumn.innerHTML = data;
+                // Removed: setTimeout(() => { newContentColumn.classList.add('fade-in'); }, 50);
             }
 
-            // Use a short timeout to allow the fade-out transition to begin
-            setTimeout(() => {
-                if (!contentColumn) {
-                    // If contentColumn doesn't exist (e.g., initial load), create it
-                    contentColumn = document.createElement('div');
-                    contentColumn.classList.add('content-column');
-                    contentArea.appendChild(contentColumn);
-                }
+            // Re-initialize font controls and header scroll check after new content is loaded
+            if (typeof initFontControls === 'function') {
+                initFontControls();
+            }
+            if (typeof window.triggerHeaderScrollCheck === 'function') {
+                window.triggerHeaderScrollCheck();
+            }
 
-                // Set the new content
-                contentColumn.innerHTML = data;
-
-                // Use requestAnimationFrame to ensure the browser has rendered the new content
-                // before applying the fade-in class, which triggers the transition.
-                requestAnimationFrame(() => {
-                    requestAnimationFrame(() => { // Double rAF for maximum compatibility
-                        contentColumn.classList.add('fade-in');
-                    });
-                });
-
-                // Re-initialize font controls and header scroll check after new content is loaded
-                if (typeof initFontControls === 'function') {
-                    initFontControls();
-                }
-                if (typeof window.triggerHeaderScrollCheck === 'function') {
-                    window.triggerHeaderScrollCheck();
-                }
-            }, 100); // Small delay to allow previous content to fade out (if any)
         } catch (error) {
             console.error('Error loading content:', error);
             contentArea.innerHTML = `<p>Error loading content: ${error.message}. Please try again.</p>`;
