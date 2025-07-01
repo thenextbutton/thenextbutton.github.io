@@ -21,10 +21,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Add a small delay before injecting new content and applying fade-in
             // This ensures the browser registers the 'removed' fade-in state before re-applying it
+            // and allows the transition to properly trigger.
             setTimeout(() => {
                 if (contentColumn) {
                     contentColumn.innerHTML = data;
-                    contentColumn.classList.add('fade-in'); // Apply fade-in to the existing column
+                    // Apply fade-in to the existing column AFTER content is set
+                    setTimeout(() => { // Nested setTimeout to ensure reflow
+                        contentColumn.classList.add('fade-in');
+                    }, 50);
                 } else {
                     // If contentColumn doesn't exist (e.g., initial load), create it
                     const newContentColumn = document.createElement('div');
@@ -44,8 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (typeof window.triggerHeaderScrollCheck === 'function') {
                     window.triggerHeaderScrollCheck();
                 }
-            }, 50); // Small delay for content fade-out before new content appears.
-                     // This can be adjusted. 0 for instant, higher for more noticeable fade.
+            }, 50); // Initial small delay for content fade-out before new content appears.
         } catch (error) {
             console.error('Error loading content:', error);
             contentArea.innerHTML = `<p>Error loading content: ${error.message}. Please try again.</p>`;
