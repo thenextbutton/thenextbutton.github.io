@@ -6,7 +6,8 @@ body {
   padding: 0;
   padding-top: 120px;
   font-size: 1rem;
-  transition: background-color 0.7s ease-in-out, color 0.7s ease-in-out;
+  /* Reverted: Removed transition for smooth theme changes */
+  /* transition: background-color 0.7s ease-in-out, color 0.7s ease-in-out; */
 }
 
 .main-header-fixed {
@@ -23,15 +24,17 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 120px;
-  opacity: 0;
-  transform: translateY(-50px);
-  transition: opacity 0.7s ease-out, transform 0.7s ease-out, background-color 0.7s ease-in-out;
+  /* Reverted: Removed initial hidden state and transition for animation */
+  /* opacity: 0; */
+  /* transform: translateY(-50px); */
+  /* transition: opacity 0.7s ease-out, transform 0.7s ease-out, background-color 0.7s ease-in-out; */
 }
 
-.main-header-fixed.fade-in {
-  opacity: 1;
-  transform: translateY(0);
-}
+/* Reverted: Removed new class for when the header fades and slides into view */
+/* .main-header-fixed.fade-in { */
+/* opacity: 1; */
+/* transform: translateY(0); */
+/* } */
 
 
 .content-column {
