@@ -7,8 +7,8 @@ body {
   padding-top: 120px;
   /* UPDATED: Default font size for non-mobile devices */
   font-size: 0.875rem;
-  /* Transition for smooth theme changes */
-  transition: background-color 1.5s ease-in-out, color 1.5s ease-in-out;
+  /* ADDED: Transition for font-size */
+  transition: background-color 1.5s ease-in-out, color 1.5s ease-in-out, font-size 0.5s ease-in-out;
 }
 
 .main-header-fixed {
