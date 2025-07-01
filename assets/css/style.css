@@ -6,7 +6,15 @@ body {
   padding: 0;
   padding-top: 120px;
   font-size: 1rem;
+  /* REVERTED: Removed scrollbar hiding properties */
+  /* -ms-overflow-style: none; */
+  /* scrollbar-width: none; */
 }
+
+/* REVERTED: Removed Webkit scrollbar hiding rule */
+/* body::-webkit-scrollbar { */
+/* display: none; */
+/* } */
 
 .main-header-fixed {
   position: fixed;
@@ -33,12 +41,8 @@ body {
   margin-top: 0;
   font-size: 1rem;
   color: #f0f0f0; /* Light gray for dark mode content */
-  /* REMOVED: opacity: 0; and transform: translateY(20px); from default state */
-  /* This means content is visible by default */
   transition: opacity 0.7s ease-out, transform 0.7s ease-out; /* Keep transition for JS control */
 }
-
-/* REMOVED: #content-area .content-column.fade-in as it's no longer needed */
 
 h1 {
   text-align: center;
