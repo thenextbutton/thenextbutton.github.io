@@ -1,7 +1,7 @@
-/* ADDED: html element styles for global font size control and transition */
+/* UPDATED: html element styles for global font size control and transition */
 html {
   font-size: 14px; /* Matches DEFAULT_HTML_FONT_SIZE in font_controls.js */
-  transition: font-size 1s ease-in-out; /* Smooth transition for font size changes */
+  transition: font-size 0.7s ease-in-out; /* Speeding up font size transition to 0.7s */
 }
 
 body {
@@ -11,7 +11,6 @@ body {
   margin: 0;
   padding: 0;
   padding-top: 120px;
-  /* REMOVED: font-size: 0.875rem; - body will now inherit from html */
   /* UPDATED: Transition for smooth theme changes (removed font-size from here) */
   transition: background-color 1.5s ease-in-out, color 1.5s ease-in-out;
 }
@@ -41,7 +40,6 @@ body {
   padding: 20px;
   box-sizing: border-box;
   margin-top: 0;
-  /* Keep font-size in rem, it will scale relative to html's font-size */
   font-size: 1rem;
   color: #f0f0f0; /* Light gray for dark mode content */
   /* Ensure content column text color also transitions smoothly */
