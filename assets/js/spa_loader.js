@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to load content
     async function loadContent(url) {
         try {
+            console.log('Attempting to fetch content from:', url); // Log the URL being fetched
             const response = await fetch(url);
             if (!response.ok) {
                 // Log the full URL that caused the 404 for easier debugging
