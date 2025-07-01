@@ -7,8 +7,8 @@ body {
   padding-top: 120px;
   /* UPDATED: Default font size for non-mobile devices */
   font-size: 0.875rem;
-  /* ADDED: Transition for font-size */
-  transition: background-color 1.5s ease-in-out, color 1.5s ease-in-out, font-size 0.5s ease-in-out;
+  /* UPDATED: Transition for font-size to 1s */
+  transition: background-color 1.5s ease-in-out, color 1.5s ease-in-out, font-size 1s ease-in-out;
 }
 
 .main-header-fixed {
@@ -384,7 +384,7 @@ body.light-mode .powered-by-github {
 body.light-mode .powered-by-github a {
     color: #666;
 }
-body.light-mode .powered-by-github a:hover {
+body.light-mode .powered-mode .powered-by-github a:hover {
     color: #444;
 }
 
