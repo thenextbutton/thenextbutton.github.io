@@ -1,7 +1,7 @@
 /* UPDATED: html element styles for global font size control and transition */
 html {
   font-size: 14px; /* Matches DEFAULT_HTML_FONT_SIZE in font_controls.js */
-  transition: font-size 0.7s ease-in-out; /* Speeding up font size transition to 0.7s */
+  transition: font-size 0.3s ease-in-out; /* Speeding up font size transition to 0.3s */
 }
 
 body {
@@ -11,6 +11,8 @@ body {
   margin: 0;
   padding: 0;
   padding-top: 120px;
+  /* UPDATED: Default font size for non-mobile devices */
+  font-size: 0.875rem;
   /* UPDATED: Transition for smooth theme changes (removed font-size from here) */
   transition: background-color 1.5s ease-in-out, color 1.5s ease-in-out;
 }
