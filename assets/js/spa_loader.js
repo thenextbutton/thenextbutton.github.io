@@ -12,34 +12,32 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             const data = await response.text();
 
-            const contentColumn = contentArea.querySelector('.content-column');
+            let contentColumn = contentArea.querySelector('.content-column');
 
-            // Remove fade-in class immediately to start fade-out (if already visible)
+            // If contentColumn exists, remove fade-in class to prepare for fade-out
             if (contentColumn) {
                 contentColumn.classList.remove('fade-in');
             }
 
-            // Add a small delay before injecting new content and applying fade-in
-            // This ensures the browser registers the 'removed' fade-in state before re-applying it
-            // and allows the transition to properly trigger.
+            // Use a short timeout to allow the fade-out transition to begin
             setTimeout(() => {
-                if (contentColumn) {
-                    contentColumn.innerHTML = data;
-                    // Apply fade-in to the existing column AFTER content is set
-                    setTimeout(() => { // Nested setTimeout to ensure reflow
-                        contentColumn.classList.add('fade-in');
-                    }, 50);
-                } else {
+                if (!contentColumn) {
                     // If contentColumn doesn't exist (e.g., initial load), create it
-                    const newContentColumn = document.createElement('div');
-                    newContentColumn.classList.add('content-column');
-                    newContentColumn.innerHTML = data;
-                    contentArea.appendChild(newContentColumn);
-                    // Add fade-in after appending to trigger animation
-                    setTimeout(() => {
-                        newContentColumn.classList.add('fade-in');
-                    }, 50); // Small delay to ensure reflow before animation
+                    contentColumn = document.createElement('div');
+                    contentColumn.classList.add('content-column');
+                    contentArea.appendChild(contentColumn);
                 }
+
+                // Set the new content
+                contentColumn.innerHTML = data;
+
+                // Use requestAnimationFrame to ensure the browser has rendered the new content
+                // before applying the fade-in class, which triggers the transition.
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => { // Double rAF for maximum compatibility
+                        contentColumn.classList.add('fade-in');
+                    });
+                });
 
                 // Re-initialize font controls and header scroll check after new content is loaded
                 if (typeof initFontControls === 'function') {
@@ -48,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (typeof window.triggerHeaderScrollCheck === 'function') {
                     window.triggerHeaderScrollCheck();
                 }
-            }, 50); // Initial small delay for content fade-out before new content appears.
+            }, 100); // Small delay to allow previous content to fade out (if any)
         } catch (error) {
             console.error('Error loading content:', error);
             contentArea.innerHTML = `<p>Error loading content: ${error.message}. Please try again.</p>`;
