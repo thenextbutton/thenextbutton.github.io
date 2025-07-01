@@ -6,6 +6,8 @@ body {
   padding: 0;
   padding-top: 120px;
   font-size: 1rem;
+  /* Added transition for smooth theme changes */
+  transition: background-color 0.7s ease-in-out, color 0.7s ease-in-out;
 }
 
 .main-header-fixed {
@@ -28,7 +30,7 @@ body {
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
-  padding: 20px; /* Desktop padding */
+  padding: 20px;
   box-sizing: border-box;
   margin-top: 0;
   font-size: 1rem;
@@ -50,7 +52,7 @@ h1 {
 
 .profile-image {
   position: fixed;
-  top: 05px;
+  top: 20px;
   left: 20px;
   width: 100px;
   height: 100px;
@@ -489,8 +491,7 @@ body.light-mode .main-header-fixed {
   }
 
   .content-column {
-    /* Adjusted padding-top to reduce gap */
-    padding: 0px 15px 15px 15px; /* Top, Right, Bottom, Left */
+    padding: 0px 15px 15px 15px;
     font-size: 1rem;
     line-height: 1.6;
     margin-bottom: 100px;
