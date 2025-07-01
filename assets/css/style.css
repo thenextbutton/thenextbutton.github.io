@@ -317,16 +317,17 @@ h1 {
   transition: background-color 1.5s, color 1.5s, border-color 1.5s;
 }
 
+/* UPDATED: Set font-size to px to prevent scaling with font controls */
 #font-minus {
-  font-size: 0.9em;
+  font-size: 13px;
 }
 
 #font-reset {
-  font-size: 1.2em;
+  font-size: 17px;
 }
 
 #font-plus {
-  font-size: 1.5em;
+  font-size: 21px;
 }
 
 .font-controls span:hover {
@@ -409,7 +410,7 @@ body.light-mode .main-header-fixed {
 
   body {
     padding-top: 170px;
-    font-size: 1rem;
+    font-size: 1rem; /* This will remain relative for mobile responsiveness */
   }
 
   .main-header-fixed {
@@ -495,19 +496,19 @@ body.light-mode .main-header-fixed {
   .font-controls span {
     width: 40px;
     height: 40px;
-    font-size: 1em;
+    font-size: 1em; /* This will remain relative for mobile responsiveness */
   }
 
   #font-minus {
-    font-size: 1em;
+    font-size: 1em; /* This will remain relative for mobile responsiveness */
   }
 
   #font-reset {
-    font-size: 1.2em;
+    font-size: 1.2em; /* This will remain relative for mobile responsiveness */
   }
 
   #font-plus {
-    font-size: 1.5em;
+    font-size: 1.5em; /* This will remain relative for mobile responsiveness */
   }
 
   .content-column {
