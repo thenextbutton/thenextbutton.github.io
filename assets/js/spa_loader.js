@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const response = await fetch(url);
             if (!response.ok) {
+                // Log the full URL that caused the 404 for easier debugging
+                console.error(`Failed to load content from: ${url}. HTTP error! status: ${response.status}`);
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const data = await response.text();
@@ -63,7 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', (event) => {
             event.preventDefault();
             const page = event.target.getAttribute('data-page');
-            const url = `assets/content/${page}_content.html`;
+            // Changed path to absolute from root
+            const url = `/assets/content/${page}_content.html`;
             loadContent(url);
 
             // Update active class for navigation
@@ -75,8 +78,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Initial content load (e.g., home page)
-    const initialPage = 'home'; 
-    const initialUrl = `assets/content/${initialPage}_content.html`;
+    const initialPage = 'home'; // Default page to load
+    // Changed path to absolute from root
+    const initialUrl = `/assets/content/${initialPage}_content.html`;
     loadContent(initialUrl);
 
     // Set initial active class for home
