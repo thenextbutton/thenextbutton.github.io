@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Initial content load (e.g., home page)
-    const initialPage = 'home'; // Default page to load
+    const initialPage = 'home'; 
     const initialUrl = `assets/content/${initialPage}_content.html`;
     loadContent(initialUrl);
 
