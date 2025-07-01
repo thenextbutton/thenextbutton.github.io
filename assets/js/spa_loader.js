@@ -1,11 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     const contentArea = document.getElementById('content-area');
-    // Removed: const mainHeader = document.querySelector('.main-header-fixed'); // This line was removed in the revert
 
     // Function to load content
     async function loadContent(url) {
         try {
-            console.log('Attempting to fetch content from:', url); // Log the URL being fetched
+            console.log('Attempting to fetch content from:', url);
             const response = await fetch(url);
             if (!response.ok) {
                 console.error(`Failed to load content from: ${url}. HTTP error! status: ${response.status}`);
@@ -15,33 +14,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const contentColumn = contentArea.querySelector('.content-column');
 
-            // Removed: Start fade out for both content and header
-            // if (contentColumn) {
-            //     contentColumn.classList.remove('fade-in');
-            // }
-            // if (mainHeader) { // This check was removed as mainHeader is no longer defined
-            //     mainHeader.classList.remove('fade-in');
-            // }
+            // Remove fade-in class immediately to start fade-out (if already visible)
+            if (contentColumn) {
+                contentColumn.classList.remove('fade-in');
+            }
 
-            // Removed setTimeout wrapper for content loading
-            // setTimeout(() => { // This delay should match the CSS transition duration for fade-out
+            // Add a small delay before injecting new content and applying fade-in
+            // This ensures the browser registers the 'removed' fade-in state before re-applying it
+            setTimeout(() => {
                 if (contentColumn) {
                     contentColumn.innerHTML = data;
-                    contentColumn.classList.add('fade-in'); // Keep content fade-in
+                    contentColumn.classList.add('fade-in'); // Apply fade-in to the existing column
                 } else {
+                    // If contentColumn doesn't exist (e.g., initial load), create it
                     const newContentColumn = document.createElement('div');
                     newContentColumn.classList.add('content-column');
                     newContentColumn.innerHTML = data;
                     contentArea.appendChild(newContentColumn);
+                    // Add fade-in after appending to trigger animation
                     setTimeout(() => {
                         newContentColumn.classList.add('fade-in');
-                    }, 50);
+                    }, 50); // Small delay to ensure reflow before animation
                 }
-
-                // Removed: Fade in the header simultaneously
-                // if (mainHeader) { // This check was removed as mainHeader is no longer defined
-                //     mainHeader.classList.add('fade-in');
-                // }
 
                 // Re-initialize font controls and header scroll check after new content is loaded
                 if (typeof initFontControls === 'function') {
@@ -50,9 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (typeof window.triggerHeaderScrollCheck === 'function') {
                     window.triggerHeaderScrollCheck();
                 }
-
-            // Removed closing for setTimeout
-            // }, 700);
+            }, 50); // Small delay for content fade-out before new content appears.
+                     // This can be adjusted. 0 for instant, higher for more noticeable fade.
         } catch (error) {
             console.error('Error loading content:', error);
             contentArea.innerHTML = `<p>Error loading content: ${error.message}. Please try again.</p>`;
@@ -64,8 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', (event) => {
             event.preventDefault();
             const page = event.target.getAttribute('data-page');
-            // Keep corrected path for content
-            const url = `/content/${page}_content.html`;
+            const url = `/content/${page}_content.html`; // Keep corrected path
             loadContent(url);
 
             // Update active class for navigation
@@ -77,9 +69,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Initial content load (e.g., home page)
-    const initialPage = 'home'; // Default page to load
-    // Keep corrected path for content
-    const initialUrl = `/content/${initialPage}_content.html`;
+    const initialPage = 'home';
+    const initialUrl = `/content/${initialPage}_content.html`; // Keep corrected path
     loadContent(initialUrl);
 
     // Set initial active class for home
