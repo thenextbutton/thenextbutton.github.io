@@ -6,7 +6,7 @@ body {
   padding: 0;
   padding-top: 120px;
   font-size: 1rem;
-  /* UPDATED: Transition for smoother theme changes (from 0.7s to 1.5s) */
+  /* Transition for smooth theme changes */
   transition: background-color 1.5s ease-in-out, color 1.5s ease-in-out;
 }
 
@@ -24,6 +24,8 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 120px;
+  /* ADDED: Transition for header background-color and color */
+  transition: background-color 1.5s ease-in-out, color 1.5s ease-in-out;
 }
 
 .content-column {
@@ -35,7 +37,8 @@ body {
   margin-top: 0;
   font-size: 1rem;
   color: #f0f0f0; /* Light gray for dark mode content */
-  transition: opacity 0.7s ease-out, transform 0.7s ease-out; /* Keep transition for JS control */
+  /* Ensure content column text color also transitions smoothly */
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out, color 1.5s ease-in-out;
 }
 
 h1 {
@@ -114,7 +117,8 @@ h1 {
   font-weight: bold;
   font-size: 1.1rem;
   padding: 5px 10px;
-  transition: color 0.5s ease-in-out;
+  /* ADDED: Transition for nav link color */
+  transition: color 1.5s ease-in-out;
 }
 
 .main-nav li a:hover {
@@ -125,6 +129,8 @@ h1 {
   color: #8be9fd;
   text-decoration: none;
   font-weight: bold;
+  /* ADDED: Transition for content link color */
+  transition: color 1.5s ease-in-out;
 }
 
 .content-column a:hover {
@@ -142,7 +148,8 @@ h1 {
   align-items: center;
   gap: 20px;
   text-align: left;
-  transition: background-color 0.7s ease-in-out, box-shadow 0.7s ease-in-out;
+  /* UPDATED: Transition for background-color and box-shadow to 1.5s */
+  transition: background-color 1.5s ease-in-out, box-shadow 1.5s ease-in-out;
   position: relative;
 }
 
@@ -203,11 +210,15 @@ h1 {
   font-size: 0.8rem;
   color: #888;
   z-index: 990;
+  /* ADDED: Transition for powered-by-github color */
+  transition: color 1.5s ease-in-out;
 }
 
 .powered-by-github a {
   color: #888;
   text-decoration: none;
+  /* ADDED: Transition for powered-by-github link color */
+  transition: color 1.5s ease-in-out;
 }
 
 .powered-by-github a:hover {
@@ -239,7 +250,7 @@ h1 {
   display: block;
   border-radius: 25px;
   position: relative;
-  transition: background 1s;
+  transition: background 1s; /* This transition is for the toggle itself */
   border: 1px solid #555;
   overflow: hidden;
 }
@@ -253,7 +264,7 @@ h1 {
   height: 21px;
   background: #f0f0f0;
   border-radius: 50%;
-  transition: 1s;
+  transition: 1s; /* This transition is for the toggle itself */
   z-index: 1;
 }
 
@@ -272,7 +283,8 @@ h1 {
   font-size: 0.9rem;
   color: #f0f0f0;
   user-select: none;
-  transition: color 0.2s;
+  /* ADDED: Transition for theme switch text color */
+  transition: color 1.5s ease-in-out;
 }
 
 
@@ -298,7 +310,8 @@ h1 {
   font-weight: bold;
   cursor: pointer;
   user-select: none;
-  transition: background-color 0.5s, color 0.5s, border-color 0.5s;
+  /* ADDED: Transition for font control background and color */
+  transition: background-color 1.5s, color 1.5s, border-color 1.5s;
 }
 
 #font-minus {
