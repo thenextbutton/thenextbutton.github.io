@@ -14,27 +14,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let contentColumn = contentArea.querySelector('.content-column');
 
-            // If contentColumn exists, update its content
+            // If contentColumn exists, remove fade-in class to trigger fade-out
             if (contentColumn) {
-                contentColumn.innerHTML = data;
-                // Removed: contentColumn.classList.add('fade-in'); // No longer needed for immediate visibility
-            } else {
-                // If contentColumn doesn't exist (e.g., initial load), create it
-                contentColumn = document.createElement('div');
-                contentColumn.classList.add('content-column');
-                contentArea.appendChild(contentColumn);
-                contentColumn.innerHTML = data;
-                // Removed: setTimeout(() => { newContentColumn.classList.add('fade-in'); }, 50);
+                contentColumn.classList.remove('fade-in');
             }
 
-            // Re-initialize font controls and header scroll check after new content is loaded
-            if (typeof initFontControls === 'function') {
-                initFontControls();
-            }
-            if (typeof window.triggerHeaderScrollCheck === 'function') {
-                window.triggerHeaderScrollCheck();
-            }
+            // Use a timeout to allow the fade-out transition to complete (0.7s from CSS)
+            // before injecting new content and starting the fade-in.
+            setTimeout(() => {
+                if (!contentColumn) {
+                    // If contentColumn doesn't exist (e.g., initial load), create it
+                    contentColumn = document.createElement('div');
+                    contentColumn.classList.add('content-column');
+                    contentArea.appendChild(contentColumn);
+                }
 
+                // Set the new content
+                contentColumn.innerHTML = data;
+
+                // Use requestAnimationFrame (double-wrapped for robustness) to ensure
+                // the browser has rendered the new content (and its initial hidden state)
+                // before applying the 'fade-in' class, which triggers the transition.
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        contentColumn.classList.add('fade-in');
+                    });
+                });
+
+                // Re-initialize font controls and header scroll check after new content is loaded
+                if (typeof initFontControls === 'function') {
+                    initFontControls();
+                }
+                if (typeof window.triggerHeaderScrollCheck === 'function') {
+                    window.triggerHeaderScrollCheck();
+                }
+            }, 700); // This delay should match the CSS transition duration for fade-out
         } catch (error) {
             console.error('Error loading content:', error);
             contentArea.innerHTML = `<p>Error loading content: ${error.message}. Please try again.</p>`;
