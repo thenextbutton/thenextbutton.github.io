@@ -14,8 +14,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let contentColumn = contentArea.querySelector('.content-column');
 
+            // Handle content injection and animation
             if (isInitialLoad) {
-                // For initial load, ensure contentColumn exists and set its content.
+                // For initial load, just set the content and ensure it's visible.
+                // CSS handles default visibility.
                 if (!contentColumn) {
                     contentColumn = document.createElement('div');
                     contentColumn.classList.add('content-column');
@@ -25,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Ensure no lingering inline styles from previous attempts
                 contentColumn.style.opacity = '';
                 contentColumn.style.transform = '';
-
             } else {
                 // For subsequent navigation, perform fade-out then fade-in
                 if (contentColumn) {
@@ -56,8 +57,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 700); // This delay should match the CSS transition duration for fade-out
             }
 
-            // Update URL hash without triggering a full page reload
-            history.pushState(null, '', `/#/${pageName}.html`);
+            // Update URL hash without triggering a full page reload, but only if it's different
+            // This prevents adding duplicate history entries or unnecessary hash changes
+            const currentHash = window.location.hash;
+            const newHash = `/#/${pageName}.html`;
+            if (currentHash !== newHash) {
+                history.pushState(null, '', newHash);
+            }
 
             // Re-initialize font controls and header scroll check after new content is loaded
             if (typeof initFontControls === 'function') {
@@ -80,7 +86,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const pagePart = hash.substring(3); // Remove '/#/'
             return pagePart.split('.')[0]; // Get "home", "about_me", "github"
         }
-        return 'home'; // Default to 'home' if no hash or invalid hash
+        // If no hash, or invalid hash, default to 'home'
+        return 'home';
     }
 
     // Handle navigation clicks
@@ -95,6 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const url = `/content/${page}_content.html`;
                 loadContent(url, page, false); // Not an initial load
             } else {
+                // If already on the page, just update active class and log, no reload
                 console.log(`Already on ${page} page. No reload needed.`);
             }
             
@@ -106,14 +114,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Initial content load (e.g., home page)
-    const initialPage = getCurrentPageFromHash(); // Get initial page from URL hash
+    // Initial content load based on URL hash or default to home
+    const initialPage = getCurrentPageFromHash();
     const initialUrl = `/content/${initialPage}_content.html`;
     loadContent(initialUrl, initialPage, true); // This is the initial load
 
     // Set initial active class based on the loaded page
-    const homeLink = document.querySelector(`.main-nav a[data-page="${initialPage}"]`);
-    if (homeLink) {
-        homeLink.classList.add('active');
+    const initialActiveLink = document.querySelector(`.main-nav a[data-page="${initialPage}"]`);
+    if (initialActiveLink) {
+        initialActiveLink.classList.add('active');
     }
 });
