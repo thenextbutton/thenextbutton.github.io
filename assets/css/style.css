@@ -33,17 +33,12 @@ body {
   margin-top: 0;
   font-size: 1rem;
   color: #f0f0f0; /* Light gray for dark mode content */
-  /* RE-ADDED: Initial hidden state and transition for content animation */
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  /* REMOVED: opacity: 0; and transform: translateY(20px); from default state */
+  /* This means content is visible by default */
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out; /* Keep transition for JS control */
 }
 
-/* RE-ADDED: Class for when the content fades and slides into view */
-#content-area .content-column.fade-in {
-  opacity: 1;
-  transform: translateY(0);
-}
+/* REMOVED: #content-area .content-column.fade-in as it's no longer needed */
 
 h1 {
   text-align: center;
