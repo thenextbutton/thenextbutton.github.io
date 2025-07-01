@@ -335,19 +335,17 @@ body.light-mode .content-column a {
   color: #007bff;
 }
 
-/* FIX: Explicitly set paragraph text color in light mode for general content */
 body.light-mode .content-column p {
   color: #1a1a1a; /* Dark text for light background */
 }
 
-/* FIX: Explicitly set h2 text color in light mode for general content */
 body.light-mode .content-column h2 {
   color: #333; /* Darker text for headings in light mode */
 }
 
 
 body.light-mode .github-project-item {
-  background-color: #e0e0e0;
+  background-color: #d0d0d0; /* Adjusted from #e0e0e0 to a slightly darker shade */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
