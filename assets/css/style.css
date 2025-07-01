@@ -6,8 +6,8 @@ body {
   padding: 0;
   padding-top: 120px;
   font-size: 1rem;
-  /* ADDED: Transition for smooth theme changes */
-  transition: background-color 0.7s ease-in-out, color 0.7s ease-in-out;
+  /* UPDATED: Transition for smoother theme changes (from 0.7s to 1.5s) */
+  transition: background-color 1.5s ease-in-out, color 1.5s ease-in-out;
 }
 
 .main-header-fixed {
