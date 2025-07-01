@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Update URL hash without triggering a full page reload, but only if it's different
             const currentHash = window.location.hash;
-            const newHash = `/#/${pageName}.html`;
+            const newHash = `/#/${pageName}.html`; // This is the format we want to enforce
             console.log(`[loadContent] Current hash: "${currentHash}", Proposed new hash: "${newHash}"`);
             if (currentHash !== newHash) {
                 history.pushState(null, '', newHash);
@@ -92,8 +92,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function getCurrentPageFromHash() {
         const hash = window.location.hash;
         console.log(`[getCurrentPageFromHash] Raw hash: "${hash}"`);
-        if (hash.startsWith('/#/')) {
-            const pagePart = hash.substring(3); // Remove '/#/'
+        // UPDATED: Changed condition to correctly match hash format "#/"
+        if (hash.startsWith('#/')) { // Changed from '/#/' to '#/'
+            const pagePart = hash.substring(2); // Remove '#/'
             const pageName = pagePart.split('.')[0]; // Get "home", "about_me", "github"
             console.log(`[getCurrentPageFromHash] Derived page name: "${pageName}"`);
             return pageName;
