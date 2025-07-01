@@ -66,8 +66,8 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', (event) => {
             event.preventDefault();
             const page = event.target.getAttribute('data-page');
-            // Changed path to absolute from root
-            const url = `/assets/content/${page}_content.html`;
+            // CORRECTED PATH: Removed '/assets'
+            const url = `/content/${page}_content.html`;
             loadContent(url);
 
             // Update active class for navigation
@@ -80,8 +80,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial content load (e.g., home page)
     const initialPage = 'home'; // Default page to load
-    // Changed path to absolute from root
-    const initialUrl = `/assets/content/${initialPage}_content.html`;
+    // CORRECTED PATH: Removed '/assets'
+    const initialUrl = `/content/${initialPage}_content.html`;
     loadContent(initialUrl);
 
     // Set initial active class for home
