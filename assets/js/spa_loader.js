@@ -37,6 +37,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     contentColumn.offsetHeight; // Trigger reflow/repaint
                     contentColumn.style.opacity = '1';
                     contentColumn.style.transform = 'translateY(0)';
+
+                    // Call initScrollAnimations after new content is loaded
+                    if (typeof initScrollAnimations === 'function') {
+                        initScrollAnimations();
+                    }
+
                 }, 700);
             }
 
