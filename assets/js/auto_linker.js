@@ -6,6 +6,7 @@ function initAutoLinker() {
         ,'Jellyfin': 'https://jellyfin.org/'
         ,'Home Assistant': 'https://www.home-assistant.io/'
         ,'Frigate': 'https://frigate.video/'
+        ,'Powershell': 'https://learn.microsoft.com/en-us/powershell/'
         // Add more keywords and URLs as needed
     };
 
