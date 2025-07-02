@@ -118,14 +118,11 @@ h1 {
   font-weight: bold;
   font-size: 1.1rem;
   padding: 5px 10px;
-  /* MODIFIED: Reverted transition for micro-interaction */
-  transition: color 0.3s ease-in-out; /* Only color transition remains */
-  /* REMOVED: display and position properties */
+  transition: color 0.3s ease-in-out;
 }
 
 .main-nav li a:hover {
   color: #8be9fd;
-  /* REMOVED: transform and box-shadow for hover effect */
 }
 
 .content-column a {
@@ -151,7 +148,7 @@ h1 {
   align-items: center;
   gap: 20px;
   text-align: left;
-  transition: background-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out, opacity 0.7s ease-out, transform 0.3s ease-out;
+  transition: background-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out, opacity 1.2s ease-out, transform 1.2s ease-out; /* MODIFIED: Slower opacity and transform transitions */
   position: relative;
 }
 
@@ -351,10 +348,8 @@ body.light-mode .main-nav li a {
   color: #333;
 }
 
-/* MODIFIED: Reverted light mode nav hover effect */
 body.light-mode .main-nav li a:hover {
   color: #007bff;
-  /* REMOVED: transform and box-shadow for hover effect */
 }
 
 body.light-mode .content-column a {
