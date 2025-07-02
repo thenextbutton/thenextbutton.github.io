@@ -114,18 +114,16 @@ h1 {
 
 .main-nav li a {
   text-decoration: none;
-  color: #a0a0a0;
-  font-weight: bold; /* Default font-weight */
+  color: #a0a0a0; /* Default color for dark mode */
+  font-weight: bold;
   font-size: 1.1rem;
   padding: 5px 10px;
-  /* MODIFIED: Added font-weight to transition */
   transition: color 0.3s ease-in-out, font-weight 0.2s ease-in-out;
-  /* REMOVED: position: relative; and all ::after rules */
 }
 
 .main-nav li a:hover {
-  color: #8be9fd;
-  font-weight: bolder; /* Slightly bolder on hover */
+  color: #c0c0c0; /* MODIFIED: Slightly lighter grey on hover for dark mode */
+  font-weight: bolder;
 }
 
 .content-column a {
@@ -348,15 +346,13 @@ body.light-mode h1 {
 }
 
 body.light-mode .main-nav li a {
-  color: #333;
-  /* MODIFIED: Added font-weight to transition for light mode */
+  color: #333; /* Default color for light mode */
   transition: color 0.3s ease-in-out, font-weight 0.2s ease-in-out;
 }
 
-/* MODIFIED: Light mode hover effect for navigation links */
 body.light-mode .main-nav li a:hover {
-  color: #007bff;
-  font-weight: bolder; /* Slightly bolder on hover */
+  color: #1a1a1a; /* MODIFIED: Slightly darker grey on hover for light mode */
+  font-weight: bolder;
 }
 
 body.light-mode .content-column a {
@@ -452,9 +448,7 @@ body.light-mode .main-header-fixed {
   .main-nav li a {
     font-size: 1.1rem;
     padding: 8px 12px;
-    /* Ensure transitions are consistent on mobile */
     transition: color 0.3s ease-in-out, font-weight 0.2s ease-in-out;
-    /* REMOVED: transform and box-shadow for hover effect from mobile media query */
   }
 
   .profile-image {
