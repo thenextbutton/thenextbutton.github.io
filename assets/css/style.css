@@ -118,12 +118,17 @@ h1 {
   font-weight: bold;
   font-size: 1.1rem;
   padding: 5px 10px;
-  transition: color 0.3s ease-in-out, font-weight 0.2s ease-in-out;
+  /* MODIFIED: Added background-color to transition */
+  transition: color 0.3s ease-in-out, font-weight 0.2s ease-in-out, background-color 0.3s ease-in-out, border-radius 0.3s ease-in-out;
+  display: inline-block; /* Needed for background/padding to apply correctly */
+  border-radius: 4px; /* Slightly rounded default */
 }
 
 .main-nav li a:hover {
   color: #c0c0c0; /* Slightly lighter grey on hover for dark mode */
   font-weight: bolder;
+  background-color: #333; /* Subtle background highlight for dark mode */
+  border-radius: 8px; /* More rounded on hover */
 }
 
 .content-column a {
@@ -347,12 +352,15 @@ body.light-mode h1 {
 
 body.light-mode .main-nav li a {
   color: #333; /* Default color for light mode */
-  transition: color 0.3s ease-in-out, font-weight 0.2s ease-in-out;
+  transition: color 0.3s ease-in-out, font-weight 0.2s ease-in-out, background-color 0.3s ease-in-out, border-radius 0.3s ease-in-out;
+  border-radius: 4px; /* Slightly rounded default */
 }
 
 body.light-mode .main-nav li a:hover {
-  color: #000; /* MODIFIED: Changed to black for a clearer, subtle contrast */
+  color: #000; /* Changed to black for a clearer, subtle contrast */
   font-weight: bolder;
+  background-color: #e0e0e0; /* Subtle background highlight for light mode */
+  border-radius: 8px; /* More rounded on hover */
 }
 
 body.light-mode .content-column a {
