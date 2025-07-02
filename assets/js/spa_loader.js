@@ -20,6 +20,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 contentColumn.innerHTML = data;
                 contentColumn.style.opacity = '';
                 contentColumn.style.transform = '';
+
+                // Call initAutoLinker immediately for initial load
+                if (typeof initAutoLinker === 'function') {
+                    initAutoLinker();
+                }
+
             } else {
                 if (contentColumn) {
                     contentColumn.style.opacity = '0';
@@ -42,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (typeof initScrollAnimations === 'function') {
                         initScrollAnimations();
                     }
-                    // Call initAutoLinker after new content is loaded
+                    // Call initAutoLinker after new content is loaded (for subsequent navigations)
                     if (typeof initAutoLinker === 'function') {
                         initAutoLinker();
                     }
