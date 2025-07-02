@@ -42,6 +42,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (typeof initScrollAnimations === 'function') {
                         initScrollAnimations();
                     }
+                    // Call initAutoLinker after new content is loaded
+                    if (typeof initAutoLinker === 'function') {
+                        initAutoLinker();
+                    }
 
                 }, 700);
             }
