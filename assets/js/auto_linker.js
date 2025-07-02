@@ -4,7 +4,8 @@ function initAutoLinker() {
     const keywordMap = {
         'Plex': 'https://plex.tv/',
         'Jellyfin': 'https://jellyfin.org/',
-        'Home Assistant': 'https://www.home-assistant.io/'
+        'Home Assistant': 'https://www.home-assistant.io/',
+        'Frigate': 'https://frigate.video/'
         // Add more keywords and URLs as needed
     };
 
