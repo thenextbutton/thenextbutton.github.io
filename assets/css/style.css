@@ -140,25 +140,27 @@ h1 {
   text-decoration: underline;
 }
 
+/* MODIFIED: CTA Button Styling for a more subtle look */
 .cta-button {
   display: inline-block;
-  background-color: #4a90e2; /* Muted blue background */
-  color: #f0f0f0; /* Light text for contrast */
+  background-color: transparent; /* Transparent background */
+  color: #8be9fd; /* Accent blue text */
   padding: 10px 20px;
-  border-radius: 25px;
+  border-radius: 8px; /* Less rounded corners */
+  border: 1px solid #8be9fd; /* Blue border */
   text-decoration: none;
   font-weight: bold;
   font-size: 1rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  box-shadow: none; /* No initial box shadow */
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   cursor: pointer;
-  border: none;
 }
 
 .cta-button:hover {
-  background-color: #3a7bd5; /* Slightly darker blue on hover */
+  background-color: #8be9fd; /* Filled blue on hover */
+  color: #1a1a1a; /* Dark text on hover */
   transform: translateY(-3px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow on hover */
 }
 
 .github-project-item {
@@ -382,36 +384,19 @@ body.light-mode .content-column a {
   color: #007bff;
 }
 
-.cta-button {
-  background-color: #4a90e2; /* Muted blue background */
-  color: #f0f0f0; /* Light text for contrast */
-  padding: 10px 20px;
-  border-radius: 25px;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 1rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  cursor: pointer;
-  border: none;
-}
-
-.cta-button:hover {
-  background-color: #3a7bd5; /* Slightly darker blue on hover */
-  transform: translateY(-3px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-}
-
+/* MODIFIED: Light mode CTA Button Styling for a more subtle look */
 body.light-mode .cta-button {
-  background-color: #0056b3; /* Darker blue for light mode */
-  color: #f0f0f0; /* Light text for contrast */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: transparent; /* Transparent background */
+  color: #007bff; /* Accent blue text */
+  border: 1px solid #007bff; /* Blue border */
+  box-shadow: none; /* No initial box shadow */
 }
 
 body.light-mode .cta-button:hover {
-  background-color: #003d80; /* Even darker blue on hover */
+  background-color: #007bff; /* Filled blue on hover */
+  color: #f0f0f0; /* Light text on hover */
   transform: translateY(-3px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow on hover */
 }
 
 body.light-mode .content-column p {
