@@ -4,7 +4,7 @@ function initAutoLinker() {
     const keywordMap = {
         'Plex': 'https://plex.tv/',
         'Jellyfin': 'https://jellyfin.org/',
-        'Home Assistant': 'https://www.home-assistant.io/' // Example: Multi-word keyword
+        'Home Assistant': 'https://www.home-assistant.io/'
         // Add more keywords and URLs as needed
     };
 
@@ -22,11 +22,12 @@ function initAutoLinker() {
         {
             // Custom filter function to accept or reject nodes
             acceptNode: function(node) {
-                // Reject text nodes that are inside <a>, <script>, or <style> tags
-                // This prevents linking within existing links or breaking script/style blocks.
+                // Reject text nodes that are inside <a>, <script>, <style>, or any H1-H6 tags
+                // This prevents linking within existing links, breaking script/style, or modifying headers.
                 if (node.parentNode.nodeName === 'A' ||
                     node.parentNode.nodeName === 'SCRIPT' ||
-                    node.parentNode.nodeName === 'STYLE') {
+                    node.parentNode.nodeName === 'STYLE' ||
+                    node.parentNode.nodeName.match(/^H[1-6]$/)) { // ADDED: Check for H1-H6 tags
                     return NodeFilter.FILTER_REJECT;
                 }
                 // Only accept text nodes that are not empty or just whitespace
