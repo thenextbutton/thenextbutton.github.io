@@ -148,7 +148,7 @@ h1 {
   align-items: center;
   gap: 20px;
   text-align: left;
-  transition: background-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out, opacity 2s ease-out, transform 2s ease-out; /* MODIFIED: Slower opacity and transform transitions to 2s */
+  transition: background-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out, opacity 2s ease-out, transform 2s ease-out; 
   position: relative;
 }
 
