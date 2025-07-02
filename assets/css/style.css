@@ -122,7 +122,7 @@ h1 {
 }
 
 .main-nav li a:hover {
-  color: #c0c0c0; /* MODIFIED: Slightly lighter grey on hover for dark mode */
+  color: #c0c0c0; /* Slightly lighter grey on hover for dark mode */
   font-weight: bolder;
 }
 
@@ -351,7 +351,7 @@ body.light-mode .main-nav li a {
 }
 
 body.light-mode .main-nav li a:hover {
-  color: #1a1a1a; /* MODIFIED: Slightly darker grey on hover for light mode */
+  color: #000; /* MODIFIED: Changed to black for a clearer, subtle contrast */
   font-weight: bolder;
 }
 
