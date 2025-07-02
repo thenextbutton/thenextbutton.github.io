@@ -108,39 +108,24 @@ h1 {
   margin: 0;
   display: flex;
   justify-content: center;
-  gap: 30px;
   flex-wrap: wrap;
+  gap: 30px;
 }
 
 .main-nav li a {
   text-decoration: none;
   color: #a0a0a0;
-  font-weight: bold;
+  font-weight: bold; /* Default font-weight */
   font-size: 1.1rem;
   padding: 5px 10px;
-  transition: color 0.3s ease-in-out;
-  position: relative; /* Needed for pseudo-element positioning */
-}
-
-/* ADDED: Underline effect for navigation links */
-.main-nav li a::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px; /* Thickness of the underline */
-  bottom: -3px; /* Distance from the text */
-  left: 0;
-  background-color: #8be9fd; /* Accent color for the underline */
-  transition: width 0.3s ease-in-out; /* Animation for the underline */
+  /* MODIFIED: Added font-weight to transition */
+  transition: color 0.3s ease-in-out, font-weight 0.2s ease-in-out;
+  /* REMOVED: position: relative; and all ::after rules */
 }
 
 .main-nav li a:hover {
   color: #8be9fd;
-}
-
-/* ADDED: Expand underline on hover */
-.main-nav li a:hover::after {
-  width: 100%; /* Make the underline appear */
+  font-weight: bolder; /* Slightly bolder on hover */
 }
 
 .content-column a {
@@ -364,15 +349,14 @@ body.light-mode h1 {
 
 body.light-mode .main-nav li a {
   color: #333;
+  /* MODIFIED: Added font-weight to transition for light mode */
+  transition: color 0.3s ease-in-out, font-weight 0.2s ease-in-out;
 }
 
-/* ADDED: Light mode underline effect for navigation links */
-body.light-mode .main-nav li a::after {
-  background-color: #007bff; /* Accent color for light mode underline */
-}
-
+/* MODIFIED: Light mode hover effect for navigation links */
 body.light-mode .main-nav li a:hover {
   color: #007bff;
+  font-weight: bolder; /* Slightly bolder on hover */
 }
 
 body.light-mode .content-column a {
@@ -468,7 +452,9 @@ body.light-mode .main-header-fixed {
   .main-nav li a {
     font-size: 1.1rem;
     padding: 8px 12px;
-    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    /* Ensure transitions are consistent on mobile */
+    transition: color 0.3s ease-in-out, font-weight 0.2s ease-in-out;
+    /* REMOVED: transform and box-shadow for hover effect from mobile media query */
   }
 
   .profile-image {
