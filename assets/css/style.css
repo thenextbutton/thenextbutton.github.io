@@ -118,10 +118,10 @@ h1 {
   font-weight: bold;
   font-size: 1.1rem;
   padding: 5px 10px;
-  /* MODIFIED: Added background-color to transition */
-  transition: color 0.3s ease-in-out, font-weight 0.2s ease-in-out, background-color 0.3s ease-in-out, border-radius 0.3s ease-in-out;
-  display: inline-block; /* Needed for background/padding to apply correctly */
-  border-radius: 4px; /* Slightly rounded default */
+  /* MODIFIED: Added box-shadow to transition */
+  transition: color 0.3s ease-in-out, font-weight 0.2s ease-in-out, background-color 0.3s ease-in-out, border-radius 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  display: inline-block;
+  border-radius: 4px;
 }
 
 .main-nav li a:hover {
@@ -129,6 +129,7 @@ h1 {
   font-weight: bolder;
   background-color: #333; /* Subtle background highlight for dark mode */
   border-radius: 8px; /* More rounded on hover */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* ADDED: Subtle shadow on hover */
 }
 
 .content-column a {
@@ -352,7 +353,8 @@ body.light-mode h1 {
 
 body.light-mode .main-nav li a {
   color: #333; /* Default color for light mode */
-  transition: color 0.3s ease-in-out, font-weight 0.2s ease-in-out, background-color 0.3s ease-in-out, border-radius 0.3s ease-in-out;
+  /* MODIFIED: Added box-shadow to transition for light mode */
+  transition: color 0.3s ease-in-out, font-weight 0.2s ease-in-out, background-color 0.3s ease-in-out, border-radius 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   border-radius: 4px; /* Slightly rounded default */
 }
 
@@ -361,6 +363,7 @@ body.light-mode .main-nav li a:hover {
   font-weight: bolder;
   background-color: #e0e0e0; /* Subtle background highlight for light mode */
   border-radius: 8px; /* More rounded on hover */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* ADDED: Subtle shadow on hover for light mode */
 }
 
 body.light-mode .content-column a {
