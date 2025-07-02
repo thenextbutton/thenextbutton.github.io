@@ -37,12 +37,12 @@ document.addEventListener('DOMContentLoaded', () => {
     function applyTheme(themeName) {
         if (themeName === 'light') {
             body.classList.add('light-mode');
-            themeSwitch.checked = true; // Check the toggle for light mode
+            themeSwitch.checked = false; // Toggle OFF for Light Mode
             themeToggleText.textContent = 'Light Mode';
             msCertLogo.src = LIGHT_MODE_MS_LOGO_SRC; // Set light mode logo
-        } else {
+        } else { // themeName === 'dark'
             body.classList.remove('light-mode');
-            themeSwitch.checked = false; // Uncheck the toggle for dark mode
+            themeSwitch.checked = true; // Toggle ON for Dark Mode
             themeToggleText.textContent = 'Dark Mode';
             msCertLogo.src = DARK_MODE_MS_LOGO_SRC; // Set dark mode logo
         }
@@ -72,14 +72,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Theme Toggle Button Logic ---
 
     themeSwitch.addEventListener('change', () => {
+        // If themeSwitch.checked is true, it means the user wants Dark Mode
+        // If themeSwitch.checked is false, it means the user wants Light Mode
         if (themeSwitch.checked) {
-            // User manually switched to light mode
-            applyTheme('light');
-            localStorage.setItem('theme', 'light');
-        } else {
-            // User manually switched to dark mode
-            applyTheme('dark');
+            applyTheme('dark'); // User manually switched to dark mode
             localStorage.setItem('theme', 'dark');
+        } else {
+            applyTheme('light'); // User manually switched to light mode
+            localStorage.setItem('theme', 'light');
         }
     });
 
