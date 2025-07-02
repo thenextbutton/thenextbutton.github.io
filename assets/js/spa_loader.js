@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (typeof initAutoLinker === 'function') {
                     initAutoLinker();
                 }
+                window.scrollTo(0, 0); // ADDED: Scroll to top on initial load
 
             } else {
                 if (contentColumn) {
@@ -52,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (typeof initAutoLinker === 'function') {
                         initAutoLinker();
                     }
+                    window.scrollTo(0, 0); // ADDED: Scroll to top after content transition
 
                 }, 700);
             }
