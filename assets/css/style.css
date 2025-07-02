@@ -118,15 +118,14 @@ h1 {
   font-weight: bold;
   font-size: 1.1rem;
   padding: 5px 10px;
-  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  display: inline-block;
-  position: relative;
+  /* MODIFIED: Reverted transition for micro-interaction */
+  transition: color 0.3s ease-in-out; /* Only color transition remains */
+  /* REMOVED: display and position properties */
 }
 
 .main-nav li a:hover {
   color: #8be9fd;
-  transform: translateY(-3px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /* REMOVED: transform and box-shadow for hover effect */
 }
 
 .content-column a {
@@ -139,6 +138,7 @@ h1 {
 .content-column a:hover {
   text-decoration: underline;
 }
+
 
 .github-project-item {
   background-color: #282a36;
@@ -351,15 +351,16 @@ body.light-mode .main-nav li a {
   color: #333;
 }
 
+/* MODIFIED: Reverted light mode nav hover effect */
 body.light-mode .main-nav li a:hover {
   color: #007bff;
-  transform: translateY(-3px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* REMOVED: transform and box-shadow for hover effect */
 }
 
 body.light-mode .content-column a {
   color: #007bff;
 }
+
 
 body.light-mode .content-column p {
   color: #1a1a1a;
