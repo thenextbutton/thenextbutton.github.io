@@ -119,10 +119,28 @@ h1 {
   font-size: 1.1rem;
   padding: 5px 10px;
   transition: color 0.3s ease-in-out;
+  position: relative; /* Needed for pseudo-element positioning */
+}
+
+/* ADDED: Underline effect for navigation links */
+.main-nav li a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px; /* Thickness of the underline */
+  bottom: -3px; /* Distance from the text */
+  left: 0;
+  background-color: #8be9fd; /* Accent color for the underline */
+  transition: width 0.3s ease-in-out; /* Animation for the underline */
 }
 
 .main-nav li a:hover {
   color: #8be9fd;
+}
+
+/* ADDED: Expand underline on hover */
+.main-nav li a:hover::after {
+  width: 100%; /* Make the underline appear */
 }
 
 .content-column a {
@@ -148,7 +166,7 @@ h1 {
   align-items: center;
   gap: 20px;
   text-align: left;
-  transition: background-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out, opacity 2s ease-out, transform 2s ease-out; 
+  transition: background-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out, opacity 2s ease-out, transform 2s ease-out;
   position: relative;
 }
 
@@ -346,6 +364,11 @@ body.light-mode h1 {
 
 body.light-mode .main-nav li a {
   color: #333;
+}
+
+/* ADDED: Light mode underline effect for navigation links */
+body.light-mode .main-nav li a::after {
+  background-color: #007bff; /* Accent color for light mode underline */
 }
 
 body.light-mode .main-nav li a:hover {
