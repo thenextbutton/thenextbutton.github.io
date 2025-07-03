@@ -380,6 +380,21 @@ h2, h3, h4, h5, h6 {
   background-color: #555;
 }
 
+/* ADDED: Focus States */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+.theme-switch-label:focus-visible, /* Specific for the toggle label */
+.font-controls span:focus-visible {
+  outline: none; /* Remove default outline */
+  box-shadow: 0 0 0 2px #8be9fd; /* Subtle blue glow for dark mode */
+  border-color: #8be9fd; /* Add a border color if applicable */
+  transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+
 body.light-mode {
   background-color: #f0f0f0;
   color: #1a1a1a;
@@ -404,6 +419,18 @@ body.light-mode:hover::-webkit-scrollbar-thumb {
 /* Preserve hover effect for the thumb itself in light mode */
 body.light-mode::-webkit-scrollbar-thumb:hover {
   background-color: #666; /* Even darker thumb on direct hover for light mode */
+}
+
+/* ADDED: Light Mode Focus States */
+body.light-mode a:focus-visible,
+body.light-mode button:focus-visible,
+body.light-mode input:focus-visible,
+body.light-mode textarea:focus-visible,
+body.light-mode select:focus-visible,
+body.light-mode .theme-switch-label:focus-visible,
+body.light-mode .font-controls span:focus-visible {
+  box-shadow: 0 0 0 2px #007bff; /* Subtle blue glow for light mode */
+  border-color: #007bff; /* Add a border color if applicable */
 }
 
 body.light-mode h1 {
