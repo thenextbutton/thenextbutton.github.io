@@ -290,8 +290,8 @@ h2, h3, h4, h5, h6 {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Softer, more diffused shadow */
   border: 1px solid rgba(255, 255, 255, 0.05); /* Very faint border */
   transition: background-color 1.5s ease-in-out, border-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out;
-  width: 180px; /* ADDED: Fixed width for better control */
-  align-items: stretch; /* ADDED: Stretch children to fill width */
+  width: 180px; /* Fixed width for better control */
+  align-items: stretch; /* Stretch children to fill width */
 }
 
 .bottom-right-controls-wrapper:hover {
@@ -300,11 +300,10 @@ h2, h3, h4, h5, h6 {
 
 
 .theme-toggle-container {
-  display: flex;
-  flex-direction: row;
+  display: grid; /* MODIFIED: Use grid for precise alignment */
+  grid-template-columns: 50px 1fr; /* MODIFIED: Fixed width for toggle, rest for text */
   align-items: center;
-  gap: 10px;
-  justify-content: space-between; /* MODIFIED: Distribute items within the container */
+  /* REMOVED: gap: 10px; */ /* Gap is now handled by grid-column-gap if needed, but not explicitly set here to allow text to fill */
 }
 
 .theme-switch-checkbox {
@@ -355,15 +354,16 @@ h2, h3, h4, h5, h6 {
   color: #f0f0f0;
   user-select: none;
   transition: color 1.5s ease-in-out;
-  min-width: 80px;
-  text-align: right;
+  /* min-width: 80px; REMOVED: No longer needed with grid */
+  text-align: right; /* Ensure text aligns to the right within its grid cell */
+  padding-left: 10px; /* ADDED: Small padding to separate text from toggle */
 }
 
 
 .font-controls {
   display: flex;
   gap: 10px;
-  justify-content: space-between; /* MODIFIED: Distribute items within the container */
+  justify-content: space-between; /* Distribute items within the container */
 }
 
 .font-controls span {
@@ -380,7 +380,7 @@ h2, h3, h4, h5, h6 {
   cursor: pointer;
   user-select: none;
   transition: background-color 1.5s, color 1.5s, border-color 1.5s;
-  flex-grow: 1; /* ADDED: Allow buttons to grow and fill space */
+  flex-grow: 1; /* Allow buttons to grow and fill space */
 }
 
 #font-minus {
