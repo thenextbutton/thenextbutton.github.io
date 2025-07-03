@@ -269,7 +269,7 @@ h1 {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 10px;
+  gap: 5px; /* MODIFIED: Reduced gap to 5px */
 }
 
 .theme-switch-checkbox {
@@ -320,7 +320,7 @@ h1 {
   color: #f0f0f0;
   user-select: none;
   transition: color 1.5s ease-in-out;
-  min-width: 90px; /* ADDED: Ensure consistent width for text */
+  min-width: 90px; /* Ensures consistent width for text */
   text-align: right; /* Align text to the right within its min-width */
 }
 
@@ -378,7 +378,7 @@ textarea:focus-visible {
   box-shadow: 0 0 0 2px #8be9fd;
   border-color: #8be9fd;
   transition: box-shadow .2s ease-in-out, border-color .2s ease-in-out;
-  border-radius: 4px; /* ADDED: Rounded corners for the focus outline */
+  border-radius: 4px; /* Rounded corners for the focus outline */
 }
 
 
@@ -419,7 +419,7 @@ body.light-mode select:focus-visible,
 body.light-mode textarea:focus-visible {
   box-shadow: 0 0 0 2px #007bff;
   border-color: #007bff;
-  border-radius: 4px; /* ADDED: Rounded corners for the focus outline in light mode */
+  border-radius: 4px; /* Rounded corners for the focus outline in light mode */
 }
 
 body.light-mode h1 {
