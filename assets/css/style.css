@@ -42,19 +42,7 @@ body {
   transition: opacity 0.7s ease-out, transform 0.7s ease-out, color 1.5s ease-in-out;
 }
 
-/* ADDED: CSS for page transitions */
-#content-area {
-    opacity: 1;
-    transition: opacity 0.3s ease-in-out; /* Controls the fade duration */
-}
-
-#content-area.fade-out {
-    opacity: 0;
-}
-
-#content-area.fade-in {
-    opacity: 1;
-}
+/* REMOVED: CSS for page transitions (#content-area, .fade-out, .fade-in) */
 
 
 h1 {

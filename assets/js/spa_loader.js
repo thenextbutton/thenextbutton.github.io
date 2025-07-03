@@ -36,13 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to load content into the main area
     async function loadContent(path) {
-        // Add fade-out class to current content
-        contentArea.classList.add('fade-out');
-
-        // Wait for the fade-out transition to complete
-        // The duration of the fade-out is defined in style.css (0.3s)
-        await new Promise(resolve => setTimeout(resolve, 300)); // Match CSS transition duration
-
         try {
             const response = await fetch(path);
             if (!response.ok) {
@@ -62,22 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error(`HTTP error! status: ${response.status} for path: ${path}`);
             } else {
                 const html = await response.text();
-                // For HTML content files (like home_content.html, about_me_content.html, contact_content.html, github_content.html),
-                // we assume they only contain the inner HTML for the .content-column.
-                // If they contain full HTML documents, we need to parse and extract the relevant part.
-                // For simplicity, assuming they are fragments that directly go into contentArea.
                 contentArea.innerHTML = html;
             }
-
-            // After new content is loaded, remove fade-out and add fade-in
-            contentArea.classList.remove('fade-out');
-            contentArea.classList.add('fade-in');
-
-            // Remove fade-in class after its transition to reset for next fade-out
-            // This is important for the transition to work correctly on subsequent clicks
-            setTimeout(() => {
-                contentArea.classList.remove('fade-in');
-            }, 300); // Match CSS transition duration
 
             // Re-initialize scroll animations for newly loaded content
             if (typeof window.initScrollAnimations === 'function') {
@@ -97,11 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error('Error loading content:', error);
             contentArea.innerHTML = '<div class="content-column"><h2>Error</h2><p>Failed to load content.</p></div>';
-            contentArea.classList.remove('fade-out'); // Ensure it's visible even on error
-            contentArea.classList.add('fade-in');
-            setTimeout(() => {
-                contentArea.classList.remove('fade-in');
-            }, 300);
         }
     }
 
