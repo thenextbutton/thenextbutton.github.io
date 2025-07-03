@@ -320,6 +320,8 @@ h1 {
   color: #f0f0f0;
   user-select: none;
   transition: color 1.5s ease-in-out;
+  min-width: 90px; /* ADDED: Ensure consistent width for text */
+  text-align: right; /* Align text to the right within its min-width */
 }
 
 
