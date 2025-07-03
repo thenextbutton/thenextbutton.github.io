@@ -275,7 +275,7 @@ h2, h3, h4, h5, h6 {
   text-decoration: underline;
 }
 
-/* MODIFIED: New wrapper for controls - Visually centered */
+/* New wrapper for controls - Visually centered */
 .bottom-right-controls-wrapper {
   position: fixed;
   bottom: 20px;
@@ -300,10 +300,10 @@ h2, h3, h4, h5, h6 {
 
 
 .theme-toggle-container {
-  display: grid; /* MODIFIED: Use grid for precise alignment */
-  grid-template-columns: 50px 1fr; /* MODIFIED: Fixed width for toggle, rest for text */
+  display: flex; /* MODIFIED: Back to flexbox */
   align-items: center;
-  /* REMOVED: gap: 10px; */ /* Gap is now handled by grid-column-gap if needed, but not explicitly set here to allow text to fill */
+  justify-content: space-between; /* MODIFIED: Distribute items within the container */
+  /* REMOVED: grid properties */
 }
 
 .theme-switch-checkbox {
@@ -323,6 +323,7 @@ h2, h3, h4, h5, h6 {
   transition: background 1s;
   border: 1px solid #555;
   overflow: hidden;
+  flex-shrink: 0; /* ADDED: Prevent toggle from shrinking */
 }
 
 .theme-switch-label:after {
@@ -354,9 +355,10 @@ h2, h3, h4, h5, h6 {
   color: #f0f0f0;
   user-select: none;
   transition: color 1.5s ease-in-out;
-  /* min-width: 80px; REMOVED: No longer needed with grid */
-  text-align: right; /* Ensure text aligns to the right within its grid cell */
+  text-align: right; /* Ensure text aligns to the right */
+  flex-grow: 1; /* ADDED: Allow text to grow and fill remaining space */
   padding-left: 10px; /* ADDED: Small padding to separate text from toggle */
+  white-space: nowrap; /* ADDED: Prevent text from wrapping */
 }
 
 
