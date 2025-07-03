@@ -166,7 +166,7 @@ h1 {
 
 .github-project-item.hidden-scroll {
   opacity: 0;
-  transform: scale(1.5); /* MODIFIED: Starts at 150% size */
+  transform: scale(1.5) translateY(50px); /* MODIFIED: Starts at 150% size AND 50px lower */
 }
 
 .project-image {
