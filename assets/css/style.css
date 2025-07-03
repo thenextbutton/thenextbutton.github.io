@@ -11,7 +11,37 @@ body {
   padding: 0;
   padding-top: 120px;
   transition: background-color 1.5s ease-in-out, color 1.5s ease-in-out;
+  overflow-y: scroll; /* ADDED: Always show vertical scrollbar */
 }
+
+/* ADDED: Scrollbar Styling for Webkit browsers */
+/* Dark Mode Scrollbar */
+body::-webkit-scrollbar {
+  width: 10px; /* Width of the scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+  background: #282a36; /* Color of the scrollbar track */
+  border-radius: 5px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: transparent; /* Transparent by default */
+  border-radius: 5px; /* Rounded corners for the thumb */
+  border: 2px solid transparent; /* Transparent border by default */
+}
+
+/* Make thumb visible on hover over the body */
+body:hover::-webkit-scrollbar-thumb {
+  background-color: #555; /* Color of the scrollbar thumb on hover */
+  border-color: #282a36; /* Border to match track on hover */
+}
+
+/* Preserve hover effect for the thumb itself */
+body::-webkit-scrollbar-thumb:hover {
+  background-color: #777; /* Color of the scrollbar thumb on direct hover */
+}
+
 
 .main-header-fixed {
   position: fixed;
@@ -148,7 +178,7 @@ h1 {
   align-items: center;
   gap: 20px;
   text-align: left;
-  transition: background-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out, opacity 2s ease-out, transform 2s ease-out; /* MODIFIED: Slower opacity and transform transitions to 2s */
+  transition: background-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out, opacity 2s ease-out, transform 2s ease-out;
   position: relative;
 }
 
@@ -159,7 +189,7 @@ h1 {
 
 .github-project-item.hidden-scroll {
   opacity: 0;
-  transform: translateY(20px);
+  transform: scale(1.5);
 }
 
 .project-image {
@@ -339,6 +369,28 @@ body.light-mode {
   background-color: #f0f0f0;
   color: #1a1a1a;
 }
+
+/* ADDED: Scrollbar Styling for Webkit browsers in Light Mode */
+body.light-mode::-webkit-scrollbar-track {
+  background: #e0e0e0; /* Lighter track for light mode */
+}
+
+body.light-mode::-webkit-scrollbar-thumb {
+  background-color: transparent; /* Transparent by default in light mode */
+  border: 2px solid transparent; /* Transparent border by default in light mode */
+}
+
+/* Make thumb visible on hover over the body in light mode */
+body.light-mode:hover::-webkit-scrollbar-thumb {
+  background-color: #888; /* Darker thumb for light mode on hover */
+  border-color: #e0e0e0; /* Border to match light track on hover */
+}
+
+/* Preserve hover effect for the thumb itself in light mode */
+body.light-mode::-webkit-scrollbar-thumb:hover {
+  background-color: #666; /* Even darker thumb on direct hover for light mode */
+}
+
 
 body.light-mode h1 {
   color: #333;
