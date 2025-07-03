@@ -275,7 +275,7 @@ h2, h3, h4, h5, h6 {
   text-decoration: underline;
 }
 
-/* MODIFIED: New wrapper for controls - Adjusted padding */
+/* MODIFIED: New wrapper for controls - Visually centered */
 .bottom-right-controls-wrapper {
   position: fixed;
   bottom: 20px;
@@ -285,12 +285,13 @@ h2, h3, h4, h5, h6 {
   flex-direction: column; /* Stack controls vertically */
   gap: 15px; /* Space between the two control groups */
   background-color: #222222; /* Slightly more distinct background */
-  padding: 15px; /* MODIFIED: Uniform padding */
-  /* If you want specific padding: padding: 15px 20px 15px 15px; (top right bottom left) */
+  padding: 15px; /* Uniform padding */
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Softer, more diffused shadow */
   border: 1px solid rgba(255, 255, 255, 0.05); /* Very faint border */
   transition: background-color 1.5s ease-in-out, border-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out;
+  width: 180px; /* ADDED: Fixed width for better control */
+  align-items: stretch; /* ADDED: Stretch children to fill width */
 }
 
 .bottom-right-controls-wrapper:hover {
@@ -303,6 +304,7 @@ h2, h3, h4, h5, h6 {
   flex-direction: row;
   align-items: center;
   gap: 10px;
+  justify-content: space-between; /* MODIFIED: Distribute items within the container */
 }
 
 .theme-switch-checkbox {
@@ -361,7 +363,7 @@ h2, h3, h4, h5, h6 {
 .font-controls {
   display: flex;
   gap: 10px;
-  justify-content: flex-end; /* Align to the right within the wrapper */
+  justify-content: space-between; /* MODIFIED: Distribute items within the container */
 }
 
 .font-controls span {
@@ -378,6 +380,7 @@ h2, h3, h4, h5, h6 {
   cursor: pointer;
   user-select: none;
   transition: background-color 1.5s, color 1.5s, border-color 1.5s;
+  flex-grow: 1; /* ADDED: Allow buttons to grow and fill space */
 }
 
 #font-minus {
@@ -449,12 +452,12 @@ body.light-mode .font-controls span:focus-visible {
   border-color: #007bff; /* Add a border color if applicable */
 }
 
-/* MODIFIED: Light mode for the new wrapper - Adjusted padding */
+/* Light mode for the new wrapper - Adjusted padding */
 body.light-mode .bottom-right-controls-wrapper {
   background-color: #e0e0e0; /* Slightly more distinct background */
   border: 1px solid rgba(0, 0, 0, 0.05); /* Very faint border */
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Softer, more diffused shadow */
-  padding: 15px; /* MODIFIED: Uniform padding */
+  padding: 15px; /* Uniform padding */
 }
 
 body.light-mode .bottom-right-controls-wrapper:hover {
