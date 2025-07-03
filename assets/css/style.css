@@ -13,6 +13,28 @@ body {
   transition: background-color 1.5s ease-in-out, color 1.5s ease-in-out;
 }
 
+/* ADDED: Scrollbar Styling for Webkit browsers */
+/* Dark Mode Scrollbar */
+body::-webkit-scrollbar {
+  width: 10px; /* Width of the scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+  background: #282a36; /* Color of the scrollbar track */
+  border-radius: 5px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #555; /* Color of the scrollbar thumb */
+  border-radius: 5px; /* Rounded corners for the thumb */
+  border: 2px solid #282a36; /* Creates a subtle border effect */
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background-color: #777; /* Color of the scrollbar thumb on hover */
+}
+
+
 .main-header-fixed {
   position: fixed;
   top: 0;
@@ -42,8 +64,9 @@ body {
   transition: opacity 0.7s ease-out, transform 0.7s ease-out, color 1.5s ease-in-out;
 }
 
+
 h1 {
-  font-family: "Consolas", monospace; /* Reverted to Consolas */
+  font-family: "Consolas", monospace;
   text-align: center;
   color: #a0a0a0;
   margin: 0;
@@ -57,7 +80,6 @@ h1 {
   transition: transform 0.7s ease-out;
 }
 
-/* Reverted other headings to Consolas (or inherit from body) */
 h2, h3, h4, h5, h6 {
   font-family: "Consolas", monospace;
 }
@@ -351,6 +373,20 @@ h2, h3, h4, h5, h6 {
 body.light-mode {
   background-color: #f0f0f0;
   color: #1a1a1a;
+}
+
+/* ADDED: Light Mode Scrollbar */
+body.light-mode::-webkit-scrollbar-track {
+  background: #e0e0e0; /* Lighter track for light mode */
+}
+
+body.light-mode::-webkit-scrollbar-thumb {
+  background-color: #888; /* Darker thumb for light mode */
+  border: 2px solid #e0e0e0; /* Border to match light track */
+}
+
+body.light-mode::-webkit-scrollbar-thumb:hover {
+  background-color: #666; /* Even darker thumb on hover for light mode */
 }
 
 body.light-mode h1 {
