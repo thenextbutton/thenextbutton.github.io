@@ -326,6 +326,8 @@ h2, h3, h4, h5, h6 {
   color: #f0f0f0;
   user-select: none;
   transition: color 1.5s ease-in-out;
+  min-width: 80px; /* ADDED: Fixed width to prevent shifting */
+  text-align: right; /* Align text to the right to keep the toggle button stable */
 }
 
 
@@ -501,7 +503,7 @@ body.light-mode .main-header-fixed {
   .main-nav li a {
     font-size: 1.1rem;
     padding: 8px 12px;
-    transition: color 0.3s ease-in-out, font-weight 0.2s ease-in-out;
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   }
 
   .profile-image {
