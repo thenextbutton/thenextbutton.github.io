@@ -275,7 +275,7 @@ h2, h3, h4, h5, h6 {
   text-decoration: underline;
 }
 
-/* MODIFIED: New wrapper for controls - More visible subtle */
+/* MODIFIED: New wrapper for controls - Adjusted padding */
 .bottom-right-controls-wrapper {
   position: fixed;
   bottom: 20px;
@@ -285,7 +285,8 @@ h2, h3, h4, h5, h6 {
   flex-direction: column; /* Stack controls vertically */
   gap: 15px; /* Space between the two control groups */
   background-color: #222222; /* Slightly more distinct background */
-  padding: 15px 20px;
+  padding: 15px; /* MODIFIED: Uniform padding */
+  /* If you want specific padding: padding: 15px 20px 15px 15px; (top right bottom left) */
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Softer, more diffused shadow */
   border: 1px solid rgba(255, 255, 255, 0.05); /* Very faint border */
@@ -448,11 +449,12 @@ body.light-mode .font-controls span:focus-visible {
   border-color: #007bff; /* Add a border color if applicable */
 }
 
-/* MODIFIED: Light mode for the new wrapper - More visible subtle */
+/* MODIFIED: Light mode for the new wrapper - Adjusted padding */
 body.light-mode .bottom-right-controls-wrapper {
   background-color: #e0e0e0; /* Slightly more distinct background */
   border: 1px solid rgba(0, 0, 0, 0.05); /* Very faint border */
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Softer, more diffused shadow */
+  padding: 15px; /* MODIFIED: Uniform padding */
 }
 
 body.light-mode .bottom-right-controls-wrapper:hover {
