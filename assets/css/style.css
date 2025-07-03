@@ -20,7 +20,7 @@ body::-webkit-scrollbar {
 }
 
 body::-webkit-scrollbar-track {
-  background: transparent; /* MODIFIED: Make track transparent in dark mode */
+  background: transparent; /* Make track transparent in dark mode */
   border-radius: 5px;
 }
 
@@ -364,6 +364,21 @@ h1 {
   background-color: #555;
 }
 
+/* Focus States */
+.font-controls span:focus-visible,
+.theme-switch-label:focus-visible,
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 2px #8be9fd;
+  border-color: #8be9fd;
+  transition: box-shadow .2s ease-in-out, border-color .2s ease-in-out;
+}
+
+
 body.light-mode {
   background-color: #f0f0f0;
   color: #1a1a1a;
@@ -371,7 +386,7 @@ body.light-mode {
 
 /* Scrollbar Styling for Webkit browsers in Light Mode */
 body.light-mode::-webkit-scrollbar-track {
-  background: transparent; /* MODIFIED: Make track transparent in light mode */
+  background: transparent; /* Make track transparent in light mode */
 }
 
 body.light-mode::-webkit-scrollbar-thumb {
@@ -390,6 +405,18 @@ body.light-mode::-webkit-scrollbar-thumb:hover {
   background-color: #666; /* Even darker thumb on direct hover for light mode */
 }
 
+
+/* Light Mode Focus States */
+body.light-mode .font-controls span:focus-visible,
+body.light-mode .theme-switch-label:focus-visible,
+body.light-mode a:focus-visible,
+body.light-mode button:focus-visible,
+body.light-mode input:focus-visible,
+body.light-mode select:focus-visible,
+body.light-mode textarea:focus-visible {
+  box-shadow: 0 0 0 2px #007bff;
+  border-color: #007bff;
+}
 
 body.light-mode h1 {
   color: #333;
