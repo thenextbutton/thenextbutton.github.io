@@ -376,6 +376,7 @@ textarea:focus-visible {
   box-shadow: 0 0 0 2px #8be9fd;
   border-color: #8be9fd;
   transition: box-shadow .2s ease-in-out, border-color .2s ease-in-out;
+  border-radius: 4px; /* ADDED: Rounded corners for the focus outline */
 }
 
 
@@ -416,6 +417,7 @@ body.light-mode select:focus-visible,
 body.light-mode textarea:focus-visible {
   box-shadow: 0 0 0 2px #007bff;
   border-color: #007bff;
+  border-radius: 4px; /* ADDED: Rounded corners for the focus outline in light mode */
 }
 
 body.light-mode h1 {
