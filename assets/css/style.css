@@ -275,7 +275,7 @@ h2, h3, h4, h5, h6 {
   text-decoration: underline;
 }
 
-/* ADDED: New wrapper for controls */
+/* MODIFIED: New wrapper for controls - More subtle */
 .bottom-right-controls-wrapper {
   position: fixed;
   bottom: 20px;
@@ -284,21 +284,20 @@ h2, h3, h4, h5, h6 {
   display: flex;
   flex-direction: column; /* Stack controls vertically */
   gap: 15px; /* Space between the two control groups */
-  background-color: #202020; /* Slightly different background */
+  background-color: #1e1e1e; /* Even closer to body background */
   padding: 15px 20px;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); /* Soft shadow */
-  border: 1px solid #333; /* Subtle border */
-  transition: background-color 1.5s ease-in-out, border-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Softer shadow */
+  border: none; /* Removed border */
+  transition: background-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .bottom-right-controls-wrapper:hover {
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6); /* Slightly more prominent shadow on hover */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Slightly more prominent shadow on hover */
 }
 
 
 .theme-toggle-container {
-  /* REMOVED: position: fixed, bottom, right, z-index */
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -359,7 +358,6 @@ h2, h3, h4, h5, h6 {
 
 
 .font-controls {
-  /* REMOVED: position: fixed, bottom, right, z-index */
   display: flex;
   gap: 10px;
   justify-content: flex-end; /* Align to the right within the wrapper */
@@ -450,15 +448,15 @@ body.light-mode .font-controls span:focus-visible {
   border-color: #007bff; /* Add a border color if applicable */
 }
 
-/* ADDED: Light mode for the new wrapper */
+/* MODIFIED: Light mode for the new wrapper - More subtle */
 body.light-mode .bottom-right-controls-wrapper {
-  background-color: #e8e8e8; /* Lighter background for light mode */
-  border-color: #ccc; /* Lighter border */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Lighter shadow */
+  background-color: #ededed; /* Even closer to body background */
+  border: none; /* Removed border */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08); /* Softer shadow */
 }
 
 body.light-mode .bottom-right-controls-wrapper:hover {
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Slightly more prominent shadow on hover */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Slightly more prominent shadow on hover */
 }
 
 
@@ -594,7 +592,6 @@ body.light-mode .main-header-fixed {
   }
 
   .theme-toggle-container {
-    /* REMOVED: bottom, right, gap */
     gap: 10px; /* Kept gap for internal spacing */
   }
 
@@ -622,7 +619,6 @@ body.light-mode .main-header-fixed {
   }
 
   .font-controls {
-    /* REMOVED: bottom, right, gap */
     gap: 8px; /* Kept gap for internal spacing */
   }
 
