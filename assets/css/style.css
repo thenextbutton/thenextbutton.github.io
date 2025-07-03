@@ -4,7 +4,7 @@ html {
 }
 
 body {
-  font-family: "Consolas", monospace; /* Keep Consolas for body text */
+  font-family: "Consolas", monospace; /* All text will now use Consolas */
   background-color: #1a1a1a;
   color: #f0f0f0;
   margin: 0;
@@ -43,7 +43,7 @@ body {
 }
 
 h1 {
-  font-family: "Inter", sans-serif; /* Applied Inter to H1 */
+  font-family: "Consolas", monospace; /* Reverted to Consolas */
   text-align: center;
   color: #a0a0a0;
   margin: 0;
@@ -57,9 +57,9 @@ h1 {
   transition: transform 0.7s ease-out;
 }
 
-/* Applied Inter to other headings */
+/* Reverted other headings to Consolas (or inherit from body) */
 h2, h3, h4, h5, h6 {
-  font-family: "Inter", sans-serif;
+  font-family: "Consolas", monospace;
 }
 
 .profile-image {
@@ -172,7 +172,7 @@ h2, h3, h4, h5, h6 {
 
 .github-project-item.hidden-scroll {
   opacity: 0;
-  transform: scale(1.5); /* Reverted to only scale, no vertical movement */
+  transform: scale(1.5);
 }
 
 .project-image {
