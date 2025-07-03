@@ -42,11 +42,8 @@ body {
   transition: opacity 0.7s ease-out, transform 0.7s ease-out, color 1.5s ease-in-out;
 }
 
-/* REMOVED: CSS for page transitions (#content-area, .fade-out, .fade-in) */
-
-
 h1 {
-  font-family: "Consolas", monospace;
+  font-family: "Consolas", monospace; /* Reverted to Consolas */
   text-align: center;
   color: #a0a0a0;
   margin: 0;
@@ -60,6 +57,7 @@ h1 {
   transition: transform 0.7s ease-out;
 }
 
+/* Reverted other headings to Consolas (or inherit from body) */
 h2, h3, h4, h5, h6 {
   font-family: "Consolas", monospace;
 }

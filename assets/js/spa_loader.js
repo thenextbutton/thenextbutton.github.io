@@ -1,109 +1,116 @@
-// Function to initialize scroll animations (from scroll_animations.js)
-// This function needs to be available globally or passed to spa_loader.js
-// Assuming initScrollAnimations is defined in assets/js/scroll_animations.js and is globally accessible
-// or we will define it here if it's not.
-if (typeof initScrollAnimations !== 'function') {
-    // Basic fallback if initScrollAnimations is not defined elsewhere
-    window.initScrollAnimations = function() {
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.remove('hidden-scroll');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.github-project-item').forEach(item => {
-            if (!item.classList.contains('hidden-scroll')) {
-                item.classList.add('hidden-scroll');
-            }
-            observer.observe(item);
-        });
-    };
-}
-
-
 document.addEventListener('DOMContentLoaded', () => {
     const contentArea = document.getElementById('content-area');
-    const navLinks = document.querySelectorAll('.main-nav a');
 
-    // Function to load content into the main area
-    async function loadContent(path) {
+    async function loadContent(url, pageName, isInitialLoad = false) {
         try {
-            const response = await fetch(path);
+            const response = await fetch(url);
             if (!response.ok) {
-                // If the specific content page is not found, try to load 404.html
-                const errorResponse = await fetch('404.html');
-                if (errorResponse.ok) {
-                    const errorHtml = await errorResponse.text();
-                    // Extract content within the .error-message-container if 404.html has full page structure
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(errorHtml, 'text/html');
-                    const errorMessageContainer = doc.querySelector('.error-message-container');
-                    contentArea.innerHTML = errorMessageContainer ? errorMessageContainer.innerHTML : errorHtml;
-                } else {
-                    // Fallback if 404.html also fails
-                    contentArea.innerHTML = '<div class="content-column"><h2>Error</h2><p>Content not found and 404 page failed to load.</p></div>';
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.text();
+
+            let contentColumn = contentArea.querySelector('.content-column');
+
+            if (isInitialLoad) {
+                if (!contentColumn) {
+                    contentColumn = document.createElement('div');
+                    contentColumn.classList.add('content-column');
+                    contentArea.appendChild(contentColumn);
                 }
-                console.error(`HTTP error! status: ${response.status} for path: ${path}`);
+                contentColumn.innerHTML = data;
+                contentColumn.style.opacity = '';
+                contentColumn.style.transform = '';
+
+                // Call initAutoLinker immediately for initial load
+                if (typeof initAutoLinker === 'function') {
+                    initAutoLinker();
+                }
+                window.scrollTo(0, 0); // ADDED: Scroll to top on initial load
+
             } else {
-                const html = await response.text();
-                contentArea.innerHTML = html;
+                if (contentColumn) {
+                    contentColumn.style.opacity = '0';
+                    contentColumn.style.transform = 'translateY(20px)';
+                }
+
+                setTimeout(() => {
+                    if (!contentColumn) {
+                        contentColumn = document.createElement('div');
+                        contentColumn.classList.add('content-column');
+                        contentArea.appendChild(contentColumn);
+                    }
+
+                    contentColumn.innerHTML = data;
+                    contentColumn.offsetHeight; // Trigger reflow/repaint
+                    contentColumn.style.opacity = '1';
+                    contentColumn.style.transform = 'translateY(0)';
+
+                    // Call initScrollAnimations after new content is loaded
+                    if (typeof initScrollAnimations === 'function') {
+                        initScrollAnimations();
+                    }
+                    // Call initAutoLinker after new content is loaded (for subsequent navigations)
+                    if (typeof initAutoLinker === 'function') {
+                        initAutoLinker();
+                    }
+                    window.scrollTo(0, 0); // ADDED: Scroll to top after content transition
+
+                }, 700);
             }
 
-            // Re-initialize scroll animations for newly loaded content
-            if (typeof window.initScrollAnimations === 'function') {
-                window.initScrollAnimations();
+            const currentHash = window.location.hash;
+            const newHash = `/#/${pageName}.html`;
+            if (currentHash !== newHash) {
+                history.pushState(null, '', newHash);
             }
 
-            // Re-initialize auto-linking for newly loaded content
-            if (typeof window.initAutoLinker === 'function') {
-                window.initAutoLinker();
+            if (typeof initFontControls === 'function') {
+                initFontControls();
             }
-
-            // Trigger header scroll check for newly loaded content height
             if (typeof window.triggerHeaderScrollCheck === 'function') {
                 window.triggerHeaderScrollCheck();
             }
 
         } catch (error) {
             console.error('Error loading content:', error);
-            contentArea.innerHTML = '<div class="content-column"><h2>Error</h2><p>Failed to load content.</p></div>';
+            contentArea.innerHTML = `<p>Error loading content: ${error.message}. Please try again.</p>`;
         }
     }
 
-    // Handle navigation clicks
-    navLinks.forEach(link => {
+    function getCurrentPageFromHash() {
+        const hash = window.location.hash;
+        if (hash.startsWith('#/')) {
+            const pagePart = hash.substring(2);
+            const pageName = pagePart.split('.')[0];
+            return pageName;
+        }
+        return 'home';
+    }
+
+    document.querySelectorAll('.main-nav a').forEach(link => {
         link.addEventListener('click', (event) => {
-            event.preventDefault(); // Prevent default link behavior
-            const page = link.getAttribute('data-page');
-            const path = `content/${page}_content.html`; // Construct path to content file
-            history.pushState({ page: page }, '', `#/${page}.html`); // Update URL in history
-            loadContent(path);
+            event.preventDefault();
+            const clickedPageData = event.target.getAttribute('data-page');
+            const currentPageFromHash = getCurrentPageFromHash();
+
+            if (clickedPageData !== currentPageFromHash) {
+                const url = `/content/${clickedPageData}_content.html`;
+                loadContent(url, clickedPageData, false);
+            }
+            
+            document.querySelectorAll('.main-nav a').forEach(navLink => {
+                navLink.classList.remove('active');
+            });
+            event.target.classList.add('active');
         });
     });
 
-    // Handle browser back/forward buttons
-    window.addEventListener('popstate', (event) => {
-        if (event.state && event.state.page) {
-            const page = event.state.page;
-            const path = `content/${page}_content.html`;
-            loadContent(path);
-        } else {
-            // Default to home page if popstate is null (e.g., initial load or direct access)
-            const initialPath = window.location.hash.substring(1) || 'home.html';
-            loadContent(`content/${initialPath}`);
-        }
-    });
+    const initialPage = getCurrentPageFromHash();
+    const initialUrl = `/content/${initialPage}_content.html`;
+    loadContent(initialUrl, initialPage, true);
 
-    // Initial content load based on URL hash or default to home
-    const initialPath = window.location.hash.substring(1) || 'home.html';
-    loadContent(`content/${initialPath}`);
+    const initialActiveLink = document.querySelector(`.main-nav a[data-page="${initialPage}"]`);
+    if (initialActiveLink) {
+        initialActiveLink.classList.add('active');
+    }
 });
