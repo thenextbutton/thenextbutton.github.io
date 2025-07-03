@@ -27,8 +27,8 @@ function initScrollAnimations() {
 
     // For each project item:
     projectItems.forEach(item => {
-        // The 'hidden-scroll' class is now assumed to be in the HTML.
-        // We only need to observe it.
+        // Ensure the element starts hidden for the animation to work on initial load
+        item.classList.add('hidden-scroll'); // Added back this line
         observer.observe(item);
     });
 }

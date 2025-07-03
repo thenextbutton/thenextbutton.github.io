@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     const themeSwitch = document.getElementById('theme-switch');
-    const themeToggleIcon = document.getElementById('theme-toggle-icon'); // MODIFIED: Get the icon element
+    const themeToggleText = document.getElementById('theme-toggle-text'); // Reverted: Get the text element
     const body = document.body;
     const msCertLogo = document.querySelector('.corner-logo-fixed');
-    const profileImage = document.querySelector('.profile-image'); // Assuming profile image is still used
+    const profileImage = document.querySelector('.profile-image');
 
     const DARK_MODE_MS_LOGO_SRC = 'assets/images/MS_Cert_Professional_logo_Wht_rgb.png';
     const LIGHT_MODE_MS_LOGO_SRC = 'assets/images/MS_Cert_Professional_logo_Blk_rgb.png';
@@ -37,14 +37,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (themeName === 'light') {
             body.classList.add('light-mode');
             themeSwitch.checked = false; // Toggle OFF for Light Mode
-            themeToggleIcon.classList.remove('fa-moon'); // MODIFIED: Change icon to sun
-            themeToggleIcon.classList.add('fa-sun');
+            themeToggleText.textContent = 'Light Mode'; // Reverted: Set text content
             msCertLogo.src = LIGHT_MODE_MS_LOGO_SRC; // Set light mode logo
         } else { // themeName === 'dark'
             body.classList.remove('light-mode');
             themeSwitch.checked = true; // Toggle ON for Dark Mode
-            themeToggleIcon.classList.remove('fa-sun'); // MODIFIED: Change icon to moon
-            themeToggleIcon.classList.add('fa-moon');
+            themeToggleText.textContent = 'Dark Mode'; // Reverted: Set text content
             msCertLogo.src = DARK_MODE_MS_LOGO_SRC; // Set dark mode logo
         }
     }

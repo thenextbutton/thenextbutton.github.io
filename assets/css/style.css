@@ -4,44 +4,14 @@ html {
 }
 
 body {
-  font-family: "Consolas", monospace; /* All text will now use Consolas */
+  font-family: "Consolas", monospace;
   background-color: #1a1a1a;
   color: #f0f0f0;
   margin: 0;
   padding: 0;
   padding-top: 120px;
   transition: background-color 1.5s ease-in-out, color 1.5s ease-in-out;
-  overflow-y: scroll; /* Always show vertical scrollbar */
 }
-
-/* Scrollbar Styling for Webkit browsers */
-/* Dark Mode Scrollbar */
-body::-webkit-scrollbar {
-  width: 10px; /* Width of the scrollbar */
-}
-
-body::-webkit-scrollbar-track {
-  background: #282a36; /* Color of the scrollbar track */
-  border-radius: 5px;
-}
-
-body::-webkit-scrollbar-thumb {
-  background-color: transparent; /* Transparent by default */
-  border-radius: 5px; /* Rounded corners for the thumb */
-  border: 2px solid transparent; /* Transparent border by default */
-}
-
-/* Make thumb visible on hover over the body */
-body:hover::-webkit-scrollbar-thumb {
-  background-color: #555; /* Color of the scrollbar thumb on hover */
-  border-color: #282a36; /* Border to match track on hover */
-}
-
-/* Preserve hover effect for the thumb itself */
-body::-webkit-scrollbar-thumb:hover {
-  background-color: #777; /* Color of the scrollbar thumb on direct hover */
-}
-
 
 .main-header-fixed {
   position: fixed;
@@ -72,9 +42,7 @@ body::-webkit-scrollbar-thumb:hover {
   transition: opacity 0.7s ease-out, transform 0.7s ease-out, color 1.5s ease-in-out;
 }
 
-
 h1 {
-  font-family: "Consolas", monospace;
   text-align: center;
   color: #a0a0a0;
   margin: 0;
@@ -86,10 +54,6 @@ h1 {
   padding: 0 180px;
   box-sizing: border-box;
   transition: transform 0.7s ease-out;
-}
-
-h2, h3, h4, h5, h6 {
-  font-family: "Consolas", monospace;
 }
 
 .profile-image {
@@ -144,8 +108,8 @@ h2, h3, h4, h5, h6 {
   margin: 0;
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
   gap: 30px;
+  flex-wrap: wrap;
 }
 
 .main-nav li a {
@@ -154,18 +118,11 @@ h2, h3, h4, h5, h6 {
   font-weight: bold;
   font-size: 1.1rem;
   padding: 5px 10px;
-  transition: color 0.3s ease-in-out, font-weight 0.2s ease-in-out, background-color 0.3s ease-in-out, border-radius 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
-  display: inline-block;
-  border-radius: 4px;
+  transition: color 0.3s ease-in-out;
 }
 
 .main-nav li a:hover {
-  color: #c0c0c0;
-  font-weight: bolder;
-  background-color: #333;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  transform: translateY(-2px);
+  color: #8be9fd;
 }
 
 .content-column a {
@@ -191,7 +148,7 @@ h2, h3, h4, h5, h6 {
   align-items: center;
   gap: 20px;
   text-align: left;
-  transition: background-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out, opacity 2s ease-out, transform 2s ease-out;
+  transition: background-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out, opacity 2s ease-out, transform 2s ease-out; /* MODIFIED: Slower opacity and transform transitions to 2s */
   position: relative;
 }
 
@@ -202,7 +159,7 @@ h2, h3, h4, h5, h6 {
 
 .github-project-item.hidden-scroll {
   opacity: 0;
-  transform: scale(1.5);
+  transform: translateY(20px);
 }
 
 .project-image {
@@ -275,35 +232,15 @@ h2, h3, h4, h5, h6 {
   text-decoration: underline;
 }
 
-/* New wrapper for controls - Visually centered */
-.bottom-right-controls-wrapper {
+.theme-toggle-container {
   position: fixed;
   bottom: 20px;
   right: 20px;
   z-index: 1000;
   display: flex;
-  flex-direction: column; /* Stack controls vertically */
-  gap: 15px; /* Space between the two control groups */
-  background-color: #222222; /* Slightly more distinct background */
-  padding: 15px; /* Uniform padding */
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Softer, more diffused shadow */
-  border: 1px solid rgba(255, 255, 255, 0.05); /* Very faint border */
-  transition: background-color 1.5s ease-in-out, border-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out;
-  width: 180px; /* Fixed width for better control */
-  align-items: stretch; /* Stretch children to fill width */
-}
-
-.bottom-right-controls-wrapper:hover {
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4); /* Slightly more prominent shadow on hover */
-}
-
-
-.theme-toggle-container {
-  display: flex; /* MODIFIED: Back to flexbox */
+  flex-direction: row;
   align-items: center;
-  justify-content: space-between; /* MODIFIED: Distribute items within the container */
-  /* REMOVED: grid properties */
+  gap: 10px;
 }
 
 .theme-switch-checkbox {
@@ -323,7 +260,6 @@ h2, h3, h4, h5, h6 {
   transition: background 1s;
   border: 1px solid #555;
   overflow: hidden;
-  flex-shrink: 0; /* ADDED: Prevent toggle from shrinking */
 }
 
 .theme-switch-label:after {
@@ -355,17 +291,16 @@ h2, h3, h4, h5, h6 {
   color: #f0f0f0;
   user-select: none;
   transition: color 1.5s ease-in-out;
-  text-align: right; /* Ensure text aligns to the right */
-  flex-grow: 1; /* ADDED: Allow text to grow and fill remaining space */
-  padding-left: 10px; /* ADDED: Small padding to separate text from toggle */
-  white-space: nowrap; /* ADDED: Prevent text from wrapping */
 }
 
 
 .font-controls {
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  z-index: 1000;
   display: flex;
   gap: 10px;
-  justify-content: space-between; /* Distribute items within the container */
 }
 
 .font-controls span {
@@ -382,7 +317,6 @@ h2, h3, h4, h5, h6 {
   cursor: pointer;
   user-select: none;
   transition: background-color 1.5s, color 1.5s, border-color 1.5s;
-  flex-grow: 1; /* Allow buttons to grow and fill space */
 }
 
 #font-minus {
@@ -401,71 +335,10 @@ h2, h3, h4, h5, h6 {
   background-color: #555;
 }
 
-/* Focus States */
-a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-textarea:focus-visible,
-select:focus-visible,
-.theme-switch-label:focus-visible, /* Specific for the toggle label */
-.font-controls span:focus-visible {
-  outline: none; /* Remove default outline */
-  box-shadow: 0 0 0 2px #8be9fd; /* Subtle blue glow for dark mode */
-  border-color: #8be9fd; /* Add a border color if applicable */
-  transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
-}
-
-
 body.light-mode {
   background-color: #f0f0f0;
   color: #1a1a1a;
 }
-
-/* Light Mode Scrollbar */
-body.light-mode::-webkit-scrollbar-track {
-  background: #e0e0e0; /* Lighter track for light mode */
-}
-
-body.light-mode::-webkit-scrollbar-thumb {
-  background-color: transparent; /* Transparent by default in light mode */
-  border: 2px solid transparent; /* Transparent border by default in light mode */
-}
-
-/* Make thumb visible on hover over the body in light mode */
-body.light-mode:hover::-webkit-scrollbar-thumb {
-  background-color: #888; /* Darker thumb for light mode on hover */
-  border-color: #e0e0e0; /* Border to match light track on hover */
-}
-
-/* Preserve hover effect for the thumb itself in light mode */
-body.light-mode::-webkit-scrollbar-thumb:hover {
-  background-color: #666; /* Even darker thumb on direct hover for light mode */
-}
-
-/* Light Mode Focus States */
-body.light-mode a:focus-visible,
-body.light-mode button:focus-visible,
-body.light-mode input:focus-visible,
-body.light-mode textarea:focus-visible,
-body.light-mode select:focus-visible,
-body.light-mode .theme-switch-label:focus-visible,
-body.light-mode .font-controls span:focus-visible {
-  box-shadow: 0 0 0 2px #007bff; /* Subtle blue glow for light mode */
-  border-color: #007bff; /* Add a border color if applicable */
-}
-
-/* Light mode for the new wrapper - Adjusted padding */
-body.light-mode .bottom-right-controls-wrapper {
-  background-color: #e0e0e0; /* Slightly more distinct background */
-  border: 1px solid rgba(0, 0, 0, 0.05); /* Very faint border */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Softer, more diffused shadow */
-  padding: 15px; /* Uniform padding */
-}
-
-body.light-mode .bottom-right-controls-wrapper:hover {
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25); /* Slightly more prominent shadow on hover */
-}
-
 
 body.light-mode h1 {
   color: #333;
@@ -473,17 +346,10 @@ body.light-mode h1 {
 
 body.light-mode .main-nav li a {
   color: #333;
-  transition: color 0.3s ease-in-out, font-weight 0.2s ease-in-out, background-color 0.3s ease-in-out, border-radius 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
-  border-radius: 4px;
 }
 
 body.light-mode .main-nav li a:hover {
-  color: #000;
-  font-weight: bolder;
-  background-color: #e0e0e0;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transform: translateY(-2px);
+  color: #007bff;
 }
 
 body.light-mode .content-column a {
@@ -599,7 +465,10 @@ body.light-mode .main-header-fixed {
   }
 
   .theme-toggle-container {
-    gap: 10px; /* Kept gap for internal spacing */
+    bottom: 10px;
+    right: 10px;
+    gap: 8px;
+    z-index: 1000;
   }
 
   .theme-switch-label {
@@ -626,7 +495,10 @@ body.light-mode .main-header-fixed {
   }
 
   .font-controls {
-    gap: 8px; /* Kept gap for internal spacing */
+    bottom: 50px;
+    right: 10px;
+    gap: 8px;
+    z-index: 1000;
   }
 
   .font-controls span {
