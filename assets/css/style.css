@@ -114,23 +114,22 @@ h1 {
 
 .main-nav li a {
   text-decoration: none;
-  color: #a0a0a0; /* Default color for dark mode */
+  color: #a0a0a0;
   font-weight: bold;
   font-size: 1.1rem;
   padding: 5px 10px;
-  /* MODIFIED: Added transform to transition */
   transition: color 0.3s ease-in-out, font-weight 0.2s ease-in-out, background-color 0.3s ease-in-out, border-radius 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
   display: inline-block;
   border-radius: 4px;
 }
 
 .main-nav li a:hover {
-  color: #c0c0c0; /* Slightly lighter grey on hover for dark mode */
+  color: #c0c0c0;
   font-weight: bolder;
-  background-color: #333; /* Subtle background highlight for dark mode */
-  border-radius: 8px; /* More rounded on hover */
+  background-color: #333;
+  border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  transform: translateY(-2px); /* ADDED: Subtle lift on hover */
+  transform: translateY(-2px);
 }
 
 .content-column a {
@@ -167,7 +166,7 @@ h1 {
 
 .github-project-item.hidden-scroll {
   opacity: 0;
-  transform: translateY(20px);
+  transform: scale(1.5); /* MODIFIED: Starts at 150% size */
 }
 
 .project-image {
@@ -353,19 +352,18 @@ body.light-mode h1 {
 }
 
 body.light-mode .main-nav li a {
-  color: #333; /* Default color for light mode */
-  /* MODIFIED: Added transform to transition for light mode */
+  color: #333;
   transition: color 0.3s ease-in-out, font-weight 0.2s ease-in-out, background-color 0.3s ease-in-out, border-radius 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
-  border-radius: 4px; /* Slightly rounded default */
+  border-radius: 4px;
 }
 
 body.light-mode .main-nav li a:hover {
-  color: #000; /* Changed to black for a clearer, subtle contrast */
+  color: #000;
   font-weight: bolder;
-  background-color: #e0e0e0; /* Subtle background highlight for light mode */
-  border-radius: 8px; /* More rounded on hover */
+  background-color: #e0e0e0;
+  border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transform: translateY(-2px); /* ADDED: Subtle lift on hover for light mode */
+  transform: translateY(-2px);
 }
 
 body.light-mode .content-column a {
