@@ -72,9 +72,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // If scrolled past threshold on initial load, immediately apply fade-out-controls
         if (controlsWrapper) {
             if (window.pageYOffset > SCROLL_THRESHOLD) {
-                controlsWrapper.classList.add('fade-out-controls');
+                controlsWrapper.classList.add('fade-out-controls'); // Keep hidden if scrolled
             } else {
-                controlsWrapper.classList.remove('fade-out-controls');
+                controlsWrapper.classList.remove('fade-out-controls'); // Make visible if at top
             }
         }
         // Still call handleScrollLogic to set header state, but controls are handled above
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.removeEventListener('resize', handleScrollLogic);
         // Ensure controls are visible when listener is disabled (e.g., during page load)
         if (controlsWrapper) {
-            controlsWrapper.classList.remove('fade-out-controls');
+            controlsWrapper.classList.remove('fade-out-controls'); // Ensure visible
             clearTimeout(fadeControlsTimeoutId);
         }
     }
