@@ -384,8 +384,8 @@ h2, h3, h4, h5, h6 {
 }
 
 .font-controls span {
-  width: 30px;
-  height: 30px;
+  width: 30px; /* Corrected size */
+  height: 30px; /* Corrected size */
   background-color: #333;
   color: #f0f0f0;
   border: 1px solid #555;
@@ -400,15 +400,15 @@ h2, h3, h4, h5, h6 {
 }
 
 #font-minus {
-  font-size: 13px;
+  font-size: 13px; /* Corrected size */
 }
 
 #font-reset {
-  font-size: 17px;
+  font-size: 17px; /* Corrected size */
 }
 
 #font-plus {
-  font-size: 21px;
+  font-size: 21px; /* Corrected size */
 }
 
 .font-controls span:hover {
@@ -640,21 +640,21 @@ body.light-mode .main-header-fixed {
   }
 
   .font-controls span {
-    width: 40px;
-    height: 40px;
-    font-size: 17px;
+    width: 30px; /* Corrected size for mobile */
+    height: 30px; /* Corrected size for mobile */
+    font-size: 17px; /* Corrected size for mobile */
   }
 
   #font-minus {
-    font-size: 13px;
+    font-size: 13px; /* Corrected size for mobile */
   }
 
   #font-reset {
-    font-size: 17px;
+    font-size: 17px; /* Corrected size for mobile */
   }
 
   #font-plus {
-    font-size: 21px;
+    font-size: 21px; /* Corrected size for mobile */
   }
 
   .content-column {
