@@ -27,9 +27,16 @@ function initScrollAnimations() {
 
     // For each project item:
     projectItems.forEach(item => {
-        // Ensure the element starts hidden for the animation to work on initial load
-        item.classList.add('hidden-scroll');
-        observer.observe(item);
+        // Check if the item is currently outside the viewport (below the fold)
+        // If it's below the viewport, it should start hidden and be observed.
+        // Otherwise, it's already visible and shouldn't have the animation applied.
+        const rect = item.getBoundingClientRect();
+        if (rect.top >= window.innerHeight) { // If the top of the element is below the bottom of the viewport
+            item.classList.add('hidden-scroll');
+            observer.observe(item);
+        }
+        // If rect.top < window.innerHeight, the item is already visible,
+        // so we do nothing, ensuring it doesn't fade in.
     });
 }
 
