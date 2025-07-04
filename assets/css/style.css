@@ -1,6 +1,7 @@
 html {
   font-size: 14px;
   transition: font-size 0.3s ease-in-out;
+  scroll-behavior: smooth; /* ADDED: Smooth scrolling for anchor links */
 }
 
 body {
@@ -182,6 +183,15 @@ h2, h3, h4, h5, h6 {
   transform: translateY(-2px);
 }
 
+/* ADDED: Active navigation link styling */
+.main-nav li a.active {
+  color: #8be9fd; /* Highlight color */
+  font-weight: bolder;
+  background-color: #333;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
 .content-column a {
   color: #8be9fd;
   text-decoration: none;
@@ -309,7 +319,7 @@ h2, h3, h4, h5, h6 {
 }
 
 .bottom-right-controls-wrapper:hover {
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 0 2px #8be9fd; /* ADDED: subtle glow on hover */
 }
 
 /* MODIFIED: Theme toggle container for icon - now uses flex for spacing */
@@ -503,6 +513,15 @@ body.light-mode .main-nav li a:hover {
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transform: translateY(-2px);
+}
+
+/* ADDED: Active navigation link styling for light mode */
+body.light-mode .main-nav li a.active {
+  color: #007bff; /* Highlight color */
+  font-weight: bolder;
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 body.light-mode .content-column a {
