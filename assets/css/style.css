@@ -299,12 +299,12 @@ h2, h3, h4, h5, h6 {
   flex-direction: column; /* Stack controls vertically */
   gap: 10px; /* Reduced gap between sections */
   background-color: rgba(34, 34, 34, 0.8); /* Added transparency (0.8 opacity) */
-  padding: 10px 8px; /* MODIFIED: Reduced horizontal padding to 8px */
+  padding: 10px 8px; /* Reduced horizontal padding to 8px */
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(0, 0, 0, 0.2);
   transition: background-color 1.5s ease-in-out, border-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out;
-  width: 130px; /* Maintained narrower width */
+  width: 135px; /* MODIFIED: Slightly increased width to 135px */
   align-items: center; /* Center children horizontally */
 }
 
@@ -318,7 +318,7 @@ h2, h3, h4, h5, h6 {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 8px; /* Increased gap slightly for better icon separation */
+  gap: 5px; /* MODIFIED: Reduced gap to 5px */
   width: 100%; /* Ensure it spans the wrapper width */
   /* REMOVED: justify-content: space-between; */
 }
@@ -331,11 +331,11 @@ h2, h3, h4, h5, h6 {
 
 .theme-switch-label {
   cursor: pointer;
-  width: auto; /* MODIFIED: Set width to auto to stretch */
-  height: 20px; /* MODIFIED: Reduced height to 20px */
+  width: auto; /* Set width to auto to stretch */
+  height: 20px; /* Kept height at 20px */
   background: #282a36;
   display: block;
-  border-radius: 10px; /* MODIFIED: Half of new height for perfect oval */
+  border-radius: 10px; /* Half of new height for perfect oval */
   position: relative;
   transition: background 1s;
   border: 1px solid #555;
@@ -347,10 +347,10 @@ h2, h3, h4, h5, h6 {
 .theme-switch-label:after {
   content: '';
   position: absolute;
-  top: 1.5px; /* MODIFIED: Vertically center (20 - 17) / 2 = 1.5 */
-  left: 1.5px; /* MODIFIED: Adjusted left to match top */
-  width: 17px; /* MODIFIED: Reduced size for the circle */
-  height: 17px; /* MODIFIED: Reduced size for the circle */
+  top: 1.5px; /* Vertically center (20 - 17) / 2 = 1.5 */
+  left: 1.5px; /* Adjusted left to match top */
+  width: 17px; /* Kept size for the circle */
+  height: 17px; /* Kept size for the circle */
   background: #f0f0f0;
   border-radius: 50%;
   transition: 1s;
@@ -363,17 +363,17 @@ h2, h3, h4, h5, h6 {
 }
 
 .theme-switch-checkbox:checked + .theme-switch-label:after {
-  left: calc(100% - 1.5px); /* MODIFIED: Adjusted left to match new size */
+  left: calc(100% - 1.5px); /* Adjusted left to match new size */
   transform: translateX(-100%);
   background: #1a1a1a;
 }
 
 #theme-toggle-icon { /* Styling for the icon */
-  font-size: 1.2rem; /* Adjust icon size */
+  font-size: 1.1rem; /* MODIFIED: Slightly reduced icon size to 1.1rem */
   color: #f0f0f0; /* Default icon color */
   transition: color 1.5s ease-in-out;
   flex-shrink: 0; /* Prevent icon from shrinking */
-  width: 20px; /* Give it a fixed width to prevent layout shifts */
+  width: 18px; /* MODIFIED: Reduced icon width to 18px */
   margin-left: auto; /* Push icon to the right */
 }
 
