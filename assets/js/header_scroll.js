@@ -63,16 +63,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // --- Control Box Fade Logic for user-initiated scrolls ---
         if (currentScrollTop > SCROLL_THRESHOLD) {
-            // If scrolled down, immediately hide the controls
+            // If scrolled down, hide the controls
             controlsWrapper.classList.add('fade-out-controls');
             clearTimeout(fadeControlsTimeoutId); // Clear any pending fade-in
         } else {
             // If at the top (or scrolled up to the top), schedule controls to fade in
             clearTimeout(fadeControlsTimeoutId); // Clear any existing timeout
-
-            // Only schedule fade-in if it's currently hidden (to avoid re-fading already visible box)
+            // Only schedule fade-in if it's currently hidden or fading out
             if (controlsWrapper.classList.contains('fade-out-controls')) {
-                fadeControlsTimeoutId = setTimeout(() => {
+                 fadeControlsTimeoutId = setTimeout(() => {
                     controlsWrapper.classList.remove('fade-out-controls'); // Make visible
                 }, FADE_OUT_DELAY);
             }
@@ -92,12 +91,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Initial state setup for controlsWrapper when listener is enabled
         // This runs once when the page loads or when the listener is re-enabled by SPA loader.
-        // It's crucial to set the correct initial state here.
         if (controlsWrapper) {
+            // If page is already scrolled down on load, keep controls hidden
             if (window.pageYOffset > SCROLL_THRESHOLD) {
-                controlsWrapper.classList.add('fade-out-controls'); // Start hidden if scrolled down
+                controlsWrapper.classList.add('fade-out-controls');
             } else {
-                controlsWrapper.classList.remove('fade-out-controls'); // Start visible if at top
+                // If at the top on load, make controls visible immediately (no fade-in delay)
+                controlsWrapper.classList.remove('fade-out-controls');
             }
         }
         handleHeaderVisibility(); // Initial call for header visibility
