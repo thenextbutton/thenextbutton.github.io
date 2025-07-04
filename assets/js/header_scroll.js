@@ -2,19 +2,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const profileImage = document.querySelector('.profile-image');
     const msCertLogo = document.querySelector('.corner-logo-fixed');
     const mainHeading = document.querySelector('h1');
-    const controlsWrapper = document.querySelector('.bottom-right-controls-wrapper'); // Get the control box
+    // Removed controlsWrapper as it's no longer managed by this script for fading
 
     const SCROLL_THRESHOLD = 50;
-    const FADE_OUT_DELAY = 300; // Milliseconds before the controls fade back in after scrolling stops
-
     let hideHeaderTimeoutId = null;
-    let fadeControlsTimeoutId = null;
     let isProfileImageActuallyHidden = false; // Tracks if the image is visually hidden (after transition)
 
-    // Function to handle the header (profile image, logo, h1) logic
-    function handleHeaderVisibility() {
+    function handleScroll() {
         let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
+        // --- Header (Profile Image, Logo, H1) Fade Logic ---
         if (currentScrollTop > SCROLL_THRESHOLD) {
             // If scrolled past the threshold, hide logos
             if (!isProfileImageActuallyHidden) {
@@ -46,78 +43,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 isProfileImageActuallyHidden = false;
             }
         }
+        // Removed all control box fading logic
     }
 
-    // Function to handle the control box fade logic for user-initiated scrolls
-    function updateControlsVisibility() {
-        if (!controlsWrapper) return;
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleScroll); // Also trigger on resize to adjust layout if needed
+    handleScroll(); // Initial call to set correct state on page load
 
-        let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-        // If programmatic scroll, ensure controls are visible and bypass user-initiated fade logic
-        if (window.isProgrammaticScroll) {
-            controlsWrapper.classList.remove('fade-out-controls'); // Ensure visible
-            clearTimeout(fadeControlsTimeoutId); // Clear any pending fade-out
-            return; // Exit, do not proceed with user-initiated fade logic
-        }
-
-        // --- Control Box Fade Logic for user-initiated scrolls ---
-        if (currentScrollTop > SCROLL_THRESHOLD) {
-            // If scrolled down, hide the controls
-            controlsWrapper.classList.add('fade-out-controls');
-            clearTimeout(fadeControlsTimeoutId); // Clear any pending fade-in
-        } else {
-            // If at the top (or scrolled up to the top), schedule controls to fade in
-            clearTimeout(fadeControlsTimeoutId); // Clear any existing timeout
-            // Only schedule fade-in if it's currently hidden or fading out
-            if (controlsWrapper.classList.contains('fade-out-controls')) {
-                 fadeControlsTimeoutId = setTimeout(() => {
-                    controlsWrapper.classList.remove('fade-out-controls'); // Make visible
-                }, FADE_OUT_DELAY);
-            }
-        }
-    }
-
-    // Main scroll event handler that dispatches to specific logic functions
-    function onScroll() {
-        handleHeaderVisibility(); // Always run header logic
-        updateControlsVisibility(); // Always run controls visibility logic
-    }
-
-    // Function to enable the scroll listener
-    function enableScrollListener() {
-        window.addEventListener('scroll', onScroll);
-        window.addEventListener('resize', onScroll); // Resize might also affect scroll position
-
-        // Initial state setup for controlsWrapper when listener is enabled
-        // This runs once when the page loads or when the listener is re-enabled by SPA loader.
-        if (controlsWrapper) {
-            // If page is already scrolled down on load, keep controls hidden
-            if (window.pageYOffset > SCROLL_THRESHOLD) {
-                controlsWrapper.classList.add('fade-out-controls');
-            } else {
-                // If at the top on load, make controls visible immediately (no fade-in delay)
-                controlsWrapper.classList.remove('fade-out-controls');
-            }
-        }
-        handleHeaderVisibility(); // Initial call for header visibility
-    }
-
-    // Function to disable the scroll listener
-    function disableScrollListener() {
-        window.removeEventListener('scroll', onScroll);
-        window.removeEventListener('resize', onScroll);
-        // Ensure controls are visible when listener is disabled (e.g., during page load/transition)
-        if (controlsWrapper) {
-            controlsWrapper.classList.remove('fade-out-controls'); // Ensure visible
-            clearTimeout(fadeControlsTimeoutId);
-        }
-    }
-
-    // Expose these functions globally
-    window.enableHeaderScrollListener = enableScrollListener;
-    window.disableHeaderScrollListener = disableScrollListener;
-
-    // Initial setup: enable the listener
-    enableScrollListener();
+    // Expose this function globally if other scripts need to trigger a header check
+    window.triggerHeaderScrollCheck = handleScroll;
 });
