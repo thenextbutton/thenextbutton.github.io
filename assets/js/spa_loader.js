@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Reset flag after a short delay to allow scroll event to fire
                 setTimeout(() => {
                     window.isProgrammaticScroll = false;
-                }, 50); // Small delay to ensure scroll event processes
+                }, 200); // Increased delay to 200ms
             } else {
                 // For subsequent loads, apply fade-out then fade-in
                 if (currentContentColumn) {
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Reset flag after a short delay to allow scroll event to fire
                     setTimeout(() => {
                         window.isProgrammaticScroll = false;
-                    }, 50); // Small delay to ensure scroll event processes
+                    }, 200); // Increased delay to 200ms
 
                 }, 700); // This timeout should match the CSS transition duration for content-column fade-out
             }
