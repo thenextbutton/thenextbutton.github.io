@@ -12,6 +12,16 @@ document.addEventListener('DOMContentLoaded', () => {
     let isProfileImageActuallyHidden = false; // Tracks if the image is visually hidden (after transition)
 
     function handleScroll() {
+        // Check if the scroll is programmatic (from spa_loader.js)
+        if (window.isProgrammaticScroll) {
+            // If it's a programmatic scroll, ensure controls are visible and do not fade them out
+            if (controlsWrapper) {
+                controlsWrapper.classList.remove('fade-out-controls');
+                clearTimeout(fadeControlsTimeoutId); // Clear any pending fade-out
+            }
+            return; // Exit the function, do not apply fade logic
+        }
+
         let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
         // --- Header (Profile Image, Logo, H1) Fade Logic ---
@@ -47,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // --- Control Box Fade Logic ---
+        // --- Control Box Fade Logic (only for user-initiated scrolls) ---
         if (controlsWrapper) { // Ensure the controlsWrapper exists
             // Add fade-out class immediately on scroll
             controlsWrapper.classList.add('fade-out-controls');
