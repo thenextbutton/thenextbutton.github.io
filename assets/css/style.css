@@ -289,38 +289,15 @@ h2, h3, h4, h5, h6 {
   text-decoration: underline;
 }
 
-/* Reverted: Wrapper for controls to original styling */
-.bottom-right-controls-wrapper {
+.theme-toggle-container {
   position: fixed;
   bottom: 20px;
   right: 20px;
   z-index: 1000;
   display: flex;
-  flex-direction: column; /* Stack controls vertically */
-  gap: 10px; /* Gap between sections */
-  background-color: rgba(34, 34, 34, 0.8); /* Original transparency */
-  padding: 10px; /* Original padding */
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  transition: background-color 1.5s ease-in-out, border-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out;
-  width: auto; /* Allow width to adjust to content */
-  align-items: flex-end; /* Align items to the right */
-}
-
-.bottom-right-controls-wrapper:hover {
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-}
-
-
-/* Reverted: Theme toggle container to original styling */
-.theme-toggle-container {
-  display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 10px; /* Original gap */
-  width: auto; /* Allow width to adjust */
-  position: relative; /* Keep relative for inner circle */
+  gap: 10px;
 }
 
 .theme-switch-checkbox {
@@ -371,19 +348,18 @@ h2, h3, h4, h5, h6 {
   color: #f0f0f0;
   user-select: none;
   transition: color 1.5s ease-in-out;
-  min-width: 80px; /* Ensures consistent width for text */
-  text-align: right; /* Align text to the right within its min-width */
+  min-width: 80px;
+  text-align: right;
 }
 
 
-/* Reverted: Font controls to original styling */
 .font-controls {
-  display: flex;
-  gap: 10px;
-  position: fixed; /* Kept fixed as it was before the wrapper */
+  position: fixed;
   bottom: 70px;
   right: 20px;
   z-index: 1000;
+  display: flex;
+  gap: 10px;
 }
 
 .font-controls span {
@@ -418,19 +394,18 @@ h2, h3, h4, h5, h6 {
   background-color: #555;
 }
 
-/* ADDED: Focus States (kept as they were a good addition) */
+/* ADDED: Focus States */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible,
-.theme-switch-label:focus-visible,
+.theme-switch-label:focus-visible, /* Specific for the toggle label */
 .font-controls span:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 2px #8be9fd;
-  border-color: #8be9fd;
+  outline: none; /* Remove default outline */
+  box-shadow: 0 0 0 2px #8be9fd; /* Subtle blue glow for dark mode */
+  border-color: #8be9fd; /* Add a border color if applicable */
   transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
-  border-radius: 4px; /* Added for consistency */
 }
 
 
@@ -439,36 +414,37 @@ body.light-mode {
   color: #1a1a1a;
 }
 
-/* ADDED: Light Mode Scrollbar (kept as they were a good addition) */
+/* ADDED: Light Mode Scrollbar */
 body.light-mode::-webkit-scrollbar-track {
-  background: transparent;
+  background: #e0e0e0; /* Lighter track for light mode */
 }
 
 body.light-mode::-webkit-scrollbar-thumb {
-  background-color: transparent;
-  border: 2px solid transparent;
+  background-color: transparent; /* MODIFIED: Transparent by default in light mode */
+  border: 2px solid transparent; /* MODIFIED: Transparent border by default in light mode */
 }
 
+/* ADDED: Make thumb visible on hover over the body in light mode */
 body.light-mode:hover::-webkit-scrollbar-thumb {
-  background-color: #888;
-  border-color: #e0e0e0;
+  background-color: #888; /* Darker thumb for light mode on hover */
+  border-color: #e0e0e0; /* Border to match light track on hover */
 }
 
+/* Preserve hover effect for the thumb itself in light mode */
 body.light-mode::-webkit-scrollbar-thumb:hover {
-  background-color: #666;
+  background-color: #666; /* Even darker thumb on direct hover for light mode */
 }
 
-/* ADDED: Light Mode Focus States (kept as they were a good addition) */
+/* ADDED: Light Mode Focus States */
 body.light-mode a:focus-visible,
 body.light-mode button:focus-visible,
 body.light-mode input:focus-visible,
-body.light-mode select:focus-visible,
 body.light-mode textarea:focus-visible,
+body.light-mode select:focus-visible,
 body.light-mode .theme-switch-label:focus-visible,
 body.light-mode .font-controls span:focus-visible {
-  box-shadow: 0 0 0 2px #007bff;
-  border-color: #007bff;
-  border-radius: 4px;
+  box-shadow: 0 0 0 2px #007bff; /* Subtle blue glow for light mode */
+  border-color: #007bff; /* Add a border color if applicable */
 }
 
 body.light-mode h1 {
