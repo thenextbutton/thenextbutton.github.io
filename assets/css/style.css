@@ -677,8 +677,8 @@ body.light-mode .main-header-fixed {
   .bottom-right-controls-wrapper {
     width: 140px; /* Slightly smaller width on mobile */
     padding: 8px 6px; /* Reduced padding */
-    bottom: 80px; /* MODIFIED: Increased bottom value to avoid overlap with "Powered by GitHub" */
-    right: 5px; /* MODIFIED: Adjusted right value to give more space */
+    bottom: 20px; /* MODIFIED: Moved back down to 20px */
+    right: 10px; /* MODIFIED: Adjusted right to 10px */
   }
 
   .theme-toggle-container {
