@@ -313,13 +313,19 @@ h2, h3, h4, h5, h6 {
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(0, 0, 0, 0.2);
-  transition: background-color 1.5s ease-in-out, border-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out;
+  transition: background-color 1.5s ease-in-out, border-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out, opacity 0.3s ease-out; /* ADDED: opacity transition */
   width: 160px; /* Fixed width for desktop, will adjust for mobile */
   align-items: center; /* Center content horizontally within the wrapper */
 }
 
 .bottom-right-controls-wrapper:hover {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 0 2px #8be9fd; /* ADDED: subtle glow on hover */
+}
+
+/* ADDED: Class for fading out the control box */
+.bottom-right-controls-wrapper.fade-out-controls {
+    opacity: 0;
+    pointer-events: none; /* Make it unclickable when hidden */
 }
 
 /* MODIFIED: Theme toggle container for icon - now uses flex for spacing */
