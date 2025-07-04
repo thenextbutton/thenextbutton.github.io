@@ -304,7 +304,7 @@ h2, h3, h4, h5, h6 {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(0, 0, 0, 0.2);
   transition: background-color 1.5s ease-in-out, border-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out;
-  width: 130px; /* MODIFIED: Made narrower */
+  width: 130px; /* Maintained narrower width */
   align-items: center; /* Center children horizontally */
 }
 
@@ -331,7 +331,7 @@ h2, h3, h4, h5, h6 {
 
 .theme-switch-label {
   cursor: pointer;
-  width: 70px; /* MODIFIED: Elongated width */
+  width: 80px; /* MODIFIED: Increased width to 80px */
   height: 25px; /* Kept height same */
   background: #282a36;
   display: block;
@@ -581,7 +581,7 @@ body.light-mode .main-header-fixed {
   .main-nav li a {
     font-size: 1.1rem;
     padding: 8px 12px;
-    transition: color 0.3s ease-in-out, font-weight 0.2s ease-in-out, background-color 0.3s ease-in-out, border-radius 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   }
 
   .profile-image {
@@ -638,9 +638,9 @@ body.light-mode .main-header-fixed {
   }
 
   .font-controls span {
-    width: 30px; /* Corrected size for mobile */
-    height: 30px; /* Corrected size for mobile */
-    font-size: 17px; /* Corrected size for mobile */
+    width: 40px;
+    height: 40px;
+    font-size: 17px;
   }
 
   #font-minus {
