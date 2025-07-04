@@ -40,25 +40,27 @@ document.addEventListener('DOMContentLoaded', () => {
             themeSwitch.checked = false; // Toggle OFF for Light Mode
             msCertLogo.src = LIGHT_MODE_MS_LOGO_SRC; // Set light mode logo
 
-            // Move moon out and fade out, move sun in and fade in
-            moonIcon.style.transform = 'translateY(-50%) translateX(-30px)'; // Move moon left
-            moonIcon.style.opacity = '0'; // Fade out moon
-
-            sunIcon.style.transform = 'translateY(-50%) translateX(0)'; // Move sun to original position
+            // Sun is active (left), Moon is inactive (right)
+            sunIcon.style.transform = 'translateY(-50%) translateX(0)'; // Sun stays at its active position
             sunIcon.style.opacity = '1'; // Fade in sun
             sunIcon.style.color = '#FFD700'; // Yellow for sun
+
+            moonIcon.style.transform = 'translateY(-50%) translateX(30px)'; // Move moon right to hide
+            moonIcon.style.opacity = '0'; // Fade out moon
+            moonIcon.style.color = '#f0f0f0'; // Ensure moon is default color when hidden/shown
         } else { // themeName === 'dark'
             body.classList.remove('light-mode');
             themeSwitch.checked = true; // Toggle ON for Dark Mode
             msCertLogo.src = DARK_MODE_MS_LOGO_SRC; // Set dark mode logo
 
-            // Move sun out and fade out, move moon in and fade in
-            sunIcon.style.transform = 'translateY(-50%) translateX(30px)'; // Move sun right
-            sunIcon.style.opacity = '0'; // Fade out sun
-
-            moonIcon.style.transform = 'translateY(-50%) translateX(0)'; // Move moon to original position
+            // Moon is active (right), Sun is inactive (left)
+            moonIcon.style.transform = 'translateY(-50%) translateX(0)'; // Moon stays at its active position
             moonIcon.style.opacity = '1'; // Fade in moon
             moonIcon.style.color = '#f0f0f0'; // White for moon
+
+            sunIcon.style.transform = 'translateY(-50%) translateX(-30px)'; // Move sun left to hide
+            sunIcon.style.opacity = '0'; // Fade out sun
+            sunIcon.style.color = '#FFD700'; // Ensure sun is yellow when hidden/shown
         }
     }
 

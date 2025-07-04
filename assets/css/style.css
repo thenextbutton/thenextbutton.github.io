@@ -341,7 +341,7 @@ h2, h3, h4, h5, h6 {
   border: 1px solid #555;
   overflow: hidden;
   flex-shrink: 0; /* Prevent it from shrinking */
-  margin: 0 10px; /* MODIFIED: Add horizontal margin to center it and create space for icons */
+  margin: 0 10px; /* Add horizontal margin to center it and create space for icons */
 }
 
 .theme-switch-label:after {
@@ -380,12 +380,12 @@ h2, h3, h4, h5, h6 {
 }
 
 #moon-icon {
-  left: 0px; /* Position moon icon to the left edge of the container */
+  right: 0px; /* MODIFIED: Position moon icon to the right edge of the container */
   color: #f0f0f0; /* Default color for moon (dark mode) */
 }
 
 #sun-icon {
-  right: 0px; /* Position sun icon to the right edge of the container */
+  left: 0px; /* MODIFIED: Position sun icon to the left edge of the container */
   color: #FFD700; /* Yellow for sun icon */
 }
 
