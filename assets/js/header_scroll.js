@@ -11,17 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let fadeControlsTimeoutId = null;
     let isProfileImageActuallyHidden = false; // Tracks if the image is visually hidden (after transition)
 
-    function handleScroll() {
-        // Check if the scroll is programmatic (from spa_loader.js)
-        if (window.isProgrammaticScroll) {
-            // If it's a programmatic scroll, ensure controls are visible and do not fade them out
-            if (controlsWrapper) {
-                controlsWrapper.classList.remove('fade-out-controls');
-                clearTimeout(fadeControlsTimeoutId); // Clear any pending fade-out
-            }
-            return; // Exit the function, do not apply fade logic
-        }
-
+    // Function to handle the actual scroll logic
+    function handleScrollLogic() {
         let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
         // --- Header (Profile Image, Logo, H1) Fade Logic ---
@@ -72,10 +63,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('resize', handleScroll); // Also trigger on resize to adjust layout if needed
-    handleScroll(); // Initial call to set correct state on page load
+    // Function to enable the scroll listener
+    function enableScrollListener() {
+        window.addEventListener('scroll', handleScrollLogic);
+        window.addEventListener('resize', handleScrollLogic);
+        handleScrollLogic(); // Run once to set initial state
+    }
 
-    // Expose this function globally if other scripts need to trigger a header check
-    window.triggerHeaderScrollCheck = handleScroll;
+    // Function to disable the scroll listener
+    function disableScrollListener() {
+        window.removeEventListener('scroll', handleScrollLogic);
+        window.removeEventListener('resize', handleScrollLogic);
+        // Ensure controls are visible when listener is disabled (e.g., during page load)
+        if (controlsWrapper) {
+            controlsWrapper.classList.remove('fade-out-controls');
+            clearTimeout(fadeControlsTimeoutId);
+        }
+    }
+
+    // Expose these functions globally
+    window.enableHeaderScrollListener = enableScrollListener;
+    window.disableHeaderScrollListener = disableScrollListener;
+
+    // Initial setup: enable the listener
+    enableScrollListener();
 });
