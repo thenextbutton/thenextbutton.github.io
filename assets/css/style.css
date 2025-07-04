@@ -298,7 +298,7 @@ h2, h3, h4, h5, h6 {
   display: flex;
   flex-direction: column; /* Stack controls vertically */
   gap: 10px; /* Reduced gap between sections */
-  background-color: #222222; /* MODIFIED: Solid dark background for dark mode */
+  background-color: rgba(34, 34, 34, 0.8); /* MODIFIED: Transparency for dark mode */
   padding: 10px 8px; /* Reduced horizontal padding to 8px */
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
@@ -313,15 +313,14 @@ h2, h3, h4, h5, h6 {
 }
 
 
-/* MODIFIED: Theme toggle container for icon - now uses flex for layout */
+/* MODIFIED: Theme toggle container for icon - now uses relative positioning for icons */
 .theme-toggle-container {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between; /* NEW: Distribute items to edges */
+  /* REMOVED: justify-content: space-between; and gap: 8px; from here */
   width: 100%; /* Take full width of parent */
-  /* REMOVED: position: relative; as icons are now part of flex flow */
-  gap: 8px; /* NEW: Gap between the toggle and the icons */
+  position: relative; /* ADDED: Needed for absolute positioning of icons */
 }
 
 .theme-switch-checkbox {
@@ -332,7 +331,7 @@ h2, h3, h4, h5, h6 {
 
 .theme-switch-label {
   cursor: pointer;
-  width: 80px; /* MODIFIED: Fixed width for the toggle track */
+  width: 80px; /* Fixed width for the toggle track */
   height: 20px;
   background: #282a36;
   display: block;
@@ -341,8 +340,7 @@ h2, h3, h4, h5, h6 {
   transition: background 1s;
   border: 1px solid #555;
   overflow: hidden;
-  /* REMOVED: margin-right: auto; and flex-grow: 1; */
-  flex-shrink: 0; /* NEW: Prevent it from shrinking */
+  flex-shrink: 0; /* Prevent it from shrinking */
 }
 
 .theme-switch-label:after {
@@ -369,23 +367,25 @@ h2, h3, h4, h5, h6 {
   background: #1a1a1a;
 }
 
-/* MODIFIED: Styling for both theme icons - now part of flex flow */
+/* MODIFIED: Styling for both theme icons - now absolutely positioned */
 .theme-icon {
   font-size: 20px; /* Fixed font size */
   transition: opacity 0.5s ease-in-out, color 0.5s ease-in-out; /* Smooth transitions for visibility and color */
-  /* REMOVED: position: absolute; top: 50%; transform: translateY(-50%); right: 8px; */
+  position: absolute; /* ADDED: Absolute positioning */
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%); /* Adjust for vertical centering */
   flex-shrink: 0; /* Prevent icon from shrinking */
   width: 20px; /* Fixed width for the icon itself */
   text-align: center;
 }
 
-/* No specific right/left needed for icons when using justify-content: space-between; */
-/* The JS will handle opacity and color */
 #moon-icon {
+  right: 8px; /* Position moon icon relative to the right edge of theme-toggle-container */
   color: #f0f0f0; /* Default color for moon (dark mode) */
 }
 
 #sun-icon {
+  right: 8px; /* Position sun icon relative to the right edge of theme-toggle-container, stacking them */
   color: #FFD700; /* Yellow for sun icon */
 }
 
@@ -556,7 +556,7 @@ body.light-mode .main-header-fixed {
 
 /* NEW: Light mode specific styles for the controls wrapper */
 body.light-mode .bottom-right-controls-wrapper {
-  background-color: #c8c8c8; /* Slightly darker than github-project-item */
+  background-color: rgba(200, 200, 200, 0.9); /* MODIFIED: Slightly darker and transparent for light mode */
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Adjusted shadow for light mode */
   border: 1px solid rgba(0, 0, 0, 0.1); /* Adjusted border for light mode */
 }
