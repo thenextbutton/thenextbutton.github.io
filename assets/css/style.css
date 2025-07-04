@@ -299,7 +299,7 @@ h2, h3, h4, h5, h6 {
   flex-direction: column; /* Stack controls vertically */
   gap: 10px; /* Reduced gap between sections */
   background-color: rgba(34, 34, 34, 0.8); /* Added transparency (0.8 opacity) */
-  padding: 10px; /* Reduced padding for tighter fit */
+  padding: 10px 8px; /* MODIFIED: Reduced horizontal padding to 8px */
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -331,25 +331,26 @@ h2, h3, h4, h5, h6 {
 
 .theme-switch-label {
   cursor: pointer;
-  width: 80px; /* MODIFIED: Increased width to 80px */
-  height: 25px; /* Kept height same */
+  width: auto; /* MODIFIED: Set width to auto to stretch */
+  height: 20px; /* MODIFIED: Reduced height to 20px */
   background: #282a36;
   display: block;
-  border-radius: 12.5px; /* Half of height for perfect oval */
+  border-radius: 10px; /* MODIFIED: Half of new height for perfect oval */
   position: relative;
   transition: background 1s;
   border: 1px solid #555;
   overflow: hidden;
-  margin-right: auto; /* NEW: Push toggle to the left */
+  margin-right: auto; /* Push toggle to the left */
+  flex-grow: 1; /* Allow it to grow and fill available space */
 }
 
 .theme-switch-label:after {
   content: '';
   position: absolute;
-  top: 2px; /* Vertically center (25 - 21) / 2 = 2 */
-  left: 2px;
-  width: 21px; /* Keep size for the circle */
-  height: 21px; /* Keep size for the circle */
+  top: 1.5px; /* MODIFIED: Vertically center (20 - 17) / 2 = 1.5 */
+  left: 1.5px; /* MODIFIED: Adjusted left to match top */
+  width: 17px; /* MODIFIED: Reduced size for the circle */
+  height: 17px; /* MODIFIED: Reduced size for the circle */
   background: #f0f0f0;
   border-radius: 50%;
   transition: 1s;
@@ -362,7 +363,7 @@ h2, h3, h4, h5, h6 {
 }
 
 .theme-switch-checkbox:checked + .theme-switch-label:after {
-  left: calc(100% - 2px); /* This calculation will adjust for the new width */
+  left: calc(100% - 1.5px); /* MODIFIED: Adjusted left to match new size */
   transform: translateX(-100%);
   background: #1a1a1a;
 }
@@ -373,7 +374,7 @@ h2, h3, h4, h5, h6 {
   transition: color 1.5s ease-in-out;
   flex-shrink: 0; /* Prevent icon from shrinking */
   width: 20px; /* Give it a fixed width to prevent layout shifts */
-  margin-left: auto; /* NEW: Push icon to the right */
+  margin-left: auto; /* Push icon to the right */
 }
 
 
