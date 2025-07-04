@@ -1,124 +1,96 @@
 document.addEventListener('DOMContentLoaded', () => {
     const contentArea = document.getElementById('content-area');
 
-    // Function to load content dynamically
     async function loadContent(url, pageName, isInitialLoad = false) {
         try {
+            // Hide the entire content area before loading new content
+            contentArea.style.opacity = '0';
+            // Add a small delay to allow the opacity transition to start visually
+            await new Promise(resolve => setTimeout(resolve, 100)); // Increased delay slightly for better visual effect
+
             const response = await fetch(url);
             if (!response.ok) {
-                // If content not found, try to load 404 page
-                const notFoundResponse = await fetch('404.html');
-                if (notFoundResponse.ok) {
-                    const notFoundHtml = await notFoundResponse.text();
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(notFoundHtml, 'text/html');
-                    const errorMessageContainer = doc.querySelector('.error-message-container');
-                    contentArea.innerHTML = errorMessageContainer ? errorMessageContainer.innerHTML : notFoundHtml;
-                } else {
-                    contentArea.innerHTML = '<div class="content-column"><h2>Error</h2><p>Content not found and 404 page failed to load.</p></div>';
-                }
-                // Ensure content column is visible in case of error
-                const currentContentColumn = contentArea.querySelector('.content-column');
-                if (currentContentColumn) {
-                    currentContentColumn.style.opacity = '1';
-                    currentContentColumn.style.transform = 'translateY(0)';
-                }
-                return; // Exit if content not found
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
-            const htmlContent = await response.text();
+            const data = await response.text();
 
-            let currentContentColumn = contentArea.querySelector('.content-column');
+            let contentColumn = contentArea.querySelector('.content-column');
 
-            if (isInitialLoad) {
-                // For initial load, just set content directly without fade effect
-                if (!currentContentColumn) {
-                    currentContentColumn = document.createElement('div');
-                    currentContentColumn.classList.add('content-column');
-                    contentArea.appendChild(currentContentColumn);
-                }
-                currentContentColumn.innerHTML = htmlContent;
-                currentContentColumn.style.opacity = ''; // Ensure opacity is reset
-                currentContentColumn.style.transform = ''; // Ensure transform is reset
-
-                window.scrollTo(0, 0); // Programmatic scroll remains
-
-                if (typeof initAutoLinker === 'function') initAutoLinker();
-
-            } else {
-                // For subsequent loads, apply fade-out then fade-in
-                if (currentContentColumn) {
-                    currentContentColumn.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
-                    currentContentColumn.style.opacity = '0';
-                    currentContentColumn.style.transform = 'translateY(20px)';
-                }
-
-                setTimeout(() => {
-                    if (!currentContentColumn) {
-                        currentContentColumn = document.createElement('div');
-                        currentContentColumn.classList.add('content-column');
-                        contentArea.appendChild(currentContentColumn);
-                    }
-                    currentContentColumn.innerHTML = htmlContent;
-                    // Trigger reflow to ensure transition restarts
-                    currentContentColumn.offsetHeight; // This forces a reflow
-
-                    currentContentColumn.style.opacity = '1';
-                    currentContentColumn.style.transform = 'translateY(0)';
-
-                    if (typeof initScrollAnimations === 'function') initScrollAnimations();
-                    if (typeof initAutoLinker === 'function') initAutoLinker();
-
-                    window.scrollTo(0, 0); // Programmatic scroll remains
-
-                }, 700); // This timeout should match the CSS transition duration for content-column fade-out
+            // If contentColumn doesn't exist, create it (ensures it's always there)
+            if (!contentColumn) {
+                contentColumn = document.createElement('div');
+                contentColumn.classList.add('content-column');
+                contentArea.appendChild(contentColumn);
             }
 
-            // Update URL hash without reloading
+            // Inject the new content into the contentColumn
+            contentColumn.innerHTML = data;
+
+            // Crucially, after content is in the DOM, initialize scroll animations
+            // This will add the 'hidden-scroll' class to .github-project-item elements
+            // BEFORE the contentArea is made fully visible.
+            if (typeof initScrollAnimations === 'function') {
+                initScrollAnimations();
+            }
+            // Also re-initialize auto-linker for the new content
+            if (typeof initAutoLinker === 'function') {
+                initAutoLinker();
+            }
+
+            // Make the content area visible again
+            // The individual github-project-item elements are now correctly hidden by JS
+            contentArea.style.opacity = '1';
+
+            // Scroll to the top of the page
+            window.scrollTo(0, 0);
+
+            // Update browser history for SPA navigation
             const currentHash = window.location.hash;
             const newHash = `/#/${pageName}.html`;
             if (currentHash !== newHash) {
                 history.pushState(null, '', newHash);
             }
 
-            // Re-initialize font controls and header scroll check after new content is loaded
-            if (typeof initFontControls === 'function') initFontControls();
-            if (typeof window.triggerHeaderScrollCheck === 'function') window.triggerHeaderScrollCheck(); // Keep this for header visibility
-            
+            // Re-initialize other page-specific scripts if they exist
+            if (typeof initFontControls === 'function') {
+                initFontControls();
+            }
+            if (typeof window.triggerHeaderScrollCheck === 'function') {
+                window.triggerHeaderScrollCheck();
+            }
+
         } catch (error) {
             console.error('Error loading content:', error);
             contentArea.innerHTML = `<p>Error loading content: ${error.message}. Please try again.</p>`;
-            const currentContentColumn = contentArea.querySelector('.content-column');
-            if (currentContentColumn) {
-                currentContentColumn.style.opacity = '1'; // Ensure it's visible even on error
-                currentContentColumn.style.transform = 'translateY(0)';
-            }
+            contentArea.style.opacity = '1'; // Ensure content area is visible even on error
         }
     }
 
-    // Function to get current page name from hash
-    function getCurrentPageName() {
+    // Function to determine the current page from the URL hash
+    function getCurrentPageFromHash() {
         const hash = window.location.hash;
         if (hash.startsWith('#/')) {
-            const pagePath = hash.substring(2); // Remove '#/'
-            const pageName = pagePath.split('.')[0]; // Get name before '.html'
+            const pagePart = hash.substring(2); // Remove '#/'
+            const pageName = pagePart.split('.')[0]; // Get 'home', 'about_me', 'github'
             return pageName;
         }
-        return 'home'; // Default to home if no hash or invalid hash
+        return 'home'; // Default to 'home' if no valid hash
     }
 
     // Event listeners for navigation links
     document.querySelectorAll('.main-nav a').forEach(link => {
         link.addEventListener('click', (event) => {
             event.preventDefault(); // Prevent default link behavior
-            const pageName = event.target.getAttribute('data-page');
-            const currentPage = getCurrentPageName();
+            const clickedPageData = event.target.getAttribute('data-page');
+            const currentPageFromHash = getCurrentPageFromHash();
 
-            // Only load if different page
-            if (pageName !== currentPage) {
-                const contentUrl = `/content/${pageName}_content.html`;
-                loadContent(contentUrl, pageName, false); // Not initial load
+            // Load content only if clicking on a different page
+            if (clickedPageData !== currentPageFromHash) {
+                const url = `/content/${clickedPageData}_content.html`;
+                loadContent(url, clickedPageData, false); // Not initial load
             }
-            // Add active class to the clicked link
+            
+            // Update active class for navigation links
             document.querySelectorAll('.main-nav a').forEach(navLink => {
                 navLink.classList.remove('active');
             });
@@ -126,29 +98,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Handle initial page load based on URL hash or default to home
-    const initialPageName = getCurrentPageName();
-    const initialContentUrl = `/content/${initialPageName}_content.html`;
-    loadContent(initialContentUrl, initialPageName, true); // Mark as initial load
+    // Initial load of content based on URL hash or default to home
+    const initialPage = getCurrentPageFromHash();
+    const initialUrl = `/content/${initialPage}_content.html`;
+    loadContent(initialUrl, initialPage, true); // Mark as initial load
 
-    // Add active class to the initial page link
-    const initialNavLink = document.querySelector(`.main-nav a[data-page="${initialPageName}"]`);
-    if (initialNavLink) {
-        initialNavLink.classList.add('active');
+    // Set active class for the initially loaded page's navigation link
+    const initialActiveLink = document.querySelector(`.main-nav a[data-page="${initialPage}"]`);
+    if (initialActiveLink) {
+        initialActiveLink.classList.add('active');
     }
-
-    // Handle browser back/forward buttons
-    window.addEventListener('popstate', () => {
-        const pageName = getCurrentPageName();
-        const contentUrl = `/content/${pageName}_content.html`;
-        loadContent(contentUrl, pageName, true); // Treat popstate as initial load for content display
-
-        // Update active class for navigation links on popstate
-        document.querySelectorAll('.main-nav a').forEach(navLink => {
-            navLink.classList.remove('active');
-            if (navLink.getAttribute('data-page') === pageName) {
-                navLink.classList.add('active');
-            }
-        });
-    });
 });

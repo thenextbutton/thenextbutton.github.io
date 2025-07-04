@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const themeSwitch = document.getElementById('theme-switch');
-    const moonIcon = document.getElementById('moon-icon'); // NEW: Get moon icon
-    const sunIcon = document.getElementById('sun-icon');   // NEW: Get sun icon
+    const themeToggleText = document.getElementById('theme-toggle-text'); // Reverted to text element
     const body = document.body;
     const msCertLogo = document.querySelector('.corner-logo-fixed');
     const profileImage = document.querySelector('.profile-image');
@@ -31,30 +30,20 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     /**
-     * Applies the specified theme to the body, updates the toggle, and sets logo/icon visibility.
+     * Applies the specified theme to the body, updates the toggle, and sets logo/text.
      * @param {string} themeName - 'light' or 'dark'.
      */
     function applyTheme(themeName) {
         if (themeName === 'light') {
             body.classList.add('light-mode');
             themeSwitch.checked = false; // Toggle OFF for Light Mode
+            themeToggleText.textContent = 'Light Mode'; // Set text for Light Mode
             msCertLogo.src = LIGHT_MODE_MS_LOGO_SRC; // Set light mode logo
-
-            // NEW: Control icon visibility and color
-            moonIcon.style.opacity = '0'; // Hide moon
-            sunIcon.style.opacity = '1';  // Show sun
-            sunIcon.style.color = '#FFD700'; // Yellow for sun
-            moonIcon.style.color = '#f0f0f0'; // Ensure moon is default color when hidden/shown
         } else { // themeName === 'dark'
             body.classList.remove('light-mode');
             themeSwitch.checked = true; // Toggle ON for Dark Mode
+            themeToggleText.textContent = 'Dark Mode'; // Set text for Dark Mode
             msCertLogo.src = DARK_MODE_MS_LOGO_SRC; // Set dark mode logo
-
-            // NEW: Control icon visibility and color
-            moonIcon.style.opacity = '1'; // Show moon
-            sunIcon.style.opacity = '0';  // Hide sun
-            moonIcon.style.color = '#f0f0f0'; // White for moon
-            sunIcon.style.color = '#FFD700'; // Ensure sun is yellow when hidden/shown
         }
     }
 

@@ -289,7 +289,7 @@ h2, h3, h4, h5, h6 {
   text-decoration: underline;
 }
 
-/* MODIFIED: Control box styling for transparency and tighter controls */
+/* Reverted: Wrapper for controls to original styling */
 .bottom-right-controls-wrapper {
   position: fixed;
   bottom: 20px;
@@ -297,15 +297,15 @@ h2, h3, h4, h5, h6 {
   z-index: 1000;
   display: flex;
   flex-direction: column; /* Stack controls vertically */
-  gap: 10px; /* Reduced gap between sections */
-  background-color: rgba(34, 34, 34, 0.8); /* MODIFIED: Transparency for dark mode */
-  padding: 10px 8px; /* Reduced horizontal padding to 8px */
+  gap: 10px; /* Gap between sections */
+  background-color: rgba(34, 34, 34, 0.8); /* Original transparency */
+  padding: 10px; /* Original padding */
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(0, 0, 0, 0.2);
   transition: background-color 1.5s ease-in-out, border-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out;
-  width: 160px; /* MODIFIED: Increased width to 160px to accommodate icons and spacing */
-  align-items: center; /* Center children horizontally */
+  width: auto; /* Allow width to adjust to content */
+  align-items: flex-end; /* Align items to the right */
 }
 
 .bottom-right-controls-wrapper:hover {
@@ -313,14 +313,14 @@ h2, h3, h4, h5, h6 {
 }
 
 
-/* MODIFIED: Theme toggle container for icon - now uses relative positioning for icons */
+/* Reverted: Theme toggle container to original styling */
 .theme-toggle-container {
   display: flex;
   flex-direction: row;
   align-items: center;
-  /* REMOVED: justify-content: space-between; and gap: 8px; from here */
-  width: 100%; /* Take full width of parent */
-  position: relative; /* ADDED: Needed for absolute positioning of icons */
+  gap: 10px; /* Original gap */
+  width: auto; /* Allow width to adjust */
+  position: relative; /* Keep relative for inner circle */
 }
 
 .theme-switch-checkbox {
@@ -331,25 +331,24 @@ h2, h3, h4, h5, h6 {
 
 .theme-switch-label {
   cursor: pointer;
-  width: 80px; /* Fixed width for the toggle track */
-  height: 20px;
+  width: 50px;
+  height: 25px;
   background: #282a36;
   display: block;
-  border-radius: 10px;
-  position: relative; /* Keep relative for the inner circle */
+  border-radius: 25px;
+  position: relative;
   transition: background 1s;
   border: 1px solid #555;
   overflow: hidden;
-  flex-shrink: 0; /* Prevent it from shrinking */
 }
 
 .theme-switch-label:after {
   content: '';
   position: absolute;
-  top: 1.5px; /* Vertically center (20 - 17) / 2 = 1.5 */
-  left: 1.5px; /* Adjusted left to match top */
-  width: 17px; /* Kept size for the circle */
-  height: 17px; /* Kept size for the circle */
+  top: 2px;
+  left: 2px;
+  width: 21px;
+  height: 21px;
   background: #f0f0f0;
   border-radius: 50%;
   transition: 1s;
@@ -362,40 +361,25 @@ h2, h3, h4, h5, h6 {
 }
 
 .theme-switch-checkbox:checked + .theme-switch-label:after {
-  left: calc(100% - 1.5px); /* Adjusted left to match new size */
+  left: calc(100% - 2px);
   transform: translateX(-100%);
   background: #1a1a1a;
 }
 
-/* MODIFIED: Styling for both theme icons - now absolutely positioned */
-.theme-icon {
-  font-size: 20px; /* Fixed font size */
-  transition: opacity 0.5s ease-in-out, color 0.5s ease-in-out; /* Smooth transitions for visibility and color */
-  position: absolute; /* ADDED: Absolute positioning */
-  top: 50%; /* Center vertically */
-  transform: translateY(-50%); /* Adjust for vertical centering */
-  flex-shrink: 0; /* Prevent icon from shrinking */
-  width: 20px; /* Fixed width for the icon itself */
-  text-align: center;
-}
-
-#moon-icon {
-  right: 8px; /* Position moon icon relative to the right edge of theme-toggle-container */
-  color: #f0f0f0; /* Default color for moon (dark mode) */
-}
-
-#sun-icon {
-  right: 8px; /* Position sun icon relative to the right edge of theme-toggle-container, stacking them */
-  color: #FFD700; /* Yellow for sun icon */
+.theme-switch-text {
+  font-size: 14px;
+  color: #f0f0f0;
+  user-select: none;
+  transition: color 1.5s ease-in-out;
+  /* Reverted: Removed min-width and text-align */
 }
 
 
-/* MODIFIED: Font controls for tighter fit */
+/* Reverted: Font controls to original styling */
 .font-controls {
   display: flex;
-  justify-content: space-between; /* Distribute items evenly with space between them */
-  gap: 0px; /* Set gap to 0 as space-between handles spacing */
-  width: 100%; /* Ensure it takes full width of its parent (.bottom-right-controls-wrapper) */
+  gap: 10px;
+  /* Reverted: Removed fixed positioning, it's now within .bottom-right-controls-wrapper */
 }
 
 .font-controls span {
@@ -430,18 +414,19 @@ h2, h3, h4, h5, h6 {
   background-color: #555;
 }
 
-/* ADDED: Focus States */
+/* ADDED: Focus States (kept as they were a good addition) */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible,
-.theme-switch-label:focus-visible, /* Specific for the toggle label */
+.theme-switch-label:focus-visible,
 .font-controls span:focus-visible {
-  outline: none; /* Remove default outline */
-  box-shadow: 0 0 0 2px #8be9fd; /* Subtle blue glow for dark mode */
-  border-color: #8be9fd; /* Add a border color if applicable */
+  outline: none;
+  box-shadow: 0 0 0 2px #8be9fd;
+  border-color: #8be9fd;
   transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  border-radius: 4px; /* Added for consistency */
 }
 
 
@@ -450,28 +435,26 @@ body.light-mode {
   color: #1a1a1a;
 }
 
-/* ADDED: Light Mode Scrollbar */
+/* ADDED: Light Mode Scrollbar (kept as they were a good addition) */
 body.light-mode::-webkit-scrollbar-track {
-  background: #e0e0e0; /* Lighter track for light mode */
+  background: transparent;
 }
 
 body.light-mode::-webkit-scrollbar-thumb {
-  background-color: transparent; /* MODIFIED: Transparent by default in light mode */
-  border: 2px solid transparent; /* MODIFIED: Transparent border by default in light mode */
+  background-color: transparent;
+  border: 2px solid transparent;
 }
 
-/* ADDED: Make thumb visible on hover over the body in light mode */
 body.light-mode:hover::-webkit-scrollbar-thumb {
-  background-color: #888; /* Darker thumb for light mode on hover */
-  border-color: #e0e0e0; /* Border to match light track on hover */
+  background-color: #888;
+  border-color: #e0e0e0;
 }
 
-/* Preserve hover effect for the thumb itself in light mode */
 body.light-mode::-webkit-scrollbar-thumb:hover {
-  background-color: #666; /* Even darker thumb on direct hover for light mode */
+  background-color: #666;
 }
 
-/* ADDED: Light Mode Focus States */
+/* ADDED: Light Mode Focus States (kept as they were a good addition) */
 body.light-mode a:focus-visible,
 body.light-mode button:focus-visible,
 body.light-mode input:focus-visible,
@@ -479,8 +462,9 @@ body.light-mode textarea:focus-visible,
 body.light-mode select:focus-visible,
 body.light-mode .theme-switch-label:focus-visible,
 body.light-mode .font-controls span:focus-visible {
-  box-shadow: 0 0 0 2px #007bff; /* Subtle blue glow for light mode */
-  border-color: #007bff; /* Add a border color if applicable */
+  box-shadow: 0 0 0 2px #007bff;
+  border-color: #007bff;
+  border-radius: 4px;
 }
 
 body.light-mode h1 {
@@ -554,14 +538,14 @@ body.light-mode .main-header-fixed {
   background-color: #f0f0f0;
 }
 
-/* NEW: Light mode specific styles for the controls wrapper */
+/* Reverted: Light mode specific styles for the controls wrapper to original */
 body.light-mode .bottom-right-controls-wrapper {
-  background-color: rgba(200, 200, 200, 0.9); /* MODIFIED: Slightly darker and transparent for light mode */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Adjusted shadow for light mode */
-  border: 1px solid rgba(0, 0, 0, 0.1); /* Adjusted border for light mode */
+  background-color: rgba(240, 240, 240, 0.8); /* Original light mode background with transparency */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Original light mode shadow */
+  border: 1px solid rgba(0, 0, 0, 0.05); /* Original light mode border */
 }
 body.light-mode .bottom-right-controls-wrapper:hover {
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25); /* Adjusted hover shadow for light mode */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Original light mode hover shadow */
 }
 
 
@@ -657,8 +641,9 @@ body.light-mode .bottom-right-controls-wrapper:hover {
   .font-controls {
     bottom: 50px;
     right: 10px;
-    gap: 8px;
     z-index: 1000;
+    display: flex;
+    gap: 8px;
   }
 
   .font-controls span {
