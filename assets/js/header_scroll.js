@@ -48,12 +48,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Main scroll event handler that dispatches to specific logic functions
-    function onScroll() {
-        // Always run header visibility logic
-        handleHeaderVisibility();
+    // Function to handle the control box fade logic for user-initiated scrolls
+    function updateControlsVisibility() {
+        if (!controlsWrapper) return;
 
-        if (!controlsWrapper) return; // Exit if controlsWrapper doesn't exist
+        let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
         // If programmatic scroll, ensure controls are visible and bypass user-initiated fade logic
         if (window.isProgrammaticScroll) {
@@ -63,8 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // --- Control Box Fade Logic for user-initiated scrolls ---
-        let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
         if (currentScrollTop > SCROLL_THRESHOLD) {
             // If scrolled down, immediately hide the controls
             controlsWrapper.classList.add('fade-out-controls');
@@ -72,10 +69,20 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             // If at the top (or scrolled up to the top), schedule controls to fade in
             clearTimeout(fadeControlsTimeoutId); // Clear any existing timeout
-            fadeControlsTimeoutId = setTimeout(() => {
-                controlsWrapper.classList.remove('fade-out-controls'); // Make visible
-            }, FADE_OUT_DELAY);
+
+            // Only schedule fade-in if it's currently hidden (to avoid re-fading already visible box)
+            if (controlsWrapper.classList.contains('fade-out-controls')) {
+                fadeControlsTimeoutId = setTimeout(() => {
+                    controlsWrapper.classList.remove('fade-out-controls'); // Make visible
+                }, FADE_OUT_DELAY);
+            }
         }
+    }
+
+    // Main scroll event handler that dispatches to specific logic functions
+    function onScroll() {
+        handleHeaderVisibility(); // Always run header logic
+        updateControlsVisibility(); // Always run controls visibility logic
     }
 
     // Function to enable the scroll listener
@@ -85,6 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Initial state setup for controlsWrapper when listener is enabled
         // This runs once when the page loads or when the listener is re-enabled by SPA loader.
+        // It's crucial to set the correct initial state here.
         if (controlsWrapper) {
             if (window.pageYOffset > SCROLL_THRESHOLD) {
                 controlsWrapper.classList.add('fade-out-controls'); // Start hidden if scrolled down
