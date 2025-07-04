@@ -304,7 +304,7 @@ h2, h3, h4, h5, h6 {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(0, 0, 0, 0.2);
   transition: background-color 1.5s ease-in-out, border-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out;
-  width: 160px; /* MODIFIED: Increased width to 160px to accommodate icons */
+  width: 160px; /* MODIFIED: Increased width to 160px to accommodate icons and spacing */
   align-items: center; /* Center children horizontally */
 }
 
@@ -313,14 +313,15 @@ h2, h3, h4, h5, h6 {
 }
 
 
-/* MODIFIED: Theme toggle container for icon - NO SPACE-BETWEEN */
+/* MODIFIED: Theme toggle container for icon - now uses flex for layout */
 .theme-toggle-container {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 4px; /* Reduced gap to 4px */
-  width: 100%; /* Ensure it spans the wrapper width */
-  position: relative; /* Needed for absolute positioning of icons */
+  justify-content: space-between; /* NEW: Distribute items to edges */
+  width: 100%; /* Take full width of parent */
+  /* REMOVED: position: relative; as icons are now part of flex flow */
+  gap: 8px; /* NEW: Gap between the toggle and the icons */
 }
 
 .theme-switch-checkbox {
@@ -331,17 +332,17 @@ h2, h3, h4, h5, h6 {
 
 .theme-switch-label {
   cursor: pointer;
-  width: 100px; /* MODIFIED: Fixed width for the toggle track */
-  height: 20px; /* Kept height at 20px */
+  width: 80px; /* MODIFIED: Fixed width for the toggle track */
+  height: 20px;
   background: #282a36;
   display: block;
-  border-radius: 10px; /* Half of new height for perfect oval */
-  position: relative;
+  border-radius: 10px;
+  position: relative; /* Keep relative for the inner circle */
   transition: background 1s;
   border: 1px solid #555;
   overflow: hidden;
-  margin-right: auto; /* Push toggle to the left */
-  /* REMOVED: flex-grow: 1; */ /* No longer needed with fixed width */
+  /* REMOVED: margin-right: auto; and flex-grow: 1; */
+  flex-shrink: 0; /* NEW: Prevent it from shrinking */
 }
 
 .theme-switch-label:after {
@@ -368,25 +369,23 @@ h2, h3, h4, h5, h6 {
   background: #1a1a1a;
 }
 
-/* NEW: Styling for both theme icons */
+/* MODIFIED: Styling for both theme icons - now part of flex flow */
 .theme-icon {
   font-size: 20px; /* Fixed font size */
   transition: opacity 0.5s ease-in-out, color 0.5s ease-in-out; /* Smooth transitions for visibility and color */
-  position: absolute; /* Position absolutely within theme-toggle-container */
-  top: 50%; /* Center vertically */
-  transform: translateY(-50%); /* Adjust for vertical centering */
+  /* REMOVED: position: absolute; top: 50%; transform: translateY(-50%); right: 8px; */
   flex-shrink: 0; /* Prevent icon from shrinking */
-  width: 20px; /* Fixed width */
-  text-align: center; /* Center icon within its fixed width */
+  width: 20px; /* Fixed width for the icon itself */
+  text-align: center;
 }
 
+/* No specific right/left needed for icons when using justify-content: space-between; */
+/* The JS will handle opacity and color */
 #moon-icon {
-  right: 8px; /* MODIFIED: Position moon icon further right */
   color: #f0f0f0; /* Default color for moon (dark mode) */
 }
 
 #sun-icon {
-  right: 8px; /* MODIFIED: Position sun icon further right, same as moon to stack them */
   color: #FFD700; /* Yellow for sun icon */
 }
 
