@@ -297,9 +297,9 @@ h2, h3, h4, h5, h6 {
   z-index: 1000;
   display: flex;
   flex-direction: column; /* Stack controls vertically */
-  gap: 10px; /* MODIFIED: Reduced gap between sections */
-  background-color: rgba(34, 34, 34, 0.8); /* MODIFIED: Added transparency (0.8 opacity) */
-  padding: 10px; /* MODIFIED: Reduced padding for tighter fit */
+  gap: 10px; /* Reduced gap between sections */
+  background-color: rgba(34, 34, 34, 0.8); /* Added transparency (0.8 opacity) */
+  padding: 10px; /* Reduced padding for tighter fit */
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -313,7 +313,7 @@ h2, h3, h4, h5, h6 {
 }
 
 
-/* MODIFIED: Theme toggle container for tighter fit */
+/* MODIFIED: Theme toggle container for tighter fit and clipping fix */
 .theme-toggle-container {
   display: flex;
   flex-direction: row;
@@ -331,11 +331,11 @@ h2, h3, h4, h5, h6 {
 
 .theme-switch-label {
   cursor: pointer;
-  width: 60px; /* MODIFIED: Increased width to 60px */
-  height: 30px; /* MODIFIED: Increased height to 30px */
+  width: 60px; /* Keep width at 60px */
+  height: 30px; /* Keep height at 30px */
   background: #282a36;
   display: block;
-  border-radius: 25px;
+  border-radius: 15px; /* MODIFIED: Set border-radius to half of height for perfect oval */
   position: relative;
   transition: background 1s;
   border: 1px solid #555;
@@ -345,10 +345,10 @@ h2, h3, h4, h5, h6 {
 .theme-switch-label:after {
   content: '';
   position: absolute;
-  top: 2px; /* Adjusted based on new height */
+  top: 2px; /* Keep top at 2px to center vertically (30 - 26) / 2 = 2 */
   left: 2px;
-  width: 26px; /* MODIFIED: Increased width to 26px */
-  height: 26px; /* MODIFIED: Increased height to 26px */
+  width: 26px; /* Keep width at 26px */
+  height: 26px; /* Keep height at 26px */
   background: #f0f0f0;
   border-radius: 50%;
   transition: 1s;
@@ -378,7 +378,6 @@ h2, h3, h4, h5, h6 {
 
 /* MODIFIED: Font controls for tighter fit */
 .font-controls {
-  /* Removed position, bottom, right, z-index as it's now inside wrapper */
   display: flex;
   justify-content: space-between; /* Distribute items evenly with space between them */
   gap: 0px; /* Set gap to 0 as space-between handles spacing */
@@ -443,8 +442,8 @@ body.light-mode::-webkit-scrollbar-track {
 }
 
 body.light-mode::-webkit-scrollbar-thumb {
-  background-color: transparent; /* MODIFIED: Transparent by default in light mode */
-  border: 2px solid transparent; /* MODIFIED: Transparent border by default in light mode */
+  background-color: transparent; /* Transparent by default in light mode */
+  border: 2px solid transparent; /* Transparent border by default in light mode */
 }
 
 /* ADDED: Make thumb visible on hover over the body in light mode */
@@ -460,7 +459,7 @@ body.light-mode::-webkit-scrollbar-thumb:hover {
 
 /* Light Mode Specific Styles for Controls */
 body.light-mode .bottom-right-controls-wrapper {
-  background-color: rgba(224, 224, 224, 0.8); /* MODIFIED: Lighter, transparent background for light mode */
+  background-color: rgba(224, 224, 224, 0.8); /* Lighter, transparent background for light mode */
   border-color: rgba(170, 170, 170, 0.2);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
