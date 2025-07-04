@@ -306,7 +306,7 @@ h2, h3, h4, h5, h6 {
   transition: background-color 1.5s ease-in-out, border-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out, opacity 0.5s ease-in-out; /* Added opacity transition */
   width: 160px; /* MODIFIED: Reduced width for a more compact look */
   align-items: center; /* Center children horizontally */
-  opacity: 1; /* Default opacity */
+  opacity: 0; /* MODIFIED: Start hidden by default */
 }
 
 .bottom-right-controls-wrapper:hover {
@@ -559,6 +559,15 @@ body.light-mode .powered-mode .powered-by-github a:hover {
     color: #444;
 }
 
+body.light-mode .font-controls span {
+  background-color: #eee;
+  color: #1a1a1a;
+  border-color: #bbb;
+}
+
+body.light-mode .theme-switch-text {
+    color: #1a1a1a;
+}
 
 body.light-mode .main-header-fixed {
   background-color: #f0f0f0;
@@ -669,15 +678,15 @@ body.light-mode .main-header-fixed {
   }
 
   #font-minus {
-    font-size: 13px; /* Corrected size for mobile */
+    font-size: 13px;
   }
 
   #font-reset {
-    font-size: 17px; /* Corrected size for mobile */
+    font-size: 17px;
   }
 
   #font-plus {
-    font-size: 21px; /* Corrected size for mobile */
+    font-size: 21px;
   }
 
   .content-column {
