@@ -14,6 +14,7 @@ body {
   max-width: 1200px; /* Max width for the entire body */
   transition: background-color 1.5s ease-in-out, color 1.5s ease-in-out;
   overflow-y: scroll; /* Ensures scrollbar space is always reserved to prevent content jumping */
+  overflow-x: hidden; /* ADDED: Prevents horizontal scrolling, fixing fixed element offset */
 }
 
 /* Scrollbar Styling for Webkit browsers */
@@ -677,7 +678,7 @@ body.light-mode .main-header-fixed {
     width: 140px; /* Slightly smaller width on mobile */
     padding: 8px 6px; /* Reduced padding */
     bottom: 80px; /* MODIFIED: Increased bottom value to avoid overlap with "Powered by GitHub" */
-    right: 10px; /* Closer to right */
+    right: 5px; /* MODIFIED: Adjusted right value to give more space */
   }
 
   .theme-toggle-container {
