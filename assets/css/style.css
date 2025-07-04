@@ -216,7 +216,7 @@ h2, h3, h4, h5, h6 {
 
 .github-project-item.hidden-scroll {
   opacity: 0;
-  transform: scale(1.5);
+  transform: scale(1.5); /* RE-ADDED: This line restores the zoom-out effect */
 }
 
 .project-image {
