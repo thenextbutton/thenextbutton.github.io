@@ -320,7 +320,7 @@ h2, h3, h4, h5, h6 {
   align-items: center;
   gap: 4px; /* Reduced gap to 4px */
   width: 100%; /* Ensure it spans the wrapper width */
-  /* REMOVED: justify-content: space-between; */
+  position: relative; /* NEW: Needed for absolute positioning of icons */
 }
 
 .theme-switch-checkbox {
@@ -368,13 +368,26 @@ h2, h3, h4, h5, h6 {
   background: #1a1a1a;
 }
 
-#theme-toggle-icon { /* Styling for the icon */
-  font-size: 20px; /* MODIFIED: Fixed font size to 20px */
-  color: #f0f0f0; /* Default icon color (moon for dark mode) */
-  transition: color 1.5s ease-in-out;
+/* NEW: Styling for both theme icons */
+.theme-icon {
+  font-size: 20px; /* Fixed font size */
+  transition: opacity 0.5s ease-in-out, color 0.5s ease-in-out; /* Smooth transitions for visibility and color */
+  position: absolute; /* Position absolutely within theme-toggle-container */
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%); /* Adjust for vertical centering */
   flex-shrink: 0; /* Prevent icon from shrinking */
-  width: 20px; /* Give it a fixed width to prevent layout shifts */
-  margin-left: auto; /* Push icon to the right */
+  width: 20px; /* Fixed width */
+  text-align: center; /* Center icon within its fixed width */
+}
+
+#moon-icon {
+  right: 8px; /* Position moon icon on the right */
+  color: #f0f0f0; /* Default color for moon (dark mode) */
+}
+
+#sun-icon {
+  right: 8px; /* Position sun icon on the right, same as moon to stack them */
+  color: #FFD700; /* Yellow for sun icon */
 }
 
 
@@ -543,8 +556,12 @@ body.light-mode .main-header-fixed {
 }
 
 /* NEW: Light Mode Icon Color */
-body.light-mode #theme-toggle-icon {
+/* This rule is now less critical as JS sets color directly, but kept for fallback/clarity */
+body.light-mode #sun-icon { /* Only sun icon needs specific light mode color */
   color: #FFD700; /* Yellow for sun icon in light mode */
+}
+body.light-mode #moon-icon { /* Moon icon should be default color in light mode */
+  color: #f0f0f0; /* Keeping moon light-colored even when hidden in light mode */
 }
 
 

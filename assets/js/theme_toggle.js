@@ -1,9 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     const themeSwitch = document.getElementById('theme-switch');
-    const themeToggleIcon = document.getElementById('theme-toggle-icon'); // MODIFIED: Get the icon element
+    const moonIcon = document.getElementById('moon-icon'); // NEW: Get moon icon
+    const sunIcon = document.getElementById('sun-icon');   // NEW: Get sun icon
     const body = document.body;
     const msCertLogo = document.querySelector('.corner-logo-fixed');
-    const profileImage = document.querySelector('.profile-image'); // Assuming profile image is still used
+    const profileImage = document.querySelector('.profile-image');
 
     const DARK_MODE_MS_LOGO_SRC = 'assets/images/MS_Cert_Professional_logo_Wht_rgb.png';
     const LIGHT_MODE_MS_LOGO_SRC = 'assets/images/MS_Cert_Professional_logo_Blk_rgb.png';
@@ -30,22 +31,30 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     /**
-     * Applies the specified theme to the body, updates the toggle, and sets logo/icon.
+     * Applies the specified theme to the body, updates the toggle, and sets logo/icon visibility.
      * @param {string} themeName - 'light' or 'dark'.
      */
     function applyTheme(themeName) {
         if (themeName === 'light') {
             body.classList.add('light-mode');
             themeSwitch.checked = false; // Toggle OFF for Light Mode
-            themeToggleIcon.classList.remove('fa-moon'); // MODIFIED: Change icon to sun
-            themeToggleIcon.classList.add('fa-sun');
             msCertLogo.src = LIGHT_MODE_MS_LOGO_SRC; // Set light mode logo
+
+            // NEW: Control icon visibility and color
+            moonIcon.style.opacity = '0'; // Hide moon
+            sunIcon.style.opacity = '1';  // Show sun
+            sunIcon.style.color = '#FFD700'; // Yellow for sun
+            moonIcon.style.color = '#f0f0f0'; // Ensure moon is default color when hidden/shown
         } else { // themeName === 'dark'
             body.classList.remove('light-mode');
             themeSwitch.checked = true; // Toggle ON for Dark Mode
-            themeToggleIcon.classList.remove('fa-sun'); // MODIFIED: Change icon to moon
-            themeToggleIcon.classList.add('fa-moon');
             msCertLogo.src = DARK_MODE_MS_LOGO_SRC; // Set dark mode logo
+
+            // NEW: Control icon visibility and color
+            moonIcon.style.opacity = '1'; // Show moon
+            sunIcon.style.opacity = '0';  // Hide sun
+            moonIcon.style.color = '#f0f0f0'; // White for moon
+            sunIcon.style.color = '#FFD700'; // Ensure sun is yellow when hidden/shown
         }
     }
 
@@ -91,8 +100,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Set initial profile image on load (kept from your original code)
-    if (profileImage) { // Check if profileImage exists before setting src
+    // Set initial profile image on load
+    if (profileImage) {
         profileImage.src = window.getRandomProfileImage();
     }
 });
