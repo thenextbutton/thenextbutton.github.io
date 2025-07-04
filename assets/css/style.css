@@ -7,10 +7,10 @@ body {
   font-family: "Consolas", monospace;
   background-color: #1a1a1a;
   color: #f0f0f0;
-  margin: 0 auto; /* MODIFIED: Added auto margins for centering */
+  margin: 0 auto;
   padding: 0;
   padding-top: 120px;
-  max-width: 1200px; /* ADDED: Max width for the entire body */
+  max-width: 1200px;
   transition: background-color 1.5s ease-in-out, color 1.5s ease-in-out;
   overflow-y: scroll; /* Ensures scrollbar space is always reserved to prevent content jumping */
 }
@@ -298,18 +298,25 @@ h2, h3, h4, h5, h6 {
   display: flex;
   flex-direction: column; /* Stack controls vertically */
   gap: 15px; /* Space between the two control groups */
-  background-color: #222222; /* Slightly more distinct background */
+  background-color: rgba(34, 34, 34, 0.9); /* MODIFIED: Added transparency */
   padding: 15px; /* Uniform padding */
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Softer, more diffused shadow */
   border: 1px solid rgba(0, 0, 0, 0.2); /* Very faint border */
-  transition: background-color 1.5s ease-in-out, border-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out;
+  transition: background-color 1.5s ease-in-out, border-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out, opacity 0.5s ease-in-out; /* Added opacity transition */
   width: 160px; /* MODIFIED: Reduced width for a more compact look */
   align-items: center; /* Center children horizontally */
+  opacity: 1; /* Default opacity */
 }
 
 .bottom-right-controls-wrapper:hover {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4); /* Slightly more prominent shadow on hover */
+}
+
+/* Class to apply when scrolling, to fade out the controls */
+.bottom-right-controls-wrapper.fade-out-controls {
+    opacity: 0;
+    pointer-events: none; /* Disable interactions when faded out */
 }
 
 
@@ -458,19 +465,43 @@ body.light-mode::-webkit-scrollbar-thumb:hover {
 }
 
 
-/* Light Mode Focus States */
-body.light-mode .font-controls span:focus-visible,
-body.light-mode .theme-switch-label:focus-visible,
-body.light-mode a:focus-visible,
-body.light-mode button:focus-visible,
-body.light-mode input:focus-visible,
-body.light-mode select:focus-visible,
-body.light-mode textarea:focus-visible {
-  box-shadow: 0 0 0 2px #007bff;
-  border-color: #007bff;
-  border-radius: 4px; /* Rounded corners for the focus outline in light mode */
+/* Light Mode Specific Styles for Controls */
+body.light-mode .bottom-right-controls-wrapper {
+  background-color: rgba(224, 224, 224, 0.9); /* Lighter, transparent background for light mode */
+  border-color: rgba(170, 170, 170, 0.2); /* Lighter border for light mode */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Adjusted shadow for light mode */
 }
 
+body.light-mode .theme-switch-text {
+    color: #1a1a1a; /* Darker text for light mode */
+}
+
+body.light-mode .theme-switch-label {
+    background: #ccc; /* Lighter background for toggle track in light mode */
+    border-color: #aaa; /* Lighter border for toggle track in light mode */
+}
+
+body.light-mode .theme-switch-checkbox:checked + .theme-switch-label {
+    background: linear-gradient(to right, #007bff, #0056b3); /* Blue gradient for checked in light mode */
+    border-color: #0056b3;
+}
+
+body.light-mode .theme-switch-checkbox:checked + .theme-switch-label:after {
+    background: #f0f0f0; /* White circle for checked in light mode */
+}
+
+body.light-mode .font-controls span {
+  background-color: #eee; /* Lighter background for font buttons in light mode */
+  color: #1a1a1a; /* Darker text for font buttons in light mode */
+  border-color: #bbb; /* Lighter border for font buttons in light mode */
+}
+
+body.light-mode .font-controls span:hover {
+  background-color: #ddd; /* Darker hover for font buttons in light mode */
+}
+
+
+/* General Light Mode Styles */
 body.light-mode h1 {
   color: #333;
 }
@@ -528,21 +559,13 @@ body.light-mode .powered-mode .powered-by-github a:hover {
     color: #444;
 }
 
-body.light-mode .font-controls span {
-  background-color: #eee;
-  color: #1a1a1a;
-  border-color: #bbb;
-}
-
-body.light-mode .theme-switch-text {
-    color: #1a1a1a;
-}
 
 body.light-mode .main-header-fixed {
   background-color: #f0f0f0;
 }
 
 
+/* Media Queries */
 @media (max-width: 768px) {
   html {
     font-size: 16px;
