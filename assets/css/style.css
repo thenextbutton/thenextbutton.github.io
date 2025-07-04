@@ -304,7 +304,7 @@ h2, h3, h4, h5, h6 {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(0, 0, 0, 0.2);
   transition: background-color 1.5s ease-in-out, border-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out;
-  width: 135px; /* MODIFIED: Slightly increased width to 135px */
+  width: 140px; /* MODIFIED: Increased width to 140px */
   align-items: center; /* Center children horizontally */
 }
 
@@ -318,7 +318,7 @@ h2, h3, h4, h5, h6 {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 5px; /* MODIFIED: Reduced gap to 5px */
+  gap: 4px; /* MODIFIED: Reduced gap to 4px */
   width: 100%; /* Ensure it spans the wrapper width */
   /* REMOVED: justify-content: space-between; */
 }
@@ -369,11 +369,11 @@ h2, h3, h4, h5, h6 {
 }
 
 #theme-toggle-icon { /* Styling for the icon */
-  font-size: 1.1rem; /* MODIFIED: Slightly reduced icon size to 1.1rem */
+  font-size: 1rem; /* MODIFIED: Reduced icon size to 1rem */
   color: #f0f0f0; /* Default icon color */
   transition: color 1.5s ease-in-out;
   flex-shrink: 0; /* Prevent icon from shrinking */
-  width: 18px; /* MODIFIED: Reduced icon width to 18px */
+  width: 16px; /* MODIFIED: Reduced icon width to 16px */
   margin-left: auto; /* Push icon to the right */
 }
 
