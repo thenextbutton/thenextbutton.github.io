@@ -7,9 +7,10 @@ body {
   font-family: "Consolas", monospace;
   background-color: #1a1a1a;
   color: #f0f0f0;
-  margin: 0;
+  margin: 0 auto; /* MODIFIED: Added auto margins for centering */
   padding: 0;
   padding-top: 120px;
+  max-width: 1200px; /* ADDED: Max width for the entire body */
   transition: background-color 1.5s ease-in-out, color 1.5s ease-in-out;
   overflow-y: scroll; /* Ensures scrollbar space is always reserved to prevent content jumping */
 }
@@ -71,7 +72,23 @@ body::-webkit-scrollbar-thumb:hover {
   transition: opacity 0.7s ease-out, transform 0.7s ease-out, color 1.5s ease-in-out;
 }
 
+/* ADDED: CSS for page transitions */
+#content-area {
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out; /* Controls the fade duration */
+}
+
+#content-area.fade-out {
+    opacity: 0;
+}
+
+#content-area.fade-in {
+    opacity: 1;
+}
+
+
 h1 {
+  font-family: "Consolas", monospace;
   text-align: center;
   color: #a0a0a0;
   margin: 0;
@@ -83,6 +100,10 @@ h1 {
   padding: 0 180px;
   box-sizing: border-box;
   transition: transform 0.7s ease-out;
+}
+
+h2, h3, h4, h5, h6 {
+  font-family: "Consolas", monospace;
 }
 
 .profile-image {
@@ -137,8 +158,8 @@ h1 {
   margin: 0;
   display: flex;
   justify-content: center;
-  gap: 30px;
   flex-wrap: wrap;
+  gap: 30px;
 }
 
 .main-nav li a {
@@ -147,11 +168,18 @@ h1 {
   font-weight: bold;
   font-size: 1.1rem;
   padding: 5px 10px;
-  transition: color 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out, font-weight 0.2s ease-in-out, background-color 0.3s ease-in-out, border-radius 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+  display: inline-block;
+  border-radius: 4px;
 }
 
 .main-nav li a:hover {
-  color: #8be9fd;
+  color: #c0c0c0;
+  font-weight: bolder;
+  background-color: #333;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
 }
 
 .content-column a {
@@ -449,10 +477,17 @@ body.light-mode h1 {
 
 body.light-mode .main-nav li a {
   color: #333;
+  transition: color 0.3s ease-in-out, font-weight 0.2s ease-in-out, background-color 0.3s ease-in-out, border-radius 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+  border-radius: 4px;
 }
 
 body.light-mode .main-nav li a:hover {
-  color: #007bff;
+  color: #000;
+  font-weight: bolder;
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
 }
 
 body.light-mode .content-column a {
@@ -548,7 +583,7 @@ body.light-mode .main-header-fixed {
   .main-nav li a {
     font-size: 1.1rem;
     padding: 8px 12px;
-    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    transition: color 0.3s ease-in-out, font-weight 0.2s ease-in-out;
   }
 
   .profile-image {
