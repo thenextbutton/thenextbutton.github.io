@@ -317,10 +317,10 @@ h2, h3, h4, h5, h6 {
   display: flex;
   flex-direction: row;
   align-items: center;
-  /* Removed justify-content: space-between; */
+  justify-content: flex-start; /* Align items to the start */
   width: 100%; /* Take full width of parent wrapper */
   position: relative; /* Needed for absolute positioning of icons */
-  /* Removed padding-right: 28px; */
+  /* Removed padding-right */
 }
 
 .theme-switch-checkbox {
@@ -341,7 +341,7 @@ h2, h3, h4, h5, h6 {
   border: 1px solid #555;
   overflow: hidden;
   flex-shrink: 0; /* Prevent it from shrinking */
-  margin: 0 auto; /* Center the toggle switch */
+  /* REMOVED margin: 0 auto; */
 }
 
 .theme-switch-label:after {
@@ -368,24 +368,20 @@ h2, h3, h4, h5, h6 {
   background: #1a1a1a;
 }
 
-/* NEW: Styling for both theme icons - now absolutely positioned */
+/* MODIFIED: Styling for both theme icons - now flex items */
 .theme-icon {
   font-size: 20px; /* Fixed font size */
   transition: opacity 0.5s ease-in-out, color 0.5s ease-in-out; /* Smooth transitions for visibility and color */
-  position: absolute; /* Absolute positioning within .theme-toggle-container */
-  top: 50%; /* Center vertically */
-  transform: translateY(-50%); /* Adjust for vertical centering */
-  width: 20px; /* Fixed width for the icon itself */
-  text-align: center;
+  /* REMOVED position: absolute; top; transform; width; text-align; */
 }
 
 #moon-icon {
-  right: -28px; /* MODIFIED: Position moon icon outside the label, to the right of the toggle */
+  margin-left: auto; /* Pushes moon icon and subsequent sun icon to the far right */
   color: #f0f0f0; /* Default color for moon (dark mode) */
 }
 
 #sun-icon {
-  right: -28px; /* MODIFIED: Position sun icon outside the label, to the right of the toggle */
+  /* No specific positioning needed here, will sit next to moon icon */
   color: #FFD700; /* Yellow for sun icon */
 }
 
@@ -557,16 +553,6 @@ body.light-mode .main-header-fixed {
   background-color: #f0f0f0;
 }
 
-/* NEW: Light mode specific styles for the controls wrapper */
-body.light-mode .bottom-right-controls-wrapper {
-  background-color: rgba(200, 200, 200, 0.9); /* Slightly darker and transparent for light mode */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Adjusted shadow for light mode */
-  border: 1px solid rgba(0, 0, 0, 0.1); /* Adjusted border for light mode */
-}
-body.light-mode .bottom-right-controls-wrapper:hover {
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25); /* Adjusted hover shadow for light mode */
-}
-
 
 @media (max-width: 768px) {
   html {
@@ -636,13 +622,14 @@ body.light-mode .bottom-right-controls-wrapper:hover {
   }
 
   .theme-toggle-container {
-    padding-right: 24px; /* Adjust space for icons on mobile */
+    /* No specific padding-right needed here */
   }
 
   .theme-switch-label {
     width: 60px; /* Slightly smaller toggle on mobile */
     height: 20px;
     border-radius: 10px;
+    /* REMOVED margin: 0 8px; */
   }
 
   .theme-switch-label:after {
