@@ -313,7 +313,7 @@ h2, h3, h4, h5, h6 {
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(0, 0, 0, 0.2);
-  transition: background-color 1.5s ease-in-out, border-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out, opacity 0.3s ease-out; /* ADDED: opacity transition */
+  transition: background-color 1.5s ease-in-out, border-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out, opacity 0.5s ease-out; /* MODIFIED: opacity transition to 0.5s */
   width: 160px; /* Fixed width for desktop, will adjust for mobile */
   align-items: center; /* Center content horizontally within the wrapper */
 }
@@ -642,60 +642,59 @@ body.light-mode .main-header-fixed {
     z-index: 1001;
   }
 
-  /* MODIFIED: Responsive adjustments for the control box */
-  .bottom-right-controls-wrapper {
-    width: 140px; /* Slightly smaller width on mobile */
-    padding: 8px 6px; /* Reduced padding */
-    bottom: 10px; /* Closer to bottom */
-    right: 10px; /* Closer to right */
-  }
-
   .theme-toggle-container {
-    /* No specific padding-right needed here */
+    bottom: 10px;
+    right: 10px;
+    gap: 8px;
+    z-index: 1000;
   }
 
   .theme-switch-label {
-    width: 60px; /* Slightly smaller toggle on mobile */
-    height: 20px;
-    border-radius: 10px;
-    margin: 0 8px; /* Adjusted margin for mobile centering */
+    width: 50px;
+    height: 25px;
+    border-radius: 25px;
   }
 
   .theme-switch-label:after {
-    top: 1.5px;
-    left: 1.5px;
-    width: 17px;
-    height: 17px;
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 21px;
+    height: 21px;
+    background: #f0f0f0;
+    border-radius: 50%;
+    transition: 1s;
+    z-index: 1;
   }
 
-  .theme-switch-checkbox:checked + .theme-switch-label:after {
-    left: calc(100% - 1.5px);
-  }
-
-  .theme-icon {
-    font-size: 18px; /* Slightly smaller icons on mobile */
+  .theme-switch-text {
+    font-size: 14px;
   }
 
   .font-controls {
-    gap: 6px; /* Reduced gap between font control buttons */
+    bottom: 50px;
+    right: 10px;
+    gap: 8px;
+    z-index: 1000;
   }
 
   .font-controls span {
-    width: 35px; /* Slightly smaller font control buttons */
-    height: 35px;
-    font-size: 16px;
+    width: 40px;
+    height: 40px;
+    font-size: 17px;
   }
 
   #font-minus {
-    font-size: 12px;
+    font-size: 13px;
   }
 
   #font-reset {
-    font-size: 16px;
+    font-size: 17px;
   }
 
   #font-plus {
-    font-size: 20px;
+    font-size: 21px;
   }
 
   .content-column {
