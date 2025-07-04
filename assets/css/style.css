@@ -313,14 +313,14 @@ h2, h3, h4, h5, h6 {
 }
 
 
-/* MODIFIED: Theme toggle container for icon */
+/* MODIFIED: Theme toggle container for icon - NO SPACE-BETWEEN */
 .theme-toggle-container {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 8px; /* Increased gap slightly for better icon separation */
   width: 100%; /* Ensure it spans the wrapper width */
-  justify-content: space-between; /* Distribute items evenly */
+  /* REMOVED: justify-content: space-between; */
 }
 
 .theme-switch-checkbox {
@@ -340,6 +340,7 @@ h2, h3, h4, h5, h6 {
   transition: background 1s;
   border: 1px solid #555;
   overflow: hidden;
+  margin-right: auto; /* NEW: Push toggle to the left */
 }
 
 .theme-switch-label:after {
@@ -372,7 +373,7 @@ h2, h3, h4, h5, h6 {
   transition: color 1.5s ease-in-out;
   flex-shrink: 0; /* Prevent icon from shrinking */
   width: 20px; /* Give it a fixed width to prevent layout shifts */
-  text-align: right; /* Align icon to the right within its space */
+  margin-left: auto; /* NEW: Push icon to the right */
 }
 
 
@@ -442,8 +443,8 @@ body.light-mode::-webkit-scrollbar-track {
 }
 
 body.light-mode::-webkit-scrollbar-thumb {
-  background-color: transparent; /* Transparent by default in light mode */
-  border: 2px solid transparent; /* Transparent border by default in light mode */
+  background-color: transparent; /* MODIFIED: Transparent by default in light mode */
+  border: 2px solid transparent; /* MODIFIED: Transparent border by default in light mode */
 }
 
 /* ADDED: Make thumb visible on hover over the body in light mode */
