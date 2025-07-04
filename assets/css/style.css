@@ -368,20 +368,24 @@ h2, h3, h4, h5, h6 {
   background: #1a1a1a;
 }
 
-/* MODIFIED: Styling for both theme icons - now flex items */
+/* MODIFIED: Styling for both theme icons - now absolutely positioned relative to .theme-toggle-container */
 .theme-icon {
   font-size: 20px; /* Fixed font size */
   transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out, color 0.5s ease-in-out; /* ADDED transform transition */
-  /* REMOVED position: absolute; top; transform; width; text-align; */
+  position: absolute; /* Re-added absolute positioning */
+  top: 50%; /* Vertical centering */
+  transform: translateY(-50%); /* Adjust for vertical centering */
+  width: 20px; /* Fixed width for the icon itself */
+  text-align: center;
 }
 
 #moon-icon {
-  /* No specific positioning needed here, will be handled by JS transform */
+  left: 0px; /* Position moon icon to the left edge of the container */
   color: #f0f0f0; /* Default color for moon (dark mode) */
 }
 
 #sun-icon {
-  /* No specific positioning needed here, will be handled by JS transform */
+  right: 0px; /* Position sun icon to the right edge of the container */
   color: #FFD700; /* Yellow for sun icon */
 }
 
