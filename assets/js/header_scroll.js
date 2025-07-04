@@ -48,20 +48,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // --- Control Box Fade-on-Scroll Logic ---
-        // Clear the existing timer whenever a scroll event occurs
-        clearTimeout(scrollEndTimer);
+        clearTimeout(scrollEndTimer); // Always clear previous timer on new scroll event
 
-        // Immediately hide the control box when scrolling starts
         if (controlsWrapper) {
-            controlsWrapper.classList.add('fade-out-controls');
-        }
-
-        // Set a new timer to show the control box after scrolling stops for a brief moment
-        scrollEndTimer = setTimeout(() => {
-            if (controlsWrapper) {
+            if (currentScrollTop > 0) { // Only hide if actively scrolling down
+                if (!controlsWrapper.classList.contains('fade-out-controls')) {
+                    controlsWrapper.classList.add('fade-out-controls');
+                }
+            } else { // If at the very top of the page (or scrolled back to top), ensure it's visible
                 controlsWrapper.classList.remove('fade-out-controls');
             }
-        }, SCROLL_END_DELAY);
+
+            // Set a new timer to show the control box after scrolling stops
+            // This timer is crucial for bringing it back after any scroll activity.
+            scrollEndTimer = setTimeout(() => {
+                controlsWrapper.classList.remove('fade-out-controls');
+            }, SCROLL_END_DELAY);
+        }
     }
 
     window.addEventListener('scroll', handleScroll);
