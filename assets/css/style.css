@@ -210,7 +210,7 @@ h2, h3, h4, h5, h6 {
   margin-top: 30px;
   margin-bottom: 30px;
   border-radius: 8px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* This is the reference shadow */
   display: flex;
   align-items: center;
   gap: 20px;
@@ -311,15 +311,15 @@ h2, h3, h4, h5, h6 {
   background-color: rgba(34, 34, 34, 0.8); /* Transparent dark background */
   padding: 10px 8px; /* Padding inside the box */
   border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* MODIFIED: Matched shadow to github-project-item */
   border: 1px solid rgba(0, 0, 0, 0.2);
-  transition: background-color 1.5s ease-in-out, border-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out, opacity 0.5s ease-out; /* MODIFIED: opacity transition to 0.5s */
+  transition: background-color 1.5s ease-in-out, border-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out, opacity 1s ease-out; /* MODIFIED: opacity transition to 1s */
   width: 160px; /* Fixed width for desktop, will adjust for mobile */
   align-items: center; /* Center content horizontally within the wrapper */
 }
 
 .bottom-right-controls-wrapper:hover {
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 0 2px #8be9fd; /* ADDED: subtle glow on hover */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4), 0 0 0 2px #8be9fd; /* MODIFIED: Matched hover shadow to github-project-item, kept glow */
 }
 
 /* ADDED: Class for fading out the control box */
@@ -502,6 +502,18 @@ body.light-mode .font-controls span:focus-visible {
   border-radius: 4px; /* Rounded corners for the focus outline in light mode */
 }
 
+/* ADDED: Light mode styling for the control box itself */
+body.light-mode .bottom-right-controls-wrapper {
+  background-color: rgba(240, 240, 240, 0.8); /* MODIFIED: Lighter background for light mode */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* MODIFIED: Lighter shadow for light mode */
+  border-color: rgba(0, 0, 0, 0.1); /* Lighter border for light mode */
+}
+
+body.light-mode .bottom-right-controls-wrapper:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25), 0 0 0 2px #007bff; /* MODIFIED: Lighter hover shadow for light mode, kept glow */
+}
+
+
 body.light-mode h1 {
   color: #333;
 }
@@ -642,59 +654,60 @@ body.light-mode .main-header-fixed {
     z-index: 1001;
   }
 
+  /* MODIFIED: Responsive adjustments for the control box */
+  .bottom-right-controls-wrapper {
+    width: 140px; /* Slightly smaller width on mobile */
+    padding: 8px 6px; /* Reduced padding */
+    bottom: 10px; /* Closer to bottom */
+    right: 10px; /* Closer to right */
+  }
+
   .theme-toggle-container {
-    bottom: 10px;
-    right: 10px;
-    gap: 8px;
-    z-index: 1000;
+    /* No specific padding-right needed here */
   }
 
   .theme-switch-label {
-    width: 50px;
-    height: 25px;
-    border-radius: 25px;
+    width: 60px; /* Slightly smaller toggle on mobile */
+    height: 20px;
+    border-radius: 10px;
+    margin: 0 8px; /* Adjusted margin for mobile centering */
   }
 
   .theme-switch-label:after {
-    content: '';
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 21px;
-    height: 21px;
-    background: #f0f0f0;
-    border-radius: 50%;
-    transition: 1s;
-    z-index: 1;
+    top: 1.5px;
+    left: 1.5px;
+    width: 17px;
+    height: 17px;
   }
 
-  .theme-switch-text {
-    font-size: 14px;
+  .theme-switch-checkbox:checked + .theme-switch-label:after {
+    left: calc(100% - 1.5px);
+  }
+
+  .theme-icon {
+    font-size: 18px; /* Slightly smaller icons on mobile */
   }
 
   .font-controls {
-    bottom: 50px;
-    right: 10px;
-    gap: 8px;
-    z-index: 1000;
+    gap: 6px; /* Reduced gap between font control buttons */
   }
 
   .font-controls span {
-    width: 40px;
-    height: 40px;
-    font-size: 17px;
+    width: 35px; /* Slightly smaller font control buttons */
+    height: 35px;
+    font-size: 16px;
   }
 
   #font-minus {
-    font-size: 13px;
+    font-size: 12px;
   }
 
   #font-reset {
-    font-size: 17px;
+    font-size: 16px;
   }
 
   #font-plus {
-    font-size: 21px;
+    font-size: 20px;
   }
 
   .content-column {
