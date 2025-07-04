@@ -67,7 +67,18 @@ document.addEventListener('DOMContentLoaded', () => {
     function enableScrollListener() {
         window.addEventListener('scroll', handleScrollLogic);
         window.addEventListener('resize', handleScrollLogic);
-        handleScrollLogic(); // Run once to set initial state
+
+        // MODIFIED: Initial check for controls visibility on load
+        // If scrolled past threshold on initial load, immediately apply fade-out-controls
+        if (controlsWrapper) {
+            if (window.pageYOffset > SCROLL_THRESHOLD) {
+                controlsWrapper.classList.add('fade-out-controls');
+            } else {
+                controlsWrapper.classList.remove('fade-out-controls');
+            }
+        }
+        // Still call handleScrollLogic to set header state, but controls are handled above
+        handleScrollLogic();
     }
 
     // Function to disable the scroll listener
