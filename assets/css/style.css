@@ -277,7 +277,7 @@ h1 {
   border: 1px solid rgba(0, 0, 0, 0.2); /* Very faint border */
   transition: background-color 1.5s ease-in-out, border-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out;
   width: 180px; /* Fixed width for better control */
-  align-items: center; /* MODIFIED: Center children horizontally */
+  align-items: center; /* Center children horizontally */
 }
 
 .bottom-right-controls-wrapper:hover {
@@ -349,8 +349,10 @@ h1 {
 .font-controls {
   /* REMOVED: position, bottom, right, z-index as it's now in wrapper */
   display: flex;
-  gap: 10px;
-  justify-content: center; /* ADDED: Center font size buttons */
+  /* MODIFIED: Changed from justify-content: center; to space-between */
+  justify-content: space-between; /* Distribute items evenly with space between them */
+  gap: 0px; /* Set gap to 0 as space-between handles spacing */
+  width: 100%; /* Ensure it takes full width of its parent (.bottom-right-controls-wrapper) */
 }
 
 .font-controls span {
