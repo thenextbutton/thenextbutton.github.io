@@ -289,7 +289,7 @@ h2, h3, h4, h5, h6 {
   text-decoration: underline;
 }
 
-/* ADDED: Wrapper for controls */
+/* MODIFIED: Control box styling for responsiveness and icon spacing */
 .bottom-right-controls-wrapper {
   position: fixed;
   bottom: 20px;
@@ -304,7 +304,7 @@ h2, h3, h4, h5, h6 {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(0, 0, 0, 0.2);
   transition: background-color 1.5s ease-in-out, border-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out;
-  width: 160px; /* Fixed width for the control box */
+  width: 160px; /* Fixed width for desktop, will adjust for mobile */
   align-items: center; /* Center content horizontally within the wrapper */
 }
 
@@ -312,14 +312,15 @@ h2, h3, h4, h5, h6 {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
-/* MODIFIED: Theme toggle container */
+/* MODIFIED: Theme toggle container for icon - now uses flex for spacing */
 .theme-toggle-container {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between; /* Distribute space between toggle and icons */
   width: 100%; /* Take full width of parent wrapper */
   position: relative; /* Needed for absolute positioning of icons */
-  /* No gap here, icons are absolutely positioned */
+  padding-right: 28px; /* Space for icons */
 }
 
 .theme-switch-checkbox {
@@ -340,7 +341,6 @@ h2, h3, h4, h5, h6 {
   border: 1px solid #555;
   overflow: hidden;
   flex-shrink: 0; /* Prevent it from shrinking */
-  margin-right: auto; /* Push the toggle to the left */
 }
 
 .theme-switch-label:after {
@@ -367,9 +367,9 @@ h2, h3, h4, h5, h6 {
   background: #1a1a1a;
 }
 
-/* NEW: Styling for theme icons */
+/* NEW: Styling for both theme icons - now absolutely positioned */
 .theme-icon {
-  font-size: 20px; /* Fixed font size for icons */
+  font-size: 20px; /* Fixed font size */
   transition: opacity 0.5s ease-in-out, color 0.5s ease-in-out; /* Smooth transitions for visibility and color */
   position: absolute; /* Absolute positioning within .theme-toggle-container */
   top: 50%; /* Center vertically */
@@ -379,12 +379,12 @@ h2, h3, h4, h5, h6 {
 }
 
 #moon-icon {
-  right: 8px; /* Position moon icon from the right edge */
+  right: 0px; /* Position moon icon relative to the right edge of theme-toggle-container */
   color: #f0f0f0; /* Default color for moon (dark mode) */
 }
 
 #sun-icon {
-  right: 8px; /* Position sun icon from the right edge, stacking them */
+  right: 0px; /* Position sun icon relative to the right edge of theme-toggle-container, stacking them */
   color: #FFD700; /* Yellow for sun icon */
 }
 
@@ -457,8 +457,8 @@ body.light-mode::-webkit-scrollbar-track {
 }
 
 body.light-mode::-webkit-scrollbar-thumb {
-  background-color: transparent; /* Transparent by default in light mode */
-  border: 2px solid transparent; /* Transparent border by default in light mode */
+  background-color: transparent; /* MODIFIED: Transparent by default in light mode */
+  border: 2px solid transparent; /* MODIFIED: Transparent border by default in light mode */
 }
 
 /* ADDED: Make thumb visible on hover over the body in light mode */
@@ -626,59 +626,59 @@ body.light-mode .bottom-right-controls-wrapper:hover {
     z-index: 1001;
   }
 
+  /* MODIFIED: Responsive adjustments for the control box */
+  .bottom-right-controls-wrapper {
+    width: 140px; /* Slightly smaller width on mobile */
+    padding: 8px 6px; /* Reduced padding */
+    bottom: 10px; /* Closer to bottom */
+    right: 10px; /* Closer to right */
+  }
+
   .theme-toggle-container {
-    bottom: 10px;
-    right: 10px;
-    gap: 8px;
-    z-index: 1000;
+    padding-right: 24px; /* Adjust space for icons on mobile */
   }
 
   .theme-switch-label {
-    width: 50px;
-    height: 25px;
-    border-radius: 25px;
+    width: 60px; /* Slightly smaller toggle on mobile */
+    height: 20px;
+    border-radius: 10px;
   }
 
   .theme-switch-label:after {
-    content: '';
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 21px;
-    height: 21px;
-    background: #f0f0f0;
-    border-radius: 50%;
-    transition: 1s;
-    z-index: 1;
+    top: 1.5px;
+    left: 1.5px;
+    width: 17px;
+    height: 17px;
   }
 
-  .theme-switch-text {
-    font-size: 14px;
+  .theme-switch-checkbox:checked + .theme-switch-label:after {
+    left: calc(100% - 1.5px);
+  }
+
+  .theme-icon {
+    font-size: 18px; /* Slightly smaller icons on mobile */
   }
 
   .font-controls {
-    bottom: 50px;
-    right: 10px;
-    gap: 8px;
-    z-index: 1000;
+    gap: 6px; /* Reduced gap between font control buttons */
   }
 
   .font-controls span {
-    width: 40px;
-    height: 40px;
-    font-size: 17px;
+    width: 35px; /* Slightly smaller font control buttons */
+    height: 35px;
+    font-size: 16px;
   }
 
   #font-minus {
-    font-size: 13px;
+    font-size: 12px;
   }
 
   #font-reset {
-    font-size: 17px;
+    font-size: 16px;
   }
 
   #font-plus {
-    font-size: 21px;
+    font-size: 20px;
   }
 
   .content-column {
