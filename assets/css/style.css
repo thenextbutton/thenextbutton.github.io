@@ -4,7 +4,7 @@ html {
 }
 
 body {
-  font-family: "Consolas", monospace;
+  font-family: "Consolas", monospace; /* All text will now use Consolas */
   background-color: #1a1a1a;
   color: #f0f0f0;
   margin: 0 auto; /* Centered body */
@@ -313,12 +313,12 @@ h2, h3, h4, h5, h6 {
 }
 
 
-/* MODIFIED: Theme toggle container for tighter fit and clipping fix */
+/* MODIFIED: Theme toggle container for icon */
 .theme-toggle-container {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 5px; /* Reduced gap for tighter text/toggle */
+  gap: 8px; /* Increased gap slightly for better icon separation */
   width: 100%; /* Ensure it spans the wrapper width */
   justify-content: space-between; /* Distribute items evenly */
 }
@@ -331,11 +331,11 @@ h2, h3, h4, h5, h6 {
 
 .theme-switch-label {
   cursor: pointer;
-  width: 60px; /* Keep width at 60px */
-  height: 30px; /* Keep height at 30px */
+  width: 50px; /* Reverted to more standard size */
+  height: 25px; /* Reverted to more standard size */
   background: #282a36;
   display: block;
-  border-radius: 15px; /* MODIFIED: Set border-radius to half of height for perfect oval */
+  border-radius: 12.5px; /* Half of height for perfect oval */
   position: relative;
   transition: background 1s;
   border: 1px solid #555;
@@ -345,10 +345,10 @@ h2, h3, h4, h5, h6 {
 .theme-switch-label:after {
   content: '';
   position: absolute;
-  top: 2px; /* Keep top at 2px to center vertically (30 - 26) / 2 = 2 */
+  top: 2px; /* Vertically center (25 - 21) / 2 = 2 */
   left: 2px;
-  width: 26px; /* Keep width at 26px */
-  height: 26px; /* Keep height at 26px */
+  width: 21px; /* Reverted to more standard size */
+  height: 21px; /* Reverted to more standard size */
   background: #f0f0f0;
   border-radius: 50%;
   transition: 1s;
@@ -366,13 +366,13 @@ h2, h3, h4, h5, h6 {
   background: #1a1a1a;
 }
 
-.theme-switch-text {
-  font-size: 14px;
-  color: #f0f0f0;
-  user-select: none;
+#theme-toggle-icon { /* NEW: Styling for the icon */
+  font-size: 1.2rem; /* Adjust icon size */
+  color: #f0f0f0; /* Default icon color */
   transition: color 1.5s ease-in-out;
-  min-width: 90px; /* Ensure consistent width for text */
-  text-align: right; /* Align text to the right within its min-width */
+  flex-shrink: 0; /* Prevent icon from shrinking */
+  width: 20px; /* Give it a fixed width to prevent layout shifts */
+  text-align: right; /* Align icon to the right within its space */
 }
 
 
@@ -457,43 +457,18 @@ body.light-mode::-webkit-scrollbar-thumb:hover {
   background-color: #666; /* Even darker thumb on direct hover for light mode */
 }
 
-/* Light Mode Specific Styles for Controls */
-body.light-mode .bottom-right-controls-wrapper {
-  background-color: rgba(224, 224, 224, 0.8); /* Lighter, transparent background for light mode */
-  border-color: rgba(170, 170, 170, 0.2);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+/* ADDED: Light Mode Focus States */
+body.light-mode a:focus-visible,
+body.light-mode button:focus-visible,
+body.light-mode input:focus-visible,
+body.light-mode textarea:focus-visible,
+body.light-mode select:focus-visible,
+body.light-mode .theme-switch-label:focus-visible,
+body.light-mode .font-controls span:focus-visible {
+  box-shadow: 0 0 0 2px #007bff; /* Subtle blue glow for light mode */
+  border-color: #007bff; /* Add a border color if applicable */
 }
 
-body.light-mode .theme-switch-text {
-    color: #1a1a1a; /* Darker text for light mode */
-}
-
-body.light-mode .theme-switch-label {
-    background: #ccc; /* Lighter background for toggle track in light mode */
-    border-color: #aaa;
-}
-
-body.light-mode .theme-switch-checkbox:checked + .theme-switch-label {
-    background: linear-gradient(to right, #007bff, #0056b3); /* Blue gradient for checked in light mode */
-    border-color: #0056b3;
-}
-
-body.light-mode .theme-switch-checkbox:checked + .theme-switch-label:after {
-    background: #f0f0f0; /* White circle for checked in light mode */
-}
-
-body.light-mode .font-controls span {
-  background-color: #eee; /* Lighter background for font buttons in light mode */
-  color: #1a1a1a; /* Darker text for font buttons in light mode */
-  border-color: #bbb;
-}
-
-body.light-mode .font-controls span:hover {
-  background-color: #ddd; /* Darker hover for font buttons in light mode */
-}
-
-
-/* General Light Mode Styles */
 body.light-mode h1 {
   color: #333;
 }
@@ -663,9 +638,9 @@ body.light-mode .main-header-fixed {
   }
 
   .font-controls span {
-    width: 30px; /* Corrected size for mobile */
-    height: 30px; /* Corrected size for mobile */
-    font-size: 17px; /* Corrected size for mobile */
+    width: 40px;
+    height: 40px;
+    font-size: 17px;
   }
 
   #font-minus {
