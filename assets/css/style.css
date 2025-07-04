@@ -289,7 +289,7 @@ h2, h3, h4, h5, h6 {
   text-decoration: underline;
 }
 
-/* Reverted: Control box is now a fixed, always visible element */
+/* MODIFIED: Control box styling for transparency and tighter controls */
 .bottom-right-controls-wrapper {
   position: fixed;
   bottom: 20px;
@@ -297,28 +297,30 @@ h2, h3, h4, h5, h6 {
   z-index: 1000;
   display: flex;
   flex-direction: column; /* Stack controls vertically */
-  gap: 15px; /* Space between the two control groups */
-  background-color: #222222; /* Solid background */
-  padding: 15px; /* Uniform padding */
+  gap: 10px; /* MODIFIED: Reduced gap between sections */
+  background-color: rgba(34, 34, 34, 0.8); /* MODIFIED: Added transparency (0.8 opacity) */
+  padding: 10px; /* MODIFIED: Reduced padding for tighter fit */
   border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Softer, more diffused shadow */
-  border: 1px solid rgba(0, 0, 0, 0.2); /* Very faint border */
-  transition: background-color 1.5s ease-in-out, border-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out; /* Removed opacity transition */
-  width: 160px; /* Reduced width for a more compact look */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  transition: background-color 1.5s ease-in-out, border-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out;
+  width: 150px; /* MODIFIED: Adjusted width to be tighter */
   align-items: center; /* Center children horizontally */
-  /* Removed opacity: 0; and fade-out-controls class */
 }
 
 .bottom-right-controls-wrapper:hover {
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4); /* Slightly more prominent shadow on hover */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
 
+/* MODIFIED: Theme toggle container for tighter fit */
 .theme-toggle-container {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 5px;
+  gap: 5px; /* MODIFIED: Reduced gap for tighter text/toggle */
+  width: 100%; /* Ensure it spans the wrapper width */
+  justify-content: space-between; /* Distribute items evenly */
 }
 
 .theme-switch-checkbox {
@@ -369,16 +371,17 @@ h2, h3, h4, h5, h6 {
   color: #f0f0f0;
   user-select: none;
   transition: color 1.5s ease-in-out;
-  min-width: 90px;
-  text-align: right;
+  /* Removed min-width and text-align as justify-content handles spacing */
 }
 
 
+/* MODIFIED: Font controls for tighter fit */
 .font-controls {
+  /* Removed position, bottom, right, z-index as it's now inside wrapper */
   display: flex;
-  justify-content: space-between;
-  gap: 0px;
-  width: 100%;
+  justify-content: space-between; /* Distribute items evenly with space between them */
+  gap: 0px; /* Set gap to 0 as space-between handles spacing */
+  width: 100%; /* Ensure it takes full width of its parent (.bottom-right-controls-wrapper) */
 }
 
 .font-controls span {
@@ -413,19 +416,18 @@ h2, h3, h4, h5, h6 {
   background-color: #555;
 }
 
-/* Focus States */
-.font-controls span:focus-visible,
-.theme-switch-label:focus-visible,
+/* ADDED: Focus States */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
+textarea:focus-visible,
 select:focus-visible,
-textarea:focus-visible {
-  outline: 0;
-  box-shadow: 0 0 0 2px #8be9fd;
-  border-color: #8be9fd;
-  transition: box-shadow .2s ease-in-out, border-color .2s ease-in-out;
-  border-radius: 4px;
+.theme-switch-label:focus-visible, /* Specific for the toggle label */
+.font-controls span:focus-visible {
+  outline: none; /* Remove default outline */
+  box-shadow: 0 0 0 2px #8be9fd; /* Subtle blue glow for dark mode */
+  border-color: #8be9fd; /* Add a border color if applicable */
+  transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
 }
 
 
@@ -434,61 +436,60 @@ body.light-mode {
   color: #1a1a1a;
 }
 
-/* Scrollbar Styling for Webkit browsers in Light Mode */
+/* ADDED: Light Mode Scrollbar */
 body.light-mode::-webkit-scrollbar-track {
-  background: transparent;
+  background: #e0e0e0; /* Lighter track for light mode */
 }
 
 body.light-mode::-webkit-scrollbar-thumb {
-  background-color: transparent;
-  border: 2px solid transparent;
+  background-color: transparent; /* MODIFIED: Transparent by default in light mode */
+  border: 2px solid transparent; /* MODIFIED: Transparent border by default in light mode */
 }
 
-/* Make thumb visible on hover over the body in light mode */
+/* ADDED: Make thumb visible on hover over the body in light mode */
 body.light-mode:hover::-webkit-scrollbar-thumb {
-  background-color: #888;
-  border-color: #e0e0e0;
+  background-color: #888; /* Darker thumb for light mode on hover */
+  border-color: #e0e0e0; /* Border to match light track on hover */
 }
 
 /* Preserve hover effect for the thumb itself in light mode */
 body.light-mode::-webkit-scrollbar-thumb:hover {
-  background-color: #666;
+  background-color: #666; /* Even darker thumb on direct hover for light mode */
 }
-
 
 /* Light Mode Specific Styles for Controls */
 body.light-mode .bottom-right-controls-wrapper {
-  background-color: #e0e0e0; /* Lighter background for light mode */
+  background-color: rgba(224, 224, 224, 0.8); /* MODIFIED: Lighter, transparent background for light mode */
   border-color: rgba(170, 170, 170, 0.2);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
 
 body.light-mode .theme-switch-text {
-    color: #1a1a1a;
+    color: #1a1a1a; /* Darker text for light mode */
 }
 
 body.light-mode .theme-switch-label {
-    background: #ccc;
+    background: #ccc; /* Lighter background for toggle track in light mode */
     border-color: #aaa;
 }
 
 body.light-mode .theme-switch-checkbox:checked + .theme-switch-label {
-    background: linear-gradient(to right, #007bff, #0056b3);
+    background: linear-gradient(to right, #007bff, #0056b3); /* Blue gradient for checked in light mode */
     border-color: #0056b3;
 }
 
 body.light-mode .theme-switch-checkbox:checked + .theme-switch-label:after {
-    background: #f0f0f0;
+    background: #f0f0f0; /* White circle for checked in light mode */
 }
 
 body.light-mode .font-controls span {
-  background-color: #eee;
-  color: #1a1a1a;
+  background-color: #eee; /* Lighter background for font buttons in light mode */
+  color: #1a1a1a; /* Darker text for font buttons in light mode */
   border-color: #bbb;
 }
 
 body.light-mode .font-controls span:hover {
-  background-color: #ddd;
+  background-color: #ddd; /* Darker hover for font buttons in light mode */
 }
 
 
@@ -565,7 +566,6 @@ body.light-mode .main-header-fixed {
 }
 
 
-/* Media Queries */
 @media (max-width: 768px) {
   html {
     font-size: 16px;
@@ -606,7 +606,7 @@ body.light-mode .main-header-fixed {
   .main-nav li a {
     font-size: 1.1rem;
     padding: 8px 12px;
-    transition: color 0.3s ease-in-out, font-weight 0.2s ease-in-out;
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   }
 
   .profile-image {
@@ -663,9 +663,9 @@ body.light-mode .main-header-fixed {
   }
 
   .font-controls span {
-    width: 30px; /* Corrected size for mobile */
-    height: 30px; /* Corrected size for mobile */
-    font-size: 17px; /* Corrected size for mobile */
+    width: 40px;
+    height: 40px;
+    font-size: 17px;
   }
 
   #font-minus {
