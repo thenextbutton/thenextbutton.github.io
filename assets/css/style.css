@@ -322,6 +322,16 @@ h2, h3, h4, h5, h6 {
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4), 0 0 0 2px #8be9fd; /* MODIFIED: Matched hover shadow to github-project-item, kept glow */
 }
 
+/* ADDED: Focus state for the control box wrapper itself */
+.bottom-right-controls-wrapper:focus-visible {
+  outline: none; /* Remove default outline */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3), 0 0 0 2px #8be9fd; /* Keep existing shadow, add subtle blue glow */
+  border-color: #8be9fd; /* Add a border color if applicable */
+  transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  border-radius: 4px; /* Added for consistency */
+}
+
+
 /* ADDED: Class for fading out the control box */
 .bottom-right-controls-wrapper.fade-out-controls {
     opacity: 0;
@@ -511,6 +521,14 @@ body.light-mode .bottom-right-controls-wrapper {
 
 body.light-mode .bottom-right-controls-wrapper:hover {
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25), 0 0 0 2px #007bff; /* MODIFIED: Lighter hover shadow for light mode, kept glow */
+}
+
+/* ADDED: Light mode focus state for the control box wrapper itself */
+body.light-mode .bottom-right-controls-wrapper:focus-visible {
+  outline: none; /* Remove default outline */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 0 0 2px #007bff; /* Keep existing shadow, add subtle blue glow */
+  border-color: #007bff; /* Add a border color if applicable */
+  border-radius: 4px; /* Added for consistency */
 }
 
 
