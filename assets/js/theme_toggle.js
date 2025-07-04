@@ -45,7 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
             sunIcon.style.opacity = '1'; // Fade in sun
             sunIcon.style.color = '#FFD700'; // Yellow for sun
 
-            moonIcon.style.transform = 'translateY(-50%) translateX(30px)'; // Move moon right to hide
+            // MODIFIED: Moon now fades out in place (translateX(0))
+            moonIcon.style.transform = 'translateY(-50%) translateX(0)'; 
             moonIcon.style.opacity = '0'; // Fade out moon
             moonIcon.style.color = '#f0f0f0'; // Ensure moon is default color when hidden/shown
         } else { // themeName === 'dark'
@@ -58,7 +59,8 @@ document.addEventListener('DOMContentLoaded', () => {
             moonIcon.style.opacity = '1'; // Fade in moon
             moonIcon.style.color = '#f0f0f0'; // White for moon
 
-            sunIcon.style.transform = 'translateY(-50%) translateX(-30px)'; // Move sun left to hide
+            // MODIFIED: Sun now fades out in place (translateX(0))
+            sunIcon.style.transform = 'translateY(-50%) translateX(0)'; 
             sunIcon.style.opacity = '0'; // Fade out sun
             sunIcon.style.color = '#FFD700'; // Ensure sun is yellow when hidden/shown
         }
