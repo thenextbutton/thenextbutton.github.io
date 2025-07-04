@@ -304,7 +304,7 @@ h2, h3, h4, h5, h6 {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(0, 0, 0, 0.2);
   transition: background-color 1.5s ease-in-out, border-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out;
-  width: 140px; /* Increased width to 140px */
+  width: 160px; /* MODIFIED: Increased width to 160px to accommodate icons */
   align-items: center; /* Center children horizontally */
 }
 
@@ -320,7 +320,7 @@ h2, h3, h4, h5, h6 {
   align-items: center;
   gap: 4px; /* Reduced gap to 4px */
   width: 100%; /* Ensure it spans the wrapper width */
-  position: relative; /* NEW: Needed for absolute positioning of icons */
+  position: relative; /* Needed for absolute positioning of icons */
 }
 
 .theme-switch-checkbox {
@@ -331,7 +331,7 @@ h2, h3, h4, h5, h6 {
 
 .theme-switch-label {
   cursor: pointer;
-  width: auto; /* Set width to auto to stretch */
+  width: 100px; /* MODIFIED: Fixed width for the toggle track */
   height: 20px; /* Kept height at 20px */
   background: #282a36;
   display: block;
@@ -341,7 +341,7 @@ h2, h3, h4, h5, h6 {
   border: 1px solid #555;
   overflow: hidden;
   margin-right: auto; /* Push toggle to the left */
-  flex-grow: 1; /* Allow it to grow and fill available space */
+  /* REMOVED: flex-grow: 1; */ /* No longer needed with fixed width */
 }
 
 .theme-switch-label:after {
@@ -381,12 +381,12 @@ h2, h3, h4, h5, h6 {
 }
 
 #moon-icon {
-  right: 8px; /* Position moon icon on the right */
+  right: 8px; /* MODIFIED: Position moon icon further right */
   color: #f0f0f0; /* Default color for moon (dark mode) */
 }
 
 #sun-icon {
-  right: 8px; /* Position sun icon on the right, same as moon to stack them */
+  right: 8px; /* MODIFIED: Position sun icon further right, same as moon to stack them */
   color: #FFD700; /* Yellow for sun icon */
 }
 
@@ -553,15 +553,6 @@ body.light-mode .theme-switch-text {
 
 body.light-mode .main-header-fixed {
   background-color: #f0f0f0;
-}
-
-/* NEW: Light Mode Icon Color */
-/* This rule is now less critical as JS sets color directly, but kept for fallback/clarity */
-body.light-mode #sun-icon { /* Only sun icon needs specific light mode color */
-  color: #FFD700; /* Yellow for sun icon in light mode */
-}
-body.light-mode #moon-icon { /* Moon icon should be default color in light mode */
-  color: #f0f0f0; /* Keeping moon light-colored even when hidden in light mode */
 }
 
 
