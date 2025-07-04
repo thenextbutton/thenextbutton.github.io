@@ -304,7 +304,7 @@ h2, h3, h4, h5, h6 {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Softer, more diffused shadow */
   border: 1px solid rgba(0, 0, 0, 0.2); /* Very faint border */
   transition: background-color 1.5s ease-in-out, border-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out;
-  width: 180px; /* Fixed width for better control */
+  width: 160px; /* MODIFIED: Reduced width for a more compact look */
   align-items: center; /* Center children horizontally */
 }
 
