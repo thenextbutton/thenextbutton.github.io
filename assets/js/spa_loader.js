@@ -40,17 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentContentColumn.style.opacity = ''; // Ensure opacity is reset
                 currentContentColumn.style.transform = ''; // Ensure transform is reset
 
-                // Disable header scroll listener before programmatic scroll
-                if (typeof window.disableHeaderScrollListener === 'function') {
-                    window.disableHeaderScrollListener();
-                }
-                window.scrollTo(0, 0);
-                // Re-enable header scroll listener after a short delay
-                setTimeout(() => {
-                    if (typeof window.enableHeaderScrollListener === 'function') {
-                        window.enableHeaderScrollListener();
-                    }
-                }, 100); // Give a small delay for scroll event to settle
+                window.scrollTo(0, 0); // Programmatic scroll remains
 
                 if (typeof initAutoLinker === 'function') initAutoLinker();
 
@@ -78,17 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (typeof initScrollAnimations === 'function') initScrollAnimations();
                     if (typeof initAutoLinker === 'function') initAutoLinker();
 
-                    // Disable header scroll listener before programmatic scroll
-                    if (typeof window.disableHeaderScrollListener === 'function') {
-                        window.disableHeaderScrollListener();
-                    }
-                    window.scrollTo(0, 0);
-                    // Re-enable header scroll listener after a short delay
-                    setTimeout(() => {
-                        if (typeof window.enableHeaderScrollListener === 'function') {
-                            window.enableHeaderScrollListener();
-                        }
-                    }, 100); // Give a small delay for scroll event to settle
+                    window.scrollTo(0, 0); // Programmatic scroll remains
 
                 }, 700); // This timeout should match the CSS transition duration for content-column fade-out
             }
@@ -101,9 +81,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Re-initialize font controls and header scroll check after new content is loaded
-            // The header scroll check is now handled by enable/disable functions
             if (typeof initFontControls === 'function') initFontControls();
-
+            if (typeof window.triggerHeaderScrollCheck === 'function') window.triggerHeaderScrollCheck(); // Keep this for header visibility
+            
         } catch (error) {
             console.error('Error loading content:', error);
             contentArea.innerHTML = `<p>Error loading content: ${error.message}. Please try again.</p>`;
