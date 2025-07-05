@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /**
      * Loads content into the main content area with a fade effect.
      * @param {string} url - The URL of the content to load.
-     * @param {string} pageName - The name of the page (e.g., 'home', 'about_me', 'now', 'github').
+     * @param {string} pageName - The name of the page (e.g., 'home', 'about_me').
      * @param {boolean} isInitialLoad - True if this is the initial page load.
      */
     async function loadContent(url, pageName, isInitialLoad = false) {
@@ -32,52 +32,64 @@ document.addEventListener('DOMContentLoaded', () => {
             // Inject the new content into the contentColumn
             contentColumn.innerHTML = data;
 
-            // After content is loaded, make it visible with a fade-in effect
-            contentArea.style.opacity = '1';
-
-            // Update the URL hash without triggering a full page reload
-            if (!isInitialLoad) {
-                window.location.hash = `/${pageName}.html`;
-            }
-
-            // Update active navigation link
-            document.querySelectorAll('.main-nav a').forEach(link => {
-                if (link.getAttribute('data-page') === pageName) {
-                    link.classList.add('active');
-                } else {
-                    link.classList.remove('active');
-                }
-            });
-
-            // Re-initialize scripts that need to run after new content is loaded
+            // Crucially, after content is in the DOM, initialize scroll animations
+            // This will add the 'hidden-scroll' class to .github-project-item elements
+            // BEFORE the contentArea is made fully visible.
             if (typeof initScrollAnimations === 'function') {
                 initScrollAnimations();
             }
+            // Also re-initialize auto-linker for the new content
             if (typeof initAutoLinker === 'function') {
                 initAutoLinker();
             }
 
-            // MODIFIED: Call updateNowPageLastCommit specifically for the 'now' page
-            if (pageName === 'now' && typeof window.updateNowPageLastCommit === 'function') {
-                window.updateNowPageLastCommit();
+            // Make the content area visible again
+            // The individual github-project-item elements are now correctly hidden by JS
+            contentArea.style.opacity = '1';
+
+            // Scroll to the top of the page
+            window.scrollTo(0, 0);
+
+            // Update browser history for SPA navigation
+            const currentHash = window.location.hash;
+            const newHash = `/#/${pageName}.html`;
+            if (currentHash !== newHash) {
+                history.pushState(null, '', newHash);
             }
+
+            // Re-initialize other page-specific scripts if they exist
+            if (typeof initFontControls === 'function') {
+                initFontControls();
+            }
+            if (typeof window.triggerHeaderScrollCheck === 'function') {
+                window.triggerHeaderScrollCheck();
+            }
+
+            // ADDED: Update active class for navigation links
+            document.querySelectorAll('.main-nav a').forEach(navLink => {
+                if (navLink.getAttribute('data-page') === pageName) {
+                    navLink.classList.add('active');
+                } else {
+                    navLink.classList.remove('active');
+                }
+            });
 
         } catch (error) {
             console.error('Error loading content:', error);
-            contentArea.innerHTML = `<p>Error loading content. Please try again later.</p>`;
-            contentArea.style.opacity = '1'; // Show error message
+            contentArea.innerHTML = `<p>Error loading content: ${error.message}. Please try again.</p>`;
+            contentArea.style.opacity = '1'; // Ensure content area is visible even on error
         }
     }
 
     /**
-     * Extracts the page name from the URL hash.
-     * @returns {string} The page name (e.g., 'home', 'about_me', 'github').
+     * Determines the current page name from the URL hash.
+     * @returns {string} The name of the current page.
      */
     function getCurrentPageFromHash() {
         const hash = window.location.hash;
         if (hash.startsWith('#/')) {
             const pagePart = hash.substring(2); // Remove '#/'
-            const pageName = pagePart.split('.')[0]; // Get 'home', 'about_me', 'github', 'now'
+            const pageName = pagePart.split('.')[0]; // Get 'home', 'about_me', 'github'
             return pageName;
         }
         return 'home'; // Default to 'home' if no valid hash
