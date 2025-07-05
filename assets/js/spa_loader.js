@@ -42,7 +42,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (typeof initAutoLinker === 'function') {
                 initAutoLinker();
             }
-
+            // ADD THIS LINE: Call the function to update the last commit date for 'now_content.html'
+            if (pageName === 'now' && typeof window.updateNowPageLastCommit === 'function') {
+                window.updateNowPageLastCommit();
+            }
             // Make the content area visible again
             // The individual github-project-item elements are now correctly hidden by JS
             contentArea.style.opacity = '1';
