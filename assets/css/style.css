@@ -505,7 +505,7 @@ body.light-mode::-webkit-scrollbar-thumb:hover {
     font-size: 0.9em; /* Optional: Make it slightly smaller than surrounding text for subtle effect */
     display: block; /* Optional: Makes it occupy its own line if it's currently inline */
     margin-top: 20px; /* Optional: Add some space above it */
-    text-align: right; /* Optional: Align it to the right */
+    text-align: left; /* Optional: Align it to the right */
 }
 
 /* ADDED: Light Mode Focus States for individual controls */
