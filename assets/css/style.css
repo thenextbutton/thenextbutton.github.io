@@ -245,7 +245,7 @@ ul li {
 
 .github-project-item.hidden-scroll {
   opacity: 0;
-  transform: scale(1.5); /* This line restores the zoom-out effect */
+  /* transform: scale(1.5); /* This line restores the zoom-out effect */
 }
 
 .project-image {
