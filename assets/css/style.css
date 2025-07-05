@@ -220,6 +220,9 @@ ul li {
   text-decoration: underline;
 }
 
+.content-column h2 {
+    margin-bottom: 5px; /* Adjust this value as needed, try 0px if you want it very tight */
+}
 
 .github-project-item {
   background-color: #282a36;
@@ -522,6 +525,7 @@ body.light-mode::-webkit-scrollbar-thumb:hover {
     font-size: 0.9em; /* Optional: Make it slightly smaller than surrounding text for subtle effect */
     display: block; /* Optional: Makes it occupy its own line if it's currently inline */
     margin-top: 0px; /* Optional: Add some space above it */
+	margin-bottom: 20px; /* Add some space below it, before the next paragraph */
     text-align: left; /* Optional: Align it to the right */
 }
 
