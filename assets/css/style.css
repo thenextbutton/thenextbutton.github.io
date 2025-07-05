@@ -660,7 +660,7 @@ body.light-mode .main-header-fixed {
   h1 {
     font-size: 2.2rem;
     line-height: 1.2;
-    padding: 0 20px;
+    padding: 0 15px;
     margin-bottom: 15px;
     position: relative;
     z-index: 1;
@@ -704,10 +704,10 @@ body.light-mode .main-header-fixed {
 
   /* MODIFIED: Responsive adjustments for the control box */
   .bottom-right-controls-wrapper {
-    width: 140px; /* Slightly smaller width on mobile */
+    max-width: 140px; /* Slightly smaller width on mobile */
     padding: 8px 6px; /* Reduced padding */
     bottom: 10px; /* Closer to bottom */
-    right: 10px; /* Closer to right */
+    right: 5px; /* Closer to right */
   }
 
   .theme-toggle-container {
