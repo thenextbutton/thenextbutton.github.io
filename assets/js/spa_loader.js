@@ -32,58 +32,50 @@ document.addEventListener('DOMContentLoaded', () => {
             // Inject the new content into the contentColumn
             contentColumn.innerHTML = data;
 
-            // Crucially, after content is in the DOM, initialize scroll animations
-            // This will add the 'hidden-scroll' class to .github-project-item elements
-            // BEFORE the contentArea is made fully visible.
-            if (typeof initScrollAnimations === 'function') {
-                initScrollAnimations();
-            }
-            // Also re-initialize auto-linker for the new content
-            if (typeof initAutoLinker === 'function') {
-                initAutoLinker();
+            // Set the hash in the URL without triggering a full page reload
+            // This allows direct linking and browser history navigation
+            if (!isInitialLoad) {
+                window.location.hash = `/${pageName}.html`;
             }
 
-            // Make the content area visible again
-            // The individual github-project-item elements are now correctly hidden by JS
-            contentArea.style.opacity = '1';
-
-            // Scroll to the top of the page
-            window.scrollTo(0, 0);
-
-            // Update browser history for SPA navigation
-            const currentHash = window.location.hash;
-            const newHash = `/#/${pageName}.html`;
-            if (currentHash !== newHash) {
-                history.pushState(null, '', newHash);
-            }
-
-            // Re-initialize other page-specific scripts if they exist
-            if (typeof initFontControls === 'function') {
-                initFontControls();
-            }
-            if (typeof window.triggerHeaderScrollCheck === 'function') {
-                window.triggerHeaderScrollCheck();
-            }
-
-            // ADDED: Update active class for navigation links
-            document.querySelectorAll('.main-nav a').forEach(navLink => {
-                if (navLink.getAttribute('data-page') === pageName) {
-                    navLink.classList.add('active');
+            // Update active class for navigation links
+            document.querySelectorAll('.main-nav a').forEach(link => {
+                if (link.getAttribute('data-page') === pageName) {
+                    link.classList.add('active');
                 } else {
-                    navLink.classList.remove('active');
+                    link.classList.remove('active');
                 }
             });
 
+            // Show the content area after content is loaded
+            contentArea.style.opacity = '1';
+
+            // Re-initialize any scripts that need to run on new content
+            // Check if functions exist before calling them
+            if (typeof window.initScrollAnimations === 'function') {
+                window.initScrollAnimations();
+            }
+            if (typeof window.initAutoLinker === 'function') {
+                window.initAutoLinker();
+            }
+
+            // *** IMPORTANT ADDITION HERE ***
+            // Call the GitHub last commit update function if on the GitHub page
+            if (pageName === 'github' && typeof window.updateNowPageLastCommit === 'function') {
+                console.log("[spa_loader.js] Calling window.updateNowPageLastCommit for GitHub page.");
+                window.updateNowPageLastCommit();
+            }
+
         } catch (error) {
             console.error('Error loading content:', error);
-            contentArea.innerHTML = `<p>Error loading content: ${error.message}. Please try again.</p>`;
+            contentArea.innerHTML = `<p>Error loading page: ${error.message}</p>`;
             contentArea.style.opacity = '1'; // Ensure content area is visible even on error
         }
     }
 
     /**
-     * Determines the current page name from the URL hash.
-     * @returns {string} The name of the current page.
+     * Extracts the page name from the URL hash.
+     * @returns {string} The page name (e.g., 'home', 'about_me', 'github').
      */
     function getCurrentPageFromHash() {
         const hash = window.location.hash;
