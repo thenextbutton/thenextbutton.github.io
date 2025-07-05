@@ -1,50 +1,84 @@
-<div class="content-column">
-    <h2 class="content-title">What I'm Doing Now</h2>
-    <p id="last-updated-text"></p> 
-    <p>This page is inspired by <a href="https://nownownow.com/" target="_blank">nownownow.com</a>. It's a snapshot of what I'm currently focusing on, learning, and enjoying. It's updated periodically, so check back for the latest!</p>
+<!-- now_content.html -->
+<!-- This file contains the main content for the "What I'm Doing Now" page. -->
+<!-- It is designed to be loaded dynamically by spa_loader.js. -->
 
-    <div class="github-project-item">
-        <h3>&#128187; What I'm Working On</h3>
-        <ul>
-            <li><strong>Refining this Website:</strong> Continuously improving the UI/UX, responsiveness, and subtle animations. Your feedback is always welcome!</li>
-            <li><strong>Learning Advanced JavaScript:</strong> Diving deeper into asynchronous programming, modern ES6+ features, and front-end frameworks to build more complex web applications.</li>
-            <li><strong>Home Automation Projects:</strong> Experimenting with new integrations and automations in Home Assistant, particularly focusing on energy monitoring and smart lighting scenes.</li>
-        </ul>
-    </div>
+<div class="page-content">
+    <h1 class="page-title">What I'm Doing Now</h1>
 
-    <div class="github-project-item">
-        <h3>&#128250; What I'm Watching</h3>
-        <ul>
-            <li><strong>Documentaries:</strong> Exploring various topics from nature to technology.</li>
-            <li><strong>Tech Tutorials:</strong> Keeping up with the latest in web development and cloud technologies.</li>
-            <li><strong>Favorite Series:</strong> Re-watching classic shows for relaxation.</li>
-        </ul>
-    </div>
+    <p class="intro-text">
+        This page reflects my current focus and activities. It's inspired by the
+        <a href="https://nownownow.com/about" target="_blank" rel="noopener noreferrer">nownownow.com</a>
+        movement.
+    </p>
 
-    <div class="github-project-item">
-        <h3>&#128214; What I'm Learning</h3>
-        <ul>
-            <li><strong>Python for Data Analysis:</strong> Expanding my skills in data manipulation and visualization using libraries like Pandas and Matplotlib.</li>
-            <li><strong>Cloud Computing (Azure/GCP)::</strong> Getting more hands-on with cloud services for deploying web applications and managing infrastructure.</li>
-            <li><strong>Containerization with Docker:</b> Understanding how to package applications and their dependencies into portable containers for consistent deployment.</li>
-        </ul>
-    </div>
-
-    <div class="github-project-item">
-        <h3>&#128251; What I'm Listening To</h3>
-        <ul>
-            <li><strong>Podcasts:</strong>
-                <ul>
-                    <li>"Syntax.fm" - For web development tips and discussions.</li>
-                    <li>"Darknet Diaries" - Fascinating stories from the world of cybersecurity.</li>
-                </ul>
+    <!-- Section: What I'm Working On -->
+    <section class="now-section">
+        <!-- The h3 is now placed directly above the activity list -->
+        <h3 class="section-heading">💻 What I'm Working On</h3>
+        <ul class="activity-list">
+            <li>
+                <strong>Refining this Website:</strong> Continuously improving the UI/UX,
+                responsiveness, and subtle animations. Your feedback is
+                always welcome!
             </li>
-            <li><strong>Music:</strong> A mix of Lo-fi beats for focus and classic rock for winding down.</li>
+            <li>
+                <strong>Learning Advanced JavaScript:</strong> Diving deeper into asynchronous
+                programming, modern ES6+ features, and front-end frameworks
+                to build more complex web applications.
+            </li>
+            <li>
+                <strong>Home Automation Projects:</strong> Experimenting with new integrations
+                and automations in <a href="#" onclick="return false;">Home Assistant</a>, particularly focusing on
+                energy monitoring and smart lighting scenes.
+            </li>
         </ul>
-    </div>
+    </section>
 
-    <div class="github-project-item">
-        <h3>&#128640; What's Next</h3>
-        <p>Planning to delve into more backend development with Node.js or Python frameworks to build full-stack applications. Also looking into contributing to open-source projects.</p>
+    <!-- Section: Reading -->
+    <section class="now-section">
+        <h3 class="section-heading">📚 Reading</h3>
+        <ul class="activity-list">
+            <li>
+                Currently reading: "The Pragmatic Programmer" by Andrew Hunt and David Thomas.
+            </li>
+            <li>
+                Next on the list: "Clean Code" by Robert C. Martin.
+            </li>
+        </ul>
+    </section>
+
+    <!-- Section: Learning -->
+    <section class="now-section">
+        <h3 class="section-heading">🧠 Learning</h3>
+        <ul class="activity-list">
+            <li>
+                Exploring new features in CSS Grid and advanced Flexbox techniques.
+            </li>
+            <li>
+                Deepening my understanding of web accessibility (WCAG guidelines).
+            </li>
+        </ul>
+    </section>
+
+    <!-- Section: Personal Life -->
+    <section class="now-section">
+        <h3 class="section-heading">🏠 Personal Life</h3>
+        <ul class="activity-list">
+            <li>
+                Focusing on fitness and healthy eating habits.
+            </li>
+            <li>
+                Spending quality time with family and friends.
+            </li>
+        </ul>
+    </section>
+
+    <!-- Last Updated Section -->
+    <div class="last-updated-container">
+        <!-- The p tag for the last updated text has been restored here -->
+        <p id="last-updated-text" class="last-updated-text">
+            <!-- This text will be updated by github_last_commit.js -->
+            Loading last update date...
+        </p>
     </div>
 </div>
