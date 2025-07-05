@@ -1,1 +1,0 @@
-document.addEventListener("DOMContentLoaded",()=>{function e(){let e=document.createElement("p");e.className="powered-by-github";let t=document.createElement("a");t.href="https://pages.github.com/",t.target="_blank",t.rel="noopener noreferrer",t.textContent="Powered by GitHub Pages",e.appendChild(t),document.body.appendChild(e)}e()});
