@@ -107,6 +107,23 @@ h2, h3, h4, h5, h6 {
   font-family: "Consolas", monospace;
 }
 
+h4 {
+    margin-top: 20px; /* Adjust as needed, default is often higher */
+    margin-bottom: 10px; /* Reduce space below h4 */
+}
+
+/* Reduce top margin for unordered lists */
+ul {
+    margin-top: 0px; /* Removes the default top margin, bringing it closer to the preceding element */
+    margin-bottom: 10px; /* Keep some space below the list */
+    padding-left: 20px; /* Adjust indentation of list items if needed */
+}
+
+/* Optional: Further reduce spacing for list items themselves */
+ul li {
+    margin-bottom: 5px; /* Adds a small gap between list items */
+}
+
 .profile-image {
   position: fixed;
   top: 20px;
