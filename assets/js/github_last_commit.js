@@ -1,70 +1,79 @@
-document.addEventListener('DOMContentLoaded', () => {
-    /**
-     * Fetches the last commit date for a given GitHub repository and updates a specified HTML element.
-     * @param {string} owner - The GitHub repository owner (e.g., 'thenextbutton').
-     * @param {string} repo - The GitHub repository name (e.g., 'thenextbutton.github.io').
-     * @param {string} elementId - The ID of the HTML element to update with the last commit info.
-     */
-    async function fetchLastCommitDate(owner, repo, elementId) {
-        const apiUrl = `https://api.github.com/repos/${owner}/${repo}/commits?per_page=1`;
-        const lastCommitElement = document.getElementById(elementId);
+/**
+ * github_last_commit.js
+ *
+ * This script fetches the last commit date for a specified GitHub repository
+ * and displays it on the webpage. It's designed to be reusable for any
+ * element that needs to show a "last updated" timestamp.
+ */
 
-        if (!lastCommitElement) {
-            console.warn(`Element with ID '${elementId}' not found. Cannot display last commit date.`);
-            return;
-        }
+document.addEventListener('DOMContentLoaded', function() {
+    // Configuration for the GitHub repository
+    const githubRepoOwner = 'google'; // Replace with your GitHub username
+    const githubRepoName = 'gemini-canvas-sample-app'; // Replace with your repository name
+
+    // The ID of the HTML element where the last updated text will be displayed
+    // This has been updated to a more generic ID.
+    const lastUpdatedElementId = 'last-updated-text';
+
+    // Get the element where the last updated date will be displayed
+    const lastUpdatedElement = document.getElementById(lastUpdatedElementId);
+
+    // If the element doesn't exist, log an error and exit
+    if (!lastUpdatedElement) {
+        console.error(`Error: Element with ID '${lastUpdatedElementId}' not found.`);
+        return;
+    }
+
+    /**
+     * Fetches the last commit date from the GitHub API.
+     * @returns {Promise<string|null>} A promise that resolves with the formatted date string,
+     * or null if an error occurs.
+     */
+    async function fetchLastCommitDate() {
+        const apiUrl = `https://api.github.com/repos/${githubRepoOwner}/${githubRepoName}/commits?per_page=1`;
 
         try {
             const response = await fetch(apiUrl);
 
+            // Check if the response was successful
             if (!response.ok) {
-                // If there's an API error, just log it and don't update the UI
-                console.error(`GitHub API error: ${response.status} - ${response.statusText}`);
-                lastCommitElement.textContent = 'Last updated: N/A (Error fetching data)';
-                return;
+                // If not successful, throw an error with the status
+                throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
             }
 
             const commits = await response.json();
 
+            // Ensure there's at least one commit
             if (commits && commits.length > 0) {
                 const lastCommitDate = new Date(commits[0].commit.author.date);
-                const now = new Date();
 
-                // Calculate the difference in milliseconds
-                const diffMs = now.getTime() - lastCommitDate.getTime();
-
-                // Convert to days
-                const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-
-                let displayText = '';
-                if (diffDays === 0) {
-                    displayText = 'Last updated: today';
-                } else if (diffDays === 1) {
-                    displayText = 'Last updated: 1 day ago';
-                } else {
-                    displayText = `Last updated: ${diffDays} days ago`;
-                }
-
-                lastCommitElement.textContent = displayText;
+                // Format the date for display (e.g., "Last updated on January 1, 2023")
+                const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                return `Last updated on ${lastCommitDate.toLocaleDateString('en-US', options)}`;
             } else {
-                lastCommitElement.textContent = 'Last updated: N/A (No commits found)';
+                console.warn('No commits found for the specified repository.');
+                return null;
             }
         } catch (error) {
             console.error('Failed to fetch last commit date:', error);
-            lastCommitElement.textContent = 'Last updated: N/A (Network error)';
+            // Return null or a default message in case of an error
+            return 'Failed to load update date.';
         }
     }
 
-    // Call the function when the DOM is ready, targeting the 'now-page-last-updated' element
-    // This will run automatically when the 'now_content.html' is loaded by spa_loader.js
-    // We need to ensure it runs *after* the content is injected.
-    // The spa_loader.js already calls functions like initScrollAnimations and initAutoLinker
-    // after content is loaded, so we can leverage that.
-    window.updateNowPageLastCommit = function() {
-        fetchLastCommitDate('thenextbutton', 'thenextbutton.github.io', 'now-page-last-updated');
-    };
+    /**
+     * Updates the content of the last updated element with the fetched date.
+     */
+    async function updateLastUpdatedText() {
+        const dateText = await fetchLastCommitDate();
+        if (dateText) {
+            lastUpdatedElement.textContent = dateText;
+        } else {
+            // Fallback text if date cannot be fetched
+            lastUpdatedElement.textContent = 'Update date unavailable.';
+        }
+    }
 
-    // Initial call for when the page is first loaded directly or through SPA
-    // This will be called by spa_loader.js
+    // Call the function to update the text when the DOM is ready
+    updateLastUpdatedText();
 });
-
