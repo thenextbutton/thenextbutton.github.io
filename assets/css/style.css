@@ -298,25 +298,7 @@ ul li {
 }
 
 
-.powered-by-github {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  font-size: 13px;
-  color: #888;
-  z-index: 990;
-  transition: color 1.5s ease-in-out;
-}
 
-.powered-by-github a {
-  color: #888;
-  text-decoration: none;
-  transition: color 1.5s ease-in-out;
-}
-
-.powered-by-github a:hover {
-  text-decoration: underline;
-}
 
 /* MODIFIED: Control box styling for responsiveness and icon spacing */
 .bottom-right-controls-wrapper {
