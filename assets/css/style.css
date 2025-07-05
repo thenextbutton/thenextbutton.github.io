@@ -288,6 +288,8 @@ h2, h3, h4, h5, h6 {
   color: #888;
   z-index: 990;
   transition: color 1.5s ease-in-out;
+  padding: 5px 10px; /* Added padding for better spacing */
+  box-sizing: border-box; /* Ensures padding is included in width */
 }
 
 .powered-by-github a {
@@ -677,8 +679,8 @@ body.light-mode .main-header-fixed {
   .bottom-right-controls-wrapper {
     width: 140px; /* Slightly smaller width on mobile */
     padding: 8px 6px; /* Reduced padding */
-    bottom: 20px; /* MODIFIED: Moved back down to 20px */
-    right: 10px; /* MODIFIED: Adjusted right to 10px */
+    bottom: 20px; /* Stays at 20px from bottom */
+    right: 10px; /* Stays at 10px from right */
   }
 
   .theme-toggle-container {
