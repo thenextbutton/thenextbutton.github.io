@@ -1,12 +1,9 @@
-/**
- * github_last_commit.js
- *
- * This script fetches the last commit date for a specified GitHub repository
- * and displays it on the webpage, calculating the difference in days.
- * It's designed to be called by spa_loader.js after content is loaded.
- */
+// This log should appear immediately if the script is loaded and parsed.
+console.log("[github_last_commit.js] Script file loaded and parsed!");
 
 document.addEventListener('DOMContentLoaded', () => {
+    console.log("[github_last_commit.js] DOMContentLoaded event fired.");
+
     /**
      * Fetches the last commit date for a given GitHub repository and updates a specified HTML element.
      * @param {string} owner - The GitHub repository owner (e.g., 'thenextbutton').
@@ -30,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log(`[github_last_commit.js] Fetch response status: ${response.status}`);
 
             if (!response.ok) {
-                // If there's an API error, log it and update the UI with an error message
                 console.error(`[github_last_commit.js] GitHub API error: ${response.status} - ${response.statusText}`);
                 lastCommitElement.textContent = `Last updated: N/A (Error: ${response.status} ${response.statusText})`;
                 return;
@@ -42,11 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (commits && commits.length > 0) {
                 const lastCommitDate = new Date(commits[0].commit.author.date);
                 const now = new Date();
-
-                // Calculate the difference in milliseconds
                 const diffMs = now.getTime() - lastCommitDate.getTime();
-
-                // Convert to days
                 const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
 
                 let displayText = '';
@@ -70,19 +62,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Call the function when the DOM is ready, targeting the 'last-updated-text' element.
-    // This will run automatically when the 'now_content.html' is loaded by spa_loader.js.
-    // We need to ensure it runs *after* the content is injected.
-    // The spa_loader.js already calls functions like initScrollAnimations and initAutoLinker
-    // after content is loaded, so we can leverage that.
     window.updateNowPageLastCommit = function() {
         console.log("[github_last_commit.js] window.updateNowPageLastCommit called.");
-        // MODIFIED: Changed 'now-page-last-updated' to 'last-updated-text'
         fetchLastCommitDate('thenextbutton', 'thenextbutton.github.io', 'last-updated-text');
     };
-
-    // Initial call for when the page is first loaded directly or through SPA
-    // This will be called by spa_loader.js
-    // Note: The spa_loader.js will handle calling window.updateNowPageLastCommit
-    // after the content is loaded into the DOM.
 });
