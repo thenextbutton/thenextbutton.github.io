@@ -31,50 +31,42 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     /**
-     * Applies the specified theme to the body, updates the toggle, and sets logo/icon visibility and position.
+     * Applies the specified theme to the body, updates the toggle, and sets logo/icon visibility.
      * @param {string} themeName - 'light' or 'dark'.
      */
     function applyTheme(themeName) {
         if (themeName === 'light') {
             body.classList.add('light-mode');
-            themeSwitch.checked = false; // Toggle OFF for Light Mode
-            msCertLogo.src = LIGHT_MODE_MS_LOGO_SRC; // Set light mode logo
+            themeSwitch.checked = false;
+            msCertLogo.src = LIGHT_MODE_MS_LOGO_SRC;
 
-            // Sun is active (left), Moon is inactive (right)
-            sunIcon.style.transform = 'translateY(-50%) translateX(0)'; // Sun stays at its active position
-            sunIcon.style.opacity = '1'; // Fade in sun
-            sunIcon.style.color = '#FFD700'; // Yellow for sun
-
-            // MODIFIED: Moon now fades out in place (translateX(0))
-            moonIcon.style.transform = 'translateY(-50%) translateX(0)'; 
-            moonIcon.style.opacity = '0'; // Fade out moon
-            moonIcon.style.color = '#f0f0f0'; // Ensure moon is default color when hidden/shown
+            if (moonIcon && sunIcon) { // Ensure icons exist before manipulating
+                moonIcon.style.opacity = '0';
+                sunIcon.style.opacity = '1';
+                sunIcon.style.color = '#FFD700';
+                moonIcon.style.color = '#f0f0f0';
+            }
         } else { // themeName === 'dark'
             body.classList.remove('light-mode');
-            themeSwitch.checked = true; // Toggle ON for Dark Mode
-            msCertLogo.src = DARK_MODE_MS_LOGO_SRC; // Set dark mode logo
+            themeSwitch.checked = true;
+            msCertLogo.src = DARK_MODE_MS_LOGO_SRC;
 
-            // Moon is active (right), Sun is inactive (left)
-            moonIcon.style.transform = 'translateY(-50%) translateX(0)'; // Moon stays at its active position
-            moonIcon.style.opacity = '1'; // Fade in moon
-            moonIcon.style.color = '#f0f0f0'; // White for moon
-
-            // MODIFIED: Sun now fades out in place (translateX(0))
-            sunIcon.style.transform = 'translateY(-50%) translateX(0)'; 
-            sunIcon.style.opacity = '0'; // Fade out sun
-            sunIcon.style.color = '#FFD700'; // Ensure sun is yellow when hidden/shown
+            if (moonIcon && sunIcon) { // Ensure icons exist before manipulating
+                moonIcon.style.opacity = '1';
+                sunIcon.style.opacity = '0';
+                moonIcon.style.color = '#f0f0f0';
+                sunIcon.style.color = '#FFD700';
+            }
         }
     }
 
     // --- Initial Theme Load Logic ---
-
     const savedTheme = localStorage.getItem('theme');
 
     if (savedTheme) {
         applyTheme(savedTheme);
     } else {
         const prefersLight = window.matchMedia('(prefers-color-scheme: light)');
-
         if (prefersLight.matches) {
             applyTheme('light');
         } else {
@@ -83,21 +75,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Theme Toggle Button Logic ---
-
     themeSwitch.addEventListener('change', () => {
         if (themeSwitch.checked) {
-            applyTheme('dark'); // User manually switched to dark mode
+            applyTheme('dark');
             localStorage.setItem('theme', 'dark');
         } else {
-            applyTheme('light'); // User manually switched to light mode
+            applyTheme('light');
             localStorage.setItem('theme', 'light');
         }
     });
 
     // --- Listen for System Theme Changes (unless overridden by user) ---
-
     const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-
     darkModeMediaQuery.addEventListener('change', (event) => {
         if (!localStorage.getItem('theme')) {
             if (event.matches) {
@@ -108,8 +97,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Set initial profile image on load
+    // Ensure profile image is set only after the DOM is fully parsed and the element exists
     if (profileImage) {
         profileImage.src = window.getRandomProfileImage();
+    } else {
+        console.error("Profile image element not found. Cannot set its source.");
     }
 });
