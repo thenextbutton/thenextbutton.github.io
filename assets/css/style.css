@@ -98,7 +98,7 @@ h1 {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  padding: 0 180px;
+  padding: 0 180px; /* Original desktop padding, adjusted in media query */
   box-sizing: border-box;
   transition: transform 0.7s ease-out;
 }
@@ -525,7 +525,7 @@ body.light-mode::-webkit-scrollbar-thumb:hover {
     font-size: 0.9em; /* Optional: Make it slightly smaller than surrounding text for subtle effect */
     display: block; /* Optional: Makes it occupy its own line if it's currently inline */
     margin-top: 0px; /* Optional: Add some space above it */
-	margin-bottom: 20px; /* Add some space below it, before the next paragraph */
+	  margin-bottom: 20px; /* Add some space below it, before the next paragraph */
     text-align: left; /* Optional: Align it to the right */
 }
 
@@ -660,6 +660,7 @@ body.light-mode .main-header-fixed {
   h1 {
     font-size: 2.2rem;
     line-height: 1.2;
+    /* 🐛 IMPORTANT FIX: Reduced padding for mobile to prevent horizontal scrollbar */
     padding: 0 15px;
     margin-bottom: 15px;
     position: relative;
@@ -704,6 +705,7 @@ body.light-mode .main-header-fixed {
 
   /* MODIFIED: Responsive adjustments for the control box */
   .bottom-right-controls-wrapper {
+    /* 🐛 IMPORTANT FIX: Use max-width and reduced right margin for very narrow viewports */
     max-width: 140px; /* Slightly smaller width on mobile */
     padding: 8px 6px; /* Reduced padding */
     bottom: 10px; /* Closer to bottom */
