@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /**
      * Loads content into the main content area with a fade effect.
      * @param {string} url - The URL of the content to load.
-     * @param {string} pageName - The name of the page (e.g., 'home', 'about_me').
+     * @param {string} pageName - The name of the page (e.g., 'home', 'about_me', 'now', 'github').
      * @param {boolean} isInitialLoad - True if this is the initial page load.
      */
     async function loadContent(url, pageName, isInitialLoad = false) {
@@ -32,13 +32,15 @@ document.addEventListener('DOMContentLoaded', () => {
             // Inject the new content into the contentColumn
             contentColumn.innerHTML = data;
 
-            // Set the hash in the URL without triggering a full page reload
-            // This allows direct linking and browser history navigation
+            // After content is loaded, make it visible with a fade-in effect
+            contentArea.style.opacity = '1';
+
+            // Update the URL hash without triggering a full page reload
             if (!isInitialLoad) {
                 window.location.hash = `/${pageName}.html`;
             }
 
-            // Update active class for navigation links
+            // Update active navigation link
             document.querySelectorAll('.main-nav a').forEach(link => {
                 if (link.getAttribute('data-page') === pageName) {
                     link.classList.add('active');
@@ -47,29 +49,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // Show the content area after content is loaded
-            contentArea.style.opacity = '1';
-
-            // Re-initialize any scripts that need to run on new content
-            // Check if functions exist before calling them
-            if (typeof window.initScrollAnimations === 'function') {
-                window.initScrollAnimations();
+            // Re-initialize scripts that need to run after new content is loaded
+            if (typeof initScrollAnimations === 'function') {
+                initScrollAnimations();
             }
-            if (typeof window.initAutoLinker === 'function') {
-                window.initAutoLinker();
+            if (typeof initAutoLinker === 'function') {
+                initAutoLinker();
             }
 
-            // *** IMPORTANT ADDITION HERE ***
-            // Call the GitHub last commit update function if on the GitHub page
-            if (pageName === 'github' && typeof window.updateNowPageLastCommit === 'function') {
-                console.log("[spa_loader.js] Calling window.updateNowPageLastCommit for GitHub page.");
+            // MODIFIED: Call updateNowPageLastCommit specifically for the 'now' page
+            if (pageName === 'now' && typeof window.updateNowPageLastCommit === 'function') {
                 window.updateNowPageLastCommit();
             }
 
         } catch (error) {
             console.error('Error loading content:', error);
-            contentArea.innerHTML = `<p>Error loading page: ${error.message}</p>`;
-            contentArea.style.opacity = '1'; // Ensure content area is visible even on error
+            contentArea.innerHTML = `<p>Error loading content. Please try again later.</p>`;
+            contentArea.style.opacity = '1'; // Show error message
         }
     }
 
@@ -81,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const hash = window.location.hash;
         if (hash.startsWith('#/')) {
             const pagePart = hash.substring(2); // Remove '#/'
-            const pageName = pagePart.split('.')[0]; // Get 'home', 'about_me', 'github'
+            const pageName = pagePart.split('.')[0]; // Get 'home', 'about_me', 'github', 'now'
             return pageName;
         }
         return 'home'; // Default to 'home' if no valid hash
