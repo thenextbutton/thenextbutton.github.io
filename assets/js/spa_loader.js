@@ -9,11 +9,41 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     async function loadContent(url, pageName, isInitialLoad = false) {
         try {
-            // Step 1: Explicitly set opacity to 0 immediately to hide the current content.
-            // This ensures content is hidden while new content is loaded and page scrolls.
-            // The CSS transition on contentArea will handle the fade-out speed of the old content.
+            console.log('Step 1: Initiating fade out of current content.');
+            // 1. Fade to 0
             contentArea.style.opacity = '0';
 
+            // 2. Confirm it is faded to 0 by waiting for the opacity transition to end.
+            // This promise resolves only when the 'opacity' transition completes.
+            await new Promise(resolve => {
+                let transitionEndTimeout; // To handle cases where transitionend might not fire reliably
+
+                const handleTransitionEnd = (event) => {
+                    // Ensure it's the opacity transition that ended
+                    if (event.propertyName === 'opacity') {
+                        contentArea.removeEventListener('transitionend', handleTransitionEnd);
+                        clearTimeout(transitionEndTimeout); // Clear the fallback timeout
+                        resolve();
+                        console.log('Transition to opacity 0 confirmed.');
+                    }
+                };
+
+                contentArea.addEventListener('transitionend', handleTransitionEnd);
+
+                // Fallback: If no transition or transitionend doesn't fire for some reason,
+                // resolve after a short delay (e.g., slightly longer than your CSS transition duration).
+                // Assuming CSS transition for opacity is 0.5s, 600ms is a safe fallback.
+                transitionEndTimeout = setTimeout(() => {
+                    contentArea.removeEventListener('transitionend', handleTransitionEnd); // Clean up
+                    resolve();
+                    console.log('Transition to opacity 0 completed via timeout (fallback).');
+                }, 600); // Adjust this fallback if your CSS transition for opacity is much longer
+            });
+
+            console.log('Step 2: Old content fully faded out. Proceeding to fetch new content.');
+
+            // 3. Load the new content (fetch and inject)
+            console.log('Step 3: Fetching new content from:', url);
             const response = await fetch(url);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -21,16 +51,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.text();
 
             let contentColumn = contentArea.querySelector('.content-column');
-
-            // If contentColumn doesn't exist, create it (ensures it's always there)
             if (!contentColumn) {
                 contentColumn = document.createElement('div');
                 contentColumn.classList.add('content-column');
                 contentArea.appendChild(contentColumn);
             }
-
-            // Step 2: Inject the new content into the (now hidden by opacity:0) area
-            contentColumn.innerHTML = data;
+            contentColumn.innerHTML = data; // Inject new content while contentArea is at opacity: 0
+            console.log('Step 3: New content injected into hidden area.');
 
             // Update active class for navigation
             document.querySelectorAll('.main-nav a').forEach(link => {
@@ -52,30 +79,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // --- CRUCIAL ORDER OF OPERATIONS ---
 
-            // 1. Scroll to the top immediately after injecting content, while contentArea opacity is 0.
+            // 4. Scroll to the top of the page (new content is now injected but not visible yet)
+            console.log('Step 4: Scrolling to top of page.');
             window.scrollTo(0, 0);
 
-            // 2. Wait for 3 seconds for the scroll to visually complete.
-            await new Promise(resolve => setTimeout(resolve, 3000)); // Increased to 3000ms as requested
+            // 5. Wait for 3 seconds for the scroll to visually complete.
+            console.log('Step 5: Waiting 3 seconds for scroll to settle and render to stabilize.');
+            await new Promise(resolve => setTimeout(resolve, 3000)); // 3000ms delay as requested
 
-            // 3. Re-initialize animations. This runs *after* the scroll has settled, and *before* content is visible.
-            // This ensures `initScrollAnimations` correctly applies `hidden-scroll` classes to
-            // elements that are truly below the (now reset) viewport, as the content is still hidden.
+            // 6. Initialize animations on the hidden, scrolled-to-top content
+            console.log('Step 6: Initializing scroll animations for new content.');
             if (typeof initScrollAnimations === 'function') {
                 initScrollAnimations();
             }
 
-            // 4. Finally, make the content visible. This will trigger the fade-in for animated elements.
-            // The content will fade *in* from its correct scrolled-to-top position.
+            // 7. Make the content visible (it will now fade in from the top)
+            console.log('Step 7: Making content visible (fading in).');
             contentArea.style.opacity = '1';
 
-            // 5. Run other initializations now that content is visible
+            // Run other initializations now that content is visible
             if (typeof initAutoLinker === 'function') {
                 initAutoLinker();
             }
             if (pageName === 'now' && typeof window.updateNowPageLastCommit === 'function') {
                 window.updateNowPageLastCommit();
             }
+            console.log('Step 8: Content loading process complete.');
 
         } catch (error) {
             console.error('Error loading content:', error);
@@ -92,20 +121,22 @@ document.addEventListener('DOMContentLoaded', () => {
             const pageName = pagePart.split('.')[0];
             return pageName;
         }
-        return 'home';
+        return 'home'; // Default to 'home' if no valid hash
     }
 
     // Event listeners for navigation links
     document.querySelectorAll('.main-nav a').forEach(link => {
         link.addEventListener('click', (event) => {
-            event.preventDefault();
+            event.preventDefault(); // Prevent default link behavior
             const clickedPageData = event.target.getAttribute('data-page');
             const currentPageFromHash = getCurrentPageFromHash();
 
+            // Load content only if clicking on a different page
             if (clickedPageData && clickedPageData !== currentPageFromHash) {
                 const url = `/content/${clickedPageData}_content.html`;
-                loadContent(url, clickedPageData, false);
+                loadContent(url, clickedPageData, false); // Not initial load
             } else if (!clickedPageData && link.href) {
+                // Fallback for links that might not have data-page, deriving from href
                 const defaultPage = link.href.split('/').pop().split('.')[0].replace('_content', '');
                  if (defaultPage && defaultPage !== currentPageFromHash) {
                     const url = `/content/${defaultPage}_content.html`;
@@ -125,5 +156,5 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial load of content based on URL hash or default to home
     const initialPage = getCurrentPageFromHash();
     const initialUrl = `/content/${initialPage}_content.html`;
-    loadContent(initialUrl, initialPage, true);
+    loadContent(initialUrl, initialPage, true); // Mark as initial load
 });
