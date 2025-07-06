@@ -793,7 +793,13 @@ body.light-mode .main-header-fixed {
     padding: 15px;
   }
 
-  /* ADDED: Re-applying text-align:left specifically to children of .project-details inside .github-project-item for mobile */
+  /* MODIFIED: Ensure items within project-details are left-aligned */
+  .project-details {
+    width: 100%;
+    align-items: flex-start; /* THIS IS THE KEY CHANGE */
+  }
+
+  /* Keep these specific text-align rules for explicit control */
   .github-project-item .project-details h3,
   .github-project-item .project-details p,
   .github-project-item .project-details h4,
@@ -823,10 +829,7 @@ body.light-mode .main-header-fixed {
     line-height: 1.4;
   }
 
-  .project-details {
-    width: 100%;
-    align-items: center;
-  }
+  /* Removed .project-details { align-items: center; } here as it's moved up and changed */
 
   .home-assistant-corner-logo {
     top: 8px;
