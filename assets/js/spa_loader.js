@@ -9,10 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     async function loadContent(url, pageName, isInitialLoad = false) {
         try {
-            // Hide the entire content area before loading new content
+            // Step 1: Hide the entire content area before loading new content
             contentArea.style.opacity = '0';
-            // Add a small delay to allow the opacity transition to start visually
-            await new Promise(resolve => setTimeout(resolve, 100)); // Increased delay slightly for better visual effect
+            // Add a small delay to allow the opacity transition to start visually (before fetch)
+            await new Promise(resolve => setTimeout(resolve, 100));
 
             const response = await fetch(url);
             if (!response.ok) {
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 contentArea.appendChild(contentColumn);
             }
 
-            // Inject the new content
+            // Step 2: Inject the new content into the (still hidden) area
             contentColumn.innerHTML = data;
 
             // Update active class for navigation
@@ -43,39 +43,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Update URL hash without causing a page reload
             if (!isInitialLoad) {
-                // Ensure the hash reflects the current page if it's not the initial load
-                // Use replaceState to avoid adding to browser history on link clicks within the same page,
-                // or pushState if you want back/forward button support for SPA navigation.
                 history.pushState(null, '', `/#/${pageName}`);
             } else {
-                // For initial load, if hash is empty, set it to home
                 if (window.location.hash === '' || window.location.hash === '#/') {
                     history.replaceState(null, '', '/#/home');
                 }
             }
 
-            // After content is loaded and DOM is updated, make it visible
-            contentArea.style.opacity = '1';
-
-            // --- NEW ORDER: Scroll to the top of the page FIRST ---
-            // This is crucial for ensuring initScrollAnimations evaluates visibility correctly.
+            // --- CRUCIAL CHANGE HERE ---
+            // Step 3: Scroll to the top immediately after injecting content, while still hidden.
             window.scrollTo(0, 0);
 
-            // --- IMPORTANT: Re-initialize scripts that operate on the new content ---
-            // These functions need to be called AFTER the new HTML is injected into the DOM
-            // AND after the page has scrolled to the top.
+            // Step 4: Wait a very brief moment for the scroll to visually complete.
+            // This is important because window.scrollTo is asynchronous and not instant.
+            await new Promise(resolve => setTimeout(resolve, 50)); // Small delay for scroll to settle
 
-            // Re-run scroll animations for any new elements that need the fade-in effect.
+            // Step 5: Make the content visible ONLY AFTER it has scrolled to the top.
+            contentArea.style.opacity = '1';
+
+            // Step 6: Re-initialize scripts now that content is visible and at the correct scroll position.
             if (typeof initScrollAnimations === 'function') {
                 initScrollAnimations();
             }
-
-            // Re-run auto-linker for any new text content that needs auto-linking.
             if (typeof initAutoLinker === 'function') {
                 initAutoLinker();
             }
-
-            // If the loaded page is 'now_content', trigger its specific last commit update.
             if (pageName === 'now' && typeof window.updateNowPageLastCommit === 'function') {
                 window.updateNowPageLastCommit();
             }
@@ -91,26 +83,24 @@ document.addEventListener('DOMContentLoaded', () => {
     function getCurrentPageFromHash() {
         const hash = window.location.hash;
         if (hash.startsWith('#/')) {
-            const pagePart = hash.substring(2); // Remove '#/'
-            const pageName = pagePart.split('.')[0]; // Get 'home', 'about_me', 'github', 'now'
+            const pagePart = hash.substring(2);
+            const pageName = pagePart.split('.')[0];
             return pageName;
         }
-        return 'home'; // Default to 'home' if no valid hash
+        return 'home';
     }
 
     // Event listeners for navigation links
     document.querySelectorAll('.main-nav a').forEach(link => {
         link.addEventListener('click', (event) => {
-            event.preventDefault(); // Prevent default link behavior
+            event.preventDefault();
             const clickedPageData = event.target.getAttribute('data-page');
             const currentPageFromHash = getCurrentPageFromHash();
 
-            // Load content only if clicking on a different page or if the hash doesn't match
-            // This handles cases where user clicks current nav item but hash might be wrong.
             if (clickedPageData && clickedPageData !== currentPageFromHash) {
                 const url = `/content/${clickedPageData}_content.html`;
-                loadContent(url, clickedPageData, false); // Not initial load
-            } else if (!clickedPageData && link.href) { // Fallback for links without data-page
+                loadContent(url, clickedPageData, false);
+            } else if (!clickedPageData && link.href) {
                 const defaultPage = link.href.split('/').pop().split('.')[0].replace('_content', '');
                  if (defaultPage && defaultPage !== currentPageFromHash) {
                     const url = `/content/${defaultPage}_content.html`;
@@ -130,5 +120,5 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial load of content based on URL hash or default to home
     const initialPage = getCurrentPageFromHash();
     const initialUrl = `/content/${initialPage}_content.html`;
-    loadContent(initialUrl, initialPage, true); // Mark as initial load
+    loadContent(initialUrl, initialPage, true);
 });
