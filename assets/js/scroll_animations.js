@@ -2,46 +2,70 @@
 // This function is designed to be called when the DOM is ready and also after new content
 // is dynamically loaded (e.g., by spa_loader.js).
 
-// Make controlsObserver globally accessible
+// Make controlsObserver globally accessible. This needs to be at the top level of the script.
 let controlsObserver;
 
 function initScrollAnimations() {
     // Define options for the Intersection Observer.
+    // 'root: null' means the viewport is used as the observing root.
+    // 'rootMargin: "0px"' means no extra margin around the root.
+    // 'threshold: 0.1' means the callback will fire when 10% of the target element
+    // is visible within the root.
     const observerOptions = {
         root: null, // Use the viewport as the container
         rootMargin: "0px",
         threshold: 0.1 // Trigger when 10% of the item is visible
     };
 
-    // Create a new Intersection Observer instance for general scroll animations.
+    // Create a new Intersection Observer instance for general scroll animations (e.g., GitHub project items).
+    // The callback function will be executed when a target element's visibility changes.
     const observer = new IntersectionObserver((entries, observer) => {
+        // Loop through each entry (each element whose visibility has changed).
         entries.forEach(entry => {
+            // If the element is currently intersecting (i.e., visible in the viewport).
             if (entry.isIntersecting) {
+                // Remove the "hidden-scroll" class. This will trigger the CSS transition
+                // to make the element visible and apply its animation.
                 entry.target.classList.remove("hidden-scroll");
+                // Stop observing this element, as it has already animated into view.
                 observer.unobserve(entry.target);
             }
         });
-    }, observerOptions);
+    }, observerOptions); // Pass the defined options to the observer.
 
-    // Get all elements that should animate on scroll (e.g., GitHub project items).
+    // Select all elements that are intended to have the scroll animation.
+    // MODIFIED: Also include .tech-skills-grid > div if you want them animated
     const scrollAnimatedItems = document.querySelectorAll(".github-project-item, .tech-skills-grid > div");
 
-    // Initialize visibility and observe items that are not initially visible.
+    // Iterate over each selected item.
     scrollAnimatedItems.forEach(item => {
+        // Get the size and position of the element relative to the viewport.
         const rect = item.getBoundingClientRect();
+
+        // Determine if the item is initially visible in the viewport when the page loads.
+        // It's considered visible if its top edge is above the bottom of the viewport
+        // and its bottom edge is below the top of the viewport.
         const isInitiallyVisible = (
             rect.top < (window.innerHeight || document.documentElement.clientHeight) &&
             rect.bottom > 0
         );
 
+        // If the item is NOT initially visible in the viewport.
         if (!isInitiallyVisible) {
+            // Add the "hidden-scroll" class. This class (defined in style.css)
+            // will make the element transparent and potentially apply a transform
+            // to prepare it for the animation.
             item.classList.add("hidden-scroll");
+            // Start observing this item. The observer will detect when it scrolls into view.
             observer.observe(item);
         }
+        // If the item IS initially visible, we do nothing. It will load immediately
+        // without the fade-in animation, as per the user's request.
     });
 
-    // --- MODIFIED: Specific Observer for the bottom-right control box ---
-    // This observer will be accessible via the global 'controlsObserver' variable
+    // --- NEW / MODIFIED PART FOR CONTROL BOX ---
+    // Create a NEW Intersection Observer instance specifically for the bottom-right control box.
+    // Assign it to the global 'controlsObserver' variable.
     controlsObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             const controlsWrapper = document.querySelector('.bottom-right-controls-wrapper');
@@ -49,18 +73,23 @@ function initScrollAnimations() {
 
             if (entry.isIntersecting) {
                 controlsWrapper.classList.remove('fade-out-controls');
+                console.log("Controls Observer (Internal): Controls are intersecting, removing fade-out.");
             } else {
                 controlsWrapper.classList.add('fade-out-controls');
+                console.log("Controls Observer (Internal): Controls are NOT intersecting, adding fade-out.");
             }
         });
-    }, observerOptions); // Use the same options
+    }, observerOptions); // Using the same observer options for simplicity
 
-    const controlsWrapper = document.querySelector('.bottom-right-controls-wrapper');
-    if (controlsWrapper) {
-        controlsObserver.observe(controlsWrapper);
+    // Get the control box element and start observing it.
+    const controlsWrapperElement = document.querySelector('.bottom-right-controls-wrapper');
+    if (controlsWrapperElement) {
+        controlsObserver.observe(controlsWrapperElement);
+        console.log("Controls Observer (Internal): Now observing the control box.");
     }
-    // --- END MODIFIED PART ---
+    // --- END NEW / MODIFIED PART FOR CONTROL BOX ---
 }
 
 // Attach the initScrollAnimations function to the DOMContentLoaded event.
+// This ensures the script runs only after the entire HTML document has been loaded and parsed.
 document.addEventListener("DOMContentLoaded", initScrollAnimations);
