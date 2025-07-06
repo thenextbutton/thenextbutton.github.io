@@ -97,7 +97,7 @@ h1 {
   line-height: 1.2;
   overflow: hidden;
   text-overflow: ellipsis;
-  padding: 0 180px; /* Original desktop padding, adjusted in media query */
+  padding: 0 40px; /* MODIFIED: Reduced desktop padding for h1 */
   box-sizing: border-box;
   transition: transform 0.7s ease-out;
 }
@@ -277,6 +277,8 @@ ul li {
 .github-project-item p {
   font-size: 1rem;
   margin-bottom: 15px;
+  word-wrap: break-word; /* ADDED: Ensures long words break */
+  overflow-wrap: break-word; /* ADDED: Standard property for word wrapping */
 }
 
 .home-assistant-corner-logo {
