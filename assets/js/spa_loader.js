@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /**
      * Loads content into the main content area with a fade effect.
      * @param {string} url - The URL of the content to load.
-     * @param {string} pageName - The name of the page (e.g., 'home', 'about_me').
+     * @param {string} pageName - The name of the page (e.g., 'home', 'about_me', 'now').
      * @param {boolean} isInitialLoad - True if this is the initial page load.
      */
     async function loadContent(url, pageName, isInitialLoad = false) {
@@ -29,70 +29,66 @@ document.addEventListener('DOMContentLoaded', () => {
                 contentArea.appendChild(contentColumn);
             }
 
-            // Inject the new content into the contentColumn
+            // Inject the new content
             contentColumn.innerHTML = data;
 
-            // Crucially, after content is in the DOM, initialize scroll animations
-            // This will add the 'hidden-scroll' class to .github-project-item elements
-            // BEFORE the contentArea is made fully visible.
-            if (typeof initScrollAnimations === 'function') {
-                initScrollAnimations();
-            }
-            // Also re-initialize auto-linker for the new content
-            if (typeof initAutoLinker === 'function') {
-                initAutoLinker();
-            }
-            // ADD THIS LINE: Call the function to update the last commit date for 'now_content.html'
-            if (pageName === 'now' && typeof window.updateNowPageLastCommit === 'function') {
-                window.updateNowPageLastCommit();
-            }
-            // Make the content area visible again
-            // The individual github-project-item elements are now correctly hidden by JS
-            contentArea.style.opacity = '1';
-
-            // Scroll to the top of the page
-            window.scrollTo(0, 0);
-
-            // Update browser history for SPA navigation
-            const currentHash = window.location.hash;
-            const newHash = `/#/${pageName}.html`;
-            if (currentHash !== newHash) {
-                history.pushState(null, '', newHash);
-            }
-
-            // Re-initialize other page-specific scripts if they exist
-            if (typeof initFontControls === 'function') {
-                initFontControls();
-            }
-            if (typeof window.triggerHeaderScrollCheck === 'function') {
-                window.triggerHeaderScrollCheck();
-            }
-
-            // ADDED: Update active class for navigation links
-            document.querySelectorAll('.main-nav a').forEach(navLink => {
-                if (navLink.getAttribute('data-page') === pageName) {
-                    navLink.classList.add('active');
+            // Update active class for navigation
+            document.querySelectorAll('.main-nav a').forEach(link => {
+                if (link.getAttribute('data-page') === pageName) {
+                    link.classList.add('active');
                 } else {
-                    navLink.classList.remove('active');
+                    link.classList.remove('active');
                 }
             });
 
+            // Update URL hash without causing a page reload
+            if (!isInitialLoad) {
+                // Ensure the hash reflects the current page if it's not the initial load
+                // Use replaceState to avoid adding to browser history on link clicks within the same page,
+                // or pushState if you want back/forward button support for SPA navigation.
+                history.pushState(null, '', `/#/${pageName}`);
+            } else {
+                // For initial load, if hash is empty, set it to home
+                if (window.location.hash === '' || window.location.hash === '#/') {
+                    history.replaceState(null, '', '/#/home');
+                }
+            }
+
+            // After content is loaded and DOM is updated, make it visible
+            contentArea.style.opacity = '1';
+
+            // --- IMPORTANT: Re-initialize scripts that operate on the new content ---
+            // These functions need to be called AFTER the new HTML is injected into the DOM
+            // so they can find and manipulate the new elements.
+
+            // Re-run scroll animations for any new elements that need the fade-in effect.
+            if (typeof initScrollAnimations === 'function') {
+                initScrollAnimations();
+            }
+
+            // Re-run auto-linker for any new text content that needs auto-linking.
+            if (typeof initAutoLinker === 'function') {
+                initAutoLinker();
+            }
+
+            // If the loaded page is 'now_content', trigger its specific last commit update.
+            if (pageName === 'now' && typeof window.updateNowPageLastCommit === 'function') {
+                window.updateNowPageLastCommit();
+            }
+
         } catch (error) {
             console.error('Error loading content:', error);
-            contentArea.innerHTML = `<p>Error loading content: ${error.message}. Please try again.</p>`;
-            contentArea.style.opacity = '1'; // Ensure content area is visible even on error
+            contentArea.innerHTML = '<p>Error loading content. Please try again.</p>';
+            contentArea.style.opacity = '1'; // Make sure the error message is visible
         }
     }
 
-    /**
-     * Determines the current page name from the URL hash.
-     * @returns {string} The name of the current page.
-     */
+    // Helper to get page name from URL hash
     function getCurrentPageFromHash() {
         const hash = window.location.hash;
         if (hash.startsWith('#/')) {
             const pagePart = hash.substring(2); // Remove '#/'
-            const pageName = pagePart.split('.')[0]; // Get 'home', 'about_me', 'github'
+            const pageName = pagePart.split('.')[0]; // Get 'home', 'about_me', 'github', 'now'
             return pageName;
         }
         return 'home'; // Default to 'home' if no valid hash
@@ -105,19 +101,30 @@ document.addEventListener('DOMContentLoaded', () => {
             const clickedPageData = event.target.getAttribute('data-page');
             const currentPageFromHash = getCurrentPageFromHash();
 
-            // Load content only if clicking on a different page
-            if (clickedPageData !== currentPageFromHash) {
+            // Load content only if clicking on a different page or if the hash doesn't match
+            // This handles cases where user clicks current nav item but hash might be wrong.
+            if (clickedPageData && clickedPageData !== currentPageFromHash) {
                 const url = `/content/${clickedPageData}_content.html`;
                 loadContent(url, clickedPageData, false); // Not initial load
+            } else if (!clickedPageData && link.href) { // Fallback for links without data-page
+                const defaultPage = link.href.split('/').pop().split('.')[0].replace('_content', '');
+                 if (defaultPage && defaultPage !== currentPageFromHash) {
+                    const url = `/content/${defaultPage}_content.html`;
+                    loadContent(url, defaultPage, false);
+                 }
             }
-            // The active class is now handled inside loadContent for consistency
         });
+    });
+
+    // Handle back/forward button browser navigation
+    window.addEventListener('popstate', () => {
+        const page = getCurrentPageFromHash();
+        const url = `/content/${page}_content.html`;
+        loadContent(url, page, false);
     });
 
     // Initial load of content based on URL hash or default to home
     const initialPage = getCurrentPageFromHash();
     const initialUrl = `/content/${initialPage}_content.html`;
     loadContent(initialUrl, initialPage, true); // Mark as initial load
-
-    // The active class for the initially loaded page's navigation link is now set by loadContent
 });
