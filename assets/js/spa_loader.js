@@ -9,7 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     async function loadContent(url, pageName, isInitialLoad = false) {
         try {
-            console.log('Step 1: Initiating fade out of current content.');
+            console.log('Step 1: Initiating fade out of current content and hiding scrollbar.');
+            // Temporarily hide the scrollbar to prevent it from being visible during scroll-to-top
+            document.body.style.overflowY = 'hidden';
+
             // 1. Fade to 0
             contentArea.style.opacity = '0';
 
@@ -126,12 +129,15 @@ document.addEventListener('DOMContentLoaded', () => {
             if (pageName === 'now' && typeof window.updateNowPageLastCommit === 'function') {
                 window.updateNowPageLastCommit();
             }
-            console.log('Step 8: Content loading process complete.');
+            console.log('Step 8: Content loading process complete. Re-enabling scrollbar.');
 
         } catch (error) {
             console.error('Error loading content:', error);
             contentArea.innerHTML = `<p>Error loading content: ${error.message}. Please try again.</p>`;
             contentArea.style.opacity = '1'; // Ensure content area is visible even on error
+        } finally {
+            // Always re-enable the scrollbar, even if an error occurs
+            document.body.style.overflowY = 'scroll';
         }
     }
 
