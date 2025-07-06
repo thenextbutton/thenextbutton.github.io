@@ -786,24 +786,27 @@ body.light-mode .main-header-fixed {
     margin-bottom: 100px;
   }
 
-  /* ADDED: Specific fixes for 'now' page content on mobile */
-  .content-column h4,
-  .content-column ul,
-  .content-column ul li {
-      text-align: left; /* Ensure headings and lists are left-aligned on mobile */
-  }
-
-  .content-column ul {
-      padding-left: 20px; /* Ensure padding-left for list indentation on mobile */
-  }
-
-
   .github-project-item {
     flex-direction: column;
     align-items: center;
-    text-align: center;
+    /* REMOVED: text-align: center; from here */
     padding: 15px;
   }
+
+  /* ADDED: Re-applying text-align:left specifically to children of .project-details inside .github-project-item for mobile */
+  .github-project-item .project-details h3,
+  .github-project-item .project-details p,
+  .github-project-item .project-details h4,
+  .github-project-item .project-details ul,
+  .github-project-item .project-details ul li {
+      text-align: left; /* Ensure text within project details is left-aligned on mobile */
+  }
+
+
+  .github-project-item .project-details ul {
+      padding-left: 20px; /* Ensure padding-left for list indentation on mobile */
+  }
+
 
   .project-image {
     width: 80%;
