@@ -14,10 +14,6 @@ function initFontControls() {
     l = r ? parseFloat(r) : 14;
     o.style.fontSize = l + "px";
 
-    // Re-create button elements to remove existing event listeners
-    // This is good practice if you're replacing elements, but for simple event listeners
-    // directly adding them is also fine if the elements aren't being replaced after init.
-    // For consistency with your original code, we'll keep the cloneNode pattern.
     let i = e.cloneNode(!0);
     e.parentNode.replaceChild(i, e);
 
@@ -27,76 +23,55 @@ function initFontControls() {
     let d = n.cloneNode(!0);
     n.parentNode.replaceChild(d, n);
 
-    // Get the control box wrapper for convenience
     const controlsWrapper = document.querySelector('.bottom-right-controls-wrapper');
 
-    i.addEventListener("click", () => {
+    // Make sure controlsObserver is defined and accessible
+    // It should be coming from scroll_animations.js which must be loaded first.
+    if (typeof controlsObserver === 'undefined') {
+        console.error("controlsObserver is not defined. Ensure scroll_animations.js loads before font_control.js");
+        return; // Exit if observer isn't ready
+    }
+
+    const applyFontSize = (newSize) => {
         // --- NEW LOGIC: Unobserve before changing font size ---
-        if (typeof controlsObserver !== 'undefined' && controlsWrapper) {
+        if (controlsWrapper) { // Check if controlsWrapper exists
             controlsObserver.unobserve(controlsWrapper);
+            console.log("Controls Observer: UN-OBSERVING for font change.");
         }
         // --- END NEW LOGIC ---
 
-        l = Math.max(8, l - 1);
+        l = newSize;
         o.style.fontSize = l + "px";
         localStorage.setItem("fontSize", l);
 
         // --- NEW LOGIC: Re-observe after a delay ---
+        // Increased delay to 750ms - experiment with this value!
         setTimeout(() => {
-            if (typeof controlsObserver !== 'undefined' && controlsWrapper) {
+            if (controlsWrapper) { // Check if controlsWrapper exists
                 controlsWrapper.classList.remove('fade-out-controls'); // Ensure visibility
                 controlsObserver.observe(controlsWrapper);
+                console.log("Controls Observer: RE-OBSERVING after font change.");
             }
-        }, 300); // Adjust delay if needed
+        }, 750); // Increased delay
         // --- END NEW LOGIC ---
 
-        "function" == typeof window.triggerHeaderScrollCheck && window.triggerHeaderScrollCheck();
+        // Check if triggerHeaderScrollCheck exists before calling
+        if (typeof window.triggerHeaderScrollCheck === 'function') {
+            window.triggerHeaderScrollCheck();
+        }
+    };
+
+    i.addEventListener("click", () => {
+        applyFontSize(Math.max(8, l - 1));
     });
 
     c.addEventListener("click", () => {
-        // --- NEW LOGIC: Unobserve before changing font size ---
-        if (typeof controlsObserver !== 'undefined' && controlsWrapper) {
-            controlsObserver.unobserve(controlsWrapper);
-        }
-        // --- END NEW LOGIC ---
-
-        l = 14;
-        o.style.fontSize = l + "px";
-        localStorage.setItem("fontSize", l);
-
-        // --- NEW LOGIC: Re-observe after a delay ---
-        setTimeout(() => {
-            if (typeof controlsObserver !== 'undefined' && controlsWrapper) {
-                controlsWrapper.classList.remove('fade-out-controls'); // Ensure visibility
-                controlsObserver.observe(controlsWrapper);
-            }
-        }, 300); // Adjust delay if needed
-        // --- END NEW LOGIC ---
-
-        "function" == typeof window.triggerHeaderScrollCheck && window.triggerHeaderScrollCheck();
+        applyFontSize(14);
     });
 
     d.addEventListener("click", () => {
-        // --- NEW LOGIC: Unobserve before changing font size ---
-        if (typeof controlsObserver !== 'undefined' && controlsWrapper) {
-            controlsObserver.unobserve(controlsWrapper);
-        }
-        // --- END NEW LOGIC ---
-
-        l = Math.min(25, l + 1);
-        o.style.fontSize = l + "px";
-        localStorage.setItem("fontSize", l);
-
-        // --- NEW LOGIC: Re-observe after a delay ---
-        setTimeout(() => {
-            if (typeof controlsObserver !== 'undefined' && controlsWrapper) {
-                controlsWrapper.classList.remove('fade-out-controls'); // Ensure visibility
-                controlsObserver.observe(controlsWrapper);
-            }
-        }, 300); // Adjust delay if needed
-        // --- END NEW LOGIC ---
-
-        "function" == typeof window.triggerHeaderScrollCheck && window.triggerHeaderScrollCheck();
+        applyFontSize(Math.min(25, l + 1));
     });
 }
+
 document.addEventListener("DOMContentLoaded", initFontControls);
