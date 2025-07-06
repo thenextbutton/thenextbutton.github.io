@@ -3,10 +3,6 @@
 // is dynamically loaded (e.g., by spa_loader.js).
 function initScrollAnimations() {
     // Define options for the Intersection Observer.
-    // 'root: null' means the viewport is used as the observing root.
-    // 'rootMargin: "0px"' means no extra margin around the root.
-    // 'threshold: 0.1' means the callback will fire when 10% of the target element
-    // is visible within the root.
     const observerOptions = {
         root: null, // Use the viewport as the container
         rootMargin: "0px",
@@ -14,7 +10,6 @@ function initScrollAnimations() {
     };
 
     // Create a new Intersection Observer instance.
-    // The callback function will be executed when a target element's visibility changes.
     const observer = new IntersectionObserver((entries, observer) => {
         // Loop through each entry (each element whose visibility has changed).
         entries.forEach(entry => {
@@ -23,39 +18,22 @@ function initScrollAnimations() {
                 // Remove the "hidden-scroll" class. This will trigger the CSS transition
                 // to make the element visible and apply its animation.
                 entry.target.classList.remove("hidden-scroll");
-                // Stop observing this element, as it has already animated into view.
+                // Stop observing this element, as it has now animated into view.
                 observer.unobserve(entry.target);
             }
         });
-    }, observerOptions); // Pass the defined options to the observer.
+    }, observerOptions);
 
-    // Select all elements that are intended to have the scroll animation.
-    const scrollAnimatedItems = document.querySelectorAll(".github-project-item");
+    // Select ALL elements that should have a scroll animation
+    const scrollAnimatedItems = document.querySelectorAll('.github-project-item, .tech-skills-grid div');
 
-    // Iterate over each selected item.
+    // IMPORTANT CHANGE: Always add the "hidden-scroll" class and observe the items.
+    // This ensures that they are initially hidden/transformed and will animate
+    // when they truly scroll into the view, even if they were "initially visible"
+    // at the moment of content injection.
     scrollAnimatedItems.forEach(item => {
-        // Get the size and position of the element relative to the viewport.
-        const rect = item.getBoundingClientRect();
-
-        // Determine if the item is initially visible in the viewport when the page loads.
-        // It's considered visible if its top edge is above the bottom of the viewport
-        // and its bottom edge is below the top of the viewport.
-        const isInitiallyVisible = (
-            rect.top < (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.bottom > 0
-        );
-
-        // If the item is NOT initially visible in the viewport.
-        if (!isInitiallyVisible) {
-            // Add the "hidden-scroll" class. This class (defined in style.css)
-            // will make the element transparent and potentially apply a transform
-            // to prepare it for the animation.
-            item.classList.add("hidden-scroll");
-            // Start observing this item. The observer will detect when it scrolls into view.
-            observer.observe(item);
-        }
-        // If the item IS initially visible, we do nothing. It will load immediately
-        // without the fade-in animation, as per the user's request.
+        item.classList.add("hidden-scroll");
+        observer.observe(item);
     });
 }
 
