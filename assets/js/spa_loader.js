@@ -76,6 +76,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.updateNowPageLastCommit();
             }
 
+            // --- NEW ADDITION: Scroll to the top of the page after content loads ---
+            window.scrollTo(0, 0);
+
         } catch (error) {
             console.error('Error loading content:', error);
             contentArea.innerHTML = '<p>Error loading content. Please try again.</p>';
