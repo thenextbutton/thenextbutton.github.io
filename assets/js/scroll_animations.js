@@ -29,33 +29,18 @@ function initScrollAnimations() {
         });
     }, observerOptions); // Pass the defined options to the observer.
 
-    // Select all elements that are intended to have the scroll animation.
-    const scrollAnimatedItems = document.querySelectorAll(".github-project-item");
+    // Select ALL elements that should have a scroll animation
+    // Ensure this selector covers all elements you want to animate
+    // Based on previous context, this should include '.github-project-item' and '.tech-skills-grid div'
+    const scrollAnimatedItems = document.querySelectorAll('.github-project-item, .tech-skills-grid div');
 
-    // Iterate over each selected item.
+    // IMPORTANT: Always add the hidden-scroll class and observe the items.
+    // This ensures they are initially hidden/transformed and will animate
+    // when scrolled into view, even if they were "initially visible"
+    // at the moment of content injection due to SPA navigation.
     scrollAnimatedItems.forEach(item => {
-        // Get the size and position of the element relative to the viewport.
-        const rect = item.getBoundingClientRect();
-
-        // Determine if the item is initially visible in the viewport when the page loads.
-        // It's considered visible if its top edge is above the bottom of the viewport
-        // and its bottom edge is below the top of the viewport.
-        const isInitiallyVisible = (
-            rect.top < (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.bottom > 0
-        );
-
-        // If the item is NOT initially visible in the viewport.
-        if (!isInitiallyVisible) {
-            // Add the "hidden-scroll" class. This class (defined in style.css)
-            // will make the element transparent and potentially apply a transform
-            // to prepare it for the animation.
-            item.classList.add("hidden-scroll");
-            // Start observing this item. The observer will detect when it scrolls into view.
-            observer.observe(item);
-        }
-        // If the item IS initially visible, we do nothing. It will load immediately
-        // without the fade-in animation, as per the user's request.
+        item.classList.add("hidden-scroll");
+        observer.observe(item);
     });
 }
 
