@@ -20,6 +20,8 @@ function initScrollAnimations() {
         });
     }, observerOptions);
 
+    // Select all elements that are intended to have the scroll animation.
+    // Ensure this includes all relevant animated items on your page.
     const scrollAnimatedItems = document.querySelectorAll(".github-project-item, .tech-skills-grid > div");
 
     scrollAnimatedItems.forEach(item => {
@@ -38,14 +40,9 @@ function initScrollAnimations() {
     // --- MODIFIED LOGIC: Make Control Box ALWAYS visible ---
     const controlsWrapper = document.querySelector('.bottom-right-controls-wrapper');
     if (controlsWrapper) {
-        // Ensure the fade-out-controls class is never present
+        // Ensure the fade-out-controls class is never present, making the control box always visible.
         controlsWrapper.classList.remove('fade-out-controls');
-
-        // Remove the scroll event listener for control box visibility
-        // as it's no longer needed to manage its fade.
-        // The previous window.addEventListener('scroll', updateControlsVisibility) is no longer attached here.
-        // You can remove any previous calls to window.removeEventListener for updateControlsVisibility
-        // if they were added elsewhere, but simply not adding it here is sufficient.
+        // No scroll event listener is needed here for the control box, as its visibility is fixed.
     }
     // --- END MODIFIED LOGIC ---
 }

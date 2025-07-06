@@ -2,13 +2,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const profileImage = document.querySelector('.profile-image');
     const msCertLogo = document.querySelector('.corner-logo-fixed');
     const mainHeading = document.querySelector('h1');
-    // Removed controlsWrapper here, as its logic is moved to scroll_animations.js
+    // Removed controlsWrapper variable as its logic is now solely in scroll_animations.js
 
     const SCROLL_THRESHOLD = 50;
     let hideHeaderTimeoutId = null;
     let isProfileImageActuallyHidden = false; // Tracks if the image is visually hidden (after transition)
 
-    // Removed scrollEndTimer and SCROLL_END_DELAY as they are no longer needed for controls
+    // Removed scrollEndTimer and SCROLL_END_DELAY variables as they are no longer needed for controls.
 
     function handleScroll() {
         let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -45,17 +45,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 isProfileImageActuallyHidden = false;
             }
         }
-        // --- END Header Logic ---
 
-        // The Control Box Fade-on-Scroll Logic has been completely removed from here.
-        // It is now solely managed by scroll_animations.js.
+        // The Control Box Fade-on-Scroll Logic has been entirely removed from this file.
+        // Its visibility is now solely managed by scroll_animations.js.
     }
 
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', handleScroll); // Also trigger on resize to adjust layout if needed
     handleScroll(); // Initial call to set correct state on page load
 
-    // Expose this function globally if other scripts need to trigger a header check
-    // This is still useful if the header's visibility needs to be recalculated by other parts of your app.
+    // Expose this function globally if other scripts need to trigger a header check.
     window.triggerHeaderScrollCheck = handleScroll;
 });
