@@ -30,7 +30,7 @@ function initScrollAnimations() {
     }, observerOptions); // Pass the defined options to the observer.
 
     // Select all elements that are intended to have the scroll animation.
-    const scrollAnimatedItems = document.querySelectorAll(".github-project-item, .tech-skills-grid div"); // Including tech-skills-grid div as per initial analysis
+    const scrollAnimatedItems = document.querySelectorAll(".github-project-item");
 
     // Iterate over each selected item.
     scrollAnimatedItems.forEach(item => {
