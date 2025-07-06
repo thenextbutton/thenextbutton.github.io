@@ -23,52 +23,16 @@ function initFontControls() {
     let d = n.cloneNode(!0);
     n.parentNode.replaceChild(d, n);
 
-    const controlsWrapper = document.querySelector('.bottom-right-controls-wrapper');
-
-    if (typeof controlsObserver === 'undefined') {
-        console.error("controlsObserver is not defined. Ensure scroll_animations.js loads before font_control.js");
-        return;
-    }
+    // Removed controlsWrapper and related observer/transition logic
+    // as visibility is now controlled by scroll_animations.js via scroll listener.
 
     const applyFontSize = (newSize) => {
-        // --- MODIFIED LOGIC: Temporarily disable CSS transition AND unobserve ---
-        if (controlsWrapper) {
-            // Store the original transition property
-            const originalTransition = controlsWrapper.style.transition;
-            controlsWrapper.dataset.originalTransition = originalTransition; // Store in a data attribute
-
-            // Disable all transitions on the control box
-            controlsWrapper.style.transition = 'none';
-            console.log("Controls Transition: DISABLED.");
-
-            controlsObserver.unobserve(controlsWrapper);
-            console.log("Controls Observer: UN-OBSERVING for font change.");
-        }
-        // --- END MODIFIED LOGIC ---
-
         l = newSize;
         o.style.fontSize = l + "px";
         localStorage.setItem("fontSize", l);
 
-        setTimeout(() => {
-            if (controlsWrapper) {
-                // Ensure it's visible by removing the fade-out class
-                controlsWrapper.classList.remove('fade-out-controls');
-
-                // Re-observe after the delay
-                controlsObserver.observe(controlsWrapper);
-                console.log("Controls Observer: RE-OBSERVING after font change.");
-
-                // --- MODIFIED LOGIC: Re-enable CSS transition ---
-                // Restore the original transition property
-                if (controlsWrapper.dataset.originalTransition !== undefined) {
-                    controlsWrapper.style.transition = controlsWrapper.dataset.originalTransition;
-                    console.log("Controls Transition: RE-ENABLED.");
-                    delete controlsWrapper.dataset.originalTransition; // Clean up data attribute
-                }
-                // --- END MODIFIED LOGIC ---
-            }
-        }, 1500); // Keep increased delay for stability
+        // No setTimeout needed here for the control box, as it won't react to font changes.
+        // It will only react to actual scrolling.
 
         if (typeof window.triggerHeaderScrollCheck === 'function') {
             window.triggerHeaderScrollCheck();

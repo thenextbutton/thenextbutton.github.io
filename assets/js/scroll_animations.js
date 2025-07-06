@@ -2,18 +2,17 @@
 // This function is designed to be called when the DOM is ready and also after new content
 // is dynamically loaded (e.g., by spa_loader.js).
 
-// Make controlsObserver globally accessible. This needs to be at the top level of the script.
-let controlsObserver;
+// Removed 'let controlsObserver;' as we're managing its visibility differently.
 
 function initScrollAnimations() {
-    // Define options for the Intersection Observer.
+    // Define options for the Intersection Observer for general scroll animations.
     const observerOptions = {
         root: null, // Use the viewport as the container
         rootMargin: "0px",
         threshold: 0.1 // Trigger when 10% of the item is visible
     };
 
-    // Create a new Intersection Observer instance for general scroll animations (e.g., GitHub project items).
+    // Create a new Intersection Observer instance for general scroll animations.
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -38,43 +37,33 @@ function initScrollAnimations() {
         }
     });
 
-    // --- MODIFIED PART FOR CONTROL BOX OBSERVER OPTIONS ---
-    // Define specific observer options for the bottom-right control box.
-    // We're giving it a large rootMargin to make it less sensitive to small movements.
-    const controlsObserverOptions = {
-        root: null, // Use the viewport as the container
-        // IMPORTANT: Increased rootMargin. This effectively makes the "viewport"
-        // for this observer much larger, so the control box is considered
-        // intersecting even if it's far outside the actual screen edges.
-        rootMargin: "0px 0px -99% 0px", // Top, Right, Bottom, Left. -99% means shrink bottom edge significantly.
-                                       // This should ensure it's "intersecting" unless truly scrolled far up.
-        threshold: 0 // Trigger as soon as any part of the element enters/leaves the expanded root.
-    };
+    // --- NEW LOGIC: Manage Control Box Visibility based on scroll position ---
+    const controlsWrapper = document.querySelector('.bottom-right-controls-wrapper');
+    if (!controlsWrapper) return; // Exit if controls not found
 
-    // Create a NEW Intersection Observer instance specifically for the bottom-right control box.
-    // Assign it to the global 'controlsObserver' variable.
-    controlsObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            const controlsWrapper = document.querySelector('.bottom-right-controls-wrapper');
-            if (!controlsWrapper) return;
+    let lastScrollY = window.scrollY; // Keep track of last scroll position
+    const scrollThreshold = 100; // Number of pixels from the top to hide/show
 
-            if (entry.isIntersecting) {
-                controlsWrapper.classList.remove('fade-out-controls');
-                console.log("Controls Observer (Internal): Controls are intersecting, removing fade-out.");
-            } else {
-                controlsWrapper.classList.add('fade-out-controls');
-                console.log("Controls Observer (Internal): Controls are NOT intersecting, adding fade-out.");
-            }
-        });
-    }, controlsObserverOptions); // Use the NEW specific options here
+    // Function to update the control box visibility
+    function updateControlsVisibility() {
+        const currentScrollY = window.scrollY;
 
-    // Get the control box element and start observing it.
-    const controlsWrapperElement = document.querySelector('.bottom-right-controls-wrapper');
-    if (controlsWrapperElement) {
-        controlsObserver.observe(controlsWrapperElement);
-        console.log("Controls Observer (Internal): Now observing the control box.");
+        // If scrolled down past the threshold
+        if (currentScrollY > scrollThreshold) {
+            controlsWrapper.classList.remove('fade-out-controls');
+        } else {
+            // If at the very top of the page (or within threshold)
+            controlsWrapper.classList.add('fade-out-controls');
+        }
+        lastScrollY = currentScrollY; // Update last scroll position
     }
-    // --- END MODIFIED PART ---
+
+    // Attach the updateControlsVisibility function to the scroll event
+    window.addEventListener('scroll', updateControlsVisibility);
+
+    // Also call it once on load to set initial state
+    updateControlsVisibility();
+    // --- END NEW LOGIC ---
 }
 
 document.addEventListener("DOMContentLoaded", initScrollAnimations);
