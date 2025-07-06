@@ -146,7 +146,7 @@ img {
   color: #f8f8f2;
 }
 
-/* Adjusted h1 styling */
+/* Main heading (h1) */
 h1 {
   font-family: "Consolas", monospace;
   text-align: center;
@@ -154,11 +154,10 @@ h1 {
   margin: 0;
   font-size: 2.5rem;
   line-height: 1.2;
-  padding: 0 20px; /* Adjusted padding to prevent horizontal scroll */
-  box-sizing: border-box; /* Ensure padding is included in the element's total width */
-  /* white-space: nowrap; was removed to allow text wrapping */
-  overflow: hidden; /* Keep overflow hidden for ellipsis */
-  text-overflow: ellipsis; /* Keep ellipsis for long text */
+  padding: 0 180px; /* This was identified as a cause of initial horizontal scroll */
+  white-space: nowrap; /* This was identified as a cause of initial horizontal scroll */
+  overflow: hidden;
+  text-overflow: ellipsis;
   transition: transform 0.7s ease-out;
 }
 
@@ -247,10 +246,11 @@ h1.slide-up {
   transition: opacity 0.6s ease-out, transform 0.6s ease-out, filter 0.6s ease-out; /* Added transition */
 }
 
-.github-project-item.hidden-scroll {
+div.github-project-item.hidden-scroll { /* This was identified as a cause of horizontal scroll on scroll */
+  transform: scale(1.5);
   opacity: 0;
-  transform: scale(0.8); /* Start slightly smaller to prevent overflow */
   filter: blur(5px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out, filter 0.6s ease-out;
 }
 
 .github-project-item .project-image {
