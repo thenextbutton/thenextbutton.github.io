@@ -57,9 +57,13 @@ document.addEventListener('DOMContentLoaded', () => {
             // After content is loaded and DOM is updated, make it visible
             contentArea.style.opacity = '1';
 
+            // --- NEW ORDER: Scroll to the top of the page FIRST ---
+            // This is crucial for ensuring initScrollAnimations evaluates visibility correctly.
+            window.scrollTo(0, 0);
+
             // --- IMPORTANT: Re-initialize scripts that operate on the new content ---
             // These functions need to be called AFTER the new HTML is injected into the DOM
-            // so they can find and manipulate the new elements.
+            // AND after the page has scrolled to the top.
 
             // Re-run scroll animations for any new elements that need the fade-in effect.
             if (typeof initScrollAnimations === 'function') {
@@ -75,9 +79,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (pageName === 'now' && typeof window.updateNowPageLastCommit === 'function') {
                 window.updateNowPageLastCommit();
             }
-
-            // --- NEW ADDITION: Scroll to the top of the page after content loads ---
-            window.scrollTo(0, 0);
 
         } catch (error) {
             console.error('Error loading content:', error);
