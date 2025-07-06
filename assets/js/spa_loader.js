@@ -83,9 +83,31 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Step 4: Scrolling to top of page.');
             window.scrollTo(0, 0);
 
-            // 5. Wait for a very short moment for the scroll to visually complete.
-            console.log('Step 5: Waiting 50ms for scroll to settle and render to stabilize.');
-            await new Promise(resolve => setTimeout(resolve, 50)); // Delay reduced to 50ms
+            // 5. Verify the page has scrolled to the top before proceeding.
+            console.log('Step 5: Verifying scroll position is 0.');
+            await new Promise(resolve => {
+                let scrollVerifyTimeout;
+                const checkScroll = () => {
+                    // Check both for cross-browser compatibility
+                    if (window.pageYOffset === 0 || document.documentElement.scrollTop === 0) {
+                        clearTimeout(scrollVerifyTimeout); // Clear timeout if verification succeeds
+                        console.log('Scroll to top verified.');
+                        resolve();
+                    } else {
+                        // Request next animation frame to re-check, preventing UI block
+                        requestAnimationFrame(checkScroll);
+                    }
+                };
+                // Start the check
+                requestAnimationFrame(checkScroll);
+
+                // Add a timeout in case the scroll never reaches 0 (e.g., sticky elements, browser quirks)
+                scrollVerifyTimeout = setTimeout(() => {
+                    console.warn('Scroll to top verification timed out after 1 second. Proceeding anyway.');
+                    resolve(); // Resolve even if not at 0 to prevent indefinite wait
+                }, 1000); // Give it up to 1 second to scroll and verify
+            });
+
 
             // 6. Initialize animations on the hidden, scrolled-to-top content
             console.log('Step 6: Initializing scroll animations for new content.');
