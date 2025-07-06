@@ -43,6 +43,13 @@ body::-webkit-scrollbar-thumb:hover {
   background-color: #777; /* Color of the scrollbar thumb on direct hover */
 }
 
+/* Hide scrollbar visually class */
+.hide-scrollbar-visually::-webkit-scrollbar-thumb,
+.hide-scrollbar-visually::-webkit-scrollbar-track {
+  background-color: transparent !important;
+  border-color: transparent !important;
+}
+
 
 .main-header-fixed {
   position: fixed;
