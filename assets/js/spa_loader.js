@@ -55,14 +55,13 @@ document.addEventListener('DOMContentLoaded', () => {
             // 1. Scroll to the top immediately after injecting content, while still hidden.
             window.scrollTo(0, 0);
 
-            // 2. Wait a very brief moment for the scroll to visually complete.
-            // This is essential because window.scrollTo is asynchronous and not instant.
-            await new Promise(resolve => setTimeout(resolve, 50)); // Small delay for scroll to settle
+            // 2. Wait a slightly longer moment for the scroll to visually complete.
+            // Increased to 150ms for better robustness.
+            await new Promise(resolve => setTimeout(resolve, 150));
 
-            // 3. Re-initialize animations (THIS IS THE CRITICAL STEP MOVED UP)
-            //    This will now run *after* the scroll has settled, and *before* content is visible.
-            //    So, `initScrollAnimations` will correctly apply `hidden-scroll` classes to
-            //    elements that are truly below the (now reset) viewport.
+            // 3. Re-initialize animations. This runs *after* the scroll has settled, and *before* content is visible.
+            // So, `initScrollAnimations` should now correctly apply `hidden-scroll` classes to
+            // elements that are truly below the (now reset) viewport.
             if (typeof initScrollAnimations === 'function') {
                 initScrollAnimations();
             }
