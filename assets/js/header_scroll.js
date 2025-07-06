@@ -2,13 +2,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const profileImage = document.querySelector('.profile-image');
     const msCertLogo = document.querySelector('.corner-logo-fixed');
     const mainHeading = document.querySelector('h1');
-    // Removed controlsWrapper variable as its logic is now solely in scroll_animations.js
 
     const SCROLL_THRESHOLD = 50;
     let hideHeaderTimeoutId = null;
-    let isProfileImageActuallyHidden = false; // Tracks if the image is visually hidden (after transition)
+    let isProfileImageActuallyHidden = false;
 
-    // Removed scrollEndTimer and SCROLL_END_DELAY variables as they are no longer needed for controls.
+    // --- Throttling Utility Function ---
+    // Limits how often a function can run.
+    function throttle(func, limit) {
+        let inThrottle;
+        return function() {
+            const args = arguments;
+            const context = this;
+            if (!inThrottle) {
+                func.apply(context, args);
+                inThrottle = true;
+                setTimeout(() => inThrottle = false, limit);
+            }
+        };
+    }
+    // --- END Throttling Utility Function ---
 
     function handleScroll() {
         let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -21,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 profileImage.classList.add('hidden');
                 msCertLogo.classList.add('hidden');
-                mainHeading.classList.add('slide-up'); // Add class to slide h1 up
+                mainHeading.classList.add('slide-up');
 
                 const profileImageTransitionDuration = parseFloat(getComputedStyle(profileImage).transitionDuration) * 1000;
 
@@ -41,19 +54,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 profileImage.classList.remove('hidden');
                 msCertLogo.classList.remove('hidden');
-                mainHeading.classList.remove('slide-up'); // Remove class to slide h1 down
+                mainHeading.classList.remove('slide-up');
                 isProfileImageActuallyHidden = false;
             }
         }
 
-        // The Control Box Fade-on-Scroll Logic has been entirely removed from this file.
-        // Its visibility is now solely managed by scroll_animations.js.
+        // The Control Box Fade-on-Scroll Logic remains completely removed from this file.
     }
 
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('resize', handleScroll); // Also trigger on resize to adjust layout if needed
-    handleScroll(); // Initial call to set correct state on page load
+    // --- Apply Throttling to Event Listeners ---
+    // The handleScroll function will now be called at most once every 100 milliseconds
+    // during scrolling or resizing.
+    const throttledHandleScroll = throttle(handleScroll, 100);
+
+    window.addEventListener('scroll', throttledHandleScroll);
+    window.addEventListener('resize', throttledHandleScroll);
+
+    // Initial call to set correct state on page load (this one doesn't need throttling)
+    handleScroll();
 
     // Expose this function globally if other scripts need to trigger a header check.
-    window.triggerHeaderScrollCheck = handleScroll;
+    // When called externally, it will trigger the throttled version.
+    window.triggerHeaderScrollCheck = throttledHandleScroll;
 });
