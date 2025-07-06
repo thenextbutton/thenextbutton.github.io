@@ -2,14 +2,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const profileImage = document.querySelector('.profile-image');
     const msCertLogo = document.querySelector('.corner-logo-fixed');
     const mainHeading = document.querySelector('h1');
-    const controlsWrapper = document.querySelector('.bottom-right-controls-wrapper'); // Get reference to the control box
+    // Removed controlsWrapper here, as its logic is moved to scroll_animations.js
 
     const SCROLL_THRESHOLD = 50;
     let hideHeaderTimeoutId = null;
     let isProfileImageActuallyHidden = false; // Tracks if the image is visually hidden (after transition)
 
-    let scrollEndTimer = null; // Timer for detecting end of scroll
-    const SCROLL_END_DELAY = 300; // Milliseconds to wait after last scroll event to fade in controls
+    // Removed scrollEndTimer and SCROLL_END_DELAY as they are no longer needed for controls
 
     function handleScroll() {
         let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -46,25 +45,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 isProfileImageActuallyHidden = false;
             }
         }
+        // --- END Header Logic ---
 
-        // --- Control Box Fade-on-Scroll Logic ---
-        clearTimeout(scrollEndTimer); // Always clear previous timer on new scroll event
-
-        if (controlsWrapper) {
-            if (currentScrollTop > 0) { // Only hide if actively scrolling down
-                if (!controlsWrapper.classList.contains('fade-out-controls')) {
-                    controlsWrapper.classList.add('fade-out-controls');
-                }
-            } else { // If at the very top of the page (or scrolled back to top), ensure it's visible
-                controlsWrapper.classList.remove('fade-out-controls');
-            }
-
-            // Set a new timer to show the control box after scrolling stops
-            // This timer is crucial for bringing it back after any scroll activity.
-            scrollEndTimer = setTimeout(() => {
-                controlsWrapper.classList.remove('fade-out-controls');
-            }, SCROLL_END_DELAY);
-        }
+        // The Control Box Fade-on-Scroll Logic has been completely removed from here.
+        // It is now solely managed by scroll_animations.js.
     }
 
     window.addEventListener('scroll', handleScroll);
@@ -72,5 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
     handleScroll(); // Initial call to set correct state on page load
 
     // Expose this function globally if other scripts need to trigger a header check
+    // This is still useful if the header's visibility needs to be recalculated by other parts of your app.
     window.triggerHeaderScrollCheck = handleScroll;
 });
