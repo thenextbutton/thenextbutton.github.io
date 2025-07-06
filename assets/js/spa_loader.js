@@ -50,21 +50,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // --- CRUCIAL CHANGE HERE ---
-            // Step 3: Scroll to the top immediately after injecting content, while still hidden.
+            // --- CRUCIAL NEW ORDER OF OPERATIONS ---
+
+            // 1. Scroll to the top immediately after injecting content, while still hidden.
             window.scrollTo(0, 0);
 
-            // Step 4: Wait a very brief moment for the scroll to visually complete.
-            // This is important because window.scrollTo is asynchronous and not instant.
+            // 2. Wait a very brief moment for the scroll to visually complete.
+            // This is essential because window.scrollTo is asynchronous and not instant.
             await new Promise(resolve => setTimeout(resolve, 50)); // Small delay for scroll to settle
 
-            // Step 5: Make the content visible ONLY AFTER it has scrolled to the top.
-            contentArea.style.opacity = '1';
-
-            // Step 6: Re-initialize scripts now that content is visible and at the correct scroll position.
+            // 3. Re-initialize animations (THIS IS THE CRITICAL STEP MOVED UP)
+            //    This will now run *after* the scroll has settled, and *before* content is visible.
+            //    So, `initScrollAnimations` will correctly apply `hidden-scroll` classes to
+            //    elements that are truly below the (now reset) viewport.
             if (typeof initScrollAnimations === 'function') {
                 initScrollAnimations();
             }
+
+            // 4. Finally, make the content visible. It will now fade in correctly.
+            contentArea.style.opacity = '1';
+
+            // 5. Run other initializations now that content is visible
             if (typeof initAutoLinker === 'function') {
                 initAutoLinker();
             }
