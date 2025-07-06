@@ -1,55 +1,55 @@
 html {
   font-size: 14px;
   transition: font-size 0.3s ease-in-out;
-  scroll-behavior: smooth; /* ADDED: Smooth scrolling for anchor links */
+  scroll-behavior: smooth;
 }
 
 body {
-  font-family: "Consolas", monospace; /* All text will now use Consolas */
+  font-family: "Consolas", monospace;
   background-color: #1a1a1a;
   color: #f0f0f0;
-  margin: 0 auto; /* Centered body */
+  margin: 0 auto;
   padding: 0;
   padding-top: 120px;
-  max-width: 1200px; /* Max width for the entire body */
+  max-width: 1200px;
   transition: background-color 1.5s ease-in-out, color 1.5s ease-in-out;
-  overflow-y: scroll; /* Ensures scrollbar space is always reserved to prevent content jumping */
+  overflow-y: scroll;
 }
 
 /* Scrollbar Styling for Webkit browsers */
 body::-webkit-scrollbar {
-  width: 10px; /* Width of the scrollbar */
+  width: 10px;
 }
 
 body::-webkit-scrollbar-track {
-  background: transparent; /* Make track transparent in dark mode */
+  background: transparent;
   border-radius: 5px;
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: transparent; /* Transparent by default */
-  border-radius: 5px; /* Rounded corners for the thumb */
-  border: 2px solid transparent; /* Transparent border by default */
+  background-color: transparent;
+  border-radius: 5px;
+  border: 2px solid transparent;
 }
 
 /* Make thumb visible on hover over the body */
 body:hover::-webkit-scrollbar-thumb {
-  background-color: #555; /* Color of the scrollbar thumb on hover */
-  border-color: #555; /* Match thumb color */
+  background-color: #555;
+  border-color: #555;
 }
 
 /* Dark Mode Scrollbar (for light-on-dark content) */
 body.light-mode::-webkit-scrollbar-track {
-  background: #f0f0f0; /* Light background for light mode scrollbar */
+  background: #f0f0f0;
 }
 
 body.light-mode::-webkit-scrollbar-thumb {
-  background-color: transparent; /* Transparent by default in light mode */
-  border-color: transparent; /* Transparent border by default in light mode */
+  background-color: transparent;
+  border-color: transparent;
 }
 
 body.light-mode:hover::-webkit-scrollbar-thumb {
-  background-color: #bbb; /* Darker thumb on hover in light mode */
+  background-color: #bbb;
   border-color: #bbb;
 }
 
@@ -69,7 +69,7 @@ body.light-mode {
 img {
   max-width: 100%;
   height: auto;
-  display: block; /* Remove extra space below images */
+  display: block;
 }
 
 /* Profile Image specific styling */
@@ -87,7 +87,7 @@ img {
 
 /* Corner Logo Fixed specific styling */
 .corner-logo-fixed {
-  width: 150px; /* Original width */
+  width: 150px;
   height: auto;
   position: fixed;
   top: 10px;
@@ -99,7 +99,7 @@ img {
 /* Styles for hidden elements (profile image, MS logo) */
 .profile-image.hidden,
 .corner-logo-fixed.hidden {
-  transform: translateX(-150%); /* Slide out to the left */
+  transform: translateX(-150%);
   opacity: 0;
 }
 
@@ -146,7 +146,7 @@ img {
   color: #f8f8f2;
 }
 
-/* Main heading (h1) */
+/* Adjusted h1 styling */
 h1 {
   font-family: "Consolas", monospace;
   text-align: center;
@@ -154,37 +154,37 @@ h1 {
   margin: 0;
   font-size: 2.5rem;
   line-height: 1.2;
-  padding: 0 180px; /* This was identified as a cause of initial horizontal scroll */
-  white-space: nowrap; /* This was identified as a cause of initial horizontal scroll */
+  padding: 0 20px;
+  box-sizing: border-box;
   overflow: hidden;
   text-overflow: ellipsis;
   transition: transform 0.7s ease-out;
 }
 
 h1.slide-up {
-  transform: translateY(-150%); /* Slide h1 up off screen */
+  transform: translateY(-150%);
 }
 
 /* Main content area styling for dynamic content */
 #content-area {
-  max-width: 1200px; /* Matches body max-width */
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 20px; /* Padding for the entire content area */
+  padding: 20px;
   box-sizing: border-box;
-  opacity: 1; /* Default opacity */
-  transition: opacity 0.3s ease-out; /* Fade effect for content transitions */
+  opacity: 1;
+  transition: opacity 0.3s ease-out;
 }
 
 .content-column {
-  max-width: 800px; /* Standard column width for readability */
-  margin: 0 auto; /* Center the content column */
+  max-width: 800px;
+  margin: 0 auto;
   padding: 20px;
   background-color: #282a36;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   line-height: 1.6;
   color: #f8f8f2;
-  box-sizing: border-box; /* Include padding in width calculation */
+  box-sizing: border-box;
 }
 
 .content-column h2 {
@@ -242,15 +242,14 @@ h1.slide-up {
   margin-bottom: 20px;
   overflow: hidden;
   position: relative;
-  max-width: 100%; /* Ensure it doesn't exceed its parent's width */
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out, filter 0.6s ease-out; /* Added transition */
+  max-width: 100%;
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out, filter 0.6s ease-out;
 }
 
-div.github-project-item.hidden-scroll { /* This was identified as a cause of horizontal scroll on scroll */
-  transform: scale(1.5);
+.github-project-item.hidden-scroll {
   opacity: 0;
+  transform: scale(0.8);
   filter: blur(5px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out, filter 0.6s ease-out;
 }
 
 .github-project-item .project-image {
@@ -259,7 +258,7 @@ div.github-project-item.hidden-scroll { /* This was identified as a cause of hor
   object-fit: cover;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
-  min-width: 150px; /* Ensure image takes up at least 150px */
+  min-width: 150px;
 }
 
 .github-project-item .project-details {
@@ -271,7 +270,7 @@ div.github-project-item.hidden-scroll { /* This was identified as a cause of hor
   color: #f8f8f2;
   margin-top: 0;
   margin-bottom: 10px;
-  border-bottom: none; /* Remove border from project item headings */
+  border-bottom: none;
   font-size: 1.3em;
 }
 
@@ -286,15 +285,15 @@ div.github-project-item.hidden-scroll { /* This was identified as a cause of hor
   position: absolute;
   top: 5px;
   left: 5px;
-  width: 30px; /* Small size for the corner logo */
+  width: 30px;
   height: auto;
-  z-index: 1; /* Ensure it's above the project image */
+  z-index: 1;
 }
 
 .home-assistant-corner-logo img {
   width: 100%;
   height: auto;
-  border-radius: 4px; /* Slightly rounded corners for the logo */
+  border-radius: 4px;
 }
 
 /* Tech Skills Grid */
@@ -314,7 +313,6 @@ div.github-project-item.hidden-scroll { /* This was identified as a cause of hor
   font-weight: bold;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-  /* Ensure the base transition is here */
 }
 
 .tech-skills-grid div:hover {
@@ -336,8 +334,8 @@ div.github-project-item.hidden-scroll { /* This was identified as a cause of hor
   flex-direction: column;
   gap: 10px;
   z-index: 1000;
-  width: 160px; /* Fixed width for the wrapper */
-  transition: opacity 0.3s ease-out; /* Fade out transition */
+  width: 160px;
+  transition: opacity 0.3s ease-out;
 }
 
 .bottom-right-controls-wrapper.fade-out-controls {
@@ -354,78 +352,78 @@ div.github-project-item.hidden-scroll { /* This was identified as a cause of hor
   border-radius: 12px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: relative;
-  overflow: hidden; /* Ensure icons don't spill */
+  overflow: hidden;
 }
 
 .theme-switch-checkbox {
-  display: none; /* Hide the default checkbox */
+  display: none;
 }
 
 .theme-switch-label {
   cursor: pointer;
-  width: 80px; /* Increased width */
-  height: 25px; /* Increased height */
-  background-color: #6272a4; /* Background for the toggle track */
-  border-radius: 15px; /* More rounded ends */
+  width: 80px;
+  height: 25px;
+  background-color: #6272a4;
+  border-radius: 15px;
   position: relative;
   transition: background-color 0.3s ease;
-  flex-shrink: 0; /* Prevent label from shrinking */
-  margin: 0 10px; /* Space for icons */
+  flex-shrink: 0;
+  margin: 0 10px;
 }
 
 .theme-switch-label:after {
   content: '';
   position: absolute;
-  top: 2px; /* Adjusted to center the circle vertically */
+  top: 2px;
   left: 2px;
-  width: 21px; /* Increased size for the circle */
+  width: 21px;
   height: 21px;
-  background-color: #f8f8f2; /* Color of the toggle circle */
+  background-color: #f8f8f2;
   border-radius: 50%;
   transition: left 0.3s ease, background-color 0.3s ease;
 }
 
 .theme-switch-checkbox:checked + .theme-switch-label:after {
-  left: calc(100% - 2px); /* Position for dark mode (right side) */
-  transform: translateX(-100%); /* Move by its own width */
+  left: calc(100% - 2px);
+  transform: translateX(-100%);
 }
 
 .theme-icon {
   font-size: 20px;
-  color: #f8f8f2; /* Default icon color */
+  color: #f8f8f2;
   position: absolute;
   transition: opacity 0.3s ease-in-out, color 0.3s ease;
-  line-height: 1; /* Align icons vertically */
+  line-height: 1;
 }
 
 #moon-icon {
-  left: 10px; /* Position moon icon */
+  left: 10px;
   opacity: 1;
-  color: #f1c40f; /* Yellow for moon */
+  color: #f1c40f;
 }
 
 #sun-icon {
-  right: 10px; /* Position sun icon */
+  right: 10px;
   opacity: 0;
-  color: #FFD700; /* Gold for sun */
+  color: #FFD700;
 }
 
 /* When checkbox is checked (dark mode active) */
 .theme-switch-checkbox:checked ~ #moon-icon {
-  opacity: 1; /* Moon remains visible */
+  opacity: 1;
 }
 
 .theme-switch-checkbox:checked ~ #sun-icon {
-  opacity: 0; /* Sun fades out */
+  opacity: 0;
 }
 
 /* When checkbox is NOT checked (light mode active) */
 .theme-switch-checkbox:not(:checked) ~ #moon-icon {
-  opacity: 0; /* Moon fades out */
+  opacity: 0;
 }
 
 .theme-switch-checkbox:not(:checked) ~ #sun-icon {
-  opacity: 1; /* Sun fades in */
+  opacity: 1;
 }
 
 /* Font Size Controls */
@@ -477,7 +475,7 @@ div.github-project-item.hidden-scroll { /* This was identified as a cause of hor
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
   body {
-    padding-top: 90px; /* Adjust padding for smaller header on mobile */
+    padding-top: 90px;
   }
 
   .profile-image {
@@ -494,29 +492,29 @@ div.github-project-item.hidden-scroll { /* This was identified as a cause of hor
   }
 
   .main-header-fixed {
-    padding: 8px 10px; /* Smaller padding for header */
+    padding: 8px 10px;
   }
 
   .main-header-fixed ul {
-    gap: 10px; /* Smaller gap between nav items */
+    gap: 10px;
   }
 
   .main-header-fixed a {
-    padding: 5px 8px; /* Smaller padding for nav links */
+    padding: 5px 8px;
     font-size: 0.9em;
   }
 
   h1 {
-    font-size: 1.8rem; /* Smaller h1 font size on mobile */
-    padding: 0 10px; /* Adjusted padding for mobile */
+    font-size: 1.8rem;
+    padding: 0 10px;
   }
 
   #content-area {
-    padding: 10px; /* Smaller overall content padding */
+    padding: 10px;
   }
 
   .content-column {
-    padding: 15px; /* Smaller column padding */
+    padding: 15px;
     font-size: 0.95rem;
   }
 
@@ -529,16 +527,16 @@ div.github-project-item.hidden-scroll { /* This was identified as a cause of hor
   }
 
   .github-project-item {
-    flex-direction: column; /* Stack image and details on small screens */
+    flex-direction: column;
   }
 
   .github-project-item .project-image {
-    width: 100%; /* Full width for image */
+    width: 100%;
     height: auto;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     border-bottom-left-radius: 0;
-    min-width: unset; /* Remove min-width for stacking */
+    min-width: unset;
   }
 
   .github-project-item .project-details {
@@ -548,7 +546,7 @@ div.github-project-item.hidden-scroll { /* This was identified as a cause of hor
   .home-assistant-corner-logo {
     top: 5px;
     left: 5px;
-    width: 25px; /* Slightly smaller logo on mobile */
+    width: 25px;
   }
 
   .tech-skills-grid {
@@ -564,28 +562,28 @@ div.github-project-item.hidden-scroll { /* This was identified as a cause of hor
   .bottom-right-controls-wrapper {
     bottom: 10px;
     right: 10px;
-    width: auto; /* Allow wrapper to size content */
-    flex-direction: row; /* Layout controls in a row */
-    align-items: center; /* Vertically align items */
-    justify-content: flex-end; /* Align controls to the right */
-    background-color: #282a36; /* Background for the wrapper */
-    border-radius: 12px; /* Rounded corners for the wrapper */
-    padding: 8px 12px; /* Padding inside the wrapper */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Shadow for the wrapper */
-    max-width: calc(100% - 20px); /* Prevent overflow from wrapper itself */
+    width: auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    background-color: #282a36;
+    border-radius: 12px;
+    padding: 8px 12px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    max-width: calc(100% - 20px);
   }
 
   .theme-toggle-container {
-    background-color: transparent; /* No background needed here */
-    box-shadow: none; /* No shadow needed here */
-    padding: 0; /* No padding needed here */
+    background-color: transparent;
+    box-shadow: none;
+    padding: 0;
   }
 
   .theme-switch-label {
-    width: 60px; /* Slightly smaller toggle on mobile */
+    width: 60px;
     height: 20px;
     border-radius: 10px;
-    margin: 0 8px; /* Adjusted margin for mobile centering */
+    margin: 0 8px;
   }
 
   .theme-switch-label:after {
@@ -600,15 +598,15 @@ div.github-project-item.hidden-scroll { /* This was identified as a cause of hor
   }
 
   .theme-icon {
-    font-size: 18px; /* Slightly smaller icons on mobile */
+    font-size: 18px;
   }
 
   .font-controls {
-    gap: 6px; /* Reduced gap between font control buttons */
+    gap: 6px;
   }
 
   .font-controls span {
-    width: 35px; /* Slightly smaller font control buttons */
+    width: 35px;
     height: 35px;
     font-size: 16px;
   }
@@ -633,7 +631,7 @@ div.github-project-item.hidden-scroll { /* This was identified as a cause of hor
     background-color: #282a36;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    margin-top: 0; /* Remove top margin if needed for mobile */
+    margin-top: 0;
   }
 }
 
@@ -700,29 +698,29 @@ body.light-mode .tech-skills-grid div:hover {
 }
 
 body.light-mode .bottom-right-controls-wrapper {
-  background-color: #ffffff; /* Light mode background for controls wrapper */
+  background-color: #ffffff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 body.light-mode .theme-toggle-container,
 body.light-mode .font-controls {
-  background-color: #e0e0e0; /* Light mode background for individual control groups */
+  background-color: #e0e0e0;
 }
 
 body.light-mode .theme-switch-label {
-  background-color: #c0c0c0; /* Light mode background for toggle track */
+  background-color: #c0c0c0;
 }
 
 body.light-mode .theme-switch-label:after {
-  background-color: #44475a; /* Darker circle in light mode */
+  background-color: #44475a;
 }
 
 body.light-mode #moon-icon {
-  color: #555; /* Darker moon in light mode */
+  color: #555;
 }
 
 body.light-mode #sun-icon {
-  color: #f1c40f; /* Still yellow for sun in light mode */
+  color: #f1c40f;
 }
 
 body.light-mode .font-controls span {
