@@ -52,7 +52,7 @@ function initFontControls() {
                 controlsObserver.observe(controlsWrapper);
                 console.log("Controls Observer: RE-OBSERVING after font change.");
             }
-        }, 750); // Increased delay
+        }, 1500); // Increased delay
         // --- END NEW LOGIC ---
 
         // Check if triggerHeaderScrollCheck exists before calling
