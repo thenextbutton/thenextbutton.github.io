@@ -21,30 +21,24 @@ function initScrollAnimations() {
     }, observerOptions);
 
     // Select all elements that are intended to have the scroll animation.
-    // Ensure this includes all relevant animated items on your page.
     const scrollAnimatedItems = document.querySelectorAll(".github-project-item, .tech-skills-grid > div");
 
+    // --- MODIFIED LOGIC HERE ---
+    // Forcibly add 'hidden-scroll' to ALL relevant items.
+    // The IntersectionObserver will then remove it when they come into view.
     scrollAnimatedItems.forEach(item => {
-        const rect = item.getBoundingClientRect();
-        const isInitiallyVisible = (
-            rect.top < (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.bottom > 0
-        );
-
-        if (!isInitiallyVisible) {
-            item.classList.add("hidden-scroll");
-            observer.observe(item);
-        }
+        item.classList.add("hidden-scroll");
+        observer.observe(item);
     });
+    // --- END MODIFIED LOGIC ---
 
-    // --- MODIFIED LOGIC: Make Control Box ALWAYS visible ---
+    // --- Control Box Always Visible Logic ---
     const controlsWrapper = document.querySelector('.bottom-right-controls-wrapper');
     if (controlsWrapper) {
-        // Ensure the fade-out-controls class is never present, making the control box always visible.
         controlsWrapper.classList.remove('fade-out-controls');
-        // No scroll event listener is needed here for the control box, as its visibility is fixed.
     }
-    // --- END MODIFIED LOGIC ---
+    // --- END Control Box Always Visible Logic ---
 }
 
+// Attach the initScrollAnimations function to the DOMContentLoaded event for initial page load.
 document.addEventListener("DOMContentLoaded", initScrollAnimations);
