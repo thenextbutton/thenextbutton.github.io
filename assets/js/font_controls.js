@@ -25,37 +25,51 @@ function initFontControls() {
 
     const controlsWrapper = document.querySelector('.bottom-right-controls-wrapper');
 
-    // Make sure controlsObserver is defined and accessible
-    // It should be coming from scroll_animations.js which must be loaded first.
     if (typeof controlsObserver === 'undefined') {
         console.error("controlsObserver is not defined. Ensure scroll_animations.js loads before font_control.js");
-        return; // Exit if observer isn't ready
+        return;
     }
 
     const applyFontSize = (newSize) => {
-        // --- NEW LOGIC: Unobserve before changing font size ---
-        if (controlsWrapper) { // Check if controlsWrapper exists
+        // --- MODIFIED LOGIC: Temporarily disable CSS transition AND unobserve ---
+        if (controlsWrapper) {
+            // Store the original transition property
+            const originalTransition = controlsWrapper.style.transition;
+            controlsWrapper.dataset.originalTransition = originalTransition; // Store in a data attribute
+
+            // Disable all transitions on the control box
+            controlsWrapper.style.transition = 'none';
+            console.log("Controls Transition: DISABLED.");
+
             controlsObserver.unobserve(controlsWrapper);
             console.log("Controls Observer: UN-OBSERVING for font change.");
         }
-        // --- END NEW LOGIC ---
+        // --- END MODIFIED LOGIC ---
 
         l = newSize;
         o.style.fontSize = l + "px";
         localStorage.setItem("fontSize", l);
 
-        // --- NEW LOGIC: Re-observe after a delay ---
-        // Increased delay to 750ms - experiment with this value!
         setTimeout(() => {
-            if (controlsWrapper) { // Check if controlsWrapper exists
-                controlsWrapper.classList.remove('fade-out-controls'); // Ensure visibility
+            if (controlsWrapper) {
+                // Ensure it's visible by removing the fade-out class
+                controlsWrapper.classList.remove('fade-out-controls');
+
+                // Re-observe after the delay
                 controlsObserver.observe(controlsWrapper);
                 console.log("Controls Observer: RE-OBSERVING after font change.");
-            }
-        }, 1500); // Increased delay
-        // --- END NEW LOGIC ---
 
-        // Check if triggerHeaderScrollCheck exists before calling
+                // --- MODIFIED LOGIC: Re-enable CSS transition ---
+                // Restore the original transition property
+                if (controlsWrapper.dataset.originalTransition !== undefined) {
+                    controlsWrapper.style.transition = controlsWrapper.dataset.originalTransition;
+                    console.log("Controls Transition: RE-ENABLED.");
+                    delete controlsWrapper.dataset.originalTransition; // Clean up data attribute
+                }
+                // --- END MODIFIED LOGIC ---
+            }
+        }, 1500); // Keep increased delay for stability
+
         if (typeof window.triggerHeaderScrollCheck === 'function') {
             window.triggerHeaderScrollCheck();
         }
