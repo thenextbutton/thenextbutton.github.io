@@ -83,9 +83,9 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Step 4: Scrolling to top of page.');
             window.scrollTo(0, 0);
 
-            // 5. Wait for 3 seconds for the scroll to visually complete.
-            console.log('Step 5: Waiting 3 seconds for scroll to settle and render to stabilize.');
-            await new Promise(resolve => setTimeout(resolve, 3000)); // 3000ms delay as requested
+            // 5. Wait for a very short moment for the scroll to visually complete.
+            console.log('Step 5: Waiting 50ms for scroll to settle and render to stabilize.');
+            await new Promise(resolve => setTimeout(resolve, 50)); // Delay reduced to 50ms
 
             // 6. Initialize animations on the hidden, scrolled-to-top content
             console.log('Step 6: Initializing scroll animations for new content.');
