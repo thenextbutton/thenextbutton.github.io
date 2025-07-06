@@ -35,140 +35,145 @@ body::-webkit-scrollbar-thumb {
 /* Make thumb visible on hover over the body */
 body:hover::-webkit-scrollbar-thumb {
   background-color: #555; /* Color of the scrollbar thumb on hover */
-  border-color: #555; /* Match border color on hover */
+  border-color: #282a36; /* Border to match track on hover */
 }
 
-/* Specific styling for when scrollbar is hidden visually */
+/* Preserve hover effect for the thumb itself */
+body::-webkit-scrollbar-thumb:hover {
+  background-color: #777; /* Color of the scrollbar thumb on direct hover */
+}
+
+/* Hide scrollbar visually class */
 .hide-scrollbar-visually::-webkit-scrollbar-thumb,
 .hide-scrollbar-visually::-webkit-scrollbar-track {
   background-color: transparent !important;
   border-color: transparent !important;
 }
 
-/* Theme variables */
-:root {
-  --text-color: #f0f0f0; /* Default text color (Dark Mode) */
-  --background-color: #1a1a1a; /* Default background color (Dark Mode) */
-  --link-color: #4CAF50; /* Green links for dark mode */
-  --link-hover-color: #66BB6A; /* Lighter green on hover */
-  --nav-link-hover-bg: rgba(76, 175, 80, 0.2); /* Semi-transparent green for nav hover */
-  --active-nav-link-color: #FFD700; /* Gold for active nav link */
-  --active-nav-link-border: #FFD700; /* Gold border for active nav link */
-  --box-shadow-color: rgba(0, 0, 0, 0.5); /* Dark shadow for dark mode */
-  --button-bg: #333;
-  --button-text: #f0f0f0;
-  --button-border: #555;
-  --button-hover-bg: #555;
-  --button-hover-text: #fff;
-  --header-bg: rgba(26, 26, 26, 0.9); /* Semi-transparent header background for dark mode */
-  --main-heading-color: #f0f0f0; /* Color for h1 */
-}
 
-body.light-theme {
-  --text-color: #333; /* Light Mode text color */
-  --background-color: #f0f0f0; /* Light Mode background color */
-  --link-color: #007bff; /* Blue links for light mode */
-  --link-hover-color: #0056b3; /* Darker blue on hover */
-  --nav-link-hover-bg: rgba(0, 123, 255, 0.1); /* Semi-transparent blue for nav hover */
-  --active-nav-link-color: #FF8C00; /* Orange for active nav link in light mode */
-  --active-nav-link-border: #FF8C00; /* Orange border for active nav link in light mode */
-  --box-shadow-color: rgba(0, 0, 0, 0.1); /* Lighter shadow for light mode */
-  --button-bg: #eee;
-  --button-text: #333;
-  --button-border: #ccc;
-  --button-hover-bg: #ddd;
-  --button-hover-text: #000;
-  --header-bg: rgba(240, 240, 240, 0.9); /* Semi-transparent header background for light mode */
-  --main-heading-color: #333; /* Color for h1 */
-}
-
-/* Ensure common elements use theme colors */
-h1 {
-  color: var(--main-heading-color);
-}
-
-a {
-  color: var(--link-color);
-  text-decoration: none;
-  transition: color 0.3s ease-in-out;
-}
-
-a:hover {
-  color: var(--link-hover-color);
-}
-
-/* Ensure h4 and list items within content area use theme's text color */
-#content-area h4,
-#content-area ul,
-#content-area ul li {
-    color: var(--text-color);
-}
-
-/* Header/Navigation */
-header {
-  background-color: var(--header-bg);
-  padding: 10px 0;
+.main-header-fixed {
   position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
-  z-index: 1000;
-  box-shadow: 0 2px 5px var(--box-shadow-color);
+  background-color: #1a1a1a;
+  padding: 10px 0;
+  box-sizing: border-box;
+  z-index: 900;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  flex-direction: column; /* Stack elements vertically */
-  transition: background-color 1.5s ease-in-out, box-shadow 1.5s ease-in-out;
+  justify-content: center;
+  min-height: 120px;
+  transition: background-color 1.5s ease-in-out, color 1.5s ease-in-out;
 }
 
-.profile-image-container {
-  position: relative;
-  width: 100px; /* Adjust as needed */
-  height: 100px; /* Adjust as needed */
-  margin-bottom: 5px; /* Space between image and h1 */
-  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+.content-column {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  box-sizing: border-box;
+  margin-top: 0;
+  font-size: 1rem;
+  color: #f0f0f0;
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out, color 1.5s ease-in-out;
+}
+
+/* ADDED: CSS for page transitions */
+#content-area {
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out; /* Controls the fade duration */
+}
+
+#content-area.fade-out {
+    opacity: 0;
+}
+
+#content-area.fade-in {
+    opacity: 1;
+}
+
+
+h1 {
+  font-family: "Consolas", monospace;
+  text-align: center;
+  color: #a0a0a0;
+  margin: 0;
+  font-size: 2.5rem;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 40px; /* MODIFIED: Reduced desktop padding for h1 */
+  box-sizing: border-box;
+  transition: transform 0.7s ease-out;
+}
+
+h2, h3, h4, h5, h6 {
+  font-family: "Consolas", monospace;
+}
+
+h4 {
+    margin-top: 20px; /* Adjust as needed, default is often higher */
+    margin-bottom: 10px; /* Reduce space below h4 */
+}
+
+/* Reduce top margin for unordered lists */
+ul {
+    margin-top: 0px; /* Removes the default top margin, bringing it closer to the preceding element */
+    margin-bottom: 10px; /* Keep some space below the list */
+    padding-left: 20px; /* Adjust indentation of list items if needed */
+}
+
+/* Optional: Further reduce spacing for list items themselves */
+ul li {
+    margin-bottom: 5px; /* Adds a small gap between list items */
 }
 
 .profile-image {
-  width: 100%;
-  height: 100%;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid var(--active-nav-link-color); /* Use active nav link color for border */
-  box-shadow: 0 0 10px var(--box-shadow-color);
-  transition: border-color 1.5s ease-in-out, box-shadow 1.5s ease-in-out;
-}
-
-.profile-image.hidden {
-  opacity: 0;
-  transform: scale(0.8);
-  pointer-events: none; /* Make it unclickable when hidden */
+  z-index: 999;
+  transition: transform 0.7s ease-out;
 }
 
 .corner-logo-fixed {
-  position: absolute; /* Position relative to the header */
-  top: 15px; /* Adjust as needed */
-  right: 15px; /* Adjust as needed */
-  width: 40px; /* Smaller size */
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 150px;
   height: auto;
-  transition: opacity 0.5s ease-in-out;
-  z-index: 1001; /* Ensure it's above other elements if needed */
+  z-index: 1000;
+  transition: transform 0.7s ease-in-out;
+}
+
+.corner-logo-fixed img {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+
+.profile-image.hidden {
+  transform: translateX(-150%);
 }
 
 .corner-logo-fixed.hidden {
-  opacity: 0;
-  pointer-events: none;
+  transform: translateX(150%);
 }
 
-h1 {
-  font-size: 2.5rem; /* Larger font size for the main heading */
-  margin: 10px 0; /* Adjust spacing as needed */
+.main-nav {
   text-align: center;
-  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
-}
-
-h1.slide-up {
-  transform: translateY(-20px); /* Slide up a bit */
-  opacity: 0;
+  margin-top: 10px;
+  margin-bottom: 0;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
 .main-nav ul {
@@ -177,333 +182,631 @@ h1.slide-up {
   margin: 0;
   display: flex;
   justify-content: center;
-  flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+  flex-wrap: wrap;
+  gap: 30px;
 }
 
-.main-nav li {
-  margin: 0 15px;
-}
-
-.main-nav a {
-  display: block;
-  padding: 10px 15px;
-  border-radius: 5px;
+.main-nav li a {
+  text-decoration: none;
+  color: #a0a0a0;
   font-weight: bold;
-  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, border-color 0.3s ease-in-out;
-  border: 1px solid transparent; /* Consistent border for all states */
-}
-
-.main-nav a:hover {
-  background-color: var(--nav-link-hover-bg);
-  color: var(--link-hover-color);
-}
-
-.main-nav a.active {
-  color: var(--active-nav-link-color);
-  border-color: var(--active-nav-link-border);
-  background-color: var(--nav-link-hover-bg); /* Keep hover background for active state */
-}
-
-/* Content Area */
-#content-area {
-  padding: 30px; /* Padding for the content */
-  margin: 20px auto;
-  max-width: 800px;
-  background-color: var(--background-color);
-  box-shadow: 0 2px 10px var(--box-shadow-color);
-  border-radius: 8px;
-  line-height: 1.8;
-  transition: opacity 0.5s ease-in-out, background-color 1.5s ease-in-out, box-shadow 1.5s ease-in-out;
-}
-
-.content-column {
-  padding: 0px 30px 30px 30px;
   font-size: 1.1rem;
-  line-height: 1.6;
-  margin-bottom: 30px;
+  padding: 5px 10px;
+  transition: color 0.3s ease-in-out, font-weight 0.2s ease-in-out, background-color 0.3s ease-in-out, border-radius 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+  display: inline-block;
+  border-radius: 4px;
 }
 
-/* Footer */
-footer {
-  text-align: center;
-  padding: 20px;
-  color: var(--text-color);
-  font-size: 0.9rem;
-  margin-top: 50px;
+.main-nav li a:hover {
+  color: #c0c0c0;
+  font-weight: bolder;
+  background-color: #333;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
 }
 
-/* Powered by GitHub Pages text */
-.powered-by-github {
-  text-align: center;
-  padding: 10px;
-  font-size: 0.8rem;
-  color: var(--text-color);
+/* ADDED: Active navigation link styling */
+.main-nav li a.active {
+  color: #8be9fd; /* Highlight color */
+  font-weight: bolder;
+  background-color: #333;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-.powered-by-github a {
-  color: var(--link-color);
+.content-column a {
+  color: #8be9fd;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 1.5s ease-in-out;
+}
+
+.content-column a:hover {
   text-decoration: underline;
 }
 
-/* Theme Toggle Button */
+.content-column h2 {
+    margin-bottom: 5px; /* Adjust this value as needed, try 0px if you want it very tight */
+}
+
+.github-project-item {
+  background-color: #282a36;
+  padding: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border-radius: 8px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* This is the reference shadow */
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  text-align: left;
+  transition: background-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out, opacity 2s ease-out, transform 2s ease-out;
+  position: relative;
+}
+
+.github-project-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+}
+
+.github-project-item.hidden-scroll {
+  opacity: 0;
+  transform: scale(0.5); /* This line restores the zoom-out effect */
+}
+
+.project-image {
+  width: 25%;
+  flex-shrink: 0;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+  margin: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.project-details {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.github-project-item h3 {
+  font-size: 1.5rem;
+  color: #8be9fd;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.github-project-item p {
+  font-size: 1rem;
+  margin-bottom: 15px;
+  word-wrap: break-word; /* ADDED: Ensures long words break */
+  overflow-wrap: break-word; /* ADDED: Standard property for word wrapping */
+}
+
+.home-assistant-corner-logo {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+}
+
+.home-assistant-corner-logo img {
+  width: 20px;
+  height: auto;
+  border-radius: 4px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.home-assistant-corner-logo:hover img {
+  transform: scale(1.1);
+}
+
+
+.powered-by-github {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  font-size: 13px;
+  color: #888;
+  z-index: 990;
+  transition: color 1.5s ease-in-out;
+}
+
+.powered-by-github a {
+  color: #888;
+  text-decoration: none;
+  transition: color 1.5s ease-in-out;
+}
+
+.powered-by-github a:hover {
+  text-decoration: underline;
+}
+
+/* MODIFIED: Control box styling for responsiveness and icon spacing */
 .bottom-right-controls-wrapper {
   position: fixed;
   bottom: 20px;
   right: 20px;
+  z-index: 1000;
   display: flex;
   flex-direction: column; /* Stack controls vertically */
-  align-items: flex-end; /* Align items to the right */
-  gap: 10px; /* Space between controls */
-  z-index: 1000;
-  transition: opacity 0.5s ease-in-out;
+  gap: 10px; /* Gap between the two control sections */
+  background-color: rgba(34, 34, 34, 0.8); /* Transparent dark background */
+  padding: 10px 8px; /* Padding inside the box */
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* MODIFIED: Matched shadow to github-project-item */
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  transition: background-color 1.5s ease-in-out, border-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out, opacity 0.75s ease-out; /* MODIFIED: opacity transition to 0.75s */
+  width: 160px; /* Fixed width for desktop, will adjust for mobile */
+  align-items: center; /* Center content horizontally within the wrapper */
 }
 
-.fade-out-controls {
-  opacity: 0;
-  pointer-events: none; /* Disable interaction when faded out */
+.bottom-right-controls-wrapper:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4); /* MODIFIED: Matched hover shadow to github-project-item, removed glow */
 }
 
+/* MODIFIED: Focus state for the control box wrapper itself - Removed blue glow */
+.bottom-right-controls-wrapper:focus-visible {
+  outline: none; /* Remove default outline */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Keep existing shadow, removed blue glow */
+  border-color: transparent; /* Ensure no border color is applied */
+  transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  border-radius: 4px; /* Added for consistency */
+}
+
+
+/* ADDED: Class for fading out the control box */
+.bottom-right-controls-wrapper.fade-out-controls {
+    opacity: 0;
+    pointer-events: none; /* Make it unclickable when hidden */
+}
+
+/* MODIFIED: Theme toggle container for icon - now uses flex for spacing */
 .theme-toggle-container {
   display: flex;
+  flex-direction: row;
   align-items: center;
-  background-color: var(--button-bg);
-  border: 1px solid var(--button-border);
-  border-radius: 15px;
-  padding: 5px 10px;
-  box-shadow: 0 2px 5px var(--box-shadow-color);
-  transition: background-color 1.5s ease-in-out, border-color 1.5s ease-in-out, box-shadow 1.5s ease-in-out;
+  justify-content: center; /* Center content horizontally within the container */
+  width: 100%; /* Take full width of parent wrapper */
+  position: relative; /* Needed for absolute positioning of icons */
+  /* Removed padding-right */
 }
 
 .theme-switch-checkbox {
-  display: none;
+  height: 0;
+  width: 0;
+  visibility: hidden;
 }
 
 .theme-switch-label {
-  display: block;
-  width: 50px; /* Adjust width of the toggle */
-  height: 25px; /* Adjust height of the toggle */
-  background-color: #ccc;
-  border-radius: 12.5px; /* Half of height for rounded toggle */
-  position: relative;
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
+  width: 80px; /* Fixed width for the toggle track */
+  height: 20px;
+  background: #282a36;
+  display: block;
+  border-radius: 10px;
+  position: relative;
+  transition: background 1s;
+  border: 1px solid #555;
+  overflow: hidden;
+  flex-shrink: 0; /* Prevent it from shrinking */
+  margin: 0 10px; /* Add horizontal margin to center it and create space for icons */
 }
 
 .theme-switch-label:after {
   content: '';
   position: absolute;
-  top: 2.5px; /* Center vertically */
-  left: 2.5px; /* Initial position */
-  width: 20px; /* Size of the switch circle */
-  height: 20px; /* Size of the switch circle */
-  background-color: #fff;
+  top: 1.5px; /* Vertically center (20 - 17) / 2 = 1.5 */
+  left: 1.5px; /* Adjusted left to match top */
+  width: 17px;
+  height: 17px;
+  background: #f0f0f0;
   border-radius: 50%;
-  transition: left 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  transition: 1s;
+  z-index: 1;
 }
 
 .theme-switch-checkbox:checked + .theme-switch-label {
-  background-color: #4CAF50; /* Green background when checked (dark mode) */
+  background: linear-gradient(to right, #00C6FF, #0072FF);
+  border-color: #0072FF;
 }
 
 .theme-switch-checkbox:checked + .theme-switch-label:after {
-  left: calc(100% - 2.5px); /* Move to the right */
-  transform: translateX(-100%); /* Ensure it stays within bounds */
+  left: calc(100% - 1.5px); /* Adjusted left to match new size */
+  transform: translateX(-100%);
+  background: #1a1a1a;
 }
 
+/* MODIFIED: Styling for both theme icons - now absolutely positioned relative to .theme-toggle-container */
 .theme-icon {
-  font-size: 20px; /* Size of the icons */
-  margin: 0 5px;
-  color: var(--text-color); /* Icon color adapts to theme */
-  transition: color 1.5s ease-in-out, opacity 0.3s ease-in-out;
-}
-
-#sun-icon {
-  color: #FFD700; /* Gold color for sun */
+  font-size: 20px; /* Fixed font size */
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out, color 1s ease-in-out; /* MODIFIED: Set transition to 1s */
+  position: absolute; /* Re-added absolute positioning */
+  top: 50%; /* Vertical centering */
+  transform: translateY(-50%); /* Adjust for vertical centering */
+  width: 20px; /* Fixed width for the icon itself */
+  text-align: center;
 }
 
 #moon-icon {
-  color: #c9c9c9; /* Grayish color for moon */
+  right: 0px; /* MODIFIED: Position moon icon to the right edge of the container */
+  color: #f0f0f0; /* Default color for moon (dark mode) */
 }
 
-/* Font Size Controls */
+#sun-icon {
+  left: 0px; /* MODIFIED: Position sun icon to the left edge of the container */
+  color: #FFD700; /* Yellow for sun icon */
+}
+
+
+/* MODIFIED: Font controls - now part of the wrapper's flow */
 .font-controls {
   display: flex;
-  align-items: center;
-  gap: 10px;
-  background-color: var(--button-bg);
-  border: 1px solid var(--button-border);
-  border-radius: 15px;
-  padding: 5px 10px;
-  box-shadow: 0 2px 5px var(--box-shadow-color);
-  transition: background-color 1.5s ease-in-out, border-color 1.5s ease-in-out, box-shadow 1.5s ease-in-out;
+  justify-content: space-between; /* Distribute items evenly */
+  gap: 0px; /* No gap needed, space-between handles it */
+  width: 100%; /* Take full width of parent wrapper */
+  /* REMOVED: position: fixed; bottom; right; z-index; */
 }
 
 .font-controls span {
+  width: 30px;
+  height: 30px;
+  background-color: #333;
+  color: #f0f0f0;
+  border: 1px solid #555;
+  border-radius: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 30px;
-  height: 30px;
+  font-weight: bold;
   cursor: pointer;
-  border-radius: 50%;
-  background-color: var(--button-bg);
-  color: var(--button-text);
-  border: 1px solid var(--button-border);
-  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, border-color 0.3s ease-in-out;
-}
-
-.font-controls span:hover {
-  background-color: var(--button-hover-bg);
-  color: var(--button-hover-text);
+  user-select: none;
+  transition: background-color 1.5s, color 1.5s, border-color 1.5s;
 }
 
 #font-minus {
-  font-size: 16px; /* Smaller minus icon */
+  font-size: 13px;
 }
 
 #font-reset {
-  font-size: 20px; /* Medium reset icon */
+  font-size: 17px;
 }
 
 #font-plus {
-  font-size: 24px; /* Larger plus icon */
+  font-size: 21px;
 }
 
-/* --- Media Queries --- */
+.font-controls span:hover {
+  background-color: #555;
+}
 
-/* For screens smaller than 768px (e.g., mobile devices) */
+/* ADDED: Focus States for individual controls */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+.theme-switch-label:focus-visible, /* Specific for the toggle label */
+.font-controls span:focus-visible {
+  outline: none; /* Remove default outline */
+  box-shadow: 0 0 0 2px #8be9fd; /* Subtle blue glow for dark mode */
+  border-color: #8be9fd; /* Add a border color if applicable */
+  transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  border-radius: 4px; /* Added for consistency */
+}
+
+
+body.light-mode {
+  background-color: #f0f0f0;
+  color: #1a1a1a;
+}
+
+/* ADDED: Light Mode Scrollbar */
+body.light-mode::-webkit-scrollbar-track {
+  background: #e0e0e0; /* Lighter track for light mode */
+}
+
+body.light-mode::-webkit-scrollbar-thumb {
+  background-color: transparent; /* MODIFIED: Transparent by default in light mode */
+  border: 2px solid transparent; /* MODIFIED: Transparent border by default in light mode */
+}
+
+/* ADDED: Make thumb visible on hover over the body in light mode */
+body.light-mode:hover::-webkit-scrollbar-thumb {
+  background-color: #888; /* Darker thumb for light mode on hover */
+  border-color: #e0e0e0; /* Border to match light track on hover */
+}
+
+/* Preserve hover effect for the thumb itself in light mode */
+body.light-mode::-webkit-scrollbar-thumb:hover {
+  background-color: #666; /* Even darker thumb on direct hover for light mode */
+}
+
+#last-updated-text {
+    color: #888; /* A shade of grey. You can use 'grey' or a hex code like #AAAAAA */
+    font-style: italic;
+    font-size: 0.9em; /* Optional: Make it slightly smaller than surrounding text for subtle effect */
+    display: block; /* Optional: Makes it occupy its own line if it's currently inline */
+    margin-top: 0px; /* Optional: Add some space above it */
+	  margin-bottom: 20px; /* Add some space below it, before the next paragraph */
+    text-align: left; /* Optional: Align it to the right */
+}
+
+/* ADDED: Light Mode Focus States for individual controls */
+body.light-mode a:focus-visible,
+body.light-mode button:focus-visible,
+body.light-mode input:focus-visible,
+body.light-mode textarea:focus-visible,
+body.light-mode select:focus-visible,
+body.light-mode .theme-switch-label:focus-visible,
+body.light-mode .font-controls span:focus-visible {
+  box-shadow: 0 0 0 2px #007bff; /* Subtle blue glow for light mode */
+  border-color: #007bff; /* Add a border color if applicable */
+  border-radius: 4px; /* Rounded corners for the focus outline in light mode */
+}
+
+/* ADDED: Light mode styling for the control box itself */
+body.light-mode .bottom-right-controls-wrapper {
+  background-color: rgba(240, 240, 240, 0.8); /* MODIFIED: Lighter background for light mode */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* MODIFIED: Lighter shadow for light mode */
+  border-color: rgba(0, 0, 0, 0.1); /* Lighter border for light mode */
+}
+
+body.light-mode .bottom-right-controls-wrapper:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25); /* MODIFIED: Lighter hover shadow for light mode, removed glow */
+}
+
+/* MODIFIED: Light mode focus state for the control box wrapper itself - Removed blue glow */
+body.light-mode .bottom-right-controls-wrapper:focus-visible {
+  outline: none; /* Remove default outline */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Keep existing shadow, removed blue glow */
+  border-color: transparent; /* Ensure no border color is applied */
+  border-radius: 4px; /* Added for consistency */
+}
+
+
+body.light-mode h1 {
+  color: #333;
+}
+
+body.light-mode .main-nav li a {
+  color: #333;
+  transition: color 0.3s ease-in-out, font-weight 0.2s ease-in-out, background-color 0.3s ease-in-out, border-radius 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+  border-radius: 4px;
+}
+
+body.light-mode .main-nav li a:hover {
+  color: #000;
+  font-weight: bolder;
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+/* ADDED: Active navigation link styling for light mode */
+body.light-mode .main-nav li a.active {
+  color: #007bff; /* Highlight color */
+  font-weight: bolder;
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .content-column a {
+  color: #007bff;
+}
+
+
+body.light-mode .content-column p {
+  color: #1a1a1a;
+}
+
+body.light-mode .content-column h2 {
+  color: #333;
+}
+
+body.light-mode .github-project-item h3 {
+  color: #333;
+}
+
+
+body.light-mode .github-project-item {
+  background-color: #d0d0d0;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+body.light-mode .github-project-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+}
+
+body.light-mode .powered-by-github {
+  color: #666;
+}
+body.light-mode .powered-by-github a {
+    color: #666;
+}
+body.light-mode .powered-mode .powered-by-github a:hover {
+    color: #444;
+}
+
+body.light-mode .font-controls span {
+  background-color: #eee;
+  color: #1a1a1a;
+  border-color: #bbb;
+}
+
+body.light-mode .theme-switch-text {
+    color: #1a1a1a;
+}
+
+body.light-mode .main-header-fixed {
+  background-color: #f0f0f0;
+}
+
+
 @media (max-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+
   body {
-    padding-top: 100px; /* Adjust padding for smaller header */
+    padding-top: 170px;
   }
 
-  header {
-    padding: 8px 0; /* Smaller header padding */
-  }
-
-  .profile-image-container {
-    width: 80px;
-    height: 80px;
-    margin-bottom: 3px;
+  .main-header-fixed {
+    padding: 10px 0;
+    min-height: 140px;
   }
 
   h1 {
-    font-size: 1.8rem; /* Smaller heading on mobile */
-    margin: 5px 0;
+    font-size: 2.2rem;
+    line-height: 1.2;
+    /* 🐛 IMPORTANT FIX: Reduced padding for mobile to prevent horizontal scrollbar */
+    padding: 0 15px;
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 1;
+    transform: translateY(30px);
+  }
+
+  h1.slide-up {
+    transform: translateY(0);
+  }
+
+  .main-nav {
+    margin-top: 10px;
+    padding: 0 10px;
+  }
+
+  .main-nav ul {
+    gap: 20px;
+  }
+
+  .main-nav li a {
+    font-size: 1.1rem;
+    padding: 8px 12px;
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+
+  .profile-image {
+    top: 10px;
+    left: 10px;
+    width: 60px;
+    height: 60px;
+    z-index: 1001;
   }
 
   .corner-logo-fixed {
-    width: 30px;
     top: 10px;
     right: 10px;
+    width: 90px;
+    height: 60px;
+    z-index: 1001;
   }
 
-  .main-nav li {
-    margin: 0 8px; /* Reduced margin for nav items */
+  /* MODIFIED: Responsive adjustments for the control box */
+  .bottom-right-controls-wrapper {
+    /* 🐛 IMPORTANT FIX: Use max-width and reduced right margin for very narrow viewports */
+    max-width: 140px; /* Slightly smaller width on mobile */
+    padding: 8px 6px; /* Reduced padding */
+    bottom: 10px; /* Closer to bottom */
+    right: 5px; /* Closer to right */
   }
 
-  .main-nav a {
-    padding: 8px 10px; /* Smaller padding for nav links */
-    font-size: 0.9rem; /* Smaller font size for nav links */
+  .theme-toggle-container {
+    /* No specific padding-right needed here */
   }
 
-  #content-area {
-    padding: 15px; /* Reduced content area padding */
-    margin: 10px auto;
+  .theme-switch-label {
+    width: 60px; /* Slightly smaller toggle on mobile */
+    height: 20px;
+    border-radius: 10px;
+    margin: 0 8px; /* Adjusted margin for mobile centering */
+  }
+
+  .theme-switch-label:after {
+    top: 1.5px;
+    left: 1.5px;
+    width: 17px;
+    height: 17px;
+  }
+
+  .theme-switch-checkbox:checked + .theme-switch-label:after {
+    left: calc(100% - 1.5px);
+  }
+
+  .theme-icon {
+    font-size: 18px; /* Slightly smaller icons on mobile */
+  }
+
+  .font-controls {
+    gap: 6px; /* Reduced gap between font control buttons */
+  }
+
+  .font-controls span {
+    width: 35px; /* Slightly smaller font control buttons */
+    height: 35px;
+    font-size: 16px;
+  }
+
+  #font-minus {
+    font-size: 12px;
+  }
+
+  #font-reset {
+    font-size: 16px;
+  }
+
+  #font-plus {
+    font-size: 20px;
   }
 
   .content-column {
     padding: 0px 15px 15px 15px;
     font-size: 1rem;
     line-height: 1.6;
-    margin-bottom: 30px;
+    margin-bottom: 100px;
   }
 
-  /* Specific fixes for 'now' page content on mobile */
-  #content-area h4 {
-      text-align: left; /* Ensure headings are left-aligned on mobile */
+  .github-project-item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 15px;
   }
 
-  #content-area ul {
-      text-align: left; /* Ensure lists are left-aligned on mobile */
-      padding-left: 20px; /* Add padding back for list indentation */
+  .project-image {
+    width: 80%;
+    max-width: 200px;
+    margin-bottom: 15px;
   }
 
-  #content-area ul li {
-      text-align: left; /* Ensure list items are left-aligned on mobile */
+  .github-project-item h3 {
+    font-size: 1.5rem;
   }
 
-  .bottom-right-controls-wrapper {
-    bottom: 15px;
-    right: 15px;
-    gap: 8px;
+  .github-project-item p {
+    font-size: 0.95rem;
+    line-height: 1.4;
   }
 
-  .theme-toggle-container {
-    padding: 3px 8px; /* Reduced padding */
-    /* Adjust width/height if needed here, but it might not be needed */
+  .project-details {
+    width: 100%;
+    align-items: center;
   }
 
-  .theme-switch-label {
-    width: 45px; /* Slightly smaller toggle on mobile */
-    height: 22px; /* Adjusted height to maintain aspect ratio */
-    border-radius: 11px; /* Half of height */
-    margin: 0 6px; /* Adjusted margin for mobile centering */
+  .home-assistant-corner-logo {
+    top: 8px;
+    right: 8px;
   }
-
-  .theme-switch-label:after {
-    top: 2px; /* Adjust to center vertically */
-    left: 2px; /* Adjust initial position */
-    width: 18px; /* Smaller switch circle */
-    height: 18px; /* Smaller switch circle */
+  .home-assistant-corner-logo img {
+    width: 20px;
   }
-
-  .theme-switch-checkbox:checked + .theme-switch-label:after {
-    left: calc(100% - 2px); /* Adjust based on new width and circle size */
-    transform: translateX(-100%);
-  }
-
-  .theme-icon {
-    font-size: 16px; /* Slightly smaller icons on mobile */
-  }
-
-  .font-controls {
-    gap: 6px; /* Reduced gap between font control buttons */
-    padding: 3px 8px; /* Match theme toggle padding */
-  }
-
-  .font-controls span {
-    width: 30px; /* Slightly smaller font control buttons */
-    height: 30px;
-    font-size: 14px;
-  }
-
-  #font-minus {
-    font-size: 10px;
-  }
-
-  #font-reset {
-    font-size: 14px;
-  }
-
-  #font-plus {
-    font-size: 18px;
-  }
-}
-
-/* Existing rules to maintain transparency on hover */
-body:hover::-webkit-scrollbar-thumb {
-  background-color: #555;
-  border-color: #555;
-}
-
-body.light-theme:hover::-webkit-scrollbar-thumb {
-  background-color: #aaa;
-  border-color: #aaa;
-}
-
-/* Ensure the scrollbar thumb is transparent by default in light mode */
-body.light-theme::-webkit-scrollbar-thumb {
-  background-color: transparent;
-  border-color: transparent;
 }
