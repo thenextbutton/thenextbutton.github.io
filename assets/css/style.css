@@ -353,8 +353,8 @@ ul li {
 /* MODIFIED: Focus state for the control box wrapper itself - Removed blue glow */
 .bottom-right-controls-wrapper:focus-visible {
   outline: none; /* Remove default outline */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Keep existing shadow, removed blue glow */
-  border-color: transparent; /* Ensure no border color is applied */
+  box-shadow: 0 0 0 2px #8be9fd; /* Subtle blue glow for dark mode */
+  border-color: #8be9fd; /* Add a border color if applicable */
   transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
   border-radius: 4px; /* Added for consistency */
 }
@@ -504,6 +504,13 @@ select:focus-visible,
 body.light-mode {
   background-color: #f0f0f0;
   color: #1a1a1a;
+}
+
+/* ADDED: Ensure content elements have correct text color in light mode */
+body.light-mode .content-column h4,
+body.light-mode .content-column ul,
+body.light-mode .content-column ul li {
+    color: #1a1a1a; /* Explicitly set dark color for light mode */
 }
 
 /* ADDED: Light Mode Scrollbar */
@@ -695,6 +702,10 @@ body.light-mode .main-header-fixed {
     transition: color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   }
 
+  .main-nav li a:hover {
+    color: 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+
   .profile-image {
     top: 10px;
     left: 10px;
@@ -774,6 +785,18 @@ body.light-mode .main-header-fixed {
     line-height: 1.6;
     margin-bottom: 100px;
   }
+
+  /* ADDED: Specific fixes for 'now' page content on mobile */
+  .content-column h4,
+  .content-column ul,
+  .content-column ul li {
+      text-align: left; /* Ensure headings and lists are left-aligned on mobile */
+  }
+
+  .content-column ul {
+      padding-left: 20px; /* Ensure padding-left for list indentation on mobile */
+  }
+
 
   .github-project-item {
     flex-direction: column;
