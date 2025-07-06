@@ -35,35 +35,19 @@ function initScrollAnimations() {
         }
     });
 
-    // --- NEW LOGIC: Manage Control Box Visibility based on scroll position ---
+    // --- MODIFIED LOGIC: Make Control Box ALWAYS visible ---
     const controlsWrapper = document.querySelector('.bottom-right-controls-wrapper');
-    if (!controlsWrapper) return; // Exit if controls not found
+    if (controlsWrapper) {
+        // Ensure the fade-out-controls class is never present
+        controlsWrapper.classList.remove('fade-out-controls');
 
-    const scrollThreshold = 100; // Number of pixels from the top to hide/show
-
-    // Function to update the control box visibility
-    function updateControlsVisibility() {
-        console.log("updateControlsVisibility called!"); // Log when this function runs
-        const currentScrollY = window.scrollY;
-        console.log(`Current ScrollY: ${currentScrollY}`); // Log current scroll position
-
-        // If scrolled down past the threshold
-        if (currentScrollY > scrollThreshold) {
-            controlsWrapper.classList.remove('fade-out-controls');
-            console.log("Controls: Removing fade-out-controls (scrolled down).");
-        } else {
-            // If at the very top of the page (or within threshold)
-            controlsWrapper.classList.add('fade-out-controls');
-            console.log("Controls: Adding fade-out-controls (at top or within threshold).");
-        }
+        // Remove the scroll event listener for control box visibility
+        // as it's no longer needed to manage its fade.
+        // The previous window.addEventListener('scroll', updateControlsVisibility) is no longer attached here.
+        // You can remove any previous calls to window.removeEventListener for updateControlsVisibility
+        // if they were added elsewhere, but simply not adding it here is sufficient.
     }
-
-    // Attach the updateControlsVisibility function to the scroll event
-    window.addEventListener('scroll', updateControlsVisibility);
-
-    // Also call it once on load to set initial state
-    updateControlsVisibility();
-    // --- END NEW LOGIC ---
+    // --- END MODIFIED LOGIC ---
 }
 
 document.addEventListener("DOMContentLoaded", initScrollAnimations);
