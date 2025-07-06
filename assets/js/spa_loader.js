@@ -9,10 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     async function loadContent(url, pageName, isInitialLoad = false) {
         try {
-            // Step 1: Hide the entire content area before loading new content
+            // Step 1: Explicitly set opacity to 0 immediately to hide the current content.
+            // This ensures content is hidden while new content is loaded and page scrolls.
+            // The CSS transition on contentArea will handle the fade-out speed of the old content.
             contentArea.style.opacity = '0';
-            // Add a small delay to allow the opacity transition to start visually (before fetch)
-            await new Promise(resolve => setTimeout(resolve, 100));
 
             const response = await fetch(url);
             if (!response.ok) {
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 contentArea.appendChild(contentColumn);
             }
 
-            // Step 2: Inject the new content into the (still hidden) area
+            // Step 2: Inject the new content into the (now hidden by opacity:0) area
             contentColumn.innerHTML = data;
 
             // Update active class for navigation
@@ -50,23 +50,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // --- CRUCIAL NEW ORDER OF OPERATIONS ---
+            // --- CRUCIAL ORDER OF OPERATIONS ---
 
-            // 1. Scroll to the top immediately after injecting content, while still hidden.
+            // 1. Scroll to the top immediately after injecting content, while contentArea opacity is 0.
             window.scrollTo(0, 0);
 
-            // 2. Wait a slightly longer moment for the scroll to visually complete.
-            // Increased to 150ms for better robustness.
+            // 2. Wait a sufficient moment for the scroll to visually complete.
+            // Keeping 150ms for now, but this might need fine-tuning (e.g., 200ms) if issue persists.
             await new Promise(resolve => setTimeout(resolve, 150));
 
             // 3. Re-initialize animations. This runs *after* the scroll has settled, and *before* content is visible.
-            // So, `initScrollAnimations` should now correctly apply `hidden-scroll` classes to
-            // elements that are truly below the (now reset) viewport.
+            // This ensures `initScrollAnimations` correctly applies `hidden-scroll` classes to
+            // elements that are truly below the (now reset) viewport, as the content is still hidden.
             if (typeof initScrollAnimations === 'function') {
                 initScrollAnimations();
             }
 
-            // 4. Finally, make the content visible. It will now fade in correctly.
+            // 4. Finally, make the content visible. This will trigger the fade-in for animated elements.
+            // The content will fade *in* from its correct scrolled-to-top position.
             contentArea.style.opacity = '1';
 
             // 5. Run other initializations now that content is visible
