@@ -55,9 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // 1. Scroll to the top immediately after injecting content, while contentArea opacity is 0.
             window.scrollTo(0, 0);
 
-            // 2. Wait a sufficient moment for the scroll to visually complete.
-            // Keeping 150ms for now, but this might need fine-tuning (e.g., 200ms) if issue persists.
-            await new Promise(resolve => setTimeout(resolve, 150));
+            // 2. Wait for 3 seconds for the scroll to visually complete.
+            await new Promise(resolve => setTimeout(resolve, 3000)); // Increased to 3000ms as requested
 
             // 3. Re-initialize animations. This runs *after* the scroll has settled, and *before* content is visible.
             // This ensures `initScrollAnimations` correctly applies `hidden-scroll` classes to
@@ -80,8 +79,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } catch (error) {
             console.error('Error loading content:', error);
-            contentArea.innerHTML = '<p>Error loading content. Please try again.</p>';
-            contentArea.style.opacity = '1'; // Make sure the error message is visible
+            contentArea.innerHTML = `<p>Error loading content: ${error.message}. Please try again.</p>`;
+            contentArea.style.opacity = '1'; // Ensure content area is visible even on error
         }
     }
 
