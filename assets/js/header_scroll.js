@@ -1,3 +1,5 @@
+// assets/js/header_scroll.js
+
 document.addEventListener('DOMContentLoaded', () => {
     const profileImage = document.querySelector('.profile-image');
     const msCertLogo = document.querySelector('.corner-logo-fixed');
@@ -7,8 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let hideHeaderTimeoutId = null;
     let isProfileImageActuallyHidden = false;
 
-    // --- Throttling Utility Function ---
-    // Limits how often a function can run.
     function throttle(func, limit) {
         let inThrottle;
         return function() {
@@ -21,7 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
     }
-    // --- END Throttling Utility Function ---
 
     function handleScroll() {
         let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -37,43 +36,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 mainHeading.classList.add('slide-up');
 
                 const profileImageTransitionDuration = parseFloat(getComputedStyle(profileImage).transitionDuration) * 1000;
-
                 hideHeaderTimeoutId = setTimeout(() => {
-                    if (profileImage.classList.contains('hidden') && typeof window.getRandomProfileImage === 'function') {
-                        profileImage.src = window.getRandomProfileImage();
-                    }
+                    // This timeout ensures the 'hidden' class has visually taken effect
+                    // before marking it as actually hidden.
                     isProfileImageActuallyHidden = true;
                     hideHeaderTimeoutId = null;
                 }, profileImageTransitionDuration);
             }
         } else {
             // If scrolled near the top, show logos
+            // Ensure the profile image and MS logo are not already visible
             if (isProfileImageActuallyHidden || profileImage.classList.contains('hidden')) {
                 clearTimeout(hideHeaderTimeoutId);
                 hideHeaderTimeoutId = null;
 
+                // Set a new random profile image *before* it becomes visible again
+                // The MS Cert logo remains the same, as per your requirement.
+                profileImage.src = window.getRandomProfileImage();
+
                 profileImage.classList.remove('hidden');
                 msCertLogo.classList.remove('hidden');
                 mainHeading.classList.remove('slide-up');
-                isProfileImageActuallyHidden = false;
+                isProfileImageActuallyHidden = false; // Reset the flag
             }
         }
-
-        // The Control Box Fade-on-Scroll Logic remains completely removed from this file.
     }
 
-    // --- Apply Throttling to Event Listeners ---
-    // The handleScroll function will now be called at most once every 100 milliseconds
-    // during scrolling or resizing.
     const throttledHandleScroll = throttle(handleScroll, 100);
 
     window.addEventListener('scroll', throttledHandleScroll);
     window.addEventListener('resize', throttledHandleScroll);
 
-    // Initial call to set correct state on page load (this one doesn't need throttling)
-    handleScroll();
+    handleScroll(); // Initial call
 
-    // Expose this function globally if other scripts need to trigger a header check.
-    // When called externally, it will trigger the throttled version.
     window.triggerHeaderScrollCheck = throttledHandleScroll;
 });
