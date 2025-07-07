@@ -6,26 +6,62 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainHeading = document.querySelector('h1');
 
     const SCROLL_THRESHOLD = 50;
-    // This flag now synchronously tracks if the elements should be visually hidden
-    // based on the scroll position. It replaces the previous 'isProfileImageActuallyHidden'
-    // to eliminate asynchronous update issues that caused inconsistency.
+    // This flag synchronously tracks if the elements should be visually hidden
+    // based on the scroll position. It ensures consistent state management.
     let areElementsVisuallyHidden = false;
 
-    // --- Throttling Utility Function ---
-    // Limits how often a function can run.
+    // --- More Robust Throttling Utility Function with Trailing Edge ---
+    // This throttle ensures that the function is called on the leading edge (immediately),
+    // periodically during continuous events, AND on the trailing edge (after events stop).
     function throttle(func, limit) {
-        let inThrottle;
-        return function() {
-            const args = arguments;
-            const context = this;
-            if (!inThrottle) {
-                func.apply(context, args);
-                inThrottle = true;
-                setTimeout(() => inThrottle = false, limit);
-            }
+        let timeoutId;
+        let lastArgs;
+        let lastThis;
+        let lastResult;
+        let lastCallTime = 0; // Tracks the time of the last *actual* function execution
+
+        // Helper to invoke the function
+        const invokeFunc = (time) => {
+            lastResult = func.apply(lastThis, lastArgs);
+            lastCallTime = time;
         };
+
+        const throttled = function() {
+            const now = Date.now();
+            lastArgs = arguments;
+            lastThis = this;
+
+            // Clear any existing trailing timeout, as a new event has occurred
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+                timeoutId = null;
+            }
+
+            // If enough time has passed since the last execution, execute immediately (leading edge)
+            if (now - lastCallTime > limit) {
+                invokeFunc(now);
+            } else {
+                // Otherwise, schedule a trailing execution.
+                // This ensures that once the rapid events stop, the function will run one last time.
+                timeoutId = setTimeout(() => {
+                    invokeFunc(Date.now()); // Execute with current time
+                    timeoutId = null; // Clear the timeout ID after execution
+                }, limit - (now - lastCallTime)); // Calculate time remaining until next possible execution
+            }
+
+            return lastResult;
+        };
+
+        // Optional: Provide a way to cancel any pending trailing calls
+        throttled.cancel = () => {
+            clearTimeout(timeoutId);
+            timeoutId = null;
+            lastCallTime = 0; // Reset for next immediate execution if needed
+        };
+
+        return throttled;
     }
-    // --- END Throttling Utility Function ---
+    // --- END More Robust Throttling Utility Function ---
 
     function handleScroll() {
         let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -62,8 +98,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Apply Throttling to Event Listeners ---
-    // The handleScroll function will now be called at most once every 100 milliseconds
-    // during scrolling or resizing.
+    // The handleScroll function will now be called at most once every 50 milliseconds
+    // during scrolling or resizing, and once more after scrolling stops.
     const throttledHandleScroll = throttle(handleScroll, 50);
 
     window.addEventListener('scroll', throttledHandleScroll);
