@@ -37,6 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function applyTheme(themeName) {
         if (themeName === 'light') {
             body.classList.add('light-mode');
+            body.classList.remove('dark-mode'); // Ensure dark-mode is removed for light theme
             themeSwitch.checked = false; // Toggle OFF for Light Mode
             msCertLogo.src = LIGHT_MODE_MS_LOGO_SRC; // Set light mode logo
 
@@ -51,6 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
             moonIcon.style.color = '#f0f0f0'; // Ensure moon is default color when hidden/shown
         } else { // themeName === 'dark'
             body.classList.remove('light-mode');
+            body.classList.add('dark-mode'); // Ensure dark-mode is added for dark theme
             themeSwitch.checked = true; // Toggle ON for Dark Mode
             msCertLogo.src = DARK_MODE_MS_LOGO_SRC; // Set dark mode logo
 
