@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
             themeSwitch.checked = true; // Toggle ON for Dark Mode
             msCertLogo.src = DARK_MODE_MS_LOGO_SRC; // Set dark mode logo
 
-            // Moon is active (right), Sun is inactive (left)
+            // Moon is active (right), Sun is inactive (left) 
             moonIcon.style.transform = 'translateY(-50%) translateX(0)'; // Moon stays at its active position
             moonIcon.style.opacity = '1'; // Fade in moon
             moonIcon.style.color = '#f0f0f0'; // White for moon
