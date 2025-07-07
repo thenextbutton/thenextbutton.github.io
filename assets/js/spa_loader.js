@@ -68,11 +68,13 @@ document.addEventListener('DOMContentLoaded', () => {
             if (typeof initScrollAnimations === 'function') {
                // initScrollAnimations();
             }
-            if (typeof initAutoLinker === 'function') {
-                // Assuming initAutoLinker is a function you might use for link processing
-                // If you don't have this, you can remove this line.
-                // initAutoLinker();
+            // --- START MODIFIED CODE ---
+            if (typeof window.initAutoLinker === 'function') {
+                window.initAutoLinker();
+            } else {
+                console.warn("Auto-linker function not found after content load. Make sure auto_linker.js is loaded and exposes initAutoLinker globally.");
             }
+            // --- END MODIFIED CODE ---
 
             // --- NEW CODE ADDED HERE FOR GITHUB COMMIT DATE ---
             // Construct the file path relative to the repository root
