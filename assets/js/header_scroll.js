@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Apply Throttling to Event Listeners ---
     // The handleScroll function will now be called at most once every 100 milliseconds
     // during scrolling or resizing.
-    const throttledHandleScroll = throttle(handleScroll, 100);
+    const throttledHandleScroll = throttle(handleScroll, 50);
 
     window.addEventListener('scroll', throttledHandleScroll);
     window.addEventListener('resize', throttledHandleScroll);
