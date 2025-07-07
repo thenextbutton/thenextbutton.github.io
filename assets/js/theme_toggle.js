@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
             body.classList.add('light-mode');
             body.classList.remove('dark-mode'); // Ensure dark-mode is removed for light theme
             themeSwitch.checked = false; // Toggle OFF for Light Mode
-            msCertLogo.src = LIGHT_MODE_MS_LOGO_SRC; // Set light mode logo
+            // msCertLogo.src = LIGHT_MODE_MS_LOGO_SRC; // Set light mode logo
 
             // Sun is active (left), Moon is inactive (right)
             sunIcon.style.transform = 'translateY(-50%) translateX(0)'; // Sun stays at its active position
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
             body.classList.remove('light-mode');
             body.classList.add('dark-mode'); // Ensure dark-mode is added for dark theme
             themeSwitch.checked = true; // Toggle ON for Dark Mode
-            msCertLogo.src = DARK_MODE_MS_LOGO_SRC; // Set dark mode logo
+            // msCertLogo.src = DARK_MODE_MS_LOGO_SRC; // Set dark mode logo
 
             // Moon is active (right), Sun is inactive (left)
             moonIcon.style.transform = 'translateY(-50%) translateX(0)'; // Moon stays at its active position
