@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Call post-load initialization functions
             // Ensure these functions are defined and available in your global scope or included scripts.
             if (typeof initScrollAnimations === 'function') {
-                initScrollAnimations();
+               // initScrollAnimations();
             }
             if (typeof initAutoLinker === 'function') {
                 // Assuming initAutoLinker is a function you might use for link processing
