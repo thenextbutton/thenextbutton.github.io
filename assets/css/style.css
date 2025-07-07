@@ -483,6 +483,40 @@ body.dark-mode .project-image.dark-mode-img {
     opacity: 1;
 }
 
+/* New: MS Cert Logo (corner-logo-fixed) */
+/* By default (light mode), hide the dark mode logo */
+.corner-logo-fixed.dark-mode-logo {
+    display: none;
+}
+
+/* When in dark mode: hide light, show dark */
+body.dark-mode .corner-logo-fixed.light-mode-logo {
+    display: none;
+}
+
+body.dark-mode .corner-logo-fixed.dark-mode-logo {
+    display: block; /* Ensure it's visible */
+}
+
+/* Optional: Transitions for the MS Cert Logo */
+.corner-logo-fixed.light-mode-logo,
+.corner-logo-fixed.dark-mode-logo {
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Ensure correct initial opacity */
+.corner-logo-fixed.light-mode-logo {
+    opacity: 1;
+}
+
+/* When in dark mode, set opacities */
+body.dark-mode .corner-logo-fixed.light-mode-logo {
+    opacity: 0;
+}
+body.dark-mode .corner-logo-fixed.dark-mode-logo {
+    opacity: 1;
+}
+
 /* MODIFIED: Font controls - now part of the wrapper's flow */
 .font-controls {
   display: flex;
