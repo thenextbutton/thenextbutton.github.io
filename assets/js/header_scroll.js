@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const SCROLL_THRESHOLD = 50;
     // This flag now synchronously tracks if the elements should be visually hidden
-    // based on the scroll position.
+    // based on the scroll position. It replaces the previous 'isProfileImageActuallyHidden'
+    // to eliminate asynchronous update issues that caused inconsistency.
     let areElementsVisuallyHidden = false;
 
     // --- Throttling Utility Function ---
@@ -31,27 +32,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // --- Header (Profile Image, Logo, H1) Fade Logic ---
         if (currentScrollTop > SCROLL_THRESHOLD) {
-            // User is scrolling down, elements should be hidden
-            // Only execute if they are not already marked as visually hidden
+            // User is scrolling down, elements should be hidden.
+            // Only execute this block if the elements are not already marked as visually hidden.
             if (!areElementsVisuallyHidden) {
                 profileImage.classList.add('hidden');
                 msCertLogo.classList.add('hidden');
                 mainHeading.classList.add('slide-up');
-                // Immediately update the state flag
+                // Immediately update the state flag to reflect that elements are now logically hidden.
                 areElementsVisuallyHidden = true;
             }
         } else {
-            // User is scrolling up, elements should be shown
-            // Only execute if they are currently marked as visually hidden
+            // User is scrolling up, elements should be shown.
+            // Only execute this block if the elements are currently marked as visually hidden.
             if (areElementsVisuallyHidden) {
-                // Set a new random profile image *before* it becomes visible again
+                // Set a new random profile image *before* its visibility changes.
+                // This ensures the new image is present as it slides back into view.
                 // The MS Cert logo remains the same, as per your requirement.
-                profileImage.src = window.getRandomProfileImage();
+                if (typeof window.getRandomProfileImage === 'function') {
+                    profileImage.src = window.getRandomProfileImage();
+                }
 
                 profileImage.classList.remove('hidden');
                 msCertLogo.classList.remove('hidden');
                 mainHeading.classList.remove('slide-up');
-                // Immediately update the state flag
+                // Immediately update the state flag to reflect that elements are now logically visible.
                 areElementsVisuallyHidden = false;
             }
         }
