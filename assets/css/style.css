@@ -288,21 +288,21 @@ ul li {
   overflow-wrap: break-word; /* ADDED: Standard property for word wrapping */
 }
 
-.home-assistant-corner-logo {
+.github-content-corner-logo {
   position: absolute;
   top: 10px;
   right: 10px;
   z-index: 10;
 }
 
-.home-assistant-corner-logo img {
+.github-content-corner-logo img {
   width: 20px;
   height: auto;
   border-radius: 4px;
   transition: transform 0.3s ease-in-out;
 }
 
-.home-assistant-corner-logo:hover img {
+.github-content-corner-logo:hover img {
   transform: scale(1.1);
 }
 
@@ -871,11 +871,11 @@ body.light-mode .main-header-fixed {
 
   /* Removed .project-details { align-items: center; } here as it's moved up and changed */
 
-  .home-assistant-corner-logo {
+  .github-content-corner-logo {
     top: 8px;
     right: 8px;
   }
-  .home-assistant-corner-logo img {
+  .github-content-corner-logo img {
     width: 20px;
   }
 }
