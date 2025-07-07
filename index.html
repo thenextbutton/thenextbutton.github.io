@@ -30,19 +30,22 @@
 <!-- MODIFIED: New wrapper for controls -->
 <div class="bottom-right-controls-wrapper">
   <div class="theme-toggle-container">
-    <input type="checkbox" id="theme-switch" class="theme-switch-checkbox">
-    <label for="theme-switch" class="theme-switch-label"></label>
-    <!-- MODIFIED: Replaced span with i for Font Awesome icons -->
-    <i id="moon-icon" class="fas fa-moon theme-icon"></i>
-    <i id="sun-icon" class="fas fa-sun theme-icon"></i>
-  </div>
+    <input type="radio" id="theme-light" name="theme-mode" value="light" class="theme-mode-radio">
+    <input type="radio" id="theme-system" name="theme-mode" value="system" class="theme-mode-radio">
+    <input type="radio" id="theme-dark" name="theme-mode" value="dark" class="theme-mode-radio">
 
-  <div class="font-controls">
-    <span id="font-minus">A</span>
-    <span id="font-reset">A</span>
-    <span id="font-plus">A</span>
+    <label for="theme-light" class="theme-mode-label" data-mode="light">
+      <i class="fas fa-sun theme-icon"></i>
+    </label>
+    <label for="theme-system" class="theme-mode-label" data-mode="system">
+      <i class="fas fa-desktop theme-icon"></i>
+    </label>
+    <label for="theme-dark" class="theme-mode-label" data-mode="dark">
+      <i class="fas fa-moon theme-icon"></i>
+    </label>
+
+    <div class="theme-toggle-slider"></div>
   </div>
-</div>
 
 <script src="assets/js/theme_toggle.js"></script>
 <script src="assets/js/header_scroll.js"></script>

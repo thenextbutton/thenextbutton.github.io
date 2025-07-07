@@ -1,13 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
     const themeSwitch = document.getElementById('theme-switch');
-    const moonIcon = document.getElementById('moon-icon');
-    const sunIcon = document.getElementById('sun-icon');
+    // const moonIcon = document.getElementById('moon-icon'); // Not needed for JS direct manipulation anymore
+    // const sunIcon = document.getElementById('sun-icon'); // Not needed for JS direct manipulation anymore
     const body = document.body;
     const msCertLogo = document.querySelector('.corner-logo-fixed');
     const profileImage = document.querySelector('.profile-image');
 
-    const DARK_MODE_MS_LOGO_SRC = 'assets/images/MS_Cert_Professional_logo_Wht_rgb.png';
-    const LIGHT_MODE_MS_LOGO_SRC = 'assets/images/MS_Cert_Professional_logo_Blk_rgb.png';
+    const DARK_MODE_MS_LOGO_SRC = 'assets/images/MS_Cert_Professional_logo_Wht_rgb.webp';
+    const LIGHT_MODE_MS_LOGO_SRC = 'assets/images/MS_Cert_Professional_logo_Blk_rgb.webp';
 
     const PROFILE_IMAGE_SOURCES = [
         'assets/images/profile_01.webp',
@@ -31,7 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     /**
-     * Applies the specified theme to the body, updates the toggle, and sets logo/icon visibility and position.
+     * Applies the specified theme to the body, updates the toggle, and sets logo.
+     * The icon visibility and position are now handled by CSS based on the themeSwitch.checked state.
      * @param {string} themeName - 'light' or 'dark'.
      */
     function applyTheme(themeName) {
@@ -41,30 +42,16 @@ document.addEventListener('DOMContentLoaded', () => {
             themeSwitch.checked = false; // Toggle OFF for Light Mode
             msCertLogo.src = LIGHT_MODE_MS_LOGO_SRC; // Set light mode logo
 
-            // Sun is active (left), Moon is inactive (right)
-            sunIcon.style.transform = 'translateY(-50%) translateX(0)'; // Sun stays at its active position
-            sunIcon.style.opacity = '1'; // Fade in sun
-            sunIcon.style.color = '#FFD700'; // Yellow for sun
-
-            // MODIFIED: Moon now fades out in place (translateX(0))
-            moonIcon.style.transform = 'translateY(-50%) translateX(0)'; 
-            moonIcon.style.opacity = '0'; // Fade out moon
-            moonIcon.style.color = '#f0f0f0'; // Ensure moon is default color when hidden/shown
+            // Removed direct manipulation of sunIcon and moonIcon styles
+            // CSS will handle these based on themeSwitch.checked
         } else { // themeName === 'dark'
             body.classList.remove('light-mode');
             body.classList.add('dark-mode'); // Ensure dark-mode is added for dark theme
             themeSwitch.checked = true; // Toggle ON for Dark Mode
             msCertLogo.src = DARK_MODE_MS_LOGO_SRC; // Set dark mode logo
 
-            // Moon is active (right), Sun is inactive (left) 
-            moonIcon.style.transform = 'translateY(-50%) translateX(0)'; // Moon stays at its active position
-            moonIcon.style.opacity = '1'; // Fade in moon
-            moonIcon.style.color = '#f0f0f0'; // White for moon
-
-            // MODIFIED: Sun now fades out in place (translateX(0))
-            sunIcon.style.transform = 'translateY(-50%) translateX(0)'; 
-            sunIcon.style.opacity = '0'; // Fade out sun
-            sunIcon.style.color = '#FFD700'; // Ensure sun is yellow when hidden/shown
+            // Removed direct manipulation of moonIcon and sunIcon styles
+            // CSS will handle these based on themeSwitch.checked
         }
     }
 

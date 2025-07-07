@@ -1,528 +1,541 @@
 html {
-  font-size: 14px;
-  transition: font-size 0.3s ease-in-out;
-  scroll-behavior: smooth; /* ADDED: Smooth scrolling for anchor links */
+  font-size: 14px;
+  transition: font-size 0.3s ease-in-out;
+  scroll-behavior: smooth; /* ADDED: Smooth scrolling for anchor links */
 }
 
 body {
-  font-family: "Consolas", monospace; /* All text will now use Consolas */
-  background-color: #1a1a1a;
-  color: #f0f0f0;
-  margin: 0 auto; /* Centered body */
-  padding: 0;
-  padding-top: 120px;
-  max-width: 1200px; /* Max width for the entire body */
-  transition: background-color 1.5s ease-in-out, color 1.5s ease-in-out;
-  overflow-y: scroll; /* Ensures scrollbar space is always reserved to prevent content jumping */
+  font-family: "Consolas", monospace; /* All text will now use Consolas */
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+  margin: 0 auto; /* Centered body */
+  padding: 0;
+  padding-top: 120px;
+  max-width: 1200px; /* Max width for the entire body */
+  transition: background-color 1.5s ease-in-out, color 1.5s ease-in-out;
+  overflow-y: scroll; /* Ensures scrollbar space is always reserved to prevent content jumping */
 }
 
 /* Scrollbar Styling for Webkit browsers */
 body::-webkit-scrollbar {
-  width: 10px; /* Width of the scrollbar */
+  width: 10px; /* Width of the scrollbar */
 }
 
 body::-webkit-scrollbar-track {
-  background: transparent; /* Make track transparent in dark mode */
-  border-radius: 5px;
+  background: transparent; /* Make track transparent in dark mode */
+  border-radius: 5px;
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: transparent; /* Transparent by default */
-  border-radius: 5px; /* Rounded corners for the thumb */
-  border: 2px solid transparent; /* Transparent border by default */
+  background-color: transparent; /* Transparent by default */
+  border-radius: 5px; /* Rounded corners for the thumb */
+  border: 2px solid transparent; /* Transparent border by default */
 }
 
 /* Make thumb visible on hover over the body */
 body:hover::-webkit-scrollbar-thumb {
-  background-color: #555; /* Color of the scrollbar thumb on hover */
-  border-color: #282a36; /* Border to match track on hover */
+  background-color: #555; /* Color of the scrollbar thumb on hover */
+  border-color: #282a36; /* Border to match track on hover */
 }
 
 /* Preserve hover effect for the thumb itself */
 body::-webkit-scrollbar-thumb:hover {
-  background-color: #777; /* Color of the scrollbar thumb on direct hover */
+  background-color: #777; /* Color of the scrollbar thumb on direct hover */
 }
 
 /* Hide scrollbar visually class */
 .hide-scrollbar-visually::-webkit-scrollbar-thumb,
 .hide-scrollbar-visually::-webkit-scrollbar-track {
-  background-color: transparent !important;
-  border-color: transparent !important;
+  background-color: transparent !important;
+  border-color: transparent !important;
 }
 
 
 .main-header-fixed {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: #1a1a1a;
-  padding: 10px 0;
-  box-sizing: border-box;
-  z-index: 900;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 120px;
-  transition: background-color 1.5s ease-in-out, color 1.5s ease-in-out;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #1a1a1a;
+  padding: 10px 0;
+  box-sizing: border-box;
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  transition: background-color 1.5s ease-in-out, color 1.5s ease-in-out;
 }
 
 .content-column {
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 20px;
-  box-sizing: border-box;
-  margin-top: 0;
-  font-size: 1rem;
-  color: #f0f0f0;
-  transition: opacity 0.7s ease-out, transform 0.7s ease-out, color 1.5s ease-in-out;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  box-sizing: border-box;
+  margin-top: 0;
+  font-size: 1rem;
+  color: #f0f0f0;
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out, color 1.5s ease-in-out;
 }
 
 /* ADDED: CSS for page transitions */
 #content-area {
-    opacity: 1;
-    transition: opacity 0.3s ease-in-out; /* Controls the fade duration */
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out; /* Controls the fade duration */
 }
 
 #content-area.fade-out {
-    opacity: 0;
+    opacity: 0;
 }
 
 #content-area.fade-in {
-    opacity: 1;
+    opacity: 1;
 }
 
 
 h1 {
-  font-family: "Consolas", monospace;
-  text-align: center;
-  color: #a0a0a0;
-  margin: 0;
-  font-size: 2.5rem;
-  line-height: 1.2;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding: 0 40px; /* MODIFIED: Reduced desktop padding for h1 */
-  box-sizing: border-box;
-  transition: transform 0.7s ease-out;
+  font-family: "Consolas", monospace;
+  text-align: center;
+  color: #a0a0a0;
+  margin: 0;
+  font-size: 2.5rem;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 40px; /* MODIFIED: Reduced desktop padding for h1 */
+  box-sizing: border-box;
+  transition: transform 0.7s ease-out;
 }
 
 h2, h3, h4, h5, h6 {
-  font-family: "Consolas", monospace;
+  font-family: "Consolas", monospace;
 }
 
 h4 {
-    margin-top: 20px; /* Adjust as needed, default is often higher */
-    margin-bottom: 10px; /* Reduce space below h4 */
+    margin-top: 20px; /* Adjust as needed, default is often higher */
+    margin-bottom: 10px; /* Reduce space below h4 */
 }
 
 /* Reduce top margin for unordered lists */
 ul {
-    margin-top: 0px; /* Removes the default top margin, bringing it closer to the preceding element */
-    margin-bottom: 10px; /* Keep some space below the list */
-    padding-left: 20px; /* Adjust indentation of list items if needed */
+    margin-top: 0px; /* Removes the default top margin, bringing it closer to the preceding element */
+    margin-bottom: 10px; /* Keep some space below the list */
+    padding-left: 20px; /* Adjust indentation of list items if needed */
 }
 
 /* Optional: Further reduce spacing for list items themselves */
 ul li {
-    margin-bottom: 5px; /* Adds a small gap between list items */
+    margin-bottom: 5px; /* Adds a small gap between list items */
 }
 
 .profile-image {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  z-index: 999;
-  transition: transform 0.7s ease-out;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  z-index: 999;
+  transition: transform 0.7s ease-out;
 }
 
 .corner-logo-fixed {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  width: 150px;
-  height: auto;
-  z-index: 1000;
-  transition: transform 0.7s ease-in-out;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 150px;
+  height: auto;
+  z-index: 1000;
+  transition: transform 0.7s ease-in-out;
 }
 
 .corner-logo-fixed img {
-  object-fit: contain;
-  width: 100%;
-  height: 100%;
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
 }
 
 .profile-image.hidden {
-  transform: translateX(-150%);
+  transform: translateX(-150%);
 }
 
 .corner-logo-fixed.hidden {
-  transform: translateX(150%);
+  transform: translateX(150%);
 }
 
 .main-nav {
-  text-align: center;
-  margin-top: 10px;
-  margin-bottom: 0;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0 20px;
-  box-sizing: border-box;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 0;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
 .main-nav ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 30px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
 }
 
 .main-nav li a {
-  text-decoration: none;
-  color: #a0a0a0;
-  font-weight: bold;
-  font-size: 1.1rem;
-  padding: 5px 10px;
-  transition: color 0.3s ease-in-out, font-weight 0.2s ease-in-out, background-color 0.3s ease-in-out, border-radius 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
-  display: inline-block;
-  border-radius: 4px;
+  text-decoration: none;
+  color: #a0a0a0;
+  font-weight: bold;
+  font-size: 1.1rem;
+  padding: 5px 10px;
+  transition: color 0.3s ease-in-out, font-weight 0.2s ease-in-out, background-color 0.3s ease-in-out, border-radius 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+  display: inline-block;
+  border-radius: 4px;
 }
 
 .main-nav li a:hover {
-  color: #c0c0c0;
-  font-weight: bolder;
-  background-color: #333;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  transform: translateY(-2px);
+  color: #c0c0c0;
+  font-weight: bolder;
+  background-color: #333;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
 }
 
 /* ADDED: Active navigation link styling */
 .main-nav li a.active {
-  color: #8be9fd; /* Highlight color */
-  font-weight: bolder;
-  background-color: #333;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  color: #8be9fd; /* Highlight color */
+  font-weight: bolder;
+  background-color: #333;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .content-column a {
-  color: #8be9fd;
-  text-decoration: none;
-  font-weight: bold;
-  transition: color 1.5s ease-in-out;
+  color: #8be9fd;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 1.5s ease-in-out;
 }
 
 .content-column a:hover {
-  text-decoration: underline;
+  text-decoration: underline;
 }
 
 .content-column h2 {
-    margin-bottom: 5px; /* Adjust this value as needed, try 0px if you want it very tight */
+    margin-bottom: 5px; /* Adjust this value as needed, try 0px if you want it very tight */
 }
 
 .github-project-item {
-  background-color: #282a36;
-  padding: 20px;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  border-radius: 8px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* This is the reference shadow */
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  text-align: left;
-  transition: background-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out, opacity 2s ease-out, transform 2s ease-out;
-  position: relative;
+  background-color: #282a36;
+  padding: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border-radius: 8px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* This is the reference shadow */
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  text-align: left;
+  transition: background-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out, opacity 2s ease-out, transform 2s ease-out;
+  position: relative;
 }
 
 .github-project-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
 }
 
 .github-project-item.hidden-scroll {
-  opacity: 0;
-  transform: scale(0.5); /* This line restores the zoom-out effect */
+  opacity: 0;
+  transform: scale(0.5); /* This line restores the zoom-out effect */
 }
 
 .project-image {
-  width: 25%;
-  flex-shrink: 0;
-  height: auto;
-  border-radius: 8px;
-  display: block;
-  margin: auto;
-  max-width: 100%;
-  object-fit: contain;
+  width: 25%;
+  flex-shrink: 0;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+  margin: auto;
+  max-width: 100%;
+  object-fit: contain;
 }
 
 .project-details {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  text-align: left;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: left;
 }
 
 .github-project-item h3 {
-  font-size: 1.5rem;
-  color: #8be9fd;
-  margin-top: 0;
-  margin-bottom: 10px;
+  font-size: 1.5rem;
+  color: #8be9fd;
+  margin-top: 0;
+  margin-bottom: 10px;
 }
 
 .github-project-item p {
-  font-size: 1rem;
-  margin-bottom: 15px;
-  word-wrap: break-word; /* ADDED: Ensures long words break */
-  overflow-wrap: break-word; /* ADDED: Standard property for word wrapping */
+  font-size: 1rem;
+  margin-bottom: 15px;
+  word-wrap: break-word; /* ADDED: Ensures long words break */
+  overflow-wrap: break-word; /* ADDED: Standard property for word wrapping */
 }
 
 .home-assistant-corner-logo {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  z-index: 10;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
 }
 
 .home-assistant-corner-logo img {
-  width: 20px;
-  height: auto;
-  border-radius: 4px;
-  transition: transform 0.3s ease-in-out;
+  width: 20px;
+  height: auto;
+  border-radius: 4px;
+  transition: transform 0.3s ease-in-out;
 }
 
 .home-assistant-corner-logo:hover img {
-  transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 
 .powered-by-github {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  font-size: 13px;
-  color: #888;
-  z-index: 990;
-  transition: color 1.5s ease-in-out;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  font-size: 13px;
+  color: #888;
+  z-index: 990;
+  transition: color 1.5s ease-in-out;
 }
 
 .powered-by-github a {
-  color: #888;
-  text-decoration: none;
-  transition: color 1.5s ease-in-out;
+  color: #888;
+  text-decoration: none;
+  transition: color 1.5s ease-in-out;
 }
 
 .powered-by-github a:hover {
-  text-decoration: underline;
+  text-decoration: underline;
 }
 
 /* MODIFIED: Control box styling for responsiveness and icon spacing */
 .bottom-right-controls-wrapper {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1000;
-  display: flex;
-  flex-direction: column; /* Stack controls vertically */
-  gap: 10px; /* Gap between the two control sections */
-  background-color: rgba(34, 34, 34, 0.8); /* Transparent dark background */
-  padding: 10px 8px; /* Padding inside the box */
-  border-radius: 12px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* MODIFIED: Matched shadow to github-project-item */
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  transition: background-color 1.5s ease-in-out, border-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out, opacity 0.75s ease-out; /* MODIFIED: opacity transition to 0.75s */
-  width: 160px; /* Fixed width for desktop, will adjust for mobile */
-  align-items: center; /* Center content horizontally within the wrapper */
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column; /* Stack controls vertically */
+  gap: 10px; /* Gap between the two control sections */
+  background-color: rgba(34, 34, 34, 0.8); /* Transparent dark background */
+  padding: 10px 8px; /* Padding inside the box */
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* MODIFIED: Matched shadow to github-project-item */
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  transition: background-color 1.5s ease-in-out, border-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out, opacity 0.75s ease-out; /* MODIFIED: opacity transition to 0.75s */
+  width: 160px; /* Fixed width for desktop, will adjust for mobile */
+  align-items: center; /* Center content horizontally within the wrapper */
 }
 
 .bottom-right-controls-wrapper:hover {
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4); /* MODIFIED: Matched hover shadow to github-project-item, removed glow */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4); /* MODIFIED: Matched hover shadow to github-project-item, removed glow */
 }
 
 /* MODIFIED: Focus state for the control box wrapper itself - Removed blue glow */
 .bottom-right-controls-wrapper:focus-visible {
-  outline: none; /* Remove default outline */
-  box-shadow: 0 0 0 2px #8be9fd; /* Subtle blue glow for dark mode */
-  border-color: #8be9fd; /* Add a border color if applicable */
-  transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
-  border-radius: 4px; /* Added for consistency */
+  outline: none; /* Remove default outline */
+  box-shadow: 0 0 0 2px #8be9fd; /* Subtle blue glow for dark mode */
+  border-color: #8be9fd; /* Add a border color if applicable */
+  transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  border-radius: 4px; /* Added for consistency */
 }
 
 
 /* ADDED: Class for fading out the control box */
 .bottom-right-controls-wrapper.fade-out-controls {
-    opacity: 0;
-    pointer-events: none; /* Make it unclickable when hidden */
-}
-
-/* MODIFIED: Theme toggle container for icon - now uses flex for spacing */
-.theme-toggle-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center; /* Center content horizontally within the container */
-  width: 100%; /* Take full width of parent wrapper */
-  position: relative; /* Needed for absolute positioning of icons */
-  /* Removed padding-right */
-}
-
-.theme-switch-checkbox {
-  height: 0;
-  width: 0;
-  visibility: hidden;
-}
-
-.theme-switch-label {
-  cursor: pointer;
-  width: 80px; /* Fixed width for the toggle track */
-  height: 20px;
-  background: #282a36;
-  display: block;
-  border-radius: 10px;
-  position: relative;
-  transition: background 1s;
-  border: 1px solid #555;
-  overflow: hidden;
-  flex-shrink: 0; /* Prevent it from shrinking */
-  margin: 0 10px; /* Add horizontal margin to center it and create space for icons */
-}
-
-.theme-switch-label:after {
-  content: '';
-  position: absolute;
-  top: 1.5px; /* Vertically center (20 - 17) / 2 = 1.5 */
-  left: 1.5px; /* Adjusted left to match top */
-  width: 17px;
-  height: 17px;
-  background: #f0f0f0;
-  border-radius: 50%;
-  transition: 1s;
-  z-index: 1;
-}
-
-.theme-switch-checkbox:checked + .theme-switch-label {
-  background: linear-gradient(to right, #00C6FF, #0072FF);
-  border-color: #0072FF;
-}
-
-.theme-switch-checkbox:checked + .theme-switch-label:after {
-  left: calc(100% - 1.5px); /* Adjusted left to match new size */
-  transform: translateX(-100%);
-  background: #1a1a1a;
-}
-
-/* MODIFIED: Styling for both theme icons - now absolutely positioned relative to .theme-toggle-container */
-.theme-icon {
-  font-size: 20px; /* Fixed font size */
-  transition: opacity 1s ease-in-out, transform 1s ease-in-out, color 1s ease-in-out; /* MODIFIED: Set transition to 1s */
-  position: absolute; /* Re-added absolute positioning */
-  top: 50%; /* Vertical centering */
-  transform: translateY(-50%); /* Adjust for vertical centering */
-  width: 20px; /* Fixed width for the icon itself */
-  text-align: center;
-}
-
-#moon-icon {
-  right: 0px; /* MODIFIED: Position moon icon to the right edge of the container */
-  color: #f0f0f0; /* Default color for moon (dark mode) */
-}
-
-#sun-icon {
-  left: 0px; /* MODIFIED: Position sun icon to the left edge of the container */
-  color: #FFD700; /* Yellow for sun icon */
+    opacity: 0;
+    pointer-events: none; /* Make it unclickable when hidden */
 }
 
 /* ==================================== */
-/* Theme-Specific Image Handling        */
+/* Theme Toggle & Font Controls Styling */
+/* ==================================== */
+
+/* MODIFIED: Styling for the NEW 3-way theme toggle */
+.theme-toggle-container {
+    display: flex; /* Arrange segments horizontally */
+    justify-content: space-between;
+    align-items: center;
+    width: 150px; /* Adjust width for 3 segments */
+    background-color: #44475a; /* Slightly lighter dark background for the track */
+    border-radius: 15px; /* Rounded ends */
+    position: relative;
+    padding: 3px; /* Padding inside the track */
+    overflow: hidden; /* Important for the slider */
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3); /* Inner shadow for depth */
+}
+
+/* Hide actual radio buttons */
+.theme-mode-radio {
+    display: none;
+}
+
+.theme-mode-label {
+    flex: 1; /* Make each label take equal space */
+    padding: 8px 0;
+    text-align: center;
+    cursor: pointer;
+    z-index: 1; /* Keep labels above the slider */
+    transition: color 0.3s ease;
+    user-select: none; /* Prevent text selection */
+}
+
+.theme-mode-label .theme-icon {
+    font-size: 18px; /* Adjust icon size */
+    color: #f0f0f0; /* Default icon color */
+    pointer-events: none; /* Prevent icon from interfering with label click */
+}
+
+/* Slider for the active state */
+.theme-toggle-slider {
+    position: absolute;
+    top: 3px; /* Match container padding */
+    bottom: 3px; /* Match container padding */
+    width: calc(100% / 3); /* Each segment is 1/3rd of the width */
+    background: linear-gradient(to right, #6272a4, #bd93f9); /* A nice gradient for the slider */
+    border-radius: 12px; /* Slightly less rounded than container */
+    transition: transform 0.3s ease-in-out; /* Smooth movement */
+    z-index: 0; /* Behind the labels */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for the slider */
+}
+
+/* Position the slider based on checked radio button */
+#theme-light:checked ~ .theme-toggle-slider {
+    transform: translateX(0%);
+}
+#theme-system:checked ~ .theme-toggle-slider {
+    transform: translateX(100%);
+}
+#theme-dark:checked ~ .theme-toggle-slider {
+    transform: translateX(200%);
+}
+
+/* Icon color for the active mode (when slider is under it) */
+/* These colors are for the icons on top of the slider */
+#theme-light:checked + .theme-mode-label .theme-icon { color: #FFD700; } /* Yellow for sun */
+#theme-system:checked + .theme-mode-label .theme-icon { color: #50fa7b; } /* Draconian green for desktop */
+#theme-dark:checked + .theme-mode-label .theme-icon { color: #f0f0f0; } /* White for moon */
+
+/* Default icon colors (when slider is NOT under them) */
+.theme-mode-label .theme-icon {
+    color: #999; /* Faded color for inactive icons */
+}
+
+/* Light Mode specific styling for the toggle */
+body.light-mode .theme-toggle-container {
+    background-color: #e0e0e0;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+}
+body.light-mode .theme-toggle-slider {
+    background: linear-gradient(to right, #007bff, #55aaff);
+}
+body.light-mode .theme-mode-label .theme-icon {
+    color: #555; /* Darker default icon color in light mode */
+}
+body.light-mode #theme-light:checked + .theme-mode-label .theme-icon { color: #FFD700; }
+body.light-mode #theme-system:checked + .theme-mode-label .theme-icon { color: #007bff; }
+body.light-mode #theme-dark:checked + .theme-mode-label .theme-icon { color: #333; }
+
+
+/* ==================================== */
+/* Theme-Specific Image Handling        */
 /* ==================================== */
 
 /* By default (light mode), hide the dark mode image */
 /* Target images with both project-image and dark-mode-img classes */
 .project-image.dark-mode-img {
-    display: none; /* No !important needed here, as specificity is now higher */
+    display: none; /* No !important needed here, as specificity is now higher */
 }
 
 /* When the body has the 'dark-mode' class: */
 body.dark-mode .project-image.light-mode-img {
-    display: none; /* Hide the light mode image */
+    display: none; /* Hide the light mode image */
 }
 
 body.dark-mode .project-image.dark-mode-img {
-    display: block; /* Show the dark mode image */
+    display: block; /* Show the dark mode image */
 }
 
 /* Add a smooth transition for the image visibility (optional, but recommended) */
 /* Apply transitions to both relevant image classes */
 .project-image.light-mode-img,
 .project-image.dark-mode-img {
-    transition: opacity 0.3s ease-in-out;
+    transition: opacity 0.3s ease-in-out;
 }
 
 /* Ensure the correct initial opacity for the visible image */
 .project-image.light-mode-img {
-    opacity: 1;
+    opacity: 1;
 }
 
 /* When in dark mode, set opacities */
 body.dark-mode .project-image.light-mode-img {
-    opacity: 0;
+    opacity: 0;
 }
 
 body.dark-mode .project-image.dark-mode-img {
-    opacity: 1;
+    opacity: 1;
 }
 
 
 /* MODIFIED: Font controls - now part of the wrapper's flow */
 .font-controls {
-  display: flex;
-  justify-content: space-between; /* Distribute items evenly */
-  gap: 0px; /* No gap needed, space-between handles it */
-  width: 100%; /* Take full width of parent wrapper */
-  /* REMOVED: position: fixed; bottom; right; z-index; */
+  display: flex;
+  justify-content: space-between; /* Distribute items evenly */
+  gap: 0px; /* No gap needed, space-between handles it */
+  width: 100%; /* Take full width of parent wrapper */
+  /* REMOVED: position: fixed; bottom; right; z-index; */
 }
 
 .font-controls span {
-  width: 30px;
-  height: 30px;
-  background-color: #333;
-  color: #f0f0f0;
-  border: 1px solid #555;
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-  cursor: pointer;
-  user-select: none;
-  transition: background-color 1.5s, color 1.5s, border-color 1.5s;
+  width: 30px;
+  height: 30px;
+  background-color: #333;
+  color: #f0f0f0;
+  border: 1px solid #555;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 1.5s, color 1.5s, border-color 1.5s;
 }
 
 #font-minus {
-  font-size: 13px;
+  font-size: 13px;
 }
 
 #font-reset {
-  font-size: 17px;
+  font-size: 17px;
 }
 
 #font-plus {
-  font-size: 21px;
+  font-size: 21px;
 }
 
 .font-controls span:hover {
-  background-color: #555;
+  background-color: #555;
 }
 
 /* ADDED: Focus States for individual controls */
@@ -531,57 +544,57 @@ button:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible,
-.theme-switch-label:focus-visible, /* Specific for the toggle label */
+.theme-mode-label:focus-visible, /* Specific for the toggle label */
 .font-controls span:focus-visible {
-  outline: none; /* Remove default outline */
-  box-shadow: 0 0 0 2px #8be9fd; /* Subtle blue glow for dark mode */
-  border-color: #8be9fd; /* Add a border color if applicable */
-  transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
-  border-radius: 4px; /* Added for consistency */
+  outline: none; /* Remove default outline */
+  box-shadow: 0 0 0 2px #8be9fd; /* Subtle blue glow for dark mode */
+  border-color: #8be9fd; /* Add a border color if applicable */
+  transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  border-radius: 4px; /* Added for consistency */
 }
 
 
 body.light-mode {
-  background-color: #f0f0f0;
-  color: #1a1a1a;
+  background-color: #f0f0f0;
+  color: #1a1a1a;
 }
 
 /* ADDED: Ensure content elements have correct text color in light mode */
 body.light-mode .content-column h4,
 body.light-mode .content-column ul,
 body.light-mode .content-column ul li {
-    color: #1a1a1a; /* Explicitly set dark color for light mode */
+    color: #1a1a1a; /* Explicitly set dark color for light mode */
 }
 
 /* ADDED: Light Mode Scrollbar */
 body.light-mode::-webkit-scrollbar-track {
-  background: #e0e0e0; /* Lighter track for light mode */
+  background: #e0e0e0; /* Lighter track for light mode */
 }
 
 body.light-mode::-webkit-scrollbar-thumb {
-  background-color: transparent; /* MODIFIED: Transparent by default in light mode */
-  border: 2px solid transparent; /* MODIFIED: Transparent border by default in light mode */
+  background-color: transparent; /* MODIFIED: Transparent by default in light mode */
+  border: 2px solid transparent; /* MODIFIED: Transparent border by default in light mode */
 }
 
 /* ADDED: Make thumb visible on hover over the body in light mode */
 body.light-mode:hover::-webkit-scrollbar-thumb {
-  background-color: #888; /* Darker thumb for light mode on hover */
-  border-color: #e0e0e0; /* Border to match light track on hover */
+  background-color: #888; /* Darker thumb for light mode on hover */
+  border-color: #e0e0e0; /* Border to match light track on hover */
 }
 
 /* Preserve hover effect for the thumb itself in light mode */
 body.light-mode::-webkit-scrollbar-thumb:hover {
-  background-color: #666; /* Even darker thumb on direct hover for light mode */
+  background-color: #666; /* Even darker thumb on direct hover for light mode */
 }
 
 #last-updated-text {
-    color: #888; /* A shade of grey. You can use 'grey' or a hex code like #AAAAAA */
-    font-style: italic;
-    font-size: 0.9em; /* Optional: Make it slightly smaller than surrounding text for subtle effect */
-    display: block; /* Optional: Makes it occupy its own line if it's currently inline */
-    margin-top: 0px; /* Optional: Add some space above it */
-	  margin-bottom: 20px; /* Add some space below it, before the next paragraph */
-    text-align: left; /* Optional: Align it to the right */
+    color: #888; /* A shade of grey. You can use 'grey' or a hex code like #AAAAAA */
+    font-style: italic;
+    font-size: 0.9em; /* Optional: Make it slightly smaller than surrounding text for subtle effect */
+    display: block; /* Optional: Makes it occupy its own line if it's currently inline */
+    margin-top: 0px; /* Optional: Add some space above it */
+	  margin-bottom: 20px; /* Add some space below it, before the next paragraph */
+    text-align: left; /* Optional: Align it to the right */
 }
 
 /* ADDED: Light Mode Focus States for individual controls */
@@ -590,292 +603,284 @@ body.light-mode button:focus-visible,
 body.light-mode input:focus-visible,
 body.light-mode textarea:focus-visible,
 body.light-mode select:focus-visible,
-body.light-mode .theme-switch-label:focus-visible,
+body.light-mode .theme-mode-label:focus-visible,
 body.light-mode .font-controls span:focus-visible {
-  box-shadow: 0 0 0 2px #007bff; /* Subtle blue glow for light mode */
-  border-color: #007bff; /* Add a border color if applicable */
-  border-radius: 4px; /* Rounded corners for the focus outline in light mode */
+  box-shadow: 0 0 0 2px #007bff; /* Subtle blue glow for light mode */
+  border-color: #007bff; /* Add a border color if applicable */
+  border-radius: 4px; /* Rounded corners for the focus outline in light mode */
 }
 
 /* ADDED: Light mode styling for the control box itself */
 body.light-mode .bottom-right-controls-wrapper {
-  background-color: rgba(240, 240, 240, 0.8); /* MODIFIED: Lighter background for light mode */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* MODIFIED: Lighter shadow for light mode */
-  border-color: rgba(0, 0, 0, 0.1); /* Lighter border for light mode */
+  background-color: rgba(240, 240, 240, 0.8); /* MODIFIED: Lighter background for light mode */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* MODIFIED: Lighter shadow for light mode */
+  border-color: rgba(0, 0, 0, 0.1); /* Lighter border for light mode */
 }
 
 body.light-mode .bottom-right-controls-wrapper:hover {
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25); /* MODIFIED: Lighter hover shadow for light mode, removed glow */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25); /* MODIFIED: Lighter hover shadow for light mode, removed glow */
 }
 
 /* MODIFIED: Light mode focus state for the control box wrapper itself - Removed blue glow */
 body.light-mode .bottom-right-controls-wrapper:focus-visible {
-  outline: none; /* Remove default outline */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Keep existing shadow, removed blue glow */
-  border-color: transparent; /* Ensure no border color is applied */
-  border-radius: 4px; /* Added for consistency */
+  outline: none; /* Remove default outline */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Keep existing shadow, removed blue glow */
+  border-color: transparent; /* Ensure no border color is applied */
+  border-radius: 4px; /* Added for consistency */
 }
 
 
 body.light-mode h1 {
-  color: #333;
+  color: #333;
 }
 
 body.light-mode .main-nav li a {
-  color: #333;
-  transition: color 0.3s ease-in-out, font-weight 0.2s ease-in-out, background-color 0.3s ease-in-out, border-radius 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
-  border-radius: 4px;
+  color: #333;
+  transition: color 0.3s ease-in-out, font-weight 0.2s ease-in-out, background-color 0.3s ease-in-out, border-radius 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+  border-radius: 4px;
 }
 
 body.light-mode .main-nav li a:hover {
-  color: #000;
-  font-weight: bolder;
-  background-color: #e0e0e0;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transform: translateY(-2px);
+  color: #000;
+  font-weight: bolder;
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
 }
 
 /* ADDED: Active navigation link styling for light mode */
 body.light-mode .main-nav li a.active {
-  color: #007bff; /* Highlight color */
-  font-weight: bolder;
-  background-color: #e0e0e0;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  color: #007bff; /* Highlight color */
+  font-weight: bolder;
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 body.light-mode .content-column a {
-  color: #007bff;
+  color: #007bff;
 }
 
 
 body.light-mode .content-column p {
-  color: #1a1a1a;
+  color: #1a1a1a;
 }
 
 body.light-mode .content-column h2 {
-  color: #333;
+  color: #333;
 }
 
 body.light-mode .github-project-item h3 {
-  color: #333;
+  color: #333;
 }
 
 
 body.light-mode .github-project-item {
-  background-color: #d0d0d0;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  background-color: #d0d0d0;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 body.light-mode .github-project-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
 }
 
 body.light-mode .powered-by-github {
-  color: #666;
+  color: #666;
 }
 body.light-mode .powered-by-github a {
-    color: #666;
+    color: #666;
 }
 body.light-mode .powered-mode .powered-by-github a:hover {
-    color: #444;
+    color: #444;
 }
 
 body.light-mode .font-controls span {
-  background-color: #eee;
-  color: #1a1a1a;
-  border-color: #bbb;
+  background-color: #eee;
+  color: #1a1a1a;
+  border-color: #bbb;
 }
 
 body.light-mode .theme-switch-text {
-    color: #1a1a1a;
+    color: #1a1a1a;
 }
 
 body.light-mode .main-header-fixed {
-  background-color: #f0f0f0;
+  background-color: #f0f0f0;
 }
 
 
 @media (max-width: 768px) {
-  html {
-    font-size: 16px;
+  html {
+    font-size: 16px;
+  }
+
+  body {
+    padding-top: 170px;
+  }
+
+  .main-header-fixed {
+    padding: 10px 0;
+    min-height: 140px;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+    line-height: 1.2;
+    /* 🐛 IMPORTANT FIX: Reduced padding for mobile to prevent horizontal scrollbar */
+    padding: 0 15px;
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 1;
+    transform: translateY(30px);
+  }
+
+  h1.slide-up {
+    transform: translateY(0);
+  }
+
+  .main-nav {
+    margin-top: 10px;
+    padding: 0 10px;
+  }
+
+  .main-nav ul {
+    gap: 20px;
+  }
+
+  .main-nav li a {
+    font-size: 1.1rem;
+    padding: 8px 12px;
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+
+  .main-nav li a:hover {
+    color: 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+
+  .profile-image {
+    top: 10px;
+    left: 10px;
+    width: 60px;
+    height: 60px;
+    z-index: 1001;
+  }
+
+  .corner-logo-fixed {
+    top: 10px;
+    right: 10px;
+    width: 90px;
+    height: 60px;
+    z-index: 1001;
+  }
+
+  /* MODIFIED: Responsive adjustments for the control box */
+  .bottom-right-controls-wrapper {
+    /* 🐛 IMPORTANT FIX: Use max-width and reduced right margin for very narrow viewports */
+    max-width: 140px; /* Slightly smaller width on mobile */
+    padding: 8px 6px; /* Reduced padding */
+    bottom: 10px; /* Closer to bottom */
+    right: 5px; /* Closer to right */
+  }
+
+  .theme-toggle-container {
+    width: 120px; /* Smaller toggle on mobile */
+    border-radius: 12px;
+    padding: 2px;
   }
 
-  body {
-    padding-top: 170px;
+  .theme-mode-label {
+      padding: 6px 0;
   }
 
-  .main-header-fixed {
-    padding: 10px 0;
-    min-height: 140px;
+  .theme-mode-label .theme-icon {
+      font-size: 16px;
   }
 
-  h1 {
-    font-size: 2.2rem;
-    line-height: 1.2;
-    /* 🐛 IMPORTANT FIX: Reduced padding for mobile to prevent horizontal scrollbar */
-    padding: 0 15px;
-    margin-bottom: 15px;
-    position: relative;
-    z-index: 1;
-    transform: translateY(30px);
+  .theme-toggle-slider {
+      border-radius: 10px;
   }
 
-  h1.slide-up {
-    transform: translateY(0);
-  }
+  .font-controls {
+    gap: 6px; /* Reduced gap between font control buttons */
+  }
 
-  .main-nav {
-    margin-top: 10px;
-    padding: 0 10px;
-  }
+  .font-controls span {
+    width: 35px; /* Slightly smaller font control buttons */
+    height: 35px;
+    font-size: 16px;
+  }
 
-  .main-nav ul {
-    gap: 20px;
-  }
+  #font-minus {
+    font-size: 12px;
+  }
 
-  .main-nav li a {
-    font-size: 1.1rem;
-    padding: 8px 12px;
-    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  }
+  #font-reset {
+    font-size: 16px;
+  }
 
-  .main-nav li a:hover {
-    color: 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  }
+  #font-plus {
+    font-size: 20px;
+  }
 
-  .profile-image {
-    top: 10px;
-    left: 10px;
-    width: 60px;
-    height: 60px;
-    z-index: 1001;
-  }
+  .content-column {
+    padding: 0px 15px 15px 15px;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 100px;
+  }
 
-  .corner-logo-fixed {
-    top: 10px;
-    right: 10px;
-    width: 90px;
-    height: 60px;
-    z-index: 1001;
-  }
+  .github-project-item {
+    flex-direction: column;
+    align-items: center;
+    /* REMOVED: text-align: center; from here */
+    padding: 15px;
+  }
 
-  /* MODIFIED: Responsive adjustments for the control box */
-  .bottom-right-controls-wrapper {
-    /* 🐛 IMPORTANT FIX: Use max-width and reduced right margin for very narrow viewports */
-    max-width: 140px; /* Slightly smaller width on mobile */
-    padding: 8px 6px; /* Reduced padding */
-    bottom: 10px; /* Closer to bottom */
-    right: 5px; /* Closer to right */
-  }
+  /* MODIFIED: Ensure items within project-details are left-aligned */
+  .project-details {
+    width: 100%;
+    align-items: flex-start; /* THIS IS THE KEY CHANGE */
+  }
 
-  .theme-toggle-container {
-    /* No specific padding-right needed here */
-  }
-
-  .theme-switch-label {
-    width: 60px; /* Slightly smaller toggle on mobile */
-    height: 20px;
-    border-radius: 10px;
-    margin: 0 8px; /* Adjusted margin for mobile centering */
-  }
-
-  .theme-switch-label:after {
-    top: 1.5px;
-    left: 1.5px;
-    width: 17px;
-    height: 17px;
-  }
-
-  .theme-switch-checkbox:checked + .theme-switch-label:after {
-    left: calc(100% - 1.5px);
-  }
-
-  .theme-icon {
-    font-size: 18px; /* Slightly smaller icons on mobile */
-  }
-
-  .font-controls {
-    gap: 6px; /* Reduced gap between font control buttons */
-  }
-
-  .font-controls span {
-    width: 35px; /* Slightly smaller font control buttons */
-    height: 35px;
-    font-size: 16px;
-  }
-
-  #font-minus {
-    font-size: 12px;
-  }
-
-  #font-reset {
-    font-size: 16px;
-  }
-
-  #font-plus {
-    font-size: 20px;
-  }
-
-  .content-column {
-    padding: 0px 15px 15px 15px;
-    font-size: 1rem;
-    line-height: 1.6;
-    margin-bottom: 100px;
-  }
-
-  .github-project-item {
-    flex-direction: column;
-    align-items: center;
-    /* REMOVED: text-align: center; from here */
-    padding: 15px;
-  }
-
-  /* MODIFIED: Ensure items within project-details are left-aligned */
-  .project-details {
-    width: 100%;
-    align-items: flex-start; /* THIS IS THE KEY CHANGE */
-  }
-
-  /* Keep these specific text-align rules for explicit control */
-  .github-project-item .project-details h3,
-  .github-project-item .project-details p,
-  .github-project-item .project-details h4,
-  .github-project-item .project-details ul,
-  .github-project-item .project-details ul li {
-      text-align: left; /* Ensure text within project details is left-aligned on mobile */
-  }
+  /* Keep these specific text-align rules for explicit control */
+  .github-project-item .project-details h3,
+  .github-project-item .project-details p,
+  .github-project-item .project-details h4,
+  .github-project-item .project-details ul,
+  .github-project-item .project-details ul li {
+      text-align: left; /* Ensure text within project details is left-aligned on mobile */
+  }
 
 
-  .github-project-item .project-details ul {
-      padding-left: 20px; /* Ensure padding-left for list indentation on mobile */
-  }
+  .github-project-item .project-details ul {
+      padding-left: 20px; /* Ensure padding-left for list indentation on mobile */
+  }
 
 
-  .project-image {
-    width: 80%;
-    max-width: 200px;
-    margin-bottom: 15px;
-  }
+  .project-image {
+    width: 80%;
+    max-width: 200px;
+    margin-bottom: 15px;
+  }
 
-  .github-project-item h3 {
-    font-size: 1.5rem;
-  }
+  .github-project-item h3 {
+    font-size: 1.5rem;
+  }
 
-  .github-project-item p {
-    font-size: 0.95rem;
-    line-height: 1.4;
-  }
+  .github-project-item p {
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
 
-  /* Removed .project-details { align-items: center; } here as it's moved up and changed */
+  /* Removed .project-details { align-items: center; } here as it's moved up and changed */
 
-  .home-assistant-corner-logo {
-    top: 8px;
-    right: 8px;
-  }
-  .home-assistant-corner-logo img {
-    width: 20px;
-  }
+  .home-assistant-corner-logo {
+    top: 8px;
+    right: 8px;
+  }
+  .home-assistant-corner-logo img {
+    width: 20px;
+  }
 }
