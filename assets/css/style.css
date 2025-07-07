@@ -151,42 +151,10 @@ ul li {
   transition: transform 0.7s ease-in-out;
 }
 
-/* ==================================== */
-/* MS Cert Logo - Theme Switching (Applies to the INNER IMAGES) */
-/* ==================================== */
-.corner-logo-fixed .light-mode-logo,
-.corner-logo-fixed .dark-mode-logo {
-    position: absolute; /* Allows images to stack perfectly within their parent .corner-logo-fixed */
-    top: 0;
-    left: 0;
-    width: 100%; /* Make images fill their container */
-    height: 100%;
-    object-fit: contain; /* Ensures the image scales correctly within its space */
-    /* This transition is for the theme-based fade effect */
-    transition: opacity 0.3s ease-in-out;
-}
-
-/* By default (light mode), hide the dark mode logo */
-.corner-logo-fixed .dark-mode-logo {
-    opacity: 0;
-    pointer-events: none; /* Make it unclickable when hidden */
-}
-
-/* Ensure the light mode logo is visible by default */
-.corner-logo-fixed .light-mode-logo {
-    opacity: 1;
-    pointer-events: auto; /* Make it clickable */
-}
-
-/* When in dark mode: */
-body.dark-mode .corner-logo-fixed .light-mode-logo {
-    opacity: 0; /* Fade out the light mode logo */
-    pointer-events: none; /* Make it unclickable */
-}
-
-body.dark-mode .corner-logo-fixed .dark-mode-logo {
-    opacity: 1; /* Fade in the dark mode logo */
-    pointer-events: auto; /* Make it clickable */
+.corner-logo-fixed img {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
 }
 
 .profile-image.hidden {
@@ -514,66 +482,6 @@ body.dark-mode .project-image.light-mode-img {
 body.dark-mode .project-image.dark-mode-img {
     opacity: 1;
 }
-
-
-/* ==================================== */
-/* MS Cert Logo - Fixed Position & Slide (Applies to the CONTAINER DIV) */
-/* ==================================== */
-.corner-logo-fixed {
-    position: fixed; /* Keeps the container in the corner */
-    top: 20px;
-    right: 20px;
-    width: 150px; /* Set a specific width for the container */
-    height: auto; /* Or define a fixed height if needed for the container */
-    z-index: 1000;
-    /* This transition is for the slide in/out effect controlled by header_scroll.js */
-    transition: transform 0.7s ease-in-out;
-}
-
-/* This class is added/removed by header_scroll.js to slide the logo container */
-.corner-logo-fixed.hidden {
-    transform: translateX(150%); /* Adjust this value if needed to slide completely out of view */
-}
-
-/* ==================================== */
-/* MS Cert Logo - Theme Switching (Applies to the INNER IMAGES) */
-/* ==================================== */
-.corner-logo-fixed .light-mode-logo,
-.corner-logo-fixed .dark-mode-logo {
-    position: absolute; /* Allows images to stack perfectly within their parent .corner-logo-fixed */
-    top: 0;
-    left: 0;
-    width: 100%; /* Make images fill their container */
-    height: 100%;
-    object-fit: contain; /* Ensures the image scales correctly within its space */
-    /* This transition is for the theme-based fade effect */
-    transition: opacity 0.3s ease-in-out;
-}
-
-/* By default (light mode), hide the dark mode logo */
-.corner-logo-fixed .dark-mode-logo {
-    opacity: 0;
-    pointer-events: none; /* Make it unclickable when hidden */
-}
-
-/* Ensure the light mode logo is visible by default */
-.corner-logo-fixed .light-mode-logo {
-    opacity: 1;
-    pointer-events: auto; /* Make it clickable */
-}
-
-/* When in dark mode: */
-body.dark-mode .corner-logo-fixed .light-mode-logo {
-    opacity: 0; /* Fade out the light mode logo */
-    pointer-events: none; /* Make it unclickable */
-}
-
-body.dark-mode .corner-logo-fixed .dark-mode-logo {
-    opacity: 1; /* Fade in the dark mode logo */
-    pointer-events: auto; /* Make it clickable */
-}
-
-/* ... (Your existing .project-image rules and other CSS below) ... */
 
 
 /* MODIFIED: Font controls - now part of the wrapper's flow */
