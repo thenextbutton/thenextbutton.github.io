@@ -6,7 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainHeading = document.querySelector('h1');
 
     const SCROLL_THRESHOLD = 50;
-    let hideHeaderTimeoutId = null; // Still useful for clearing pending animations/changes
+    // This flag now synchronously tracks if the elements should be visually hidden
+    // based on the scroll position.
+    let areElementsVisuallyHidden = false;
 
     // --- Throttling Utility Function ---
     // Limits how often a function can run.
@@ -29,25 +31,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // --- Header (Profile Image, Logo, H1) Fade Logic ---
         if (currentScrollTop > SCROLL_THRESHOLD) {
-            // If scrolled past the threshold, hide logos
-            // Only hide if they are not already hidden
-            if (!profileImage.classList.contains('hidden')) {
-                clearTimeout(hideHeaderTimeoutId); // Clear any pending show actions
-
+            // User is scrolling down, elements should be hidden
+            // Only execute if they are not already marked as visually hidden
+            if (!areElementsVisuallyHidden) {
                 profileImage.classList.add('hidden');
                 msCertLogo.classList.add('hidden');
                 mainHeading.classList.add('slide-up');
-
-                // Optional: If you want to change the image AFTER it's fully hidden,
-                // you can keep a timeout here, but it's not strictly necessary for the core fix.
-                // For simplicity and directness, we'll change it when showing.
+                // Immediately update the state flag
+                areElementsVisuallyHidden = true;
             }
         } else {
-            // If scrolled near the top, show logos
-            // Only show if they are currently hidden
-            if (profileImage.classList.contains('hidden')) {
-                clearTimeout(hideHeaderTimeoutId); // Clear any pending hide actions
-
+            // User is scrolling up, elements should be shown
+            // Only execute if they are currently marked as visually hidden
+            if (areElementsVisuallyHidden) {
                 // Set a new random profile image *before* it becomes visible again
                 // The MS Cert logo remains the same, as per your requirement.
                 profileImage.src = window.getRandomProfileImage();
@@ -55,6 +51,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 profileImage.classList.remove('hidden');
                 msCertLogo.classList.remove('hidden');
                 mainHeading.classList.remove('slide-up');
+                // Immediately update the state flag
+                areElementsVisuallyHidden = false;
             }
         }
     }
@@ -67,7 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', throttledHandleScroll);
     window.addEventListener('resize', throttledHandleScroll);
 
-    // Initial call to set correct state on page load (this one doesn't need throttling)
+    // Initial call to set correct state on page load.
+    // This call is not throttled to ensure immediate setup.
     handleScroll();
 
     // Expose this function globally if other scripts need to trigger a header check.
