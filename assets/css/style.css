@@ -445,19 +445,20 @@ ul li {
 
 /* By default, hide the dark mode image */
 .dark-mode-img {
-    display: none;
+    display: none !important; /* ADDED !important */
 }
 
 /* When the body has the 'dark-mode' class, hide the light mode image and show the dark mode image */
 body.dark-mode .light-mode-img {
-    display: none;
+    display: none !important; /* ADDED !important */
 }
 
 body.dark-mode .dark-mode-img {
-    display: block; /* Or 'inline-block', 'flex', etc., depending on desired layout */
+    display: block !important; /* ADDED !important */
 }
 
 /* Optional: Add a smooth transition for the image visibility if you want a subtle fade effect */
+/* No need for !important on opacity transitions, as display change is more immediate */
 .light-mode-img,
 .dark-mode-img {
     transition: opacity 0.3s ease-in-out;
@@ -474,7 +475,6 @@ body.dark-mode .dark-mode-img {
 .light-mode-img {
     opacity: 1; /* Ensure visible by default */
 }
-
 
 /* MODIFIED: Font controls - now part of the wrapper's flow */
 .font-controls {
