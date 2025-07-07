@@ -443,37 +443,44 @@ ul li {
   color: #FFD700; /* Yellow for sun icon */
 }
 
-/* By default, hide the dark mode image */
-.dark-mode-img {
-    display: none !important; /* ADDED !important */
+/* ==================================== */
+/* Theme-Specific Image Handling        */
+/* ==================================== */
+
+/* By default (light mode), hide the dark mode image */
+/* Target images with both project-image and dark-mode-img classes */
+.project-image.dark-mode-img {
+    display: none; /* No !important needed here, as specificity is now higher */
 }
 
-/* When the body has the 'dark-mode' class, hide the light mode image and show the dark mode image */
-body.dark-mode .light-mode-img {
-    display: none !important; /* ADDED !important */
+/* When the body has the 'dark-mode' class: */
+body.dark-mode .project-image.light-mode-img {
+    display: none; /* Hide the light mode image */
 }
 
-body.dark-mode .dark-mode-img {
-    display: block !important; /* ADDED !important */
+body.dark-mode .project-image.dark-mode-img {
+    display: block; /* Show the dark mode image */
 }
 
-/* Optional: Add a smooth transition for the image visibility if you want a subtle fade effect */
-/* No need for !important on opacity transitions, as display change is more immediate */
-.light-mode-img,
-.dark-mode-img {
+/* Add a smooth transition for the image visibility (optional, but recommended) */
+/* Apply transitions to both relevant image classes */
+.project-image.light-mode-img,
+.project-image.dark-mode-img {
     transition: opacity 0.3s ease-in-out;
 }
 
-body.dark-mode .light-mode-img {
-    opacity: 0;
-}
-
-body.dark-mode .dark-mode-img {
+/* Ensure the correct initial opacity for the visible image */
+.project-image.light-mode-img {
     opacity: 1;
 }
 
-.light-mode-img {
-    opacity: 1; /* Ensure visible by default */
+/* When in dark mode, set opacities */
+body.dark-mode .project-image.light-mode-img {
+    opacity: 0;
+}
+
+body.dark-mode .project-image.dark-mode-img {
+    opacity: 1;
 }
 
 /* MODIFIED: Font controls - now part of the wrapper's flow */
