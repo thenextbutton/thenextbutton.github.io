@@ -307,37 +307,57 @@ ul li {
 }
 
 /* icons for now games playing */
+.console-list {
+  list-style-type: none; /* This is the key CSS property that hides the default bullet point. */
+  padding-left: 0; /* Often useful to reset default UL padding */
+}
+
+.console-list li {
+  position: relative;
+  padding-left: 30px; /* Creates space for the icon */
+}
+
+.console-list li::before {
+  content: "\f11b"; /* The icon's Unicode character */
+  font-family: "Font Awesome 6 Free"; /* Tells the browser which font to use */
+  font-weight: 900; /* Specifies the font weight for the icon */
+  position: absolute;
+  left: 0; /* Positions the icon where the bullet would normally be */
+  top: 50%;
+  transform: translateY(-50%); /* Vertically centers the icon */
+  /* ... other styling for color, size, etc. ... */
+}
 
 .switch-list li::before {
   content: "\f11b"; /* Unicode for fa-nintendo-switch */
-  font-family: "Font Awesome 6 Brands"; /* Ensure this */
-  font-weight: 400; /* Ensure this */
+  /*font-family: "Font Awesome 6 Brands"; /* Ensure this */
+  /*font-weight: 400; /* Ensure this */
 }
 
 /* Using fa-xbox for both OG Xbox and Xbox 360 */
 .xbox-list li::before {
   content: "\f412"; /* Unicode for fa-xbox */
-  font-family: "Font Awesome 6 Brands"; /* Ensure this */
-  font-weight: 400; /* Ensure this */
+  /*font-family: "Font Awesome 6 Brands"; /* Ensure this */
+  /*font-weight: 400; /* Ensure this */
 }
 
 .playstation-list li::before {
   content: "\f3df"; /* Unicode for fa-playstation */
-  font-family: "Font Awesome 6 Brands"; /* Ensure this */
-  font-weight: 400; /* Ensure this */
+  /*font-family: "Font Awesome 6 Brands"; /* Ensure this */
+  /*font-weight: 400; /* Ensure this */
 }
 
 .steam-list li::before {
   content: "\f1b6"; /* Unicode for fa-steam */
-  font-family: "Font Awesome 6 Brands"; /* Ensure this */
-  font-weight: 400; /* Ensure this */
+  /*font-family: "Font Awesome 6 Brands"; /* Ensure this */
+  /*font-weight: 400; /* Ensure this */
 }
 
 /* For generic game list (like GameCube, Game Boy) */
 .generic-game-list li::before {
   content: "\f11b"; /* Unicode for fa-gamepad */
-  font-family: "Font Awesome 6 Free"; /* Ensure this */
-  font-weight: 900; /* Ensure this */
+  /*font-family: "Font Awesome 6 Free"; /* Ensure this */
+  /*font-weight: 900; /* Ensure this */
 }
 
 .powered-by-github {
