@@ -309,7 +309,7 @@ ul li {
 /* icons for now games playing */
 
 .switch-list li::before {
-  content: "\f418"; /* Unicode for fa-nintendo-switch */
+  content: "\f11b"; /* Unicode for fa-nintendo-switch */
   font-family: "Font Awesome 6 Brands"; /* Ensure this */
   font-weight: 400; /* Ensure this */
 }
