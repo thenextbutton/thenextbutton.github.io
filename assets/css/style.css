@@ -306,6 +306,35 @@ ul li {
   transform: scale(1.1);
 }
 
+/* icons for now games playing */
+
+.switch-list li::before {
+  content: "\f418"; 
+}
+
+/* Using fa-xbox for both OG Xbox and Xbox 360 */
+.xbox-list li::before {
+  content: "\f412"; 
+}
+
+/* Unicode for fa-playstation */
+.playstation-list li::before {
+  content: "\f3df"; 
+}
+
+.steam-list li::before {
+  content: "\f1b6"; /* Unicode for fa-steam */
+  font-family: "Font Awesome 6 Brands"; /* Steam is in the Brands set */
+  font-weight: 400; /* Regular weight for brands */
+}
+
+/* MODIFIED: Generic icon for consoles without specific logos (e.g., GameCube, Game Boy) */
+.generic-game-list li::before {
+  content: "\f11b"; /* Unicode for fa-gamepad */
+  font-family: "Font Awesome 6 Free"; /* This is in the Free set */
+  font-weight: 900; /* Solid weight for free icons */
+}
+
 
 .powered-by-github {
   position: fixed;
