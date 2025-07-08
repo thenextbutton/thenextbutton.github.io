@@ -306,59 +306,62 @@ ul li {
   transform: scale(1.1);
 }
 
-/* icons for now games playing */
+/* Styling for game lists */
 .console-list {
-  list-style-type: none; /* This is the key CSS property that hides the default bullet point. */
-  padding-left: 0; /* Often useful to reset default UL padding */
+  list-style-type: none; /* Removes the default bullet points */
+  padding-left: 0; /* Remove default padding for lists */
 }
 
+/* Base style for list items */
 .console-list li {
   position: relative;
-  padding-left: 30px; /* Creates space for the icon */
+  padding-left: 30px; /* Space for the icon/image */
+  margin-bottom: 5px; /* Add some space between items */
+  display: flex; /* Use flexbox for better alignment */
+  align-items: center; /* Vertically align items */
 }
 
+/* Base style for the image icons (the "bullet points") */
 .console-list li::before {
-  content: "\f11b"; /* The icon's Unicode character */
-  font-family: "Font Awesome 6 Free"; /* Tells the browser which font to use */
-  font-weight: 900; /* Specifies the font weight for the icon */
-  position: absolute;
-  left: 0; /* Positions the icon where the bullet would normally be */
-  top: 50%;
-  transform: translateY(-50%); /* Vertically centers the icon */
-  /* ... other styling for color, size, etc. ... */
+  content: ""; /* CRITICAL: Must be an empty string for background-image */
+  display: inline-block; /* Make it a block-level element so it can have width/height */
+  width: 24px; /* Adjust width as needed for your images */
+  height: 24px; /* Adjust height as needed for your images */
+  background-size: contain; /* Scales the image to fit without cropping */
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-right: 8px; /* Space between icon and text */
+  flex-shrink: 0; /* Prevent the image from shrinking */
 }
+
+/* Specific image for each console type */
 
 .switch-list li::before {
-  content: "\f11b"; /* Unicode for fa-nintendo-switch */
-  /*font-family: "Font Awesome 6 Brands"; /* Ensure this */
-  /*font-weight: 400; /* Ensure this */
+  background-image: url('../images/switch.webp');
 }
 
-/* Using fa-xbox for both OG Xbox and Xbox 360 */
 .xbox-list li::before {
-  content: "\f412"; /* Unicode for fa-xbox */
-  /*font-family: "Font Awesome 6 Brands"; /* Ensure this */
-  /*font-weight: 400; /* Ensure this */
+  background-image: url('../images/xbox.webp');
 }
 
 .playstation-list li::before {
-  content: "\f3df"; /* Unicode for fa-playstation */
-  /*font-family: "Font Awesome 6 Brands"; /* Ensure this */
-  /*font-weight: 400; /* Ensure this */
+  background-image: url('../images/playstation.webp');
 }
 
 .steam-list li::before {
-  content: "\f1b6"; /* Unicode for fa-steam */
-  /*font-family: "Font Awesome 6 Brands"; /* Ensure this */
-  /*font-weight: 400; /* Ensure this */
+  background-image: url('../images/steam.webp');
 }
 
-/* For generic game list (like GameCube, Game Boy) */
-.generic-game-list li::before {
-  content: "\f11b"; /* Unicode for fa-gamepad */
-  /*font-family: "Font Awesome 6 Free"; /* Ensure this */
-  /*font-weight: 900; /* Ensure this */
+.gamecube-list li::before {
+  background-image: url('../images/gamecube.webp');
 }
+
+.gameboy-list li::before {
+  background-image: url('../images/gameboy_og.webp');
+}
+
+/* ... rest of your CSS ... */
+
 
 .powered-by-github {
   position: fixed;
