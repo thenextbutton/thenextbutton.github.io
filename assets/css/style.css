@@ -325,12 +325,12 @@ ul li {
 .console-list li::before {
   content: ""; /* CRITICAL: Must be an empty string for background-image */
   display: inline-block; /* Make it a block-level element so it can have width/height */
-  width: 24px; /* Adjust width as needed for your images */
-  height: 24px; /* Adjust height as needed for your images */
+  width: 18px; /* Adjust width as needed for your images */
+  height: 18px; /* Adjust height as needed for your images */
   background-size: contain; /* Scales the image to fit without cropping */
   background-repeat: no-repeat;
   background-position: center;
-  margin-right: 8px; /* Space between icon and text */
+  margin-right: 12px; /* Space between icon and text */
   flex-shrink: 0; /* Prevent the image from shrinking */
 }
 
