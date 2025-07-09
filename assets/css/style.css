@@ -315,7 +315,7 @@ ul li {
 /* Base style for list items */
 .console-list li {
   position: relative;
-  padding-left: 5px; /* Space for the icon/image */
+  padding-left: -5px; /* Space for the icon/image */
   margin-bottom: 2px; /* Add some space between items */
   display: flex; /* Use flexbox for better alignment */
   align-items: center; /* Vertically align items */
