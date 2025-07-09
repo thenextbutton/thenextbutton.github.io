@@ -307,13 +307,13 @@ ul li {
 }
 
 /* Styling for game lists */
-.console-list {
+.content-list {
   list-style-type: none; /* Removes the default bullet points */
   padding-left: 0; /* Remove default padding for lists */
 }
 
 /* Base style for list items */
-.console-list li {
+.content-list li {
   position: relative;
   padding-left: -5px; /* Space for the icon/image */
   margin-bottom: 2px; /* Add some space between items */
@@ -322,7 +322,7 @@ ul li {
 }
 
 /* Base style for the image icons (the "bullet points") */
-.console-list li::before {
+.content-list li::before {
   content: ""; /* CRITICAL: Must be an empty string for background-image */
   display: inline-block; /* Make it a block-level element so it can have width/height */
   width: 18px; /* Adjust width as needed for your images */
@@ -360,7 +360,21 @@ ul li {
   background-image: url('../images/gameboy_og.webp');
 }
 
-/* ... rest of your CSS ... */
+.movie-item::before {
+  background-image: url('../images/movie.webp');
+}
+
+.tv-show-item::before {
+  background-image: url('../images/television.webp');
+}
+
+.podcast-item::before {
+  background-image: url('../images/ipod.webp');
+}
+
+.music-item::before {
+  background-image: url('../images/loud-speaker.webp');
+}
 
 
 .powered-by-github {
