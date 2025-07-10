@@ -18,7 +18,7 @@ function initAutoLinker(){
 
   let n = document.createTreeWalker(t,NodeFilter.SHOW_TEXT,{
     acceptNode:function(e){
-      return"A"===e.parentNode.nodeName||"SCRIPT"===e.parentNode.nodeName||"STYLE"===e.parentNode.nodeName||e.parentNode.nodeName.match(/^H[1-6]$/)||0===e.nodeValue.trim().length?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT
+      return"A"===e.parentNode.nodeName||"SCRIPT"===e.parentNode.nodeName||"STYLE"===e.parentNode.nodeName||e.parentNode.nodeName.match(/^H[1-3]$/)||0===e.nodeValue.trim().length?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT
     }
   },!1);
 
