@@ -202,13 +202,13 @@ ul li {
 /* Default link styling within content-column paragraphs */
 .content-column p a {
   color: #8be9fd; /* Your accent color */
-  text-decoration: underline; /* Default underline */
+  text-decoration: none; /* Removed underline */
   font-weight: bold;
   transition: color 1.5s ease-in-out, text-decoration 0.3s ease-in-out;
 }
 
 .content-column p a:hover {
-  text-decoration: none; /* Remove underline on hover for standard links */
+  text-decoration: none; /* Ensure no underline on hover */
 }
 
 
@@ -221,11 +221,11 @@ ul li {
 
 .content-column a {
   color: #8be9fd;
-  text-decoration: none;
+  text-decoration: none; /* Removed underline */
   font-weight: bold;
   transition: color 1.5s ease-in-out;
 }
-.content-column a:hover { text-decoration: underline; }
+.content-column a:hover { text-decoration: none; } /* Ensure no underline on hover */
 .content-column h2 { margin-bottom: 5px; }
 
 #last-updated-text {
@@ -521,7 +521,7 @@ body.dark-mode .github-content-corner-logo .light-mode-img {
   transition: color 1.5s ease-in-out;
 }
 .powered-by-github a { color: #888; text-decoration: none; transition: color 1.5s ease-in-out; }
-.powered-by-github a:hover { text-decoration: underline; }
+.powered-by-github a:hover { text-decoration: none; } /* Removed underline on hover */
 
 /* --- General Focus States --- */
 a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible,
