@@ -1,105 +1,170 @@
-/* --- Base Styles --- */
 html {
   font-size: 14px;
   transition: font-size 0.3s ease-in-out;
-  scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+  scroll-behavior: smooth; /* ADDED: Smooth scrolling for anchor links */
 }
 
 body {
   font-family: "Consolas", monospace; /* All text will now use Consolas */
   background-color: #1a1a1a;
   color: #f0f0f0;
-  margin: 0 auto;
+  margin: 0 auto; /* Centered body */
   padding: 0;
   padding-top: 120px;
-  max-width: 1200px;
+  max-width: 1200px; /* Max width for the entire body */
   transition: background-color 1.5s ease-in-out, color 1.5s ease-in-out;
   overflow-y: scroll; /* Ensures scrollbar space is always reserved to prevent content jumping */
 }
 
-/* --- Scrollbar Styling for Webkit browsers (Dark Mode Default) --- */
+/* Scrollbar Styling for Webkit browsers */
 body::-webkit-scrollbar {
-  width: 10px;
+  width: 10px; /* Width of the scrollbar */
 }
 
 body::-webkit-scrollbar-track {
-  background: transparent;
+  background: transparent; /* Make track transparent in dark mode */
   border-radius: 5px;
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: transparent;
-  border-radius: 5px;
-  border: 2px solid transparent;
+  background-color: transparent; /* Transparent by default */
+  border-radius: 5px; /* Rounded corners for the thumb */
+  border: 2px solid transparent; /* Transparent border by default */
 }
 
-body:hover::-webkit-scrollbar-thumb {
-  background-color: #555;
-  border-color: #282a36;
-}
-
+/* Make thumb visible on hover over the scrollbar */
 body::-webkit-scrollbar-thumb:hover {
-  background-color: #777;
+  background-color: #555; /* Darker thumb on hover */
 }
 
-/* Hide scrollbar visually class */
-.hide-scrollbar-visually::-webkit-scrollbar-thumb,
-.hide-scrollbar-visually::-webkit-scrollbar-track {
-  background-color: transparent !important;
-  border-color: transparent !important;
+/* Make thumb visible when hovering over the body */
+body:hover::-webkit-scrollbar-thumb {
+  background-color: #888; /* Visible thumb on body hover */
 }
 
-/* --- Header & Navigation --- */
+/* Specific styling for scrollbar visibility control */
+body.hide-scrollbar-visually::-webkit-scrollbar-thumb {
+    background-color: transparent !important;
+    border-color: transparent !important;
+}
+
+body.light-mode {
+  background-color: #f0f0f0;
+  color: #1a1a1a;
+}
+
+body.light-mode::-webkit-scrollbar-track {
+  background: #e0e0e0;
+}
+
+body.light-mode::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+body.light-mode::-webkit-scrollbar-thumb:hover {
+  background-color: #bbb;
+}
+
+body.light-mode:hover::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #00aaff;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-family: "Consolas", monospace;
+  transition: color 1.5s ease-in-out;
+}
+
+a {
+  color: #00aaff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #0077cc;
+  text-decoration: underline;
+}
+
+p, ul, li {
+  line-height: 1.6;
+}
+
+ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+.profile-image, .corner-logo-fixed {
+  position: fixed;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  z-index: 1000;
+  pointer-events: none; /* Allows clicks to pass through */
+}
+
+.profile-image {
+  top: 10px;
+  left: 20px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #00aaff;
+  box-shadow: 0 0 10px rgba(0, 170, 255, 0.5);
+}
+
+.profile-image.hidden {
+  opacity: 0;
+  transform: translateX(-100px);
+}
+
+.corner-logo-fixed {
+  top: 10px;
+  right: 20px;
+  width: 80px;
+  height: auto;
+}
+
+.corner-logo-fixed.hidden {
+  opacity: 0;
+  transform: translateX(100px);
+}
+
 .main-header-fixed {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #1a1a1a;
+  background-color: rgba(26, 26, 26, 0.9);
   padding: 10px 0;
-  box-sizing: border-box;
-  z-index: 900;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  z-index: 999;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  min-height: 120px;
-  transition: background-color 1.5s ease-in-out, color 1.5s ease-in-out;
+  align-items: center;
+  flex-direction: column;
+  transition: background-color 1.5s ease-in-out;
 }
 
-h1 {
-  font-family: "Consolas", monospace;
-  text-align: center;
-  color: #a0a0a0;
+body.light-mode .main-header-fixed {
+  background-color: rgba(240, 240, 240, 0.9);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.main-header-fixed h1 {
+  color: #00aaff;
   margin: 0;
-  font-size: 2.5rem;
-  line-height: 1.2;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding: 0 40px;
-  box-sizing: border-box;
-  transition: transform 0.7s ease-out;
+  padding-top: 10px;
+  font-size: 2.5em;
+  transition: transform 0.5s ease;
 }
 
-/* Common heading styles */
-h2, h3, h4, h5, h6 {
-  font-family: "Consolas", monospace;
-}
-
-h4 {
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
-
-.main-nav {
-  text-align: center;
-  margin-top: 10px;
-  margin-bottom: 0;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0 20px;
-  box-sizing: border-box;
+.main-header-fixed h1.slide-up {
+  transform: translateY(-50px);
+  opacity: 0;
 }
 
 .main-nav ul {
@@ -107,688 +172,339 @@ h4 {
   padding: 0;
   margin: 0;
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 30px;
+  gap: 20px;
 }
 
-.main-nav li a {
-  text-decoration: none;
-  color: #a0a0a0;
+.main-nav a {
+  color: #f0f0f0;
   font-weight: bold;
-  font-size: 1.1rem;
   padding: 5px 10px;
-  transition: color 0.3s ease-in-out, font-weight 0.2s ease-in-out, background-color 0.3s ease-in-out, border-radius 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
-  display: inline-block;
-  border-radius: 4px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.main-nav li a:hover {
-  color: #c0c0c0;
-  font-weight: bolder;
-  background-color: #333;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  transform: translateY(-2px);
+body.light-mode .main-nav a {
+  color: #1a1a1a;
 }
 
-.main-nav li a.active {
-  color: #8be9fd;
-  font-weight: bolder;
-  background-color: #333;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+.main-nav a:hover, .main-nav a.active {
+  background-color: #00aaff;
+  color: #1a1a1a;
+  text-decoration: none;
 }
 
-/* --- Profile Images & Fixed Logos --- */
-.profile-image,
-.corner-logo-fixed {
-  position: fixed;
-  top: 20px;
-  transition: transform 0.7s ease-out;
-}
-
-.profile-image {
-  left: 20px;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  z-index: 999;
-}
-
-.corner-logo-fixed {
-  right: 20px;
-  width: 150px;
-  height: auto;
-  z-index: 1000; /* Ensure logo is above profile image */
-  transition: transform 0.7s ease-in-out;
-}
-
-.corner-logo-fixed img {
-  object-fit: contain;
-  width: 100%;
-  height: 100%;
-}
-
-/* Hidden states for fixed elements */
-.profile-image.hidden {
-  transform: translateX(-150%);
-}
-
-.corner-logo-fixed.hidden {
-  transform: translateX(150%);
-}
-
-/* --- Content Area & General Text --- */
-#content-area {
-  opacity: 1;
-  transition: opacity 0.3s ease-in-out;
-}
-
-#content-area.fade-out {
-  opacity: 0;
-}
-
-#content-area.fade-in {
-  opacity: 1;
+body.light-mode .main-nav a:hover, body.light-mode .main-nav a.active {
+  background-color: #0077cc;
+  color: #f0f0f0;
 }
 
 .content-column {
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
+  max-width: 900px;
+  margin: 0 auto;
   padding: 20px;
-  box-sizing: border-box;
-  margin-top: 0;
-  font-size: 1rem;
-  color: #f0f0f0;
-  transition: opacity 0.7s ease-out, transform 0.7s ease-out, color 1.5s ease-in-out;
+  background-color: #222;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  margin-top: 150px;
+  transition: background-color 1.5s ease-in-out, box-shadow 1.5s ease-in-out;
+  opacity: 1; /* Initial opacity for fade effect */
+  transition: opacity 0.5s ease-in-out; /* Transition for fade effect */
 }
 
-.content-column a {
-  color: #8be9fd;
-  text-decoration: none;
-  font-weight: bold;
-  transition: color 1.5s ease-in-out;
+body.light-mode .content-column {
+  background-color: #fff;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
-.content-column a:hover {
-  text-decoration: underline;
-}
-
-.content-column h2 {
-  margin-bottom: 5px;
-}
-
-ul {
-  margin-top: 0px;
-  margin-bottom: 10px;
-  padding-left: 20px;
-}
-
-ul li {
-  margin-bottom: 5px;
-}
-
-#last-updated-text {
-  color: #888;
-  font-style: italic;
-  font-size: 0.9em;
-  display: block;
-  margin-top: 0px;
-  margin-bottom: 20px;
-  text-align: left;
+/* Scroll Animation hidden state */
+.hidden-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
 /* --- GitHub Project Items --- */
 .github-project-item {
-  background-color: #282a36;
-  padding: 20px;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  display: flex; /* Use flexbox for horizontal alignment of logo and text */
+  align-items: flex-start; /* Align items to the top (start of the cross-axis) */
+  gap: 20px; /* Space between the image and the text details */
+  background-color: #2a2a2a;
   border-radius: 8px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  text-align: left;
-  transition: background-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out, opacity 2s ease-out, transform 2s ease-out;
-  position: relative; /* Needed for absolute positioning of corner logo, and sticky children */
+  margin-bottom: 25px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative; /* Essential for positioning the corner logo */
+  overflow: hidden; /* Ensures nothing spills out of the item */
+}
 
-  /* Styles for sticky image effect (as discussed previously) */
-  padding-bottom: 20px; /* Ensures space for the image to stick within the item */
-  margin-bottom: 40px; /* Provides separation between items */
-  flex-direction: column; /* Stacks image and details vertically */
-  align-items: center; /* Centers content horizontally within the item */
+body.light-mode .github-project-item {
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .github-project-item:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
-.github-project-item.hidden-scroll {
-  opacity: 0;
-  transform: scale(0.5);
+body.light-mode .github-project-item:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-.project-image {
-  width: 25%;
-  flex-shrink: 0;
+.github-project-item .project-image {
+  flex-shrink: 0; /* Prevent the image from shrinking */
+  width: 150px; /* Adjust as needed */
   height: auto;
-  border-radius: 8px;
-  display: block;
-  margin: auto; /* Centers the image within its available space */
-  max-width: 100%;
-  object-fit: contain;
-
-  /* Styles for sticky image effect (as discussed previously) */
-  position: sticky;
-  top: 20px; /* Offset from the top of the viewport where the image will stick */
-  z-index: 1; /* Ensures image stays above other content while sticking */
-  margin-bottom: 15px; /* Space between the image and project details below it */
+  border-radius: 5px;
+  object-fit: cover;
+  align-self: flex-start; /* Align the image to the top of the flex container */
 }
 
-.project-details {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  text-align: left;
-  width: 100%; /* Ensures it takes full width within the flex container */
-  align-items: flex-start; /* Aligns content inside project-details to the start */
-}
-
-.github-project-item h3 {
-  font-size: 1.5rem;
-  color: #8be9fd;
-  margin-top: 0;
-  margin-bottom: 10px;
-}
-
-.github-project-item p {
-  font-size: 1rem;
-  margin-bottom: 15px;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-}
-
-/* Specific text alignment rules for mobile (maintained for explicit control) */
-.github-project-item .project-details h3,
-.github-project-item .project-details p,
-.github-project-item .project-details h4,
-.github-project-item .project-details ul,
-.github-project-item .project-details ul li {
-    text-align: left;
-}
-
-.github-project-item .project-details ul {
-    padding-left: 20px;
-}
-
+/* Style for the logo that appears in the top-right corner of the github-project-item */
 .github-content-corner-logo {
-  position: absolute; /* Default to absolute for corner placement */
+  position: absolute; /* Position relative to the .github-project-item */
   top: 10px;
   right: 10px;
-  z-index: 10;
-  /* If you want this also sticky and pushed by the next, the `position: sticky` and `top` properties below will override `position: absolute` */
-  position: sticky; /* Make logo sticky as well, if desired */
-  top: 20px; /* Stick at the same position or adjusted */
-  z-index: 2; /* Ensure logo is above the main image if they overlap */
-  align-self: flex-start; /* Aligns it to the start if using flexbox in github-project-item */
-  margin-left: 10px; /* Example offset if not absolutely positioned for sticky behavior */
+  width: 50px; /* Adjust size as needed */
+  height: auto;
+  z-index: 1; /* Ensure it's above other content within the item if needed */
 }
 
 .github-content-corner-logo img {
-  width: 20px;
-  height: auto;
-  border-radius: 4px;
-  transition: transform 0.3s ease-in-out;
+    width: 100%;
+    height: auto;
+    display: block; /* Remove extra space below image */
 }
 
-.github-content-corner-logo:hover img {
-  transform: scale(1.1);
+.project-details {
+  flex-grow: 1; /* Allow project details to take up remaining space */
 }
 
-/* --- Theming (Dark Mode Default vs Light Mode Overrides) --- */
-
-/* Theme-Specific Image Handling */
-.project-image.dark-mode-img {
-  display: none;
-}
-body.dark-mode .project-image.dark-mode-img {
-  display: block;
-}
-body.dark-mode .project-image.light-mode-img {
-  display: none;
-}
-.project-image.light-mode-img,
-.project-image.dark-mode-img {
-  transition: opacity 0.3s ease-in-out;
-}
-.project-image.light-mode-img {
-  opacity: 1;
-}
-body.dark-mode .project-image.light-mode-img {
-  opacity: 0;
-}
-body.dark-mode .project-image.dark-mode-img {
-  opacity: 1;
+.project-details h3 {
+  margin-top: 0;
+  color: #00aaff;
 }
 
-/* --- Controls Wrapper --- */
+.project-details p {
+  margin-bottom: 10px;
+}
+
+.project-details ul {
+  padding-left: 20px;
+  margin-top: 5px;
+}
+
+.project-details ul li {
+  margin-bottom: 5px;
+}
+
+/* Specific styles for dark/light mode images if you have them */
+body.dark-mode .light-mode-img {
+    display: none;
+}
+
+body.dark-mode .dark-mode-img {
+    display: block;
+}
+
+body.light-mode .light-mode-img {
+    display: block;
+}
+
+body.light-mode .dark-mode-img {
+    display: none;
+}
+
+/* --- Font Controls --- */
 .bottom-right-controls-wrapper {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  z-index: 1000;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  background-color: rgba(34, 34, 34, 0.8);
-  padding: 10px 8px;
-  border-radius: 12px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  transition: background-color 1.5s ease-in-out, border-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out, opacity 0.75s ease-out;
-  width: 160px;
-  align-items: center;
+  gap: 15px;
+  z-index: 1000;
+  transition: opacity 0.3s ease-in-out; /* For fade out/in effect */
 }
 
-.bottom-right-controls-wrapper:hover {
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
-}
-
-.bottom-right-controls-wrapper.fade-out-controls {
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* Theme Toggle */
-.theme-toggle-container {
+.font-controls, .theme-toggle-container {
+  background-color: #333;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
   display: flex;
-  flex-direction: row;
+  gap: 10px;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  position: relative;
-  margin: 0 10px;
 }
 
-.theme-switch-checkbox {
-  height: 0;
-  width: 0;
-  visibility: hidden;
-}
-
-.theme-switch-label {
-  cursor: pointer;
-  width: 80px;
-  height: 20px;
-  background: #282a36;
-  display: block;
-  border-radius: 10px;
-  position: relative;
-  transition: background 1s;
-  border: 1px solid #555;
-  overflow: hidden;
-  flex-shrink: 0;
-  margin: 0 10px;
-}
-
-.theme-switch-label:after {
-  content: '';
-  position: absolute;
-  top: 1.5px;
-  left: 1.5px;
-  width: 17px;
-  height: 17px;
-  background: #f0f0f0;
-  border-radius: 50%;
-  transition: 1s;
-  z-index: 1;
-}
-
-.theme-switch-checkbox:checked + .theme-switch-label {
-  background: linear-gradient(to right, #00C6FF, #0072FF);
-  border-color: #0072FF;
-}
-
-.theme-switch-checkbox:checked + .theme-switch-label:after {
-  left: calc(100% - 1.5px);
-  transform: translateX(-100%);
-  background: #1a1a1a;
-}
-
-/* Theme Icons */
-.theme-icon {
-  font-size: 20px;
-  transition: opacity 1s ease-in-out, transform 1s ease-in-out, color 1s ease-in-out;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 20px;
-  text-align: center;
-}
-
-#moon-icon {
-  right: 0px;
-  color: #f0f0f0;
-}
-
-#sun-icon {
-  left: 0px;
-  color: #FFD700;
-}
-
-/* Font Controls */
-.font-controls {
-  display: flex;
-  justify-content: space-between;
-  gap: 0px;
-  width: 100%;
+body.light-mode .font-controls, body.light-mode .theme-toggle-container {
+  background-color: #eee;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .font-controls span {
+  background-color: #00aaff;
+  color: #fff;
   width: 30px;
   height: 30px;
-  background-color: #333;
-  color: #f0f0f0;
-  border: 1px solid #555;
-  border-radius: 5px;
+  border-radius: 50%;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   font-weight: bold;
   cursor: pointer;
-  user-select: none;
-  transition: background-color 1.5s, color 1.5s, border-color 1.5s;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-#font-minus { font-size: 13px; }
-#font-reset { font-size: 17px; }
-#font-plus { font-size: 21px; }
+body.light-mode .font-controls span {
+  background-color: #0077cc;
+}
 
 .font-controls span:hover {
-  background-color: #555;
+  background-color: #0077cc;
+  transform: scale(1.1);
 }
 
-/* --- List Styling (Content Lists) --- */
-.content-list {
-  list-style-type: none;
-  padding-left: 0;
+body.light-mode .font-controls span:hover {
+  background-color: #0055aa;
 }
 
-.content-list li {
+.theme-switch-checkbox {
+  display: none; /* Hide the default checkbox */
+}
+
+.theme-switch-label {
+  width: 50px; /* Width of the switch */
+  height: 26px; /* Height of the switch */
+  background-color: #555; /* Default background for switch track */
+  border-radius: 25px; /* Rounded ends */
   position: relative;
-  padding-left: -5px; /* Adjust this value if it causes layout issues */
-  margin-bottom: 2px;
-  display: flex;
-  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.content-list li::before {
-  content: "";
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  margin-right: 12px;
-  flex-shrink: 0;
+body.light-mode .theme-switch-label {
+  background-color: #bbb;
 }
 
-/* Specific image for each console type */
-.switch-list li::before { background-image: url('../images/switch.webp'); }
-.xbox-list li::before { background-image: url('../images/xbox.webp'); }
-.playstation-list li::before { background-image: url('../images/playstation.webp'); }
-.steam-list li::before { background-image: url('../images/steam.webp'); }
-.gamecube-list li::before { background-image: url('../images/gamecube.webp'); }
-.gameboy-list li::before { background-image: url('../images/gameboy_og.webp'); }
-.movie-item::before { background-image: url('../images/movie.webp'); }
-.tv-show-item::before { background-image: url('../images/television.webp'); }
-.podcast-item::before { background-image: url('../images/ipod.webp'); }
-.music-item::before { background-image: url('../images/loud-speaker.webp'); }
-
-/* --- Footer --- */
-.powered-by-github {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  font-size: 13px;
-  color: #888;
-  z-index: 990;
-  transition: color 1.5s ease-in-out;
+.theme-switch-label::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 22px; /* Size of the circle (thumb) */
+  height: 22px;
+  background-color: #f0f0f0; /* Color of the thumb */
+  border-radius: 50%;
+  transition: transform 0.3s, background-color 0.3s;
 }
 
-.powered-by-github a {
-  color: #888;
+body.light-mode .theme-switch-label::before {
+  background-color: #fff;
+}
+
+/* Checked state: move thumb to the right and change track color */
+.theme-switch-checkbox:checked + .theme-switch-label {
+  background-color: #00aaff; /* Dark mode track color */
+}
+
+.theme-switch-checkbox:checked + .theme-switch-label::before {
+  transform: translateX(24px); /* Move thumb to the right */
+}
+
+/* Icons for light and dark mode */
+.theme-icon {
+  position: absolute;
+  font-size: 1.2em;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: opacity 0.3s ease;
+}
+
+#moon-icon {
+  left: 8px;
+  color: #f0f0f0; /* Moon color for dark mode */
+}
+
+#sun-icon {
+  right: 8px;
+  color: #FFD700; /* Sun color for light mode */
+}
+
+/* Initial state for icons (before JS adjusts) */
+.theme-switch-checkbox:not(:checked) ~ #moon-icon {
+  opacity: 0; /* Hide moon in light mode by default */
+}
+
+.theme-switch-checkbox:checked ~ #sun-icon {
+  opacity: 0; /* Hide sun in dark mode by default */
+}
+
+/* Footer styles */
+.site-footer {
+  text-align: center;
+  padding: 20px;
+  margin-top: 50px;
+  background-color: #2a2a2a;
+  color: #f0f0f0;
+  border-top: 1px solid #333;
+  transition: background-color 1.5s ease-in-out, color 1.5s ease-in-out, border-color 1.5s ease-in-out;
+}
+
+body.light-mode .site-footer {
+  background-color: #e0e0e0;
+  color: #1a1a1a;
+  border-top: 1px solid #ccc;
+}
+
+.site-footer .powered-by-github {
+  margin: 0;
+  font-size: 0.9em;
+}
+
+.site-footer a {
+  color: #00aaff;
   text-decoration: none;
-  transition: color 1.5s ease-in-out;
 }
 
-.powered-by-github a:hover {
+.site-footer a:hover {
   text-decoration: underline;
 }
 
-/* --- Focus States (General & Light Mode Overrides) --- */
-/* Common focus styles for all interactive elements */
-a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-textarea:focus-visible,
-select:focus-visible,
-.theme-switch-label:focus-visible,
-.font-controls span:focus-visible,
-.bottom-right-controls-wrapper:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 2px #8be9fd; /* Dark mode blue glow */
-  border-color: #8be9fd;
-  transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
-  border-radius: 4px;
-}
 
-/* --- Light Mode Overrides --- */
-body.light-mode {
-  background-color: #f0f0f0;
-  color: #1a1a1a;
-}
-
-/* Light Mode Scrollbar */
-body.light-mode::-webkit-scrollbar-track {
-  background: #e0e0e0;
-}
-body.light-mode::-webkit-scrollbar-thumb {
-  background-color: transparent;
-  border: 2px solid transparent;
-}
-body.light-mode:hover::-webkit-scrollbar-thumb {
-  background-color: #888;
-  border-color: #e0e0e0;
-}
-body.light-mode::-webkit-scrollbar-thumb:hover {
-  background-color: #666;
-}
-
-/* Light Mode Main Elements */
-body.light-mode .main-header-fixed {
-  background-color: #f0f0f0;
-}
-body.light-mode h1 {
-  color: #333;
-}
-body.light-mode .main-nav li a {
-  color: #333;
-}
-body.light-mode .main-nav li a:hover {
-  color: #000;
-  background-color: #e0e0e0;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-body.light-mode .main-nav li a.active {
-  color: #007bff;
-  background-color: #e0e0e0;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-body.light-mode .content-column a {
-  color: #007bff;
-}
-body.light-mode .content-column p,
-body.light-mode .content-column h4,
-body.light-mode .content-column ul,
-body.light-mode .content-column ul li {
-  color: #1a1a1a;
-}
-body.light-mode .content-column h2 {
-  color: #333;
-}
-body.light-mode .github-project-item {
-  background-color: #d0d0d0;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-body.light-mode .github-project-item:hover {
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
-}
-body.light-mode .github-project-item h3 {
-  color: #333;
-}
-body.light-mode .powered-by-github,
-body.light-mode .powered-by-github a {
-  color: #666;
-}
-body.light-mode .powered-by-github a:hover {
-  color: #444;
-}
-body.light-mode .font-controls span {
-  background-color: #eee;
-  color: #1a1a1a;
-  border-color: #bbb;
-}
-body.light-mode .bottom-right-controls-wrapper {
-  background-color: rgba(240, 240, 240, 0.8);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  border-color: rgba(0, 0, 0, 0.1);
-}
-body.light-mode .bottom-right-controls-wrapper:hover {
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
-}
-/* Light mode focus for controls wrapper */
-body.light-mode a:focus-visible,
-body.light-mode button:focus-visible,
-body.light-mode input:focus-visible,
-body.light-mode textarea:focus-visible,
-body.light-mode select:focus-visible,
-body.light-mode .theme-switch-label:focus-visible,
-body.light-mode .font-controls span:focus-visible,
-body.light-mode .bottom-right-controls-wrapper:focus-visible {
-  box-shadow: 0 0 0 2px #007bff; /* Light mode blue glow */
-  border-color: #007bff;
-}
-
-/* --- Media Queries (Mobile Specific Adjustments) --- */
+/* Mobile Responsiveness */
 @media (max-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-
-  body {
-    padding-top: 170px;
-  }
-
-  .main-header-fixed {
-    padding: 10px 0;
-    min-height: 140px;
-  }
-
-  h1 {
-    font-size: 2.2rem;
-    line-height: 1.2;
-    padding: 0 15px;
-    margin-bottom: 15px;
-    position: relative;
-    z-index: 1;
-    transform: translateY(30px);
-  }
-
-  h1.slide-up {
-    transform: translateY(0);
-  }
-
-  .main-nav {
-    margin-top: 10px;
-    padding: 0 10px;
-  }
-
-  .main-nav ul {
-    gap: 20px;
-  }
-
-  .main-nav li a {
-    font-size: 1.1rem;
-    padding: 8px 12px;
-    /* Corrected transitions for mobile links */
-    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  }
-
   .profile-image {
-    top: 10px;
+    top: 5px;
     left: 10px;
     width: 60px;
     height: 60px;
-    z-index: 1001;
   }
 
   .corner-logo-fixed {
-    top: 10px;
+    top: 5px;
     right: 10px;
-    width: 90px;
-    height: 60px;
-    z-index: 1001;
-  }
-
-  .bottom-right-controls-wrapper {
-    max-width: 140px;
-    padding: 8px 6px;
-    bottom: 10px;
-    right: 5px;
-  }
-
-  .theme-switch-label {
     width: 60px;
-    height: 20px;
-    border-radius: 10px;
-    margin: 0 8px;
   }
 
-  .theme-switch-label:after {
-    top: 1.5px;
-    left: 1.5px;
-    width: 17px;
-    height: 17px;
+  .main-header-fixed h1 {
+    font-size: 2em;
+    padding-top: 5px;
   }
 
-  .theme-switch-checkbox:checked + .theme-switch-label:after {
-    left: calc(100% - 1.5px);
+  .main-nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding-bottom: 5px;
   }
 
-  .theme-icon {
-    font-size: 18px;
+  .main-nav a {
+    font-size: 0.9em;
+    padding: 3px 8px;
   }
-
-  .font-controls {
-    gap: 6px;
-  }
-
-  .font-controls span {
-    width: 35px;
-    height: 35px;
-    font-size: 16px;
-  }
-
-  #font-minus { font-size: 12px; }
-  #font-reset { font-size: 16px; }
-  #font-plus { font-size: 20px; }
 
   .content-column {
     padding: 0px 15px 15px 15px;
@@ -798,36 +514,66 @@ body.light-mode .bottom-right-controls-wrapper:focus-visible {
   }
 
   .github-project-item {
-    flex-direction: column;
-    align-items: center;
+    flex-direction: column; /* Stack items vertically on smaller screens */
+    align-items: center; /* Center items when stacked */
     padding: 15px;
   }
 
+  .github-project-item .project-image {
+    width: 80%; /* Make image take more width on mobile */
+    max-width: 200px; /* Limit max width */
+    margin-bottom: 15px; /* Add space between image and text */
+  }
+
   .project-details {
-    width: 100%;
-    align-items: flex-start;
+    width: 100%; /* Ensure details take full width */
+    text-align: center; /* Center text within details on mobile */
   }
 
-  .project-image {
-    width: 80%;
-    max-width: 200px;
-    margin-bottom: 15px;
+  /* Ensure text within project details is centered on mobile */
+  .github-project-item .project-details h3,
+  .github-project-item .project-details p,
+  .github-project-item .project-details h4,
+  .github-project-item .project-details ul,
+  .github-project-item .project-details ul li {
+      text-align: center;
   }
 
-  .github-project-item h3 {
-    font-size: 1.5rem;
-  }
-
-  .github-project-item p {
-    font-size: 0.95rem;
-    line-height: 1.4;
+  .github-project-item .project-details ul {
+      padding-left: 0px; /* Remove default padding for centered list */
+      list-style-position: inside; /* Keep bullets inside for centered text */
   }
 
   .github-content-corner-logo {
-    top: 8px;
-    right: 8px;
+    top: 10px;
+    right: 10px;
   }
-  .github-content-corner-logo img {
-    width: 20px;
+
+  .bottom-right-controls-wrapper {
+    bottom: 10px;
+    right: 10px;
+    gap: 10px;
   }
+
+  .font-controls, .theme-toggle-container {
+    padding: 8px;
+    gap: 8px;
+  }
+
+  .font-controls span {
+    width: 25px;
+    height: 25px;
+    font-size: 0.9em;
+  }
+}
+
+/* Custom styles for specific pages or elements */
+#last-updated-text {
+  display: block;
+  font-size: 0.9em;
+  color: #aaa;
+  margin-bottom: 20px;
+}
+body.light-mode #last-updated-text {
+  color: #666;
 }
