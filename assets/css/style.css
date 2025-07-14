@@ -564,6 +564,15 @@ body.light-mode a:focus-visible, body.light-mode button:focus-visible, body.ligh
   border-color: #007bff;
 }
 
+body.light-mode #lightbox-content {
+  background-color: #f0f0f0; /* Or white, or a very light grey */
+  border-color: #007bff; /* Or another accent color for light mode */
+}
+
+body.light-mode #lightbox-description {
+  color: #1a1a1a; /* Your main dark text color for light mode */
+}
+
 /* --- Lightbox Styles --- */
 #lightbox-overlay {
   position: fixed;
