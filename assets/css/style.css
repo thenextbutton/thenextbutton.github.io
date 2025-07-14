@@ -256,13 +256,14 @@ ul li {
 /* Main Project Image (Sticky) */
 .project-image {
   flex-shrink: 0; /* Prevent the image from shrinking */
-  width: 25%; /* Original width */
+  width: 200px; /* Fixed width for the image on desktop */
   height: auto;
   border-radius: 8px;
   display: block;
-  margin: auto; /* Centers the image within its available space */
-  max-width: 100%;
+  /* REMOVED: margin: auto; - This was causing vertical centering issues */
+  max-width: 100%; /* Ensure it doesn't exceed its container */
   object-fit: contain;
+  align-self: flex-start; /* Align to the top within the flex container */
 
   position: sticky; /* Make it sticky */
   top: 130px; /* Stick below the fixed header (120px header + 10px buffer) */
@@ -301,7 +302,7 @@ ul li {
 }
 
 .github-content-corner-logo img {
-  width: 20px; /* Original size for corner logo */
+  width: 30px; /* Adjust size as needed for the corner logo */
   height: auto;
   border-radius: 4px;
   transition: transform 0.3s ease-in-out;
