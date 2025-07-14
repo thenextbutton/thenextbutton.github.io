@@ -327,7 +327,7 @@ ul li {
   display: inline-flex; /* Changed to inline-flex to align icon and text */
   align-items: center; /* Vertically center icon and text */
   background-color: #8be9fd; /* Accent color background */
-  color: #f0f0f0; /* Set text color to your primary text color for visibility */
+  color: #1a1a1a; /* Set text color to your dark background color for contrast on light blue button */
   padding: 8px 15px;
   border-radius: 5px;
   text-decoration: none !important; /* This line removes the underline, added !important */
