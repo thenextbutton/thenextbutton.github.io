@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 initLightbox();
             }
 
-            // --- NEW CODE ADDED HERE FOR GITHUB COMMIT DATE ---
+            // --- GITHUB COMMIT DATE ---
             // Construct the file path relative to the repository root
             // Assuming your content pages are in a 'content' folder at the root.
             const filePath = `content/${pageName}_content.html`;
