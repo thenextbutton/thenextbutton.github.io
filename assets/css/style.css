@@ -577,7 +577,12 @@ body.light-mode a:focus-visible, body.light-mode button:focus-visible, body.ligh
     align-items: center;
     padding: 15px;
   }
-  .project-details { width: 100%; align-items: flex-start; }
+  .project-details {
+    width: 100%;
+    align-items: flex-start;
+    /* ADDED: Margin-top to push text down below the sticky image on mobile */
+    margin-top: 60px; /* Adjust this value as needed based on image height + desired spacing */
+  }
   /* Specific text alignment rules for mobile (maintained for explicit control) */
   .github-project-item .project-details h3,
   .github-project-item .project-details p,
@@ -585,7 +590,13 @@ body.light-mode a:focus-visible, body.light-mode button:focus-visible, body.ligh
   .github-project-item .project-details ul,
   .github-project-item .project-details ul li { text-align: left; }
   .github-project-item .project-details ul { padding-left: 20px; }
-  .project-image { width: 80%; max-width: 200px; margin-bottom: 15px; }
+  .project-image {
+    width: 80%;
+    max-width: 200px;
+    margin-bottom: 15px;
+    /* MODIFIED: Adjust top value for mobile sticky positioning */
+    top: 80px; /* Adjusted sticky top position for mobile */
+  }
   .github-project-item h3 { font-size: 1.5rem; }
   .github-project-item p { font-size: 0.95rem; line-height: 1.4; }
   .github-content-corner-logo { top: 8px; right: 8px; }
