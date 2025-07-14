@@ -68,13 +68,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (typeof initScrollAnimations === 'function') {
                // initScrollAnimations();
             }
-            // --- START MODIFIED CODE ---
             if (typeof window.initAutoLinker === 'function') {
                 window.initAutoLinker();
-            } else {
-                console.warn("Auto-linker function not found after content load. Make sure auto_linker.js is loaded and exposes initAutoLinker globally.");
+            } 
+            if (typeof initLightbox === 'function') {
+                initLightbox();
             }
-            // --- END MODIFIED CODE ---
 
             // --- NEW CODE ADDED HERE FOR GITHUB COMMIT DATE ---
             // Construct the file path relative to the repository root
