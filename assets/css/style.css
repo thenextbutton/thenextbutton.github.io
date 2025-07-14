@@ -32,139 +32,148 @@ body::-webkit-scrollbar-thumb {
   border: 2px solid transparent; /* Transparent border by default */
 }
 
-/* Make thumb visible on hover over the scrollbar */
-body::-webkit-scrollbar-thumb:hover {
-  background-color: #555; /* Darker thumb on hover */
-}
-
-/* Make thumb visible when hovering over the body */
+/* Make thumb visible on hover over the body */
 body:hover::-webkit-scrollbar-thumb {
-  background-color: #888; /* Visible thumb on body hover */
+  background-color: #555; /* Color of the scrollbar thumb on hover */
+  border-color: #282a36; /* Border to match track on hover */
 }
 
-/* Specific styling for scrollbar visibility control */
-body.hide-scrollbar-visually::-webkit-scrollbar-thumb {
-    background-color: transparent !important;
-    border-color: transparent !important;
+/* Preserve hover effect for the thumb itself */
+body::-webkit-scrollbar-thumb:hover {
+  background-color: #777; /* Color of the scrollbar thumb on direct hover */
 }
 
-body.light-mode {
-  background-color: #f0f0f0;
-  color: #1a1a1a;
+/* Hide scrollbar visually class */
+.hide-scrollbar-visually::-webkit-scrollbar-thumb,
+.hide-scrollbar-visually::-webkit-scrollbar-track {
+  background-color: transparent !important;
+  border-color: transparent !important;
 }
 
-body.light-mode::-webkit-scrollbar-track {
-  background: #e0e0e0;
-}
-
-body.light-mode::-webkit-scrollbar-thumb {
-  background-color: transparent;
-  border-color: transparent;
-}
-
-body.light-mode::-webkit-scrollbar-thumb:hover {
-  background-color: #bbb;
-}
-
-body.light-mode:hover::-webkit-scrollbar-thumb {
-  background-color: #ccc;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  color: #00aaff;
-  margin-top: 20px;
-  margin-bottom: 10px;
-  font-family: "Consolas", monospace;
-  transition: color 1.5s ease-in-out;
-}
-
-a {
-  color: #00aaff;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-a:hover {
-  color: #0077cc;
-  text-decoration: underline;
-}
-
-p, ul, li {
-  line-height: 1.6;
-}
-
-ul {
-  list-style-type: disc;
-  margin-left: 20px;
-}
-
-.profile-image, .corner-logo-fixed {
-  position: fixed;
-  transition: opacity 0.5s ease, transform 0.5s ease;
-  z-index: 1000;
-  pointer-events: none; /* Allows clicks to pass through */
-}
-
-.profile-image {
-  top: 10px;
-  left: 20px;
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #00aaff;
-  box-shadow: 0 0 10px rgba(0, 170, 255, 0.5);
-}
-
-.profile-image.hidden {
-  opacity: 0;
-  transform: translateX(-100px);
-}
-
-.corner-logo-fixed {
-  top: 10px;
-  right: 20px;
-  width: 80px;
-  height: auto;
-}
-
-.corner-logo-fixed.hidden {
-  opacity: 0;
-  transform: translateX(100px);
-}
 
 .main-header-fixed {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background-color: rgba(26, 26, 26, 0.9);
+  background-color: #1a1a1a;
   padding: 10px 0;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-  z-index: 999;
+  box-sizing: border-box;
+  z-index: 900;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  transition: background-color 1.5s ease-in-out;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  transition: background-color 1.5s ease-in-out, color 1.5s ease-in-out;
 }
 
-body.light-mode .main-header-fixed {
-  background-color: rgba(240, 240, 240, 0.9);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+.content-column {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  box-sizing: border-box;
+  margin-top: 0;
+  font-size: 1rem;
+  color: #f0f0f0;
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out, color 1.5s ease-in-out;
 }
 
-.main-header-fixed h1 {
-  color: #00aaff;
+/* ADDED: CSS for page transitions */
+#content-area {
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out; /* Controls the fade duration */
+}
+
+#content-area.fade-out {
+    opacity: 0;
+}
+
+#content-area.fade-in {
+    opacity: 1;
+}
+
+
+h1 {
+  font-family: "Consolas", monospace;
+  text-align: center;
+  color: #a0a0a0;
   margin: 0;
-  padding-top: 10px;
-  font-size: 2.5em;
-  transition: transform 0.5s ease;
+  font-size: 2.5rem;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 40px; /* MODIFIED: Reduced desktop padding for h1 */
+  box-sizing: border-box;
+  transition: transform 0.7s ease-out;
 }
 
-.main-header-fixed h1.slide-up {
-  transform: translateY(-50px);
-  opacity: 0;
+h2, h3, h4, h5, h6 {
+  font-family: "Consolas", monospace;
+}
+
+h4 {
+    margin-top: 20px; /* Adjust as needed, default is often higher */
+    margin-bottom: 10px; /* Reduce space below h4 */
+}
+
+/* Reduce top margin for unordered lists */
+ul {
+    margin-top: 0px; /* Removes the default top margin, bringing it closer to the preceding element */
+    margin-bottom: 10px; /* Keep some space below the list */
+    padding-left: 20px; /* Adjust indentation of list items if needed */
+}
+
+/* Optional: Further reduce spacing for list items themselves */
+ul li {
+    margin-bottom: 5px; /* Adds a small gap between list items */
+}
+
+.profile-image {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  z-index: 999;
+  transition: transform 0.7s ease-out;
+}
+
+.corner-logo-fixed {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 150px;
+  height: auto;
+  z-index: 1000;
+  transition: transform 0.7s ease-in-out;
+}
+
+.corner-logo-fixed img {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+
+.profile-image.hidden {
+  transform: translateX(-150%);
+}
+
+.corner-logo-fixed.hidden {
+  transform: translateX(150%);
+}
+
+.main-nav {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 0;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
 .main-nav ul {
@@ -172,338 +181,712 @@ body.light-mode .main-header-fixed {
   padding: 0;
   margin: 0;
   display: flex;
-  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
 }
 
-.main-nav a {
-  color: #f0f0f0;
-  font-weight: bold;
-  padding: 5px 10px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-body.light-mode .main-nav a {
-  color: #1a1a1a;
-}
-
-.main-nav a:hover, .main-nav a.active {
-  background-color: #00aaff;
-  color: #1a1a1a;
+.main-nav li a {
   text-decoration: none;
+  color: #a0a0a0;
+  font-weight: bold;
+  font-size: 1.1rem;
+  padding: 5px 10px;
+  transition: color 0.3s ease-in-out, font-weight 0.2s ease-in-out, background-color 0.3s ease-in-out, border-radius 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+  display: inline-block;
+  border-radius: 4px;
 }
 
-body.light-mode .main-nav a:hover, body.light-mode .main-nav a.active {
-  background-color: #0077cc;
-  color: #f0f0f0;
-}
-
-.content-column {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #222;
+.main-nav li a:hover {
+  color: #c0c0c0;
+  font-weight: bolder;
+  background-color: #333;
   border-radius: 8px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-  margin-top: 150px;
-  transition: background-color 1.5s ease-in-out, box-shadow 1.5s ease-in-out;
-  opacity: 1; /* Initial opacity for fade effect */
-  transition: opacity 0.5s ease-in-out; /* Transition for fade effect */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
 }
 
-body.light-mode .content-column {
-  background-color: #fff;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+/* ADDED: Active navigation link styling */
+.main-nav li a.active {
+  color: #8be9fd; /* Highlight color */
+  font-weight: bolder;
+  background-color: #333;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* Scroll Animation hidden state */
-.hidden-scroll {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+.content-column a {
+  color: #8be9fd;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 1.5s ease-in-out;
 }
 
-/* --- GitHub Project Items --- */
+.content-column a:hover {
+  text-decoration: underline;
+}
+
+.content-column h2 {
+    margin-bottom: 5px; /* Adjust this value as needed, try 0px if you want it very tight */
+}
+
 .github-project-item {
-  display: flex; /* Use flexbox for horizontal alignment of logo and text */
-  align-items: flex-start; /* Align items to the top (start of the cross-axis) */
-  gap: 20px; /* Space between the image and the text details */
-  background-color: #2a2a2a;
-  border-radius: 8px;
-  margin-bottom: 25px;
+  background-color: #282a36;
   padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative; /* Essential for positioning the corner logo */
-  overflow: hidden; /* Ensures nothing spills out of the item */
-}
-
-body.light-mode .github-project-item {
-  background-color: #f9f9f9;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border-radius: 8px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* This is the reference shadow */
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  text-align: left;
+  transition: background-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out, opacity 2s ease-out, transform 2s ease-out;
+  position: relative;
 }
 
 .github-project-item:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
 }
 
-body.light-mode .github-project-item:hover {
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+.github-project-item.hidden-scroll {
+  opacity: 0;
+  transform: scale(0.5); /* This line restores the zoom-out effect */
 }
 
-.github-project-item .project-image {
-  flex-shrink: 0; /* Prevent the image from shrinking */
-  width: 150px; /* Adjust as needed */
+.project-image {
+  width: 25%;
+  flex-shrink: 0;
   height: auto;
-  border-radius: 5px;
-  object-fit: cover;
-  align-self: flex-start; /* Align the image to the top of the flex container */
-}
-
-/* Style for the logo that appears in the top-right corner of the github-project-item */
-.github-content-corner-logo {
-  position: absolute; /* Position relative to the .github-project-item */
-  top: 10px;
-  right: 10px;
-  width: 50px; /* Adjust size as needed */
-  height: auto;
-  z-index: 1; /* Ensure it's above other content within the item if needed */
-}
-
-.github-content-corner-logo img {
-    width: 100%;
-    height: auto;
-    display: block; /* Remove extra space below image */
+  border-radius: 8px;
+  display: block;
+  margin: auto;
+  max-width: 100%;
+  object-fit: contain;
 }
 
 .project-details {
-  flex-grow: 1; /* Allow project details to take up remaining space */
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: left;
 }
 
-.project-details h3 {
+.github-project-item h3 {
+  font-size: 1.5rem;
+  color: #8be9fd;
   margin-top: 0;
-  color: #00aaff;
-}
-
-.project-details p {
   margin-bottom: 10px;
 }
 
-.project-details ul {
-  padding-left: 20px;
-  margin-top: 5px;
+.github-project-item p {
+  font-size: 1rem;
+  margin-bottom: 15px;
+  word-wrap: break-word; /* ADDED: Ensures long words break */
+  overflow-wrap: break-word; /* ADDED: Standard property for word wrapping */
 }
 
-.project-details ul li {
-  margin-bottom: 5px;
+.github-content-corner-logo {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
 }
 
-/* Specific styles for dark/light mode images if you have them */
-body.dark-mode .light-mode-img {
-    display: none;
+.github-content-corner-logo img {
+  width: 20px;
+  height: auto;
+  border-radius: 4px;
+  transition: transform 0.3s ease-in-out;
 }
 
-body.dark-mode .dark-mode-img {
-    display: block;
+.github-content-corner-logo:hover img {
+  transform: scale(1.1);
 }
 
-body.light-mode .light-mode-img {
-    display: block;
+/* Styling for game lists */
+.content-list {
+  list-style-type: none; /* Removes the default bullet points */
+  padding-left: 0; /* Remove default padding for lists */
 }
 
-body.light-mode .dark-mode-img {
-    display: none;
+/* Base style for list items */
+.content-list li {
+  position: relative;
+  padding-left: -5px; /* Space for the icon/image */
+  margin-bottom: 2px; /* Add some space between items */
+  display: flex; /* Use flexbox for better alignment */
+  align-items: center; /* Vertically align items */
 }
 
-/* --- Font Controls --- */
+/* Base style for the image icons (the "bullet points") */
+.content-list li::before {
+  content: ""; /* CRITICAL: Must be an empty string for background-image */
+  display: inline-block; /* Make it a block-level element so it can have width/height */
+  width: 18px; /* Adjust width as needed for your images */
+  height: 18px; /* Adjust height as needed for your images */
+  background-size: contain; /* Scales the image to fit without cropping */
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-right: 12px; /* Space between icon and text */
+  flex-shrink: 0; /* Prevent the image from shrinking */
+}
+
+/* Specific image for each console type */
+
+.switch-list li::before {
+  background-image: url('../images/switch.webp');
+}
+
+.xbox-list li::before {
+  background-image: url('../images/xbox.webp');
+}
+
+.playstation-list li::before {
+  background-image: url('../images/playstation.webp');
+}
+
+.steam-list li::before {
+  background-image: url('../images/steam.webp');
+}
+
+.gamecube-list li::before {
+  background-image: url('../images/gamecube.webp');
+}
+
+.gameboy-list li::before {
+  background-image: url('../images/gameboy_og.webp');
+}
+
+.movie-item::before {
+  background-image: url('../images/movie.webp');
+}
+
+.tv-show-item::before {
+  background-image: url('../images/television.webp');
+}
+
+.podcast-item::before {
+  background-image: url('../images/ipod.webp');
+}
+
+.music-item::before {
+  background-image: url('../images/loud-speaker.webp');
+}
+
+
+.powered-by-github {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  font-size: 13px;
+  color: #888;
+  z-index: 990;
+  transition: color 1.5s ease-in-out;
+}
+
+.powered-by-github a {
+  color: #888;
+  text-decoration: none;
+  transition: color 1.5s ease-in-out;
+}
+
+.powered-by-github a:hover {
+  text-decoration: underline;
+}
+
+/* MODIFIED: Control box styling for responsiveness and icon spacing */
 .bottom-right-controls-wrapper {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
   z-index: 1000;
-  transition: opacity 0.3s ease-in-out; /* For fade out/in effect */
-}
-
-.font-controls, .theme-toggle-container {
-  background-color: #333;
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
   display: flex;
-  gap: 10px;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column; /* Stack controls vertically */
+  gap: 10px; /* Gap between the two control sections */
+  background-color: rgba(34, 34, 34, 0.8); /* Transparent dark background */
+  padding: 10px 8px; /* Padding inside the box */
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* MODIFIED: Matched shadow to github-project-item */
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  transition: background-color 1.5s ease-in-out, border-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out, opacity 0.75s ease-out; /* MODIFIED: opacity transition to 0.75s */
+  width: 160px; /* Fixed width for desktop, will adjust for mobile */
+  align-items: center; /* Center content horizontally within the wrapper */
 }
 
-body.light-mode .font-controls, body.light-mode .theme-toggle-container {
-  background-color: #eee;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+.bottom-right-controls-wrapper:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4); /* MODIFIED: Matched hover shadow to github-project-item, removed glow */
 }
 
-.font-controls span {
-  background-color: #00aaff;
-  color: #fff;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
+/* MODIFIED: Focus state for the control box wrapper itself - Removed blue glow */
+.bottom-right-controls-wrapper:focus-visible {
+  outline: none; /* Remove default outline */
+  box-shadow: 0 0 0 2px #8be9fd; /* Subtle blue glow for dark mode */
+  border-color: #8be9fd; /* Add a border color if applicable */
+  transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  border-radius: 4px; /* Added for consistency */
+}
+
+
+/* ADDED: Class for fading out the control box */
+.bottom-right-controls-wrapper.fade-out-controls {
+    opacity: 0;
+    pointer-events: none; /* Make it unclickable when hidden */
+}
+
+/* MODIFIED: Theme toggle container for icon - now uses flex for spacing */
+.theme-toggle-container {
   display: flex;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-body.light-mode .font-controls span {
-  background-color: #0077cc;
-}
-
-.font-controls span:hover {
-  background-color: #0077cc;
-  transform: scale(1.1);
-}
-
-body.light-mode .font-controls span:hover {
-  background-color: #0055aa;
+  justify-content: center; /* Center content horizontally within the container */
+  width: 100%; /* Take full width of parent wrapper */
+  position: relative; /* Needed for absolute positioning of icons */
+  /* Removed padding-right */
 }
 
 .theme-switch-checkbox {
-  display: none; /* Hide the default checkbox */
+  height: 0;
+  width: 0;
+  visibility: hidden;
 }
 
 .theme-switch-label {
-  width: 50px; /* Width of the switch */
-  height: 26px; /* Height of the switch */
-  background-color: #555; /* Default background for switch track */
-  border-radius: 25px; /* Rounded ends */
-  position: relative;
   cursor: pointer;
-  transition: background-color 0.3s;
+  width: 80px; /* Fixed width for the toggle track */
+  height: 20px;
+  background: #282a36;
+  display: block;
+  border-radius: 10px;
+  position: relative;
+  transition: background 1s;
+  border: 1px solid #555;
+  overflow: hidden;
+  flex-shrink: 0; /* Prevent it from shrinking */
+  margin: 0 10px; /* Add horizontal margin to center it and create space for icons */
 }
 
-body.light-mode .theme-switch-label {
-  background-color: #bbb;
-}
-
-.theme-switch-label::before {
+.theme-switch-label:after {
   content: '';
   position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 22px; /* Size of the circle (thumb) */
-  height: 22px;
-  background-color: #f0f0f0; /* Color of the thumb */
+  top: 1.5px; /* Vertically center (20 - 17) / 2 = 1.5 */
+  left: 1.5px; /* Adjusted left to match top */
+  width: 17px;
+  height: 17px;
+  background: #f0f0f0;
   border-radius: 50%;
-  transition: transform 0.3s, background-color 0.3s;
+  transition: 1s;
+  z-index: 1;
 }
 
-body.light-mode .theme-switch-label::before {
-  background-color: #fff;
-}
-
-/* Checked state: move thumb to the right and change track color */
 .theme-switch-checkbox:checked + .theme-switch-label {
-  background-color: #00aaff; /* Dark mode track color */
+  background: linear-gradient(to right, #00C6FF, #0072FF);
+  border-color: #0072FF;
 }
 
-.theme-switch-checkbox:checked + .theme-switch-label::before {
-  transform: translateX(24px); /* Move thumb to the right */
+.theme-switch-checkbox:checked + .theme-switch-label:after {
+  left: calc(100% - 1.5px); /* Adjusted left to match new size */
+  transform: translateX(-100%);
+  background: #1a1a1a;
 }
 
-/* Icons for light and dark mode */
+/* MODIFIED: Styling for both theme icons - now absolutely positioned relative to .theme-toggle-container */
 .theme-icon {
-  position: absolute;
-  font-size: 1.2em;
-  top: 50%;
-  transform: translateY(-50%);
-  transition: opacity 0.3s ease;
+  font-size: 20px; /* Fixed font size */
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out, color 1s ease-in-out; /* MODIFIED: Set transition to 1s */
+  position: absolute; /* Re-added absolute positioning */
+  top: 50%; /* Vertical centering */
+  transform: translateY(-50%); /* Adjust for vertical centering */
+  width: 20px; /* Fixed width for the icon itself */
+  text-align: center;
 }
 
 #moon-icon {
-  left: 8px;
-  color: #f0f0f0; /* Moon color for dark mode */
+  right: 0px; /* MODIFIED: Position moon icon to the right edge of the container */
+  color: #f0f0f0; /* Default color for moon (dark mode) */
 }
 
 #sun-icon {
-  right: 8px;
-  color: #FFD700; /* Sun color for light mode */
+  left: 0px; /* MODIFIED: Position sun icon to the left edge of the container */
+  color: #FFD700; /* Yellow for sun icon */
 }
 
-/* Initial state for icons (before JS adjusts) */
-.theme-switch-checkbox:not(:checked) ~ #moon-icon {
-  opacity: 0; /* Hide moon in light mode by default */
+/* ==================================== */
+/* Theme-Specific Image Handling        */
+/* ==================================== */
+
+/* By default (light mode), hide the dark mode image */
+/* Target images with both project-image and dark-mode-img classes */
+.project-image.dark-mode-img {
+    display: none; /* No !important needed here, as specificity is now higher */
 }
 
-.theme-switch-checkbox:checked ~ #sun-icon {
-  opacity: 0; /* Hide sun in dark mode by default */
+/* When the body has the 'dark-mode' class: */
+body.dark-mode .project-image.light-mode-img {
+    display: none; /* Hide the light mode image */
 }
 
-/* Footer styles */
-.site-footer {
-  text-align: center;
-  padding: 20px;
-  margin-top: 50px;
-  background-color: #2a2a2a;
+body.dark-mode .project-image.dark-mode-img {
+    display: block; /* Show the dark mode image */
+}
+
+/* Add a smooth transition for the image visibility (optional, but recommended) */
+/* Apply transitions to both relevant image classes */
+.project-image.light-mode-img,
+.project-image.dark-mode-img {
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Ensure the correct initial opacity for the visible image */
+.project-image.light-mode-img {
+    opacity: 1;
+}
+
+/* When in dark mode, set opacities */
+body.dark-mode .project-image.light-mode-img {
+    opacity: 0;
+}
+
+body.dark-mode .project-image.dark-mode-img {
+    opacity: 1;
+}
+
+
+/* MODIFIED: Font controls - now part of the wrapper's flow */
+.font-controls {
+  display: flex;
+  justify-content: space-between; /* Distribute items evenly */
+  gap: 0px; /* No gap needed, space-between handles it */
+  width: 100%; /* Take full width of parent wrapper */
+  /* REMOVED: position: fixed; bottom; right; z-index; */
+}
+
+.font-controls span {
+  width: 30px;
+  height: 30px;
+  background-color: #333;
   color: #f0f0f0;
-  border-top: 1px solid #333;
-  transition: background-color 1.5s ease-in-out, color 1.5s ease-in-out, border-color 1.5s ease-in-out;
+  border: 1px solid #555;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 1.5s, color 1.5s, border-color 1.5s;
 }
 
-body.light-mode .site-footer {
-  background-color: #e0e0e0;
+#font-minus {
+  font-size: 13px;
+}
+
+#font-reset {
+  font-size: 17px;
+}
+
+#font-plus {
+  font-size: 21px;
+}
+
+.font-controls span:hover {
+  background-color: #555;
+}
+
+/* ADDED: Focus States for individual controls */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+.theme-switch-label:focus-visible, /* Specific for the toggle label */
+.font-controls span:focus-visible {
+  outline: none; /* Remove default outline */
+  box-shadow: 0 0 0 2px #8be9fd; /* Subtle blue glow for dark mode */
+  border-color: #8be9fd; /* Add a border color if applicable */
+  transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  border-radius: 4px; /* Added for consistency */
+}
+
+
+body.light-mode {
+  background-color: #f0f0f0;
   color: #1a1a1a;
-  border-top: 1px solid #ccc;
 }
 
-.site-footer .powered-by-github {
-  margin: 0;
-  font-size: 0.9em;
+/* ADDED: Ensure content elements have correct text color in light mode */
+body.light-mode .content-column h4,
+body.light-mode .content-column ul,
+body.light-mode .content-column ul li {
+    color: #1a1a1a; /* Explicitly set dark color for light mode */
 }
 
-.site-footer a {
-  color: #00aaff;
-  text-decoration: none;
+/* ADDED: Light Mode Scrollbar */
+body.light-mode::-webkit-scrollbar-track {
+  background: #e0e0e0; /* Lighter track for light mode */
 }
 
-.site-footer a:hover {
-  text-decoration: underline;
+body.light-mode::-webkit-scrollbar-thumb {
+  background-color: transparent; /* MODIFIED: Transparent by default in light mode */
+  border: 2px solid transparent; /* MODIFIED: Transparent border by default in light mode */
+}
+
+/* ADDED: Make thumb visible on hover over the body in light mode */
+body.light-mode:hover::-webkit-scrollbar-thumb {
+  background-color: #888; /* Darker thumb for light mode on hover */
+  border-color: #e0e0e0; /* Border to match light track on hover */
+}
+
+/* Preserve hover effect for the thumb itself in light mode */
+body.light-mode::-webkit-scrollbar-thumb:hover {
+  background-color: #666; /* Even darker thumb on direct hover for light mode */
+}
+
+#last-updated-text {
+    color: #888; /* A shade of grey. You can use 'grey' or a hex code like #AAAAAA */
+    font-style: italic;
+    font-size: 0.9em; /* Optional: Make it slightly smaller than surrounding text for subtle effect */
+    display: block; /* Optional: Makes it occupy its own line if it's currently inline */
+    margin-top: 0px; /* Optional: Add some space above it */
+	  margin-bottom: 20px; /* Add some space below it, before the next paragraph */
+    text-align: left; /* Optional: Align it to the right */
+}
+
+/* ADDED: Light Mode Focus States for individual controls */
+body.light-mode a:focus-visible,
+body.light-mode button:focus-visible,
+body.light-mode input:focus-visible,
+body.light-mode textarea:focus-visible,
+body.light-mode select:focus-visible,
+body.light-mode .theme-switch-label:focus-visible,
+body.light-mode .font-controls span:focus-visible {
+  box-shadow: 0 0 0 2px #007bff; /* Subtle blue glow for light mode */
+  border-color: #007bff; /* Add a border color if applicable */
+  border-radius: 4px; /* Rounded corners for the focus outline in light mode */
+}
+
+/* ADDED: Light mode styling for the control box itself */
+body.light-mode .bottom-right-controls-wrapper {
+  background-color: rgba(240, 240, 240, 0.8); /* MODIFIED: Lighter background for light mode */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* MODIFIED: Lighter shadow for light mode */
+  border-color: rgba(0, 0, 0, 0.1); /* Lighter border for light mode */
+}
+
+body.light-mode .bottom-right-controls-wrapper:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25); /* MODIFIED: Lighter hover shadow for light mode, removed glow */
+}
+
+/* MODIFIED: Light mode focus state for the control box wrapper itself - Removed blue glow */
+body.light-mode .bottom-right-controls-wrapper:focus-visible {
+  outline: none; /* Remove default outline */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Keep existing shadow, removed blue glow */
+  border-color: transparent; /* Ensure no border color is applied */
+  border-radius: 4px; /* Added for consistency */
 }
 
 
-/* Mobile Responsiveness */
+body.light-mode h1 {
+  color: #333;
+}
+
+body.light-mode .main-nav li a {
+  color: #333;
+  transition: color 0.3s ease-in-out, font-weight 0.2s ease-in-out, background-color 0.3s ease-in-out, border-radius 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+  border-radius: 4px;
+}
+
+body.light-mode .main-nav li a:hover {
+  color: #000;
+  font-weight: bolder;
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+/* ADDED: Active navigation link styling for light mode */
+body.light-mode .main-nav li a.active {
+  color: #007bff; /* Highlight color */
+  font-weight: bolder;
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .content-column a {
+  color: #007bff;
+}
+
+
+body.light-mode .content-column p {
+  color: #1a1a1a;
+}
+
+body.light-mode .content-column h2 {
+  color: #333;
+}
+
+body.light-mode .github-project-item h3 {
+  color: #333;
+}
+
+
+body.light-mode .github-project-item {
+  background-color: #d0d0d0;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+body.light-mode .github-project-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+}
+
+body.light-mode .powered-by-github {
+  color: #666;
+}
+body.light-mode .powered-by-github a {
+    color: #666;
+}
+body.light-mode .powered-mode .powered-by-github a:hover {
+    color: #444;
+}
+
+body.light-mode .font-controls span {
+  background-color: #eee;
+  color: #1a1a1a;
+  border-color: #bbb;
+}
+
+body.light-mode .theme-switch-text {
+    color: #1a1a1a;
+}
+
+body.light-mode .main-header-fixed {
+  background-color: #f0f0f0;
+}
+
+
 @media (max-width: 768px) {
-  .profile-image {
-    top: 5px;
-    left: 10px;
-    width: 60px;
-    height: 60px;
+  html {
+    font-size: 16px;
   }
 
-  .corner-logo-fixed {
-    top: 5px;
-    right: 10px;
-    width: 60px;
+  body {
+    padding-top: 170px;
   }
 
-  .main-header-fixed h1 {
-    font-size: 2em;
-    padding-top: 5px;
+  .main-header-fixed {
+    padding: 10px 0;
+    min-height: 140px;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+    line-height: 1.2;
+    /* 🐛 IMPORTANT FIX: Reduced padding for mobile to prevent horizontal scrollbar */
+    padding: 0 15px;
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 1;
+    transform: translateY(30px);
+  }
+
+  h1.slide-up {
+    transform: translateY(0);
+  }
+
+  .main-nav {
+    margin-top: 10px;
+    padding: 0 10px;
   }
 
   .main-nav ul {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    padding-bottom: 5px;
+    gap: 20px;
   }
 
-  .main-nav a {
-    font-size: 0.9em;
-    padding: 3px 8px;
+  .main-nav li a {
+    font-size: 1.1rem;
+    padding: 8px 12px;
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+
+  .main-nav li a:hover {
+    color: 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+
+  .profile-image {
+    top: 10px;
+    left: 10px;
+    width: 60px;
+    height: 60px;
+    z-index: 1001;
+  }
+
+  .corner-logo-fixed {
+    top: 10px;
+    right: 10px;
+    width: 90px;
+    height: 60px;
+    z-index: 1001;
+  }
+
+  /* MODIFIED: Responsive adjustments for the control box */
+  .bottom-right-controls-wrapper {
+    /* 🐛 IMPORTANT FIX: Use max-width and reduced right margin for very narrow viewports */
+    max-width: 140px; /* Slightly smaller width on mobile */
+    padding: 8px 6px; /* Reduced padding */
+    bottom: 10px; /* Closer to bottom */
+    right: 5px; /* Closer to right */
+  }
+
+  .theme-toggle-container {
+    /* No specific padding-right needed here */
+  }
+
+  .theme-switch-label {
+    width: 60px; /* Slightly smaller toggle on mobile */
+    height: 20px;
+    border-radius: 10px;
+    margin: 0 8px; /* Adjusted margin for mobile centering */
+  }
+
+  .theme-switch-label:after {
+    top: 1.5px;
+    left: 1.5px;
+    width: 17px;
+    height: 17px;
+  }
+
+  .theme-switch-checkbox:checked + .theme-switch-label:after {
+    left: calc(100% - 1.5px);
+  }
+
+  .theme-icon {
+    font-size: 18px; /* Slightly smaller icons on mobile */
+  }
+
+  .font-controls {
+    gap: 6px; /* Reduced gap between font control buttons */
+  }
+
+  .font-controls span {
+    width: 35px; /* Slightly smaller font control buttons */
+    height: 35px;
+    font-size: 16px;
+  }
+
+  #font-minus {
+    font-size: 12px;
+  }
+
+  #font-reset {
+    font-size: 16px;
+  }
+
+  #font-plus {
+    font-size: 20px;
   }
 
   .content-column {
@@ -514,66 +897,55 @@ body.light-mode .site-footer {
   }
 
   .github-project-item {
-    flex-direction: column; /* Stack items vertically on smaller screens */
-    align-items: center; /* Center items when stacked */
+    flex-direction: column;
+    align-items: center;
+    /* REMOVED: text-align: center; from here */
     padding: 15px;
   }
 
-  .github-project-item .project-image {
-    width: 80%; /* Make image take more width on mobile */
-    max-width: 200px; /* Limit max width */
-    margin-bottom: 15px; /* Add space between image and text */
-  }
-
+  /* MODIFIED: Ensure items within project-details are left-aligned */
   .project-details {
-    width: 100%; /* Ensure details take full width */
-    text-align: center; /* Center text within details on mobile */
+    width: 100%;
+    align-items: flex-start; /* THIS IS THE KEY CHANGE */
   }
 
-  /* Ensure text within project details is centered on mobile */
+  /* Keep these specific text-align rules for explicit control */
   .github-project-item .project-details h3,
   .github-project-item .project-details p,
   .github-project-item .project-details h4,
   .github-project-item .project-details ul,
   .github-project-item .project-details ul li {
-      text-align: center;
+      text-align: left; /* Ensure text within project details is left-aligned on mobile */
   }
+
 
   .github-project-item .project-details ul {
-      padding-left: 0px; /* Remove default padding for centered list */
-      list-style-position: inside; /* Keep bullets inside for centered text */
+      padding-left: 20px; /* Ensure padding-left for list indentation on mobile */
   }
+
+
+  .project-image {
+    width: 80%;
+    max-width: 200px;
+    margin-bottom: 15px;
+  }
+
+  .github-project-item h3 {
+    font-size: 1.5rem;
+  }
+
+  .github-project-item p {
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+
+  /* Removed .project-details { align-items: center; } here as it's moved up and changed */
 
   .github-content-corner-logo {
-    top: 10px;
-    right: 10px;
+    top: 8px;
+    right: 8px;
   }
-
-  .bottom-right-controls-wrapper {
-    bottom: 10px;
-    right: 10px;
-    gap: 10px;
+  .github-content-corner-logo img {
+    width: 20px;
   }
-
-  .font-controls, .theme-toggle-container {
-    padding: 8px;
-    gap: 8px;
-  }
-
-  .font-controls span {
-    width: 25px;
-    height: 25px;
-    font-size: 0.9em;
-  }
-}
-
-/* Custom styles for specific pages or elements */
-#last-updated-text {
-  display: block;
-  font-size: 0.9em;
-  color: #aaa;
-  margin-bottom: 20px;
-}
-body.light-mode #last-updated-text {
-  color: #666;
 }
