@@ -327,7 +327,7 @@ ul li {
   display: inline-flex; /* Changed to inline-flex to align icon and text */
   align-items: center; /* Vertically center icon and text */
   background-color: #8be9fd; /* Accent color background */
-  color: #1a1a1a; /* Changed to a dark color for contrast on light blue background */
+  color: #000000; /* Changed to pure black for maximum contrast */
   padding: 8px 15px;
   border-radius: 5px;
   text-decoration: none; /* This line removes the underline */
