@@ -231,10 +231,8 @@ ul li {
   background-color: #282a36;
   padding: 20px;
   margin-top: 30px;
-  /* MODIFIED: Adjusted min-height to provide enough sticky area without excessive blank space */
-  min-height: 220px; /* Adjusted min-height */
-  /* MODIFIED: Adjusted margin-bottom for tighter spacing between items */
-  margin-bottom: 30px; /* Adjusted margin-bottom */
+  min-height: 220px;
+  margin-bottom: 30px;
   border-radius: 8px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
   display: flex; /* Flex container for image and details */
@@ -243,7 +241,7 @@ ul li {
   text-align: left;
   transition: background-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out, opacity 2s ease-out, transform 2s ease-out;
   position: relative; /* Crucial for absolute positioning of corner logo */
-  /* REMOVED: overflow: hidden; - This was preventing sticky from working */
+  /* overflow: hidden; (Removed in previous step to fix sticky) */
 }
 
 .github-project-item:hover {
@@ -267,7 +265,7 @@ ul li {
   object-fit: contain;
   align-self: flex-start; /* Ensure it aligns to the top within the flex container */
 
-  position: sticky; /* Make it sticky */
+  position: sticky; /* Make it sticky for desktop */
   top: 130px; /* Stick below the fixed header (120px header + 10px buffer) */
   z-index: 1; /* Ensure it stays above scrolling text content */
   margin-bottom: 15px; /* Space below the image when it's part of the flow */
@@ -580,8 +578,8 @@ body.light-mode a:focus-visible, body.light-mode button:focus-visible, body.ligh
   .project-details {
     width: 100%;
     align-items: flex-start;
-    /* ADDED: Margin-top to push text down below the sticky image on mobile */
-    margin-top: 60px; /* Adjust this value as needed based on image height + desired spacing */
+    /* MODIFIED: Removed margin-top as sticky is now removed, and adjust padding-top if needed */
+    /* margin-top: 60px; */
   }
   /* Specific text alignment rules for mobile (maintained for explicit control) */
   .github-project-item .project-details h3,
@@ -594,8 +592,9 @@ body.light-mode a:focus-visible, body.light-mode button:focus-visible, body.ligh
     width: 80%;
     max-width: 200px;
     margin-bottom: 15px;
-    /* MODIFIED: Adjust top value for mobile sticky positioning */
-    top: 80px; /* Adjusted sticky top position for mobile */
+    /* MODIFIED: Remove sticky properties for mobile */
+    position: static; /* Disable sticky for mobile */
+    top: auto; /* Reset top property */
   }
   .github-project-item h3 { font-size: 1.5rem; }
   .github-project-item p { font-size: 0.95rem; line-height: 1.4; }
