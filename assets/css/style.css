@@ -231,10 +231,10 @@ ul li {
   background-color: #282a36;
   padding: 20px;
   margin-top: 30px;
-  /* MODIFIED: Set a fixed height or min-height to control the scroll area for sticky elements */
-  /* This height should be greater than the sticky image's height + top offset + margin-bottom */
-  min-height: 250px; /* Adjusted min-height to ensure enough scrollable area for sticky image */
-  margin-bottom: 60px; /* Provides ample space for the next item to push */
+  /* MODIFIED: Reduced min-height to make containers less "big" */
+  min-height: 200px; /* Adjusted min-height */
+  /* MODIFIED: Reduced margin-bottom for tighter spacing between items */
+  margin-bottom: 40px; /* Adjusted margin-bottom */
   border-radius: 8px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
   display: flex; /* Flex container for image and details */
@@ -243,8 +243,7 @@ ul li {
   text-align: left;
   transition: background-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out, opacity 2s ease-out, transform 2s ease-out;
   position: relative; /* Crucial for absolute positioning of corner logo */
-  /* MODIFIED: Removed overflow: hidden; as it can sometimes clip sticky content or prevent it from "breaking out" of its container to stick */
-  /* overflow: hidden; */
+  overflow: hidden; /* Re-added overflow: hidden; as it's generally good for containing absolute children */
 }
 
 .github-project-item:hover {
@@ -264,7 +263,6 @@ ul li {
   height: auto; /* Maintain aspect ratio */
   border-radius: 8px;
   display: block;
-  /* REMOVED: margin: auto; - This was causing vertical centering issues */
   max-width: 100%; /* Ensure it doesn't exceed its container */
   object-fit: contain;
   align-self: flex-start; /* Ensure it aligns to the top within the flex container */
