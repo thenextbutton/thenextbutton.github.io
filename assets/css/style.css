@@ -199,7 +199,19 @@ ul li {
   transition: opacity 0.7s ease-out, transform 0.7s ease-out, color 1.5s ease-in-out;
 }
 
-/* Page transitions */
+/* Default link styling within content-column paragraphs */
+.content-column p a {
+  color: #8be9fd; /* Your accent color */
+  text-decoration: underline; /* Default underline */
+  font-weight: bold;
+  transition: color 1.5s ease-in-out, text-decoration 0.3s ease-in-out;
+}
+
+.content-column p a:hover {
+  text-decoration: none; /* Remove underline on hover for standard links */
+}
+
+
 #content-area {
   opacity: 1;
   transition: opacity 0.3s ease-in-out;
@@ -310,8 +322,8 @@ ul li {
   overflow-wrap: break-word;
 }
 
-/* Styling for the "View Project on GitHub" link */
-.github-project-item p a {
+/* NEW: Styling for the specific "View Project on GitHub" button links */
+.github-button-link {
   display: inline-flex; /* Changed to inline-flex to align icon and text */
   align-items: center; /* Vertically center icon and text */
   background-color: #8be9fd; /* Accent color background */
@@ -326,13 +338,13 @@ ul li {
 }
 
 /* Styling for the GitHub icon within the button */
-.github-project-item p a .fab.fa-github {
+.github-button-link .fab.fa-github {
   margin-right: 8px; /* Space between icon and text */
   font-size: 1.1em; /* Make icon slightly larger than text */
 }
 
 
-.github-project-item p a:hover {
+.github-button-link:hover {
   background-color: #6ac8e0; /* Slightly darker/different shade on hover */
   color: #000; /* Even darker text on hover */
   transform: translateY(-2px); /* Lift effect on hover */
