@@ -164,9 +164,9 @@ ul li {
   font-weight: bold;
   font-size: 1.1rem;
   padding: 5px 10px;
+  border-radius: 4px;
   transition: color 0.3s ease-in-out, font-weight 0.2s ease-in-out, background-color 0.3s ease-in-out, border-radius 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
   display: inline-block;
-  border-radius: 4px;
 }
 
 .main-nav li a:hover {
@@ -231,7 +231,10 @@ ul li {
   background-color: #282a36;
   padding: 20px;
   margin-top: 30px;
-  margin-bottom: 30px; /* Provides space for the next item to push */
+  /* MODIFIED: Set a fixed height or min-height to control the scroll area for sticky elements */
+  /* This height should be greater than the sticky image's height + top offset + margin-bottom */
+  min-height: 250px; /* Adjusted min-height to ensure enough scrollable area for sticky image */
+  margin-bottom: 60px; /* Provides ample space for the next item to push */
   border-radius: 8px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
   display: flex; /* Flex container for image and details */
@@ -240,7 +243,8 @@ ul li {
   text-align: left;
   transition: background-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out, opacity 2s ease-out, transform 2s ease-out;
   position: relative; /* Crucial for absolute positioning of corner logo */
-  overflow: hidden; /* Ensures no content spills out */
+  /* MODIFIED: Removed overflow: hidden; as it can sometimes clip sticky content or prevent it from "breaking out" of its container to stick */
+  /* overflow: hidden; */
 }
 
 .github-project-item:hover {
@@ -257,13 +261,13 @@ ul li {
 .project-image {
   flex-shrink: 0; /* Prevent the image from shrinking */
   width: 200px; /* Fixed width for the image on desktop */
-  height: auto;
+  height: auto; /* Maintain aspect ratio */
   border-radius: 8px;
   display: block;
   /* REMOVED: margin: auto; - This was causing vertical centering issues */
   max-width: 100%; /* Ensure it doesn't exceed its container */
   object-fit: contain;
-  align-self: flex-start; /* Align to the top within the flex container */
+  align-self: flex-start; /* Ensure it aligns to the top within the flex container */
 
   position: sticky; /* Make it sticky */
   top: 130px; /* Stick below the fixed header (120px header + 10px buffer) */
@@ -378,7 +382,6 @@ body.dark-mode .github-content-corner-logo .light-mode-img {
   width: 80px;
   height: 20px;
   background: #282a36;
-  display: block;
   border-radius: 10px;
   position: relative;
   transition: background 1s;
