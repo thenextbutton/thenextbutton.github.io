@@ -279,7 +279,7 @@ ul li {
   text-align: left;
 }
 
-/* NEW: Styling for images directly inside project-details */
+/* Styling for images directly inside project-details */
 .project-details img {
   max-width: 100%; /* Ensure image is responsive and doesn't overflow */
   height: auto; /* Maintain aspect ratio */
@@ -287,6 +287,12 @@ ul li {
   margin-top: 15px; /* Space above the image */
   margin-bottom: 15px; /* Space below the image */
   display: block; /* Ensures margin works correctly */
+  cursor: pointer; /* Indicate that the image is clickable */
+  transition: transform 0.2s ease-in-out; /* Smooth transition for hover */
+}
+
+.project-details img:hover {
+    transform: scale(1.02); /* Slightly enlarge on hover */
 }
 
 
@@ -546,6 +552,100 @@ body.light-mode a:focus-visible, body.light-mode button:focus-visible, body.ligh
   border-color: #007bff;
 }
 
+/* --- Lightbox Styles --- */
+#lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000; /* Ensure it's on top of everything */
+  opacity: 0; /* Start hidden */
+  visibility: hidden; /* Start hidden */
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  backdrop-filter: blur(5px); /* Blur effect for the background */
+  -webkit-backdrop-filter: blur(5px); /* Safari support */
+}
+
+#lightbox-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+#lightbox-content {
+  position: relative; /* For positioning the close button */
+  background-color: #282a36; /* Background for the lightbox content area */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  max-width: 90%; /* Max width of the lightbox content */
+  max-height: 90%; /* Max height of the lightbox content */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* Hide anything that overflows the rounded corners */
+  border: 2px solid #8be9fd; /* Border around the lightbox content */
+}
+
+#lightbox-image {
+  max-width: 100%; /* Image fills its container up to its natural size */
+  max-height: 75vh; /* Limit image height to viewport height */
+  height: auto; /* Maintain aspect ratio */
+  display: block;
+  border-radius: 8px; /* Rounded corners for the image itself */
+  object-fit: contain; /* Ensure the entire image is visible */
+}
+
+#lightbox-description {
+  color: #f0f0f0;
+  font-size: 0.9rem;
+  margin-top: 15px;
+  text-align: center;
+  max-width: 80%; /* Limit width of description */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+#lightbox-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #ff5555; /* Red close button */
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#lightbox-close-btn:hover {
+  background-color: #cc0000;
+  transform: scale(1.1);
+}
+
+/* Class to blur the body content when lightbox is active */
+body.blur-content > *:not(#lightbox-overlay) {
+  filter: blur(3px);
+  pointer-events: none; /* Disable interaction with blurred content */
+  user-select: none; /* Prevent selection of blurred content */
+}
+body.blur-content {
+    overflow: hidden; /* Prevent scrolling of main content when lightbox is open */
+}
+
+
 /* --- Media Queries (Mobile Specific Adjustments) --- */
 @media (max-width: 768px) {
   html { font-size: 16px; }
@@ -609,7 +709,7 @@ body.light-mode a:focus-visible, body.light-mode button:focus-visible, body.ligh
   .project-details img {
     max-width: 100%;
     height: auto;
-    margin-top: 10px; /* Slightly less margin on mobile if needed */
+    margin-top: 10px; /* Slightly less margin on mobile for tighter spacing */
     margin-bottom: 10px;
   }
   .github-project-item h3 { font-size: 1.5rem; }
