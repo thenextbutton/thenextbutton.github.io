@@ -327,7 +327,7 @@ ul li {
   display: inline-flex; /* Changed to inline-flex to align icon and text */
   align-items: center; /* Vertically center icon and text */
   background-color: #8be9fd; /* Accent color background */
-  color: #1a1a1a; /* Set text color for dark mode */
+  color: #f0f0f0; /* Set text color to your primary text color for visibility */
   padding: 8px 15px;
   border-radius: 5px;
   text-decoration: none !important; /* This line removes the underline, added !important */
@@ -346,7 +346,7 @@ ul li {
 
 .github-button-link:hover {
   background-color: #6ac8e0; /* Slightly darker/different shade on hover */
-  color: #000; /* Even darker text on hover */
+  color: #000; /* Text color on hover (black for contrast) */
   /* Removed transform: translateY(-2px); */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
