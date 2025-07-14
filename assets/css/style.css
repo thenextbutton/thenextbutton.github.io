@@ -318,7 +318,7 @@ ul li {
   color: #1a1a1a; /* Dark text for contrast */
   padding: 8px 15px;
   border-radius: 5px;
-  text-decoration: none; /* Remove underline */
+  text-decoration: none; /* This line removes the underline */
   font-weight: bold;
   margin-top: 10px; /* Space above the button */
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
