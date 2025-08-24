@@ -51,7 +51,7 @@ body::-webkit-scrollbar-thumb:hover {
   left: 0;
   height: 2.5px; /* Adjust thickness as needed */
   background-color: #8be9fd; /* Your accent color */
-  z-index: 3000; /* Ensure it's on top of other elements */
+  z-index: 1000; /* Ensure it's on top of other elements */
   width: 0%; /* Start with a width of 0 */
   transition: width 0.2s ease-out; /* Smooth animation for width changes */
 }
