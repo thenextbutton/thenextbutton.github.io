@@ -44,6 +44,18 @@ body::-webkit-scrollbar-thumb:hover {
   background-color: #777; /* Color of the scrollbar thumb on direct hover */
 }
 
+/* Scroll Progress Bar */
+#scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 5px; /* Adjust thickness as needed */
+  background-color: #8be9fd; /* Your accent color */
+  z-index: 1000; /* Ensure it's on top of other elements */
+  width: 0%; /* Start with a width of 0 */
+  transition: width 0.2s ease-out; /* Smooth animation for width changes */
+}
+
 /* Hide scrollbar visually class */
 .hide-scrollbar-visually::-webkit-scrollbar-thumb,
 .hide-scrollbar-visually::-webkit-scrollbar-track {
@@ -570,7 +582,11 @@ body.light-mode #lightbox-content {
 }
 
 body.light-mode #lightbox-description {
-  color: #1a1a1a; /* Your main dark text color for light mode */
+  color: #1a1a1a; /* main dark text color for light mode */
+}
+
+body.light-mode #scroll-progress-bar {
+  background-color: #007bff; /* A different color for light mode */
 }
 
 /* --- Lightbox Styles --- */
