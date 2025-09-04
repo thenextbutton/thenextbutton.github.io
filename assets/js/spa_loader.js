@@ -61,7 +61,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Start the content fade-out and the scrollbar animation simultaneously
         contentArea.style.opacity = '0';
+        
+        // --- NEW: Call the progress bar's own transition handler ---
         const scrollbarAnimationPromise = window.handlePageTransition ? window.handlePageTransition() : Promise.resolve();
+        // ---------------------------------------------------------
+        
         const contentFadePromise = new Promise(resolve => {
             const handleTransitionEnd = (event) => {
                 if (event.propertyName === 'opacity') {
@@ -70,7 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             };
             contentArea.addEventListener('transitionend', handleTransitionEnd);
-            // Fallback for immediate state
             setTimeout(() => resolve(), 500);
         });
 
@@ -80,7 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Smoothly scroll to the top of the page after animations are done
         await new Promise(resolve => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            // Wait for a brief moment for the scroll to complete
             setTimeout(resolve, 300);
         });
 
