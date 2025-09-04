@@ -45,7 +45,7 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 /* Scroll Progress Bar */
-/* Update the main progress bar rule to transition height */
+/* Update the main progress bar rule to transition transform and width */
 #scroll-progress-bar {
   position: fixed;
   top: 0;
@@ -54,13 +54,14 @@ body::-webkit-scrollbar-thumb:hover {
   background-color: #8be9fd;
   z-index: 2000;
   width: 0%;
-  transition: width 0.2s ease-out, height 0.5s ease-in-out; /* Add height transition */
+  transition: width 0.2s ease-out, transform 0.5s ease-in-out; /* Add transform transition */
+  transform-origin: top left;
 }
 
-/* shrink the bar's height */
+/* New class to shrink and slide the bar */
 .scroll-shrinking {
-  height: 0.1px !important;
-  opacity: 0;
+  transform: translateY(-100%) scaleX(0.1);
+  opacity: 0; /* Add opacity to make it smoothly disappear */
 }
 
 /* Hide scrollbar visually class */
