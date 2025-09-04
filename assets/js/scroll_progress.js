@@ -3,36 +3,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', () => {
         const docElement = document.documentElement;
-
-        // Calculate the total scrollable height
         const totalHeight = docElement.scrollHeight - docElement.clientHeight;
-
-        // Calculate the current scroll position
         const scrollPosition = docElement.scrollTop;
-
-        // Calculate the percentage scrolled
         let scrollPercentage = (scrollPosition / totalHeight) * 100;
-
-        // Ensure the bar reaches 100% when at the very bottom
         if (totalHeight === 0) {
-            scrollPercentage = 100; // Handle pages with no scroll
+            scrollPercentage = 100;
         }
-
-        // Update the width of the progress bar
         progressBar.style.width = scrollPercentage + '%';
     });
     
-
-    window.handlePageTransition = () => {
-        // Add the shrinking class to start the height animation
-        progressBar.classList.add('scroll-shrinking');
-        
-        // Wait for the height transition to complete
-        setTimeout(() => {
-            // Reset the width immediately
-            progressBar.style.width = '0%';
-            // Remove the shrinking class to return to full height
-            progressBar.classList.remove('scroll-shrinking');
-        }, 500); // This delay should match the CSS height transition duration
+    // MODIFIED: This function is now async and returns a promise
+    window.handlePageTransition = async () => {
+        return new Promise(resolve => {
+            const handleTransitionEnd = (event) => {
+                if (event.propertyName === 'height' || event.propertyName === 'opacity') {
+                    progressBar.removeEventListener('transitionend', handleTransitionEnd);
+                    // Reset the width immediately after the height transition ends
+                    progressBar.style.width = '0%';
+                    // Remove the shrinking class to return to full height for the new page
+                    progressBar.classList.remove('scroll-shrinking');
+                    resolve();
+                }
+            };
+            
+            // Add the shrinking class to start the height animation
+            progressBar.classList.add('scroll-shrinking');
+            
+            // Add event listener to know when the transition completes
+            progressBar.addEventListener('transitionend', handleTransitionEnd);
+            
+            // Fallback for browsers that don't fire transitionend
+            setTimeout(() => {
+                resolve();
+            }, 600); // This should be slightly longer than your CSS transition (0.5s)
+        });
     };
 });
