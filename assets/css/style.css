@@ -45,15 +45,22 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 /* Scroll Progress Bar */
+/* Update the main progress bar rule to transition height */
 #scroll-progress-bar {
   position: fixed;
   top: 0;
   left: 0;
   height: 2.5px; /* Adjust thickness as needed */
-  background-color: #8be9fd; /* Your accent color */
-  z-index: 1000; /* Ensure it's on top of other elements */
-  width: 0%; /* Start with a width of 0 */
-  transition: width 0.2s ease-out; /* Smooth animation for width changes */
+  background-color: #8be9fd;
+  z-index: 2000;
+  width: 0%;
+  transition: width 0.2s ease-out, height 0.5s ease-in-out; /* Add height transition */
+}
+
+/* shrink the bar's height */
+.scroll-shrinking {
+  height: 0.1px !important;
+  opacity: 0;
 }
 
 /* Hide scrollbar visually class */

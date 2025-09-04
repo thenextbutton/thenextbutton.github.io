@@ -21,4 +21,18 @@ document.addEventListener('DOMContentLoaded', () => {
         // Update the width of the progress bar
         progressBar.style.width = scrollPercentage + '%';
     });
+    
+
+    window.handlePageTransition = () => {
+        // Add the shrinking class to start the height animation
+        progressBar.classList.add('scroll-shrinking');
+        
+        // Wait for the height transition to complete
+        setTimeout(() => {
+            // Reset the width immediately
+            progressBar.style.width = '0%';
+            // Remove the shrinking class to return to full height
+            progressBar.classList.remove('scroll-shrinking');
+        }, 500); // This delay should match the CSS height transition duration
+    };
 });
