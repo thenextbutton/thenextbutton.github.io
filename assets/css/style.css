@@ -403,149 +403,112 @@ body.dark-mode .github-content-corner-logo .light-mode-img {
 }
 
 
-/* --- MODERN CONTROL PANEL STYLES --- */
-
-/* Unified Wrapper */
+/* --- Controls Wrapper (Bottom Right) --- */
 .bottom-right-controls-wrapper {
-  display: flex; /* Use flexbox to stack controls */
-  flex-direction: column;
-  gap: 15px; /* Spacing between the toggle and font controls */
   position: fixed;
-  bottom: 25px;
-  right: 25px;
+  bottom: 20px;
+  right: 20px;
   z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: rgba(34, 34, 34, 0.8);
+  padding: 10px 8px;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  transition: background-color 1.5s ease-in-out, border-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out, opacity 0.75s ease-out;
+  width: 160px;
+  align-items: center;
+}
+.bottom-right-controls-wrapper:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+}
+.bottom-right-controls-wrapper.fade-out-controls {
+  opacity: 0;
+  pointer-events: none;
 }
 
-/* Theme Toggle Button */
+/* Theme Toggle */
 .theme-toggle-container {
   display: flex;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
+  width: 100%;
   position: relative;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(10px);
-  border-radius: 50px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 5px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease-in-out;
+  margin: 0 10px;
 }
-.theme-switch-checkbox {
-  height: 0;
-  width: 0;
-  visibility: hidden;
-}
+.theme-switch-checkbox { height: 0; width: 0; visibility: hidden; }
 .theme-switch-label {
   cursor: pointer;
-  width: 45px;
-  height: 25px;
-  background-color: #212121;
-  border-radius: 50px;
+  width: 80px;
+  height: 20px;
+  background: #282a36;
+  border-radius: 10px;
   position: relative;
-  transition: background-color 0.4s;
-  flex-shrink: 0; /* Prevents shrinking */
+  transition: background 1s;
+  border: 1px solid #555;
+  overflow: hidden;
+  flex-shrink: 0;
+  margin: 0 10px;
 }
-.theme-switch-label::after {
+.theme-switch-label:after {
   content: '';
   position: absolute;
   top: 1.5px;
   left: 1.5px;
-  width: 22px; /* Adjusted to be slightly larger */
-  height: 22px; /* Adjusted to be slightly larger */
-  background: #fafafa;
+  width: 17px;
+  height: 17px;
+  background: #fafafa; /* Softer white */
   border-radius: 50%;
-  transition: left 0.4s ease-in-out;
+  transition: 1s;
+  z-index: 1;
 }
-.theme-switch-checkbox:checked + .theme-switch-label::after {
-  left: calc(100% - 23.5px); /* Position for checked state */
-}
+.theme-switch-checkbox:checked + .theme-switch-label { background: linear-gradient(to right, #4a90e2, #2e60a3); border-color: #4a90e2; } /* New accent color for light mode */
+.theme-switch-checkbox:checked + .theme-switch-label:after { left: calc(100% - 1.5px); transform: translateX(-100%); background: #333333; } /* Softer black */
 
-/* Icons (Font Size Responsive) */
+/* Theme Icons */
 .theme-icon {
-  font-size: 1em; /* This makes the icon size relative to the root font-size */
+  font-size: 20px;
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out, color 1s ease-in-out;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  transition: opacity 0.4s ease-in-out, color 0.4s ease-in-out;
+  width: 20px;
+  text-align: center;
 }
-#moon-icon {
-  left: 15px; /* Position relative to the container */
-  color: #c0c0c0;
-}
-#sun-icon {
-  right: 15px; /* Position relative to the container */
-  color: #ffd700;
-}
-.theme-switch-checkbox:not(:checked) ~ #moon-icon {
-  opacity: 0;
-}
-.theme-switch-checkbox:checked ~ #sun-icon {
-  opacity: 0;
-}
-
+#moon-icon { right: 0px; color: #fafafa; }
+#sun-icon { left: 0px; color: #FFD700; }
+.theme-switch-checkbox:not(:checked) ~ #moon-icon { opacity: 0; }
+.theme-switch-checkbox:checked ~ #sun-icon { opacity: 0; }
 
 /* Font Controls */
 .font-controls {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
-  gap: 10px; /* Space between buttons */
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(10px);
-  border-radius: 50px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 5px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease-in-out;
+  display: flex;
+  justify-content: space-between;
+  gap: 0px;
+  width: 100%;
 }
 .font-controls span {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
+  background-color: #333;
+  color: #fafafa; /* Softer white */
+  border: 1px solid #555;
+  border-radius: 5px;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  font-weight: bold;
   cursor: pointer;
-  color: #fff;
-  background: transparent;
-  border-radius: 50%;
-  transition: background-color 0.2s, transform 0.1s, font-size 0.2s; /* Add font-size transition */
-  font-size: 1.1em; /* This makes the button font size relative */
+  user-select: none;
+  transition: background-color 1.5s, color 1.5s, border-color 1.5s;
 }
-.font-controls span:hover {
-  background: rgba(255, 255, 255, 0.1);
-  transform: scale(1.1);
-}
-.font-controls span:active {
-  background: rgba(255, 255, 255, 0.2);
-  transform: scale(0.9);
-}
-
-/* Light Mode Overrides */
-body.light-mode .theme-toggle-container,
-body.light-mode .font-controls {
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-}
-body.light-mode .theme-switch-label {
-  background-color: #ccc;
-}
-body.light-mode .theme-switch-label::after {
-  background: #333333;
-}
-body.light-mode #moon-icon {
-  color: #888;
-}
-body.light-mode #sun-icon {
-  color: #ffcc00;
-}
-body.light-mode .font-controls span {
-  color: #333;
-}
-body.light-mode .font-controls span:hover {
-  background: rgba(0, 0, 0, 0.05);
-}
-body.light-mode .font-controls span:active {
-  background: rgba(0, 0, 0, 0.1);
-}
-
+#font-minus { font-size: 13px; }
+#font-reset { font-size: 17px; }
+#font-plus { font-size: 21px; }
+.font-controls span:hover { background-color: #555; }
 
 /* --- Custom List Styling (Image-based bullets) --- */
 /* Consolidated base styles for all lists using image icons */
@@ -570,6 +533,75 @@ body.light-mode .font-controls span:active {
   background-position: center;
   margin-right: 12px;
   flex-shrink: 0;
+}
+
+/* --- New Font Control Styles --- */
+
+/* Wrapper for the font controls */
+.font-controls-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: flex-end; /* Align the toggle button to the right */
+  align-items: center;
+  width: auto;
+}
+
+/* The individual buttons */
+.font-button {
+  width: 30px;
+  height: 30px;
+  background-color: #333;
+  color: #fafafa;
+  border: 1px solid #555;
+  border-radius: 50%; /* Make them round */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Elastic transition for spring effect */
+  position: absolute;
+  right: 0;
+  opacity: 0;
+  pointer-events: none; /* Disable clicks when hidden */
+}
+
+/* The main toggle button, which is always visible */
+#font-toggle {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 10;
+  font-size: 21px; /* The largest 'A' */
+}
+
+/* The font-minus button will slide to the left */
+#font-minus {
+  transform: translateX(0); /* Default position */
+}
+/* The font-reset button will slide to the left */
+#font-reset {
+  transform: translateX(0); /* Default position */
+}
+
+/* When the toggle button has the 'active' class, show and position the other buttons */
+#font-toggle.active + #font-minus {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-100px); /* Adjust this value for spacing */
+}
+
+#font-toggle.active + #font-minus + #font-reset {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50px); /* Adjust this value for spacing */
+}
+
+/* --- Light Mode Overrides for the new buttons --- */
+body.light-mode .font-button {
+  background-color: #eee;
+  color: #333333;
+  border-color: #bbb;
 }
 
 /* Specific image for each console/content type */

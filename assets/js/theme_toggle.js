@@ -114,4 +114,42 @@ document.addEventListener('DOMContentLoaded', () => {
     if (profileImage) {
         profileImage.src = window.getRandomProfileImage();
     }
+
+// --- Font Control Buttons Logic ---
+    const fontToggle = document.getElementById('font-toggle');
+    const fontMinus = document.getElementById('font-minus');
+    const fontReset = document.getElementById('font-reset');
+
+    fontToggle.addEventListener('click', () => {
+        // Toggle the 'active' class on the toggle button itself
+        fontToggle.classList.toggle('active');
+        
+        // Toggle the 'active' class on the other buttons to trigger CSS transitions
+        fontMinus.classList.toggle('active');
+        fontReset.classList.toggle('active');
+    });
+
+    // We also need to hide the buttons if the user clicks anywhere else
+    document.addEventListener('click', (event) => {
+        const isClickInside = fontToggle.contains(event.target) || fontMinus.contains(event.target) || fontReset.contains(event.target);
+        
+        if (!isClickInside && fontToggle.classList.contains('active')) {
+            fontToggle.classList.remove('active');
+            fontMinus.classList.remove('active');
+            fontReset.classList.remove('active');
+        }
+    });
+
+    // This is a temporary function to handle font size changes.
+    // This is just a placeholder and can be linked to your existing font size logic.
+    fontMinus.addEventListener('click', () => {
+        console.log('Font size decreased!');
+        // Add your font decrease logic here
+    });
+
+    fontReset.addEventListener('click', () => {
+        console.log('Font size reset!');
+        // Add your font reset logic here
+    });
+
 });
