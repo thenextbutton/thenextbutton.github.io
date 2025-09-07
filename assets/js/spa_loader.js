@@ -1,6 +1,40 @@
 document.addEventListener('DOMContentLoaded', () => {
     const contentArea = document.getElementById('content-area');
 
+    function updatePageMetadata(pageName, projectTitle = null, projectDescription = null) {
+        // Default values for all pages
+        let pageTitle = "My Corner of the Internet";
+        let metaDescription = "A portfolio showcasing my projects and professional journey.";
+
+        // Update based on the current page
+        switch(pageName) {
+            case 'github':
+                if (projectTitle) {
+                    pageTitle = `${projectTitle} - GitHub Projects`;
+                    metaDescription = projectDescription || `View details about the ${projectTitle} project on GitHub.`;
+                } else {
+                    pageTitle = "My GitHub Projects";
+                    metaDescription = "A collection of my key projects and scripts on GitHub.";
+                }
+                break;
+            case 'now':
+                pageTitle = "What I'm Doing Now";
+                metaDescription = "A look into my current personal and professional focus.";
+                break;
+            case 'home':
+            default:
+                pageTitle = "Hello, World! - My Corner of the Internet";
+                metaDescription = "A portfolio and personal blog showcasing my professional and personal projects.";
+                break;
+        }
+
+        document.title = pageTitle;
+        // Update Open Graph tags for better social sharing previews
+        document.querySelector('meta[property="og:title"]').setAttribute('content', pageTitle);
+        document.querySelector('meta[property="og:description"]').setAttribute('content', metaDescription);
+        document.querySelector('meta[property="og:url"]').setAttribute('content', window.location.href);
+    }
+
     /**
      * Determines the current page name and anchor ID from the URL hash.
      * @returns {{pageName: string, anchor: string|null}}
@@ -29,7 +63,6 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     async function loadContent(url, pageName, anchor = null, isInitialLoad = false) {
         try {
-            console.log('Step 1: Initiating fade out of current content and making scrollbar transparent.');
             document.body.classList.add('hide-scrollbar-visually');
             contentArea.style.opacity = '0';
 
@@ -40,18 +73,15 @@ document.addEventListener('DOMContentLoaded', () => {
                         contentArea.removeEventListener('transitionend', handleTransitionEnd);
                         clearTimeout(transitionEndTimeout);
                         resolve();
-                        console.log('Transition to opacity 0 confirmed.');
                     }
                 };
                 contentArea.addEventListener('transitionend', handleTransitionEnd);
                 transitionEndTimeout = setTimeout(() => {
                     contentArea.removeEventListener('transitionend', handleTransitionEnd);
                     resolve();
-                    console.log('Transition timeout triggered (opacity might already be 0).');
                 }, parseFloat(getComputedStyle(contentArea).transitionDuration) * 1000 + 100);
             });
 
-            console.log('Step 2: Fetching new content from:', url);
             const response = await fetch(url);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -65,7 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 contentArea.appendChild(contentColumn);
             }
 
-            console.log('Step 3: Injecting new content and removing scrollbar transparency.');
             contentColumn.innerHTML = data;
             document.body.classList.remove('hide-scrollbar-visually');
 
@@ -79,8 +108,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 initLightbox();
             }
 
-            // *** IMPORTANT CHANGE ***
-            // Call the social share init function AFTER the content is in the DOM
             if (typeof window.initSocialShare === 'function') {
                 window.initSocialShare();
             }
@@ -90,7 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.updateGithubFileCommitDate(filePath);
             }
 
-            console.log('Step 4: Fading in new content.');
             await new Promise(resolve => setTimeout(resolve, 50));
             contentArea.style.opacity = '1';
 
@@ -99,26 +125,33 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             setActiveNavLink(pageName);
 
+            // Dynamically get project title and description for metadata updates
+            let projectTitle = null;
+            let projectDescription = null;
             if (anchor) {
-                const targetElement = document.getElementById(anchor);
-                if (targetElement) {
+                const projectElement = document.getElementById(anchor);
+                if (projectElement) {
+                    projectTitle = projectElement.querySelector('h3').innerText;
+                    projectDescription = projectElement.querySelector('.project-details p').innerText;
+
+                    // Scroll to the anchor
                     await new Promise(resolve => setTimeout(resolve, 100));
-                    
                     const headerHeight = document.querySelector('.main-header-fixed').offsetHeight;
                     const offset = 15;
-                    const topPosition = targetElement.getBoundingClientRect().top + window.scrollY - headerHeight - offset;
-
+                    const topPosition = projectElement.getBoundingClientRect().top + window.scrollY - headerHeight - offset;
                     window.scrollTo({
                         top: topPosition,
                         behavior: 'smooth'
                     });
                 } else {
-                    console.warn(`Anchor element with ID '${anchor}' not found.`);
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
             } else {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
+
+            // Call the metadata update function with the correct info
+            updatePageMetadata(pageName, projectTitle, projectDescription);
 
             if (typeof window.triggerHeaderScrollCheck === 'function') {
                 window.triggerHeaderScrollCheck();
@@ -173,6 +206,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Set initial active nav link
     setActiveNavLink(initialPage);
 });
