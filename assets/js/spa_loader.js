@@ -1,13 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
     const contentArea = document.getElementById('content-area');
 
-    /**
+/**
      * Loads content into the main content area with a fade effect.
      * @param {string} url - The URL of the content to load.
      * @param {string} pageName - The name of the page (e.g., 'home', 'about_me', 'now').
+     * @param {string|null} anchor - The anchor ID to scroll to (e.g., 'pi-cow-garage').
      * @param {boolean} isInitialLoad - True if this is the initial page load.
      */
-    async function loadContent(url, pageName, isInitialLoad = false) {
+    async function loadContent(url, pageName, anchor = null, isInitialLoad = false) {
         try {
             console.log('Step 1: Initiating fade out of current content and making scrollbar transparent.');
             // Add class to make scrollbar visually transparent
@@ -74,6 +75,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (typeof initLightbox === 'function') {
                 initLightbox();
             }
+            // Add the social share init function here since content is loaded
+            if (typeof window.initSocialShare === 'function') {
+                window.initSocialShare();
+            }
 
             // --- GITHUB COMMIT DATE ---
             // Construct the file path relative to the repository root
@@ -95,12 +100,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Update URL hash and active navigation link
             if (!isInitialLoad) {
-                window.location.hash = `#/${pageName}.html`;
+                // If there's an anchor, append it to the hash
+                window.location.hash = `#/${pageName}.html${anchor ? '#' + anchor : ''}`;
                 setActiveNavLink(pageName);
             }
 
-            // Scroll to the top of the content area
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // --- NEW: Scroll to the anchor if it exists, otherwise scroll to the top
+            if (anchor) {
+                const targetElement = document.getElementById(anchor);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                } else {
+                    console.warn(`Anchor element with ID '${anchor}' not found.`);
+                    window.scrollTo({ top: 0, behavior: 'smooth' }); // Fallback to top if not found
+                }
+            } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            // --- END NEW CODE ---
 
             // Trigger header scroll check to adjust header visibility based on new scroll position
             if (typeof window.triggerHeaderScrollCheck === 'function') {
