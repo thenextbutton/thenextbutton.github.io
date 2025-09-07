@@ -204,7 +204,7 @@ a[target="_blank"] {
   /* Adds a space to the right for the icon */
   padding-right: 15px;
   /* Adds the icon as a background image */
-  background: url('../assets/images/external_link_icon.webp') no-repeat right center;
+  background: url('../images/external_link_icon.webp') no-repeat right center;
   /* Ensures the icon doesn't stretch or repeat */
   background-size: 12px 12px;
 }
