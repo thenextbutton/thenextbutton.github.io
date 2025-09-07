@@ -730,6 +730,16 @@ body.light-mode .social-icons-wrapper a, body.light-mode .social-icons-wrapper b
   color: #333333;
 }
 
+/* Corrected rule to exclude social icons from the external link icon */
+a[target="_blank"]:not(.github-content-corner-logo):not(.social-icons-wrapper) {
+  padding-right: 15px;
+  background: url('../images/external_link_icon_wht.webp') no-repeat right center;
+  background-size: 12px 12px;
+}
+body.light-mode a[target="_blank"]:not(.github-content-corner-logo):not(.social-icons-wrapper) {
+  padding-right: 15px;
+  background: url('../images/external_link_icon_blk.webp') no-repeat right center;
+  background-size: 12px 12px;
 }
 
 /* --- Light Mode Overrides --- */
