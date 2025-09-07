@@ -104,9 +104,10 @@ async function loadContent(url, pageName, anchor = null, isInitialLoad = false) 
             if (targetElement) {
                 // Wait for a moment to ensure the element is fully rendered and its position is correct
                 await new Promise(resolve => setTimeout(resolve, 100));
-                
+
                 const headerHeight = document.querySelector('.main-header-fixed').offsetHeight;
-                const topPosition = targetElement.getBoundingClientRect().top + window.scrollY - headerHeight;
+                const offset = 10; // The desired 10px offset
+                const topPosition = targetElement.getBoundingClientRect().top + window.scrollY - headerHeight - offset;
 
                 window.scrollTo({
                     top: topPosition,
