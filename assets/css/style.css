@@ -70,7 +70,10 @@ body::-webkit-scrollbar-thumb:hover {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #171c26;
+  background-color: rgba(23, 28, 38, 0.8); /* Changed to semi-transparent */
+  backdrop-filter: blur(10px); /* Glassmorphism effect */
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle bottom border */
   padding: 10px 0;
   box-sizing: border-box;
   z-index: 900;
@@ -178,29 +181,42 @@ ul li {
   font-size: 1.1rem;
   padding: 5px 10px;
   border-radius: 4px;
-  transition: color 0.3s ease-in-out, font-weight 0.2s ease-in-out, background-color 0.3s ease-in-out, border-radius 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out;
   display: inline-block;
+  position: relative; /* Needed for the pseudo-element */
+  overflow: hidden;
 }
 
 .main-nav li a:hover {
   color: #c0c0c0;
-  font-weight: bolder;
-  background-color: #333;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  transform: translateY(-2px);
+}
+
+.main-nav li a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #7dbeff; /* Your accent color */
+  transform: translateX(-100%); /* Start off-screen to the left */
+  transition: transform 0.3s ease-in-out;
+}
+
+.main-nav li a:hover::after {
+  transform: translateX(0); /* Slide in from the left on hover */
 }
 
 .main-nav li a.active {
   color: #7dbeff; /* New accent color */
   font-weight: bolder;
-  background-color: #333;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  background-color: transparent; /* Reset background */
+  border-radius: 8px; /* Remove if you want a clean underline */
+  box-shadow: none; /* Remove box shadow */
 }
 
 /* Selects all anchor tags that have the target="_blank" attribute */
-a[target="_blank"]:not(.github-content-corner-logo):not(.powered-by-github) {
+a[target="_blank"]:not(.github-content-corner-logo) {
   padding-right: 15px;
   background: url('../images/external_link_icon_wht.webp') no-repeat right center;
   background-size: 12px 12px;
@@ -643,11 +659,17 @@ body.light-mode::-webkit-scrollbar-thumb { background-color: transparent; border
 body.light-mode:hover::-webkit-scrollbar-thumb { background-color: #888; border-color: #e0e0e0; }
 body.light-mode::-webkit-scrollbar-thumb:hover { background-color: #666; }
 
-body.light-mode .main-header-fixed { background-color: #fafafa; }
+body.light-mode .main-header-fixed {
+  background-color: rgba(250, 250, 250, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
 body.light-mode h1 { color: #333333; }
 body.light-mode .main-nav li a { color: #333333; }
-body.light-mode .main-nav li a:hover { color: #000; background-color: #e0e0e0; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); transform: translateY(-2px); }
-body.light-mode .main-nav li a.active { color: #4a90e2; background-color: #e0e0e0; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); } /* New accent color for light mode */
+body.light-mode .main-nav li a:hover { color: #000; }
+body.light-mode .main-nav li a::after { background-color: #4a90e2; }
+body.light-mode .main-nav li a.active { color: #4a90e2; background-color: transparent; box-shadow: none; }
 body.light-mode .content-column a { color: #4a90e2; } /* New accent color for light mode */
 body.light-mode .content-column p, body.light-mode .content-column h4, body.light-mode .content-column ul, body.light-mode .content-column ul li { color: #333333; }
 body.light-mode .content-column h2 { color: #333333; }
@@ -665,7 +687,7 @@ body.light-mode a:focus-visible, body.light-mode button:focus-visible, body.ligh
 }
 
 /* Selects all anchor tags that have the target="_blank" attribute */
-body.light-mode a[target="_blank"]:not(.github-content-corner-logo):not(.powered-by-github) {
+body.light-mode a[target="_blank"]:not(.github-content-corner-logo) {
   padding-right: 15px;
   background: url('../images/external_link_icon_blk.webp') no-repeat right center;
   background-size: 12px 12px;
@@ -880,4 +902,3 @@ body.blur-content {
   .github-content-corner-logo { top: 8px; right: 8px; }
   .github-content-corner-logo img { width: 20px; }
 }
-
