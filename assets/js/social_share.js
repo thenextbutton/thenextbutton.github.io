@@ -21,27 +21,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // --- Main "Share Project" button listener ---
             shareButton.addEventListener('click', (event) => {
-                event.stopPropagation(); // Prevents the click from bubbling up to the document
+                event.stopPropagation();
                 
-                // If another project is open, close it first
                 if (activeWrapper && activeWrapper !== socialWrapper) {
                     handleClose();
                 }
 
-                // Toggle the current one
                 socialWrapper.classList.toggle('active');
                 activeWrapper = socialWrapper.classList.contains('active') ? socialWrapper : null;
 
-                // Stop the timer if the menu is closed
                 clearTimeout(globalTimer);
             });
 
             // --- Social links and copy button listeners ---
             socialLinks.forEach(link => {
-                link.addEventListener('click', (event) => {
-                    // Start the 5-second timer when a social link is clicked
-                    clearTimeout(globalTimer);
-                    globalTimer = setTimeout(handleClose, 5000);
+                link.addEventListener('click', () => {
+                    handleClose();
                 });
             });
 
@@ -54,7 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         const copiedIconClass = 'fas fa-check';
                         icon.className = copiedIconClass;
                         
-                        // Give visual feedback then clear the timer and close the menu after 2 seconds
                         setTimeout(() => {
                             icon.className = originalIconClass;
                             handleClose(); 
