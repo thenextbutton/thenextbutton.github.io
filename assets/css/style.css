@@ -199,14 +199,14 @@ ul li {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* Highlight external links with an icon */
-.main-nav li a[href*="github.com"]::after {
-  content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="%23a0a0a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>');
-  margin-left: 5px;
-  display: inline-block;
-  vertical-align: top;
-  position: relative;
-  top: 1px;
+/* Selects all anchor tags that have the target="_blank" attribute */
+a[target="_blank"] {
+  /* Adds a space to the right for the icon */
+  padding-right: 15px;
+  /* Adds the icon as a background image */
+  background: url('assets/images/external_link_icon.webp') no-repeat right center;
+  /* Ensures the icon doesn't stretch or repeat */
+  background-size: 12px 12px;
 }
 
 /* Dark mode icon color override on hover */
