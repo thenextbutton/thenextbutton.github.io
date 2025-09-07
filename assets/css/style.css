@@ -199,6 +199,31 @@ ul li {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+/* Highlight external links with an icon */
+.main-nav li a[href*="github.com"]::after {
+  content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="%23a0a0a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>');
+  margin-left: 5px;
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  top: 1px;
+}
+
+/* Dark mode icon color override on hover */
+.main-nav li a[href*="github.com"]:hover::after {
+  content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="%23c0c0c0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>');
+}
+
+/* Light mode icon color override */
+body.light-mode .main-nav li a[href*="github.com"]::after {
+  content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="%23333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>');
+}
+
+/* Light mode icon hover color override */
+body.light-mode .main-nav li a[href*="github.com"]:hover::after {
+  content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="%23000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>');
+}
+
 /* --- Content Area & General Text --- */
 .content-column {
   max-width: 800px;
@@ -663,23 +688,37 @@ body.light-mode #scroll-progress-bar {
   font-weight: bold; /* Make the X bolder */
   cursor: pointer;
   display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-transition: background-color 0.2s ease-in-out, -webkit-transform 0.2s ease-in-out, -webkit-box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out, -webkit-transform 0.2s ease-in-out, -webkit-box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
   transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out, -webkit-transform 0.2s ease-in-out, -webkit-box-shadow 0.2s ease-in-out;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Stronger shadow */
 }
 
 #lightbox-close-btn:hover {
   background-color: #cc0000;
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
   transform: scale(1.1);
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6); /* Even stronger shadow on hover */
   border-color: white; /* Solid white border on hover */
 }
 
 /* Class to blur the body content when lightbox is active */
 body.blur-content > *:not(#lightbox-overlay) {
+  -webkit-filter: blur(3px);
   filter: blur(3px);
   pointer-events: none; /* Disable interaction with blurred content */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none; /* Prevent selection of blurred content */
 }
 body.blur-content {
@@ -700,15 +739,20 @@ body.blur-content {
     margin-bottom: 15px;
     position: relative;
     z-index: 1;
+    -webkit-transform: translateY(30px);
+    -ms-transform: translateY(30px);
     transform: translateY(30px);
   }
-  h1.slide-up { transform: translateY(0); }
+  h1.slide-up { -webkit-transform: translateY(0); -ms-transform: translateY(0); transform: translateY(0); }
   .main-nav { margin-top: 10px; padding: 0 10px; }
   .main-nav ul { gap: 20px; }
   .main-nav li a {
     font-size: 1.1rem;
     padding: 8px 12px;
+    -webkit-transition: color 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out, -webkit-box-shadow 0.3s ease-in-out;
+    transition: color 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out, -webkit-box-shadow 0.3s ease-in-out;
     transition: color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out, -webkit-box-shadow 0.3s ease-in-out;
   }
   .profile-image { top: 10px; left: 10px; width: 60px; height: 60px; z-index: 1001; }
   .corner-logo-fixed { top: 10px; right: 10px; width: 90px; height: 60px; z-index: 1001; }
@@ -724,12 +768,19 @@ body.blur-content {
   #font-plus { font-size: 20px; }
   .content-column { padding: 0px 15px 15px 15px; font-size: 1rem; line-height: 1.6; margin-bottom: 100px; }
   .github-project-item {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     padding: 15px;
   }
   .project-details {
     width: 100%;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
     align-items: flex-start;
     /* Removed margin-top as sticky is now removed from .project-image */
   }
