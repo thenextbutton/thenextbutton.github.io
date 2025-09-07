@@ -649,42 +649,84 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   border-radius: 4px;
 }
 
-/* --- Social Share Icons --- */
-.social-share-icons {
-  margin-top: 15px; /* Adds space between the icons and other content */
+/* --- Social Share Controls --- */
+.share-container {
   display: flex;
-  gap: 15px; /* Spacing between the icons */
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
 }
 
-.social-share-icons a {
-  color: #a0a0a0; /* Default color for the icons */
-  font-size: 24px; /* Larger icon size for visibility */
-  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+.share-btn {
+  background-color: #282a36; /* Your project item color */
+  color: #a0a0a0;
+  border: 1px solid #444;
+  padding: 8px 15px;
+  border-radius: 50px; /* Pill shape for button */
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.share-btn:hover {
+  background-color: #383b48;
+  transform: translateY(-2px);
+}
+body.light-mode .share-btn {
+  background-color: #d0d0d0;
+  color: #333333;
+  border-color: #bbb;
+}
+body.light-mode .share-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.social-icons-wrapper {
+  display: flex;
+  gap: 15px;
+  max-height: 0; /* Hides the wrapper */
+  overflow: hidden; /* Hides the contents */
+  transition: max-height 0.5s ease-in-out;
+}
+.social-icons-wrapper.active {
+  max-height: 50px; /* Adjust to be slightly larger than the content height */
+}
+
+/* Base styles for all icons/buttons inside the wrapper */
+.social-icons-wrapper a, .social-icons-wrapper button {
+  background-color: transparent;
+  color: #a0a0a0;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
   display: inline-block;
-  text-decoration: none; /* Removes any underline from the links */
-  border-radius: 50%;
-  padding: 5px;
+  padding: 0;
 }
 
-.social-share-icons a:hover {
-  transform: scale(1.1); /* Slight zoom effect on hover */
+/* Individual icon colors on hover */
+.social-icons-wrapper .fa-twitter:hover { color: #1da1f2; }
+.social-icons-wrapper .fa-linkedin-in:hover { color: #0077b5; }
+.social-icons-wrapper .fa-facebook-f:hover { color: #1877f2; }
+.social-icons-wrapper .fa-clipboard:hover { color: #7dbeff; }
+
+/* Light Mode Overrides for Icons */
+body.light-mode .social-icons-wrapper a, body.light-mode .social-icons-wrapper button {
+  color: #333333;
 }
 
-.social-share-icons .fa-twitter:hover {
-  color: #1da1f2; /* Twitter Blue */
+/* Corrected rule to exclude social icons from the external link icon */
+a[target="_blank"]:not(.github-content-corner-logo):not(.powered-by-github):not(.social-icons-wrapper a) {
+  padding-right: 15px;
+  background: url('../images/external_link_icon_wht.webp') no-repeat right center;
+  background-size: 12px 12px;
 }
-
-.social-share-icons .fa-linkedin-in:hover {
-  color: #0077b5; /* LinkedIn Blue */
-}
-
-.social-share-icons .fa-facebook-f:hover {
-  color: #1877f2; /* Facebook Blue */
-}
-
-/* Light Mode Overrides for Social Share Icons */
-body.light-mode .social-share-icons a {
-  color: #333333; /* Darker icons in light mode */
+body.light-mode a[target="_blank"]:not(.github-content-corner-logo):not(.powered-by-github):not(.social-icons-wrapper a) {
+  padding-right: 15px;
+  background: url('../images/external_link_icon_blk.webp') no-repeat right center;
+  background-size: 12px 12px;
 }
 
 /* --- Light Mode Overrides --- */
