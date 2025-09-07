@@ -8,7 +8,9 @@ function initAutoLinker(){
     Powershell:"https://learn.microsoft.com/en-us/powershell/",
     Docker:"https://www.docker.com/",
     Proxmox:"https://www.proxmox.com/",
-    ESPHome:"https://esphome.io/"
+    ESPHome:"https://esphome.io/",
+    CarPlay:"https://www.apple.com/uk/ios/carplay/",
+    "Android Auto":"https://www.android.com/intl/en_uk/auto/"
   };
   let t = document.getElementById("content-area");
 
