@@ -547,6 +547,71 @@ body.dark-mode .github-content-corner-logo .light-mode-img {
 .podcast-item::before { background-image: url('../images/ipod.webp'); }
 .music-item::before { background-image: url('../images/loud-speaker.webp'); }
 
+/* * This CSS file handles the styling and animation for the scroll-to-bottom button.
+ */
+
+/* Scroll Button Container */
+.scroll-to-bottom-container {
+  position: fixed;
+  bottom: 20px; /* Distance from the bottom of the viewport */
+  right: 20px; /* Distance from the right of the viewport */
+  z-index: 1000; /* Ensures the button is on top of other content */
+  opacity: 0; /* Initially hidden */
+  pointer-events: none; /* Prevents interaction when hidden */
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Scroll Button Styling */
+#scroll-to-bottom-btn {
+  background-color: #282a36; /* Dark mode background */
+  color: #fafafa; /* Dark mode text color */
+  border: 1px solid #555;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease-in-out, background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  user-select: none; /* Prevent text selection */
+  -webkit-user-select: none;
+  font-size: 1.5rem; /* Larger font size for the emoji */
+}
+
+#scroll-to-bottom-btn:hover {
+  transform: translateY(-2px);
+  background-color: #333;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Visibility Class (added by JavaScript) */
+.scroll-to-bottom-container.active {
+  opacity: 1;
+  pointer-events: auto; /* Allows interaction when active */
+}
+
+/* Light Mode Overrides */
+body.light-mode .scroll-to-bottom-container {
+  opacity: 0;
+}
+
+body.light-mode .scroll-to-bottom-container.active {
+  opacity: 1;
+}
+
+body.light-mode #scroll-to-bottom-btn {
+  background-color: #eee;
+  color: #333333;
+  border-color: #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+body.light-mode #scroll-to-bottom-btn:hover {
+  background-color: #ddd;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
 
 /* --- Footer --- */
 .powered-by-github {
@@ -810,3 +875,4 @@ body.blur-content {
   .github-content-corner-logo { top: 8px; right: 8px; }
   .github-content-corner-logo img { width: 20px; }
 }
+
