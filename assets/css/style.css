@@ -632,6 +632,24 @@ body.dark-mode .github-content-corner-logo .light-mode-img {
   z-index: 1000;
 }
 
+.font-submenu {
+  position: absolute;
+  right: 70px; /* distance from main stack */
+  bottom: 80px; /* aligns with font-toggle-btn */
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 1;
+  z-index: 999;
+}
+
+.font-submenu.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(20px);
+}
+
 
 /* Light mode overrides */
 body.light-mode .scroll-style {

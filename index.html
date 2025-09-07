@@ -59,19 +59,35 @@
 </div>
 
 <div class="vertical-button-stack">
+  <!-- Scroll Button -->
   <div class="scroll-style" id="scroll-btn">
     <i class="fas fa-arrow-down"></i>
   </div>
+
+  <!-- Theme Toggle -->
   <div class="scroll-style" id="theme-toggle-btn">
     <i class="fas fa-adjust"></i>
   </div>
-  <div class="scroll-style" id="font-plus-btn">
-    <span style="font-size: 1.2rem;">A+</span>
+
+  <!-- Font Master Toggle -->
+  <div class="scroll-style" id="font-toggle-btn">
+    <span style="font-size: 1rem;">A</span>
   </div>
-  <div class="scroll-style" id="font-minus-btn">
-    <span style="font-size: 0.9rem;">A−</span>
+
+  <!-- Font Submenu -->
+  <div class="font-submenu hidden">
+    <div class="scroll-style font-control" id="font-minus">
+      <span style="font-size: 0.9rem;">A−</span>
+    </div>
+    <div class="scroll-style font-control" id="font-reset">
+      <span style="font-size: 1rem;">A</span>
+    </div>
+    <div class="scroll-style font-control" id="font-plus">
+      <span style="font-size: 1.2rem;">A+</span>
+    </div>
   </div>
 </div>
+
 
 
 <script src="assets/js/theme_toggle.js"></script>
