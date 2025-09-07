@@ -216,10 +216,10 @@ ul li {
 }
 
 /* Selects all anchor tags that have the target="_blank" attribute */
-a[target="_blank"]:not(.github-content-corner-logo):not(.social-share-icons) {
-  padding-right: 15px;
-  background: url('../images/external_link_icon_wht.webp') no-repeat right center;
-  background-size: 12px 12px;
+a[target="_blank"]:not(.github-content-corner-logo):not(.social-share-icons a) {
+  padding-right: 15px;
+  background: url('../images/external_link_icon_wht.webp') no-repeat right center;
+  background-size: 12px 12px;
 }
 
 /* Dark mode icon color override on hover */
