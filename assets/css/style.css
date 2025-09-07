@@ -204,7 +204,7 @@ a[target="_blank"] {
   /* Adds a space to the right for the icon */
   padding-right: 15px;
   /* Adds the icon as a background image */
-  background: url('../images/external_link_icon.webp') no-repeat right center;
+  background: url('../images/external_link_icon_wht.webp') no-repeat right center;
   /* Ensures the icon doesn't stretch or repeat */
   background-size: 12px 12px;
 }
@@ -666,6 +666,17 @@ body.light-mode a:focus-visible, body.light-mode button:focus-visible, body.ligh
   box-shadow: 0 0 0 2px #4a90e2;
   border-color: #4a90e2;
 }
+
+/* Selects all anchor tags that have the target="_blank" attribute */
+body.light-mode a[target="_blank"] {
+  /* Adds a space to the right for the icon */
+  padding-right: 15px;
+  /* Adds the icon as a background image */
+  background: url('../images/external_link_icon_blk.webp') no-repeat right center;
+  /* Ensures the icon doesn't stretch or repeat */
+  background-size: 12px 12px;
+}
+
 
 body.light-mode #lightbox-content {
   background-color: #fafafa; /* Or white, or a very light grey */
