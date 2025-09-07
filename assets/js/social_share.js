@@ -2,16 +2,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const contentArea = document.getElementById('content-area');
 
     const initSocialShare = () => {
+        // Find and process all share buttons
         const shareButtons = document.querySelectorAll('.share-btn');
         shareButtons.forEach(button => {
-            // Remove any existing event listeners to prevent duplicates
-            const newButton = button.cloneNode(true);
-            button.parentNode.replaceChild(newButton, button);
-            
+            // Check if the button already has a listener to prevent duplicates
+            if (button.dataset.listenerAdded) {
+                return;
+            }
+            button.dataset.listenerAdded = 'true';
+
             let timer;
 
-            newButton.addEventListener('click', () => {
-                const wrapper = newButton.nextElementSibling;
+            button.addEventListener('click', () => {
+                const wrapper = button.nextElementSibling;
                 const isActive = wrapper.classList.toggle('active');
 
                 // Clear any existing timer
@@ -26,11 +29,18 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
+        // Find and process all copy link buttons
         const copyButtons = document.querySelectorAll('.copy-link-btn');
         const originalIconClass = 'fas fa-clipboard';
         const copiedIconClass = 'fas fa-check';
 
         copyButtons.forEach(button => {
+            // Check if the button already has a listener
+            if (button.dataset.listenerAdded) {
+                return;
+            }
+            button.dataset.listenerAdded = 'true';
+            
             button.addEventListener('click', () => {
                 const linkToCopy = button.dataset.link;
                 if (linkToCopy) {
@@ -48,16 +58,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    const observer = new MutationObserver((mutationsList) => {
+    // Create a MutationObserver to watch for changes to the content area's children
+    const observer = new MutationObserver((mutationsList, observer) => {
         for(const mutation of mutationsList) {
-            if (mutation.type === 'childList') {
+            // Re-initialize social share when new content is added to the content area
+            if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
                 initSocialShare();
             }
         }
     });
 
+    // Start observing the content area for child element changes
     observer.observe(contentArea, { childList: true });
 
-    // Initial check for content
+    // Initial call to set up listeners for the very first page load
     initSocialShare();
 });
