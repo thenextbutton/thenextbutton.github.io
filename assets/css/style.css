@@ -200,7 +200,7 @@ ul li {
 }
 
 /* Selects all anchor tags that have the target="_blank" attribute */
-a[target="_blank"] {
+a[target="_blank"]:not(.github-content-corner-logo) {
   padding-right: 15px;
   background: url('../images/external_link_icon_wht.webp') no-repeat right center;
   background-size: 12px 12px;
@@ -665,7 +665,7 @@ body.light-mode a:focus-visible, body.light-mode button:focus-visible, body.ligh
 }
 
 /* Selects all anchor tags that have the target="_blank" attribute */
-body.light-mode a[target="_blank"] {
+body.light-mode a[target="_blank"]:not(.github-content-corner-logo) {
   padding-right: 15px;
   background: url('../images/external_link_icon_blk.webp') no-repeat right center;
   background-size: 12px 12px;
