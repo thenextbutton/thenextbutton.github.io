@@ -23,23 +23,30 @@ document.addEventListener('DOMContentLoaded', () => {
             shareButton.addEventListener('click', (event) => {
                 event.stopPropagation();
                 
+                // If another project is open, close it first
                 if (activeWrapper && activeWrapper !== socialWrapper) {
                     handleClose();
                 }
 
+                // Toggle the current one
                 socialWrapper.classList.toggle('active');
                 activeWrapper = socialWrapper.classList.contains('active') ? socialWrapper : null;
 
+                // Stop the timer if the menu is closed
                 clearTimeout(globalTimer);
             });
 
-            // --- Social links and copy button listeners ---
+            // --- Social links listener ---
             socialLinks.forEach(link => {
                 link.addEventListener('click', () => {
-                    handleClose();
+                    // Clear any existing timer
+                    clearTimeout(globalTimer);
+                    // Start a new 5-second timer to close the menu
+                    globalTimer = setTimeout(handleClose, 5000);
                 });
             });
 
+            // --- Copy Link button listener ---
             copyButton.addEventListener('click', () => {
                 const linkToCopy = copyButton.dataset.link;
                 if (linkToCopy) {
@@ -49,19 +56,23 @@ document.addEventListener('DOMContentLoaded', () => {
                         const copiedIconClass = 'fas fa-check';
                         icon.className = copiedIconClass;
                         
-                        setTimeout(() => {
+                        // Clear any existing timer
+                        clearTimeout(globalTimer);
+                        
+                        // Start a new 5-second timer to close the menu, and also revert the icon
+                        globalTimer = setTimeout(() => {
                             icon.className = originalIconClass;
-                            handleClose(); 
-                        }, 2000);
+                            handleClose();
+                        }, 5000);
                     }).catch(err => {
                         console.error('Failed to copy text: ', err);
                     });
                 }
             });
             
-            // This is to handle clicks outside of the share menu to close it
+            // This handles clicks outside of the share menu to close it
             document.addEventListener('click', (event) => {
-                if (!socialWrapper.contains(event.target) && !shareButton.contains(event.target)) {
+                if (activeWrapper && !activeWrapper.contains(event.target) && !shareButton.contains(event.target)) {
                     handleClose();
                 }
             });
