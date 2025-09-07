@@ -632,10 +632,14 @@ body.dark-mode .github-content-corner-logo .light-mode-img {
   z-index: 1000;
 }
 
+.font-control-wrapper {
+  position: relative;
+}
+
 .font-submenu {
   position: absolute;
-  right: 70px; /* distance from main stack */
-  bottom: 80px; /* aligns with font-toggle-btn */
+  top: 0;
+  right: 60px; /* distance from toggle button */
   display: flex;
   flex-direction: row;
   gap: 10px;
@@ -649,6 +653,7 @@ body.dark-mode .github-content-corner-logo .light-mode-img {
   pointer-events: none;
   transform: translateX(20px);
 }
+
 
 
 /* Light mode overrides */

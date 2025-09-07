@@ -3,7 +3,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const submenu = document.querySelector(".font-submenu");
 
   toggleBtn.addEventListener("click", () => {
-    submenu.classList.toggle("hidden");
+  const rect = toggleBtn.getBoundingClientRect();
+  submenu.style.top = `${rect.top}px`;
+  submenu.classList.toggle("hidden");
   });
 
   const htmlRoot = document.documentElement;
