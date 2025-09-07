@@ -9,31 +9,29 @@
 </head>
 <body class="page-container">
 <div id="scroll-progress-bar"></div>
-
-<img alt="My Profile Picture" class="profile-image">
-<img alt="MS Certification Logo" class="corner-logo-fixed">
 	
 <header class="main-header-fixed">
-  <h1>Hello, World!</h1>
-  <nav class="main-nav">
-    <ul>
-      <li><a href="#/home.html" data-page="home">Home</a></li>
-      <li><a href="#/github.html" data-page="github">GitHub</a></li>
-	  <li><a href="#/now.html" data-page="now">Now</a></li>
-    </ul>
-  </nav>
+  <img alt="My Profile Picture" class="profile-image">
+  <div class="header-center-content">
+    <h1>Hello, World!</h1>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="#/home.html" data-page="home">Home</a></li>
+        <li><a href="#/github.html" data-page="github">GitHub</a></li>
+        <li><a href="#/now.html" data-page="now">Now</a></li>
+      </ul>
+    </nav>
+  </div>
+  <img alt="MS Certification Logo" class="corner-logo-fixed">
 </header>
 
 <div id="content-area">
-  <!-- Dynamic content will be loaded here by JavaScript -->
-</div>
+  </div>
 
-<!-- MODIFIED: New wrapper for controls -->
 <div class="bottom-right-controls-wrapper">
   <div class="theme-toggle-container">
     <input type="checkbox" id="theme-switch" class="theme-switch-checkbox">
     <label for="theme-switch" class="theme-switch-label"></label>
-    <!-- MODIFIED: Replaced span with i for Font Awesome icons -->
     <i id="moon-icon" class="fas fa-moon theme-icon"></i>
     <i id="sun-icon" class="fas fa-sun theme-icon"></i>
   </div>
@@ -45,7 +43,6 @@
   </div>
 </div>
 
-    <!-- Lightbox Overlay Structure -->
     <div id="lightbox-overlay">
       <div id="lightbox-content">
         <img id="lightbox-image" src="" alt="">
@@ -60,10 +57,6 @@
 <script src="assets/js/powered_by.js"></script>
 <script src="assets/js/auto_linker.js"></script>
 <script src="assets/js/github_last_commit.js"></script> 
-<script src="assets/js/spa_loader.js"></script>
-<script src="assets/js/scroll_animations.js"></script>
-<script src="assets/js/font_controls.js"></script>
-<script src="assets/js/lightbox.js"></script>
-<script src="assets/js/scroll_progress.js"></script>
+<script src="assets/js/main.js"></script>
 </body>
 </html>
