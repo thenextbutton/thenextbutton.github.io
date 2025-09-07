@@ -215,8 +215,7 @@ ul li {
   box-shadow: none; /* Remove box shadow */
 }
 
-/* Selects all anchor tags that have the target="_blank" attribute */
-a[target="_blank"]:not(.github-content-corner-logo):not(.social-share-icons a) {
+a[target="_blank"]:not(.github-content-corner-logo):not(.social-icons-wrapper a) {
   padding-right: 15px;
   background: url('../images/external_link_icon_wht.webp') no-repeat right center;
   background-size: 12px 12px;
@@ -727,7 +726,8 @@ body.light-mode .share-btn:hover {
 
 /* Light Mode Overrides for Icons */
 body.light-mode .social-icons-wrapper a, body.light-mode .social-icons-wrapper button {
-  color: #333333;
+  color: #4a90e2; /* New default color to match the copy button */
+  transition: color 0.3s ease-in-out;
 }
 
 /* Corrected rule to exclude social icons from the external link icon */
@@ -780,12 +780,11 @@ body.light-mode a:focus-visible, body.light-mode button:focus-visible, body.ligh
 }
 
 /* Selects all anchor tags that have the target="_blank" attribute */
-body.light-mode a[target="_blank"]:not(.github-content-corner-logo):not(.social-share-icons) {
-  padding-right: 15px;
-  background: url('../images/external_link_icon_blk.webp') no-repeat right center;
-  background-size: 12px 12px;
+body.light-mode a[target="_blank"]:not(.github-content-corner-logo):not(.social-icons-wrapper a) {
+  padding-right: 15px;
+  background: url('../images/external_link_icon_blk.webp') no-repeat right center;
+  background-size: 12px 12px;
 }
-
 
 body.light-mode #lightbox-content {
   background-color: #fafafa; /* Or white, or a very light grey */
@@ -798,6 +797,26 @@ body.light-mode #lightbox-description {
 
 body.light-mode #scroll-progress-bar {
   background-color: #4a90e2; /* A different color for light mode */
+}
+
+/* Light Mode overrides for social icons */
+body.light-mode .social-icons-wrapper a, body.light-mode .social-icons-wrapper button {
+  color: #4a90e2; /* New default color to match the copy button */
+  transition: color 0.3s ease-in-out;
+}
+
+/* Hover effects for individual social icons in light mode */
+body.light-mode .social-icons-wrapper .fa-twitter:hover { color: #1da1f2; }
+body.light-mode .social-icons-wrapper .fa-linkedin-in:hover { color: #0077b5; }
+body.light-mode .social-icons-wrapper .fa-facebook-f:hover { color: #1877f2; }
+body.light-mode .social-icons-wrapper .fa-clipboard:hover { color: #4a90e2; }
+
+body.light-mode .social-icons-wrapper a:hover .fa-reddit-alien {
+  color: #ff4500;
+}
+
+body.light-mode .social-icons-wrapper a:hover .fa-whatsapp {
+  color: #25d366;
 }
 
 /* --- Lightbox Styles --- */
