@@ -7,7 +7,8 @@ function initAutoLinker(){
     Frigate:"https://frigate.video/",
     Powershell:"https://learn.microsoft.com/en-us/powershell/",
     Docker:"https://www.docker.com/",
-    Proxmox:"https://www.proxmox.com/"
+    Proxmox:"https://www.proxmox.com/",
+    ESPHome:"https://esphome.io/"
   };
   let t = document.getElementById("content-area");
 
