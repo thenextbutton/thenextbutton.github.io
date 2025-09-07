@@ -711,6 +711,19 @@ body.light-mode .share-btn:hover {
 .social-icons-wrapper .fa-linkedin-in:hover { color: #0077b5; }
 .social-icons-wrapper .fa-facebook-f:hover { color: #1877f2; }
 .social-icons-wrapper .fa-clipboard:hover { color: #7dbeff; }
+.social-icons-wrapper a .fa-reddit-alien,
+.social-icons-wrapper a .fa-whatsapp {
+  color: var(--secondary-text-color); 
+  transition: color 0.3s ease-in-out;
+}
+
+.social-icons-wrapper a:hover .fa-reddit-alien {
+  color: #ff4500; 
+}
+
+.social-icons-wrapper a:hover .fa-whatsapp {
+  color: #25d366; 
+}
 
 /* Light Mode Overrides for Icons */
 body.light-mode .social-icons-wrapper a, body.light-mode .social-icons-wrapper button {

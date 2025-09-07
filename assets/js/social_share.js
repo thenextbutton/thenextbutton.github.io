@@ -1,46 +1,51 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // This function will be called by spa_loader.js when content is ready
     window.initSocialShare = () => {
-        const shareButtons = document.querySelectorAll('.share-btn');
-        shareButtons.forEach(button => {
-            // Remove any old listeners before adding new ones
-            const oldButton = button;
-            const newButton = oldButton.cloneNode(true);
-            oldButton.parentNode.replaceChild(newButton, oldButton);
+        const shareContainers = document.querySelectorAll('.share-container');
+
+        shareContainers.forEach(container => {
+            const shareButton = container.querySelector('.share-btn');
+            const socialWrapper = container.querySelector('.social-icons-wrapper');
+            const copyButton = container.querySelector('.copy-link-btn');
+            const socialLinks = container.querySelectorAll('.social-icons-wrapper a');
             
             let timer;
 
-            newButton.addEventListener('click', () => {
-                const wrapper = newButton.nextElementSibling;
-                const isActive = wrapper.classList.toggle('active');
+            const handleClose = () => {
+                socialWrapper.classList.remove('active');
+                clearTimeout(timer);
+            };
 
+            // Event listener for the "Share Project" button
+            shareButton.addEventListener('click', () => {
+                const isActive = socialWrapper.classList.toggle('active');
                 clearTimeout(timer);
 
                 if (isActive) {
-                    timer = setTimeout(() => {
-                        wrapper.classList.remove('active');
-                    }, 5000);
+                    timer = setTimeout(handleClose, 5000); // 5-second timer
                 }
             });
-        });
 
-        const copyButtons = document.querySelectorAll('.copy-link-btn');
-        const originalIconClass = 'fas fa-clipboard';
-        const copiedIconClass = 'fas fa-check';
+            // Event listener for the social links (Facebook, Twitter, etc.)
+            socialLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    handleClose(); // Close the wrapper immediately
+                });
+            });
 
-        copyButtons.forEach(button => {
-            const oldButton = button;
-            const newButton = oldButton.cloneNode(true);
-            oldButton.parentNode.replaceChild(newButton, oldButton);
-
-            newButton.addEventListener('click', () => {
-                const linkToCopy = newButton.dataset.link;
+            // Event listener for the "Copy Link" button
+            copyButton.addEventListener('click', () => {
+                const linkToCopy = copyButton.dataset.link;
                 if (linkToCopy) {
                     navigator.clipboard.writeText(linkToCopy).then(() => {
-                        const icon = newButton.querySelector('i');
+                        const icon = copyButton.querySelector('i');
+                        const originalIconClass = 'fas fa-clipboard';
+                        const copiedIconClass = 'fas fa-check';
                         icon.className = copiedIconClass;
+                        
+                        // Close the wrapper after a 2-second visual feedback
                         setTimeout(() => {
                             icon.className = originalIconClass;
+                            handleClose();
                         }, 2000);
                     }).catch(err => {
                         console.error('Failed to copy text: ', err);
@@ -49,6 +54,4 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     };
-
-    // No longer need to call initSocialShare here because spa_loader.js will handle it
 });
