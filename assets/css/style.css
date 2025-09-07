@@ -403,110 +403,119 @@ body.dark-mode .github-content-corner-logo .light-mode-img {
 }
 
 
-/* --- Controls Wrapper (Bottom Right) --- */
+/* --- MODERN CONTROL PANEL STYLES --- */
+
+/* Unified Wrapper */
 .bottom-right-controls-wrapper {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1000;
-  display: flex;
+  display: flex; /* Use flexbox to stack controls */
   flex-direction: column;
-  gap: 10px;
-  background-color: rgba(34, 34, 34, 0.8);
-  padding: 10px 8px;
-  border-radius: 12px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  transition: background-color 1.5s ease-in-out, border-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out, opacity 0.75s ease-out;
-  width: 160px;
-  align-items: center;
-}
-.bottom-right-controls-wrapper:hover {
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
-}
-.bottom-right-controls-wrapper.fade-out-controls {
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* MODERN CONTROL PANEL STYLES */
-
-.bottom-right-controls-wrapper {
-  display: flex; /* Use flexbox for alignment */
-  flex-direction: column; /* Stack the groups vertically */
-  gap: 15px; /* Add space between the theme toggle and font controls */
+  gap: 15px; /* Spacing between the toggle and font controls */
   position: fixed;
   bottom: 25px;
   right: 25px;
   z-index: 1000;
 }
 
-.theme-toggle-container,
-.font-controls {
-  display: flex; /* Use flexbox for internal alignment */
-  background: rgba(0, 0, 0, 0.4); /* Semi-transparent background */
-  backdrop-filter: blur(10px); /* Frosted glass effect */
-  border-radius: 50px; /* Fully rounded capsule shape */
-  border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle white border */
+/* Theme Toggle Button */
+.theme-toggle-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 5px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2); /* Soft shadow */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease-in-out;
 }
-
-/* Theme Toggle Label */
+.theme-switch-checkbox {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+}
 .theme-switch-label {
-  width: 45px; /* Wider switch for better thumb area */
+  cursor: pointer;
+  width: 45px;
   height: 25px;
   background-color: #212121;
   border-radius: 50px;
-  cursor: pointer;
   position: relative;
   transition: background-color 0.4s;
+  flex-shrink: 0; /* Prevents shrinking */
+}
+.theme-switch-label::after {
+  content: '';
+  position: absolute;
+  top: 1.5px;
+  left: 1.5px;
+  width: 22px; /* Adjusted to be slightly larger */
+  height: 22px; /* Adjusted to be slightly larger */
+  background: #fafafa;
+  border-radius: 50%;
+  transition: left 0.4s ease-in-out;
+}
+.theme-switch-checkbox:checked + .theme-switch-label::after {
+  left: calc(100% - 23.5px); /* Position for checked state */
 }
 
-/* Sun and Moon Icons */
+/* Icons (Font Size Responsive) */
 .theme-icon {
+  font-size: 1em; /* This makes the icon size relative to the root font-size */
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 1.2rem;
-  transition: opacity 0.4s ease-in-out;
+  transition: opacity 0.4s ease-in-out, color 0.4s ease-in-out;
 }
-
 #moon-icon {
-  left: 8px; /* Position the moon icon */
-  color: #c0c0c0; /* A soft grey color */
+  left: 15px; /* Position relative to the container */
+  color: #c0c0c0;
+}
+#sun-icon {
+  right: 15px; /* Position relative to the container */
+  color: #ffd700;
+}
+.theme-switch-checkbox:not(:checked) ~ #moon-icon {
+  opacity: 0;
+}
+.theme-switch-checkbox:checked ~ #sun-icon {
+  opacity: 0;
 }
 
-#sun-icon {
-  right: 8px; /* Position the sun icon */
-  color: #ffd700; /* A warm yellow color */
-}
 
 /* Font Controls */
+.font-controls {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+  gap: 10px; /* Space between buttons */
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 5px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
 .font-controls span {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem;
-  font-weight: bold;
   cursor: pointer;
   color: #fff;
   background: transparent;
-  border-radius: 50%; /* Make them perfectly round */
-  transition: background-color 0.2s, transform 0.1s;
+  border-radius: 50%;
+  transition: background-color 0.2s, transform 0.1s, font-size 0.2s; /* Add font-size transition */
+  font-size: 1.1em; /* This makes the button font size relative */
 }
-
 .font-controls span:hover {
   background: rgba(255, 255, 255, 0.1);
-  transform: scale(1.1); /* Slightly increase size on hover */
+  transform: scale(1.1);
 }
-
 .font-controls span:active {
   background: rgba(255, 255, 255, 0.2);
-  transform: scale(0.9); /* Shrink slightly on click */
+  transform: scale(0.9);
 }
 
 /* Light Mode Overrides */
@@ -515,18 +524,28 @@ body.light-mode .font-controls {
   background: rgba(255, 255, 255, 0.5);
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
-
-body.light-mode .font-controls span {
-  color: #333; /* Dark text for light mode */
+body.light-mode .theme-switch-label {
+  background-color: #ccc;
 }
-
+body.light-mode .theme-switch-label::after {
+  background: #333333;
+}
+body.light-mode #moon-icon {
+  color: #888;
+}
+body.light-mode #sun-icon {
+  color: #ffcc00;
+}
+body.light-mode .font-controls span {
+  color: #333;
+}
 body.light-mode .font-controls span:hover {
   background: rgba(0, 0, 0, 0.05);
 }
-
 body.light-mode .font-controls span:active {
   background: rgba(0, 0, 0, 0.1);
 }
+
 
 /* --- Custom List Styling (Image-based bullets) --- */
 /* Consolidated base styles for all lists using image icons */
