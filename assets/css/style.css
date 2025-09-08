@@ -559,9 +559,7 @@ body.dark-mode .github-content-corner-logo .light-mode-img {
 .podcast-item::before { background-image: url('../images/ipod.webp'); }
 .music-item::before { background-image: url('../images/loud-speaker.webp'); }
 
-/* * This CSS file handles the styling and animation for the scroll-to-bottom button.
- */
-
+/* --- Scroll Button --- */
 /* Scroll Button Container */
 .scroll-to-bottom-container {
   position: fixed;
@@ -698,7 +696,7 @@ body.light-mode .share-btn:hover {
   background-color: transparent;
   color: #a0a0a0;
   border: none;
-  font-size: 24px;
+  font-size: 1.714rem; /* Changed to rem for font resizing */
   cursor: pointer;
   transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
   display: inline-block;
@@ -726,8 +724,22 @@ body.light-mode .share-btn:hover {
 
 /* Light Mode Overrides for Icons */
 body.light-mode .social-icons-wrapper a, body.light-mode .social-icons-wrapper button {
-  color: #333333; /* New default color to match the copy button */
+  color: #4a90e2; /* New default color to match the copy button */
   transition: color 0.3s ease-in-out;
+}
+
+/* Hover effects for individual social icons in light mode */
+body.light-mode .social-icons-wrapper .fa-twitter:hover { color: #1da1f2; }
+body.light-mode .social-icons-wrapper .fa-linkedin-in:hover { color: #0077b5; }
+body.light-mode .social-icons-wrapper .fa-facebook-f:hover { color: #1877f2; }
+body.light-mode .social-icons-wrapper .fa-clipboard:hover { color: #4a90e2; }
+
+body.light-mode .social-icons-wrapper a:hover .fa-reddit-alien {
+  color: #ff4500;
+}
+
+body.light-mode .social-icons-wrapper a:hover .fa-whatsapp {
+  color: #25d366;
 }
 
 /* Corrected rule to exclude social icons from the external link icon */
@@ -797,26 +809,6 @@ body.light-mode #lightbox-description {
 
 body.light-mode #scroll-progress-bar {
   background-color: #4a90e2; /* A different color for light mode */
-}
-
-/* Light Mode overrides for social icons */
-body.light-mode .social-icons-wrapper a, body.light-mode .social-icons-wrapper button {
-  color: #333333; /* New default color to match the copy button */
-  transition: color 0.3s ease-in-out;
-}
-
-/* Hover effects for individual social icons in light mode */
-body.light-mode .social-icons-wrapper .fa-twitter:hover { color: #1da1f2; }
-body.light-mode .social-icons-wrapper .fa-linkedin-in:hover { color: #0077b5; }
-body.light-mode .social-icons-wrapper .fa-facebook-f:hover { color: #1877f2; }
-body.light-mode .social-icons-wrapper .fa-clipboard:hover { color: #4a90e2; }
-
-body.light-mode .social-icons-wrapper a:hover .fa-reddit-alien {
-  color: #ff4500;
-}
-
-body.light-mode .social-icons-wrapper a:hover .fa-whatsapp {
-  color: #25d366;
 }
 
 /* --- Lightbox Styles --- */
