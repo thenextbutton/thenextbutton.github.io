@@ -1,24 +1,21 @@
+(() => {
+    // Check if the URL has an anchor tag
+    if (window.location.hash.split('#')[2]) {
+        // Scroll to the top of the page immediately
+        window.scrollTo(0, 0);
+    }
+})();
+
 window.triggerHeaderScrollCheck = function() {
-  const header = document.querySelector('.main-header-fixed');
-  if (window.scrollY > 0) {
-    header.classList.add('scrolled');
-  } else {
-    header.classList.remove('scrolled');
-  }
+    const header = document.querySelector('.main-header-fixed');
+    if (window.scrollY > 0) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
 };
 
 window.addEventListener('scroll', window.triggerHeaderScrollCheck);
-
-// NEW: This listener will execute before the browser's default anchor jump
-window.addEventListener('hashchange', () => {
-  const { pageName, anchor } = getCurrentPageFromHash();
-  const url = `/content/${pageName}_content.html`;
-  // Reset scroll to top immediately to prevent the browser's default jump
-  if (anchor) {
-    window.scrollTo(0, 0);
-  }
-  loadContent(url, pageName, anchor, true);
-});
 
 document.addEventListener('DOMContentLoaded', () => {
     const contentArea = document.getElementById('content-area');
@@ -228,4 +225,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     setActiveNavLink(initialPage);
-});s
+});
