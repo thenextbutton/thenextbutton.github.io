@@ -2,20 +2,20 @@
 html {
   font-size: 14px;
   transition: font-size 0.3s ease-in-out;
-  scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+  scroll-behavior: smooth;
 }
 
 body {
-  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; /* New font for readability */
-  line-height: 1.6; /* Improved line height for readability */
-  background-color: #171c26; /* New, richer dark background color */
-  color: #fafafa; /* Softer white for main text */
-  margin: 0 auto; /* Centered body */
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  line-height: 1.6;
+  background-color: #171c26;
+  color: #fafafa;
+  margin: 0 auto;
   padding: 0;
-  padding-top: 120px; /* Space for fixed header */
-  max-width: 1200px; /* Max width for the entire body */
+  padding-top: 120px;
+  max-width: 1200px;
   transition: background-color 1.5s ease-in-out, color 1.5s ease-in-out;
-  overflow-y: scroll; /* Ensures scrollbar space is always reserved to prevent content jumping */
+  overflow-y: scroll;
 }
 
 /* --- Scrollbar Styling for Webkit browsers --- */
@@ -24,25 +24,23 @@ body::-webkit-scrollbar {
 }
 
 body::-webkit-scrollbar-track {
-  background: transparent; /* Make track transparent in dark mode */
+  background: transparent;
   border-radius: 5px;
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: transparent; /* Transparent by default */
-  border-radius: 5px; /* Rounded corners for the thumb */
-  border: 2px solid transparent; /* Transparent border by default */
+  background-color: transparent;
+  border-radius: 5px;
+  border: 2px solid transparent;
 }
 
-/* Make thumb visible on hover over the body */
 body:hover::-webkit-scrollbar-thumb {
-  background-color: #555; /* Color of the scrollbar thumb on hover */
-  border-color: #282a36; /* Border to match track on hover */
+  background-color: #555;
+  border-color: #282a36;
 }
 
-/* Preserve hover effect for the thumb itself */
 body::-webkit-scrollbar-thumb:hover {
-  background-color: #777; /* Color of the scrollbar thumb on direct hover */
+  background-color: #777;
 }
 
 /* Scroll Progress Bar */
@@ -50,14 +48,13 @@ body::-webkit-scrollbar-thumb:hover {
   position: fixed;
   top: 0;
   left: 0;
-  height: 2.5px; /* Adjust thickness as needed */
-  background-color: #7dbeff; /* New accent color */
-  z-index: 1000; /* Ensure it's on top of other elements */
-  width: 0%; /* Start with a width of 0 */
-  transition: width 0.2s ease-out; /* Smooth animation for width changes */
+  height: 2.5px;
+  background-color: #7dbeff;
+  z-index: 1000;
+  width: 0%;
+  transition: width 0.2s ease-out;
 }
 
-/* Hide scrollbar visually class */
 .hide-scrollbar-visually::-webkit-scrollbar-thumb,
 .hide-scrollbar-visually::-webkit-scrollbar-track {
   background-color: transparent !important;
@@ -83,7 +80,7 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 h1 {
-  font-family: "Consolas", monospace; /* Kept Consolas for headings */
+  font-family: "Consolas", monospace;
   text-align: center;
   color: #a0a0a0;
   margin: 0;
@@ -97,7 +94,7 @@ h1 {
 }
 
 h2, h3, h4, h5, h6 {
-  font-family: "Consolas", monospace; /* Kept Consolas for headings */
+  font-family: "Consolas", monospace;
 }
 
 h4 {
@@ -105,7 +102,6 @@ h4 {
   margin-bottom: 10px;
 }
 
-/* Base UL/LI styles (for standard lists, not custom icon lists) */
 ul {
   margin-top: 0px;
   margin-bottom: 10px;
@@ -192,31 +188,27 @@ ul li {
 }
 
 .main-nav li a.active {
-  color: #7dbeff; /* New accent color */
+  color: #7dbeff;
   font-weight: bolder;
   background-color: #333;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* Selects all anchor tags that have the target="_blank" attribute */
 a[target="_blank"]:not(.github-content-corner-logo):not(.powered-by-github) {
   padding-right: 15px;
   background: url('../images/external_link_icon_wht.webp') no-repeat right center;
   background-size: 12px 12px;
 }
 
-/* Dark mode icon color override on hover */
 .main-nav li a[href*="github.com"]:hover::after {
   content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="%23c0c0c0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>');
 }
 
-/* Light mode icon color override */
 body.light-mode .main-nav li a[href*="github.com"]::after {
   content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="%23333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>');
 }
 
-/* Light mode icon hover color override */
 body.light-mode .main-nav li a[href*="github.com"]:hover::after {
   content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="%23000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>');
 }
@@ -230,20 +222,19 @@ body.light-mode .main-nav li a[href*="github.com"]:hover::after {
   box-sizing: border-box;
   margin-top: 0;
   font-size: 1rem;
-  color: #fafafa; /* Softer white for content text */
+  color: #fafafa;
   transition: opacity 0.7s ease-out, transform 0.7s ease-out, color 1.5s ease-in-out;
 }
 
-/* Default link styling within content-column paragraphs */
 .content-column p a {
-  color: #7dbeff; /* New accent color */
-  text-decoration: none; /* Removed underline */
+  color: #7dbeff;
+  text-decoration: none;
   font-weight: bold;
   transition: color 1.5s ease-in-out, text-decoration 0.3s ease-in-out;
 }
 
 .content-column p a:hover {
-  text-decoration: none; /* Ensure no underline on hover */
+  text-decoration: none;
 }
 
 
@@ -255,12 +246,12 @@ body.light-mode .main-nav li a[href*="github.com"]:hover::after {
 #content-area.fade-in { opacity: 1; }
 
 .content-column a {
-  color: #7dbeff; /* New accent color */
-  text-decoration: none; /* Removed underline */
+  color: #7dbeff;
+  text-decoration: none;
   font-weight: bold;
   transition: color 1.5s ease-in-out;
 }
-.content-column a:hover { text-decoration: none; } /* Ensure no underline on hover */
+.content-column a:hover { text-decoration: none; }
 .content-column h2 { margin-bottom: 5px; }
 
 #last-updated-text {
@@ -282,13 +273,12 @@ body.light-mode .main-nav li a[href*="github.com"]:hover::after {
   margin-bottom: 30px;
   border-radius: 8px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-  display: flex; /* Flex container for image and details */
-  align-items: flex-start; /* Align items to the top */
-  gap: 20px; /* Space between image and details */
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
   text-align: left;
   transition: background-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out, opacity 2s ease-out, transform 2s ease-out;
-  position: relative; /* Crucial for absolute positioning of corner logo */
-  /* overflow: hidden; (Removed in previous step to fix sticky) */
+  position: relative;
 }
 
 .github-project-item:hover {
@@ -301,51 +291,49 @@ body.light-mode .main-nav li a[href*="github.com"]:hover::after {
   transform: scale(0.5);
 }
 
-/* Main Project Image (Sticky) */
 .project-image {
-  flex-shrink: 0; /* Prevent the image from shrinking */
-  width: 200px; /* Fixed width for the image on desktop */
-  height: auto; /* Maintain aspect ratio */
+  flex-shrink: 0;
+  width: 200px;
+  height: auto;
   border-radius: 8px;
   display: block;
-  max-width: 100%; /* Ensure it doesn't exceed its container */
+  max-width: 100%;
   object-fit: contain;
-  align-self: flex-start; /* Ensure it aligns to the top within the flex container */
+  align-self: flex-start;
 
-  position: sticky; /* Make it sticky for desktop */
-  top: 130px; /* Stick below the fixed header (120px header + 10px buffer) */
-  z-index: 1; /* Ensure it stays above scrolling text content */
-  margin-bottom: 15px; /* Space below the image when it's part of the flow */
+  position: sticky;
+  top: 130px;
+  z-index: 1;
+  margin-bottom: 15px;
 }
 
 .project-details {
-  flex-grow: 1; /* Allow details to take remaining space */
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   text-align: left;
 }
 
-/* Styling for images directly inside project-details */
 .project-details img {
-  max-width: 100%; /* Ensure image is responsive and doesn't overflow */
-  height: auto; /* Maintain aspect ratio */
-  border-radius: 8px; /* Consistent rounded corners */
-  margin-top: 15px; /* Space above the image */
-  margin-bottom: 15px; /* Space below the image */
-  display: block; /* Ensures margin works correctly */
-  cursor: pointer; /* Indicate that the image is clickable */
-  transition: transform 0.2s ease-in-out; /* Smooth transition for hover */
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  display: block;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
 }
 
 .project-details img:hover {
-    transform: scale(1.02); /* Slightly enlarge on hover */
+    transform: scale(1.02);
 }
 
 
 .github-project-item h3 {
   font-size: 1.5rem;
-  color: #7dbeff; /* New accent color */
+  color: #7dbeff;
   margin-top: 0;
   margin-bottom: 10px;
 }
@@ -357,7 +345,6 @@ body.light-mode .main-nav li a[href*="github.com"]:hover::after {
   overflow-wrap: break-word;
 }
 
-/* Corner Logo (Non-Sticky, Absolute Positioned within .github-project-item) */
 .github-content-corner-logo {
   position: absolute;
   top: 10px;
@@ -376,7 +363,6 @@ body.light-mode .main-nav li a[href*="github.com"]:hover::after {
   transform: scale(1.1);
 }
 
-/* Theme-Specific Image Handling (for project images and corner logos) */
 .project-image.dark-mode-img,
 .github-content-corner-logo .dark-mode-img {
   display: none;
@@ -426,7 +412,6 @@ body.dark-mode .github-content-corner-logo .light-mode-img {
   pointer-events: none;
 }
 
-/* Theme Toggle */
 .theme-toggle-container {
   display: flex;
   flex-direction: row;
@@ -457,15 +442,14 @@ body.dark-mode .github-content-corner-logo .light-mode-img {
   left: 1.5px;
   width: 17px;
   height: 17px;
-  background: #fafafa; /* Softer white */
+  background: #fafafa;
   border-radius: 50%;
   transition: 1s;
   z-index: 1;
 }
-.theme-switch-checkbox:checked + .theme-switch-label { background: linear-gradient(to right, #4a90e2, #2e60a3); border-color: #4a90e2; } /* New accent color for light mode */
-.theme-switch-checkbox:checked + .theme-switch-label:after { left: calc(100% - 1.5px); transform: translateX(-100%); background: #333333; } /* Softer black */
+.theme-switch-checkbox:checked + .theme-switch-label { background: linear-gradient(to right, #4a90e2, #2e60a3); border-color: #4a90e2; }
+.theme-switch-checkbox:checked + .theme-switch-label:after { left: calc(100% - 1.5px); transform: translateX(-100%); background: #333333; }
 
-/* Theme Icons */
 .theme-icon {
   font-size: 20px;
   transition: opacity 1s ease-in-out, transform 1s ease-in-out, color 1s ease-in-out;
@@ -480,7 +464,6 @@ body.dark-mode .github-content-corner-logo .light-mode-img {
 .theme-switch-checkbox:not(:checked) ~ #moon-icon { opacity: 0; }
 .theme-switch-checkbox:checked ~ #sun-icon { opacity: 0; }
 
-/* Font Controls */
 .font-controls {
   display: flex;
   justify-content: space-between;
@@ -491,7 +474,7 @@ body.dark-mode .github-content-corner-logo .light-mode-img {
   width: 30px;
   height: 30px;
   background-color: #333;
-  color: #fafafa; /* Softer white */
+  color: #fafafa;
   border: 1px solid #555;
   border-radius: 5px;
   display: flex;
@@ -508,14 +491,13 @@ body.dark-mode .github-content-corner-logo .light-mode-img {
 .font-controls span:hover { background-color: #555; }
 
 /* --- Custom List Styling (Image-based bullets) --- */
-/* Consolidated base styles for all lists using image icons */
 .console-list, .content-list {
   list-style-type: none;
   padding-left: 0;
 }
 .console-list li, .content-list li {
   position: relative;
-  padding-left: 30px; /* Space for the icon/image (18px icon + 12px margin-right) */
+  padding-left: 30px;
   margin-bottom: 2px;
   display: flex;
   align-items: center;
@@ -532,7 +514,6 @@ body.dark-mode .github-content-corner-logo .light-mode-img {
   flex-shrink: 0;
 }
 
-/* Specific image for each console/content type */
 .switch-list li::before { background-image: url('../images/switch.webp'); }
 .xbox-list li::before { background-image: url('../images/xbox.webp'); }
 .playstation-list li::before { background-image: url('../images/playstation.webp'); }
@@ -550,18 +531,18 @@ body.dark-mode .github-content-corner-logo .light-mode-img {
 /* Scroll Button Container */
 .scroll-to-bottom-container {
   position: fixed;
-  bottom: 20px; /* Distance from the bottom of the viewport */
-  right: 20px; /* Distance from the right of the viewport */
-  z-index: 1000; /* Ensures the button is on top of other content */
-  opacity: 0; /* Initially hidden */
-  pointer-events: none; /* Prevents interaction when hidden */
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
   transition: opacity 0.3s ease-in-out;
 }
 
 /* Scroll Button Styling */
 #scroll-to-bottom-btn {
-  background-color: #282a36; /* Dark mode background */
-  color: #fafafa; /* Dark mode text color */
+  background-color: #282a36;
+  color: #fafafa;
   border: 1px solid #555;
   border-radius: 50%;
   width: 45px;
@@ -572,9 +553,9 @@ body.dark-mode .github-content-corner-logo .light-mode-img {
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
   transition: transform 0.2s ease-in-out, background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  user-select: none; /* Prevent text selection */
+  user-select: none;
   -webkit-user-select: none;
-  font-size: 1.5rem; /* Larger font size for the emoji */
+  font-size: 1.5rem;
 }
 
 #scroll-to-bottom-btn:hover {
@@ -583,13 +564,11 @@ body.dark-mode .github-content-corner-logo .light-mode-img {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
 }
 
-/* Visibility Class (added by JavaScript) */
 .scroll-to-bottom-container.active {
   opacity: 1;
-  pointer-events: auto; /* Allows interaction when active */
+  pointer-events: auto;
 }
 
-/* Light Mode Overrides */
 body.light-mode .scroll-to-bottom-container {
   opacity: 0;
 }
@@ -621,13 +600,13 @@ body.light-mode #scroll-to-bottom-btn:hover {
   transition: color 1.5s ease-in-out;
 }
 .powered-by-github a { color: #888; text-decoration: none; transition: color 1.5s ease-in-out; }
-.powered-by-github a:hover { text-decoration: none; } /* Removed underline on hover */
+.powered-by-github a:hover { text-decoration: none; }
 
 /* --- General Focus States --- */
 a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible,
 .theme-switch-label:focus-visible, .font-controls span:focus-visible, .bottom-right-controls-wrapper:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px #7dbeff; /* New accent color */
+  box-shadow: 0 0 0 2px #7dbeff;
   border-color: #7dbeff;
   transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
   border-radius: 4px;
@@ -642,11 +621,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 }
 
 .share-btn {
-  background-color: #282a36; /* Your project item color */
+  background-color: #282a36;
   color: #a0a0a0;
   border: 1px solid #444;
   padding: 8px 15px;
-  border-radius: 50px; /* Pill shape for button */
+  border-radius: 50px;
   cursor: pointer;
   font-size: 1rem;
   transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
@@ -670,27 +649,25 @@ body.light-mode .share-btn:hover {
 .social-icons-wrapper {
   display: flex;
   gap: 15px;
-  max-height: 0; /* Hides the wrapper */
-  overflow: hidden; /* Hides the contents */
+  max-height: 0;
+  overflow: hidden;
   transition: max-height 0.5s ease-in-out;
 }
 .social-icons-wrapper.active {
-  max-height: 50px; /* Adjust to be slightly larger than the content height */
+  max-height: 50px;
 }
 
-/* Base styles for all icons/buttons inside the wrapper */
 .social-icons-wrapper a, .social-icons-wrapper button {
   background-color: transparent;
   color: #a0a0a0;
   border: none;
-  font-size: 1.714rem; /* Changed to rem for font resizing */
+  font-size: 1.714rem;
   cursor: pointer;
   transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
   display: inline-block;
   padding: 0;
 }
 
-/* Individual icon colors on hover */
 .social-icons-wrapper .fa-twitter:hover { color: #1da1f2; }
 .social-icons-wrapper .fa-linkedin-in:hover { color: #0077b5; }
 .social-icons-wrapper .fa-facebook-f:hover { color: #1877f2; }
@@ -709,15 +686,13 @@ body.light-mode .share-btn:hover {
   color: #25d366;
 }
 
-/* Light Mode Overrides for Icons */
 body.light-mode .content-column .social-icons-wrapper a, body.light-mode .content-column .social-icons-wrapper button {
-  color: #333333; /* New default color to match the copy button */
+  color: #333333;
   transition: color 0.3s ease-in-out;
 }
 
-/* Hover effects for individual social icons in light mode */
 body.light-mode .content-column .social-icons-wrapper a:hover {
-  color: #666666; /* Lighter grey hover color for social icons */
+  color: #666666;
 }
 
 body.light-mode .content-column .social-icons-wrapper .fa-twitter:hover { color: #1da1f2; }
@@ -733,7 +708,6 @@ body.light-mode .content-column .social-icons-wrapper a:hover .fa-whatsapp {
   color: #25d366;
 }
 
-/* Corrected rule to exclude external link icon from social media links */
 a[target="_blank"]:not(.github-content-corner-logo):not(.powered-by-github) {
   padding-right: 15px;
   background: url('../images/external_link_icon_wht.webp') no-repeat right center;
@@ -745,17 +719,15 @@ body.light-mode a[target="_blank"]:not(.github-content-corner-logo):not(.powered
   background-size: 12px 12px;
 }
 
-/* --- Explicit override for social icons to fix external link image issue */
 .social-icons-wrapper a, .social-icons-wrapper a:hover {
     background: none !important;
     padding-right: 0 !important;
 }
 
-
 /* --- Light Mode Overrides --- */
 body.light-mode {
-  background-color: #fafafa; /* New, softer white */
-  color: #333333; /* New, softer dark gray */
+  background-color: #fafafa;
+  color: #333333;
 }
 body.light-mode::-webkit-scrollbar-track { background: #e0e0e0; }
 body.light-mode::-webkit-scrollbar-thumb { background-color: transparent; border: 2px solid transparent; }
@@ -766,8 +738,8 @@ body.light-mode .main-header-fixed { background-color: #fafafa; }
 body.light-mode h1 { color: #333333; }
 body.light-mode .main-nav li a { color: #333333; }
 body.light-mode .main-nav li a:hover { color: #000; background-color: #e0e0e0; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); transform: translateY(-2px); }
-body.light-mode .main-nav li a.active { color: #4a90e2; background-color: #e0e0e0; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); } /* New accent color for light mode */
-body.light-mode .content-column a { color: #4a90e2; } /* New accent color for light mode */
+body.light-mode .main-nav li a.active { color: #4a90e2; background-color: #e0e0e0; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); }
+body.light-mode .content-column a { color: #4a90e2; }
 body.light-mode .content-column p, body.light-mode .content-column h4, body.light-mode .content-column ul, body.light-mode .content-column ul li { color: #333333; }
 body.light-mode .content-column h2 { color: #333333; }
 body.light-mode .github-project-item { background-color: #d0d0d0; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); }
@@ -783,7 +755,6 @@ body.light-mode a:focus-visible, body.light-mode button:focus-visible, body.ligh
   border-color: #4a90e2;
 }
 
-/* Selects all anchor tags that have the target="_blank" attribute */
 body.light-mode a[target="_blank"]:not(.github-content-corner-logo):not(.powered-by-github) {
   padding-right: 15px;
   background: url('../images/external_link_icon_blk.webp') no-repeat right center;
@@ -792,16 +763,16 @@ body.light-mode a[target="_blank"]:not(.github-content-corner-logo):not(.powered
 
 
 body.light-mode #lightbox-content {
-  background-color: #fafafa; /* Or white, or a very light grey */
-  border-color: #4a90e2; /* Or another accent color for light mode */
+  background-color: #fafafa;
+  border-color: #4a90e2;
 }
 
 body.light-mode #lightbox-description {
-  color: #333333; /* main dark text color for light mode */
+  color: #333333;
 }
 
 body.light-mode #scroll-progress-bar {
-  background-color: #4a90e2; /* A different color for light mode */
+  background-color: #4a90e2;
 }
 
 /* --- Lightbox Styles --- */
@@ -811,16 +782,16 @@ body.light-mode #scroll-progress-bar {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+  background-color: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2000; /* Ensure it's on top of everything */
-  opacity: 0; /* Start hidden */
-  visibility: hidden; /* Start hidden */
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
   transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-  backdrop-filter: blur(5px); /* Blur effect for the background */
-  -webkit-backdrop-filter: blur(5px); /* Safari support */
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 }
 
 #lightbox-overlay.active {
@@ -829,28 +800,28 @@ body.light-mode #scroll-progress-bar {
 }
 
 #lightbox-content {
-  position: relative; /* For positioning the close button */
-  background-color: #282a36; /* Background for the lightbox content area */
+  position: relative;
+  background-color: #282a36;
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-  max-width: 90%; /* Max width of the lightbox content */
-  max-height: 90%; /* Max height of the lightbox content */
+  max-width: 90%;
+  max-height: 90%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  overflow: hidden; /* Hide anything that overflows the rounded corners */
-  border: 2px solid #7dbeff; /* Border around the lightbox content */
+  overflow: hidden;
+  border: 2px solid #7dbeff;
 }
 
 #lightbox-image {
-  max-width: 100%; /* Image fills its container up to its natural size */
-  max-height: 75vh; /* Limit image height to viewport height */
-  height: auto; /* Maintain aspect ratio */
+  max-width: 100%;
+  max-height: 75vh;
+  height: auto;
   display: block;
-  border-radius: 8px; /* Rounded corners for the image itself */
-  object-fit: contain; /* Ensure the entire image is visible */
+  border-radius: 8px;
+  object-fit: contain;
 }
 
 #lightbox-description {
@@ -858,7 +829,7 @@ body.light-mode #scroll-progress-bar {
   font-size: 0.9rem;
   margin-top: 15px;
   text-align: center;
-  max-width: 80%; /* Limit width of description */
+  max-width: 80%;
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
@@ -867,14 +838,14 @@ body.light-mode #scroll-progress-bar {
   position: absolute;
   top: 10px;
   right: 10px;
-  background-color: #ff3333; /* Brighter red */
+  background-color: #ff3333;
   color: white;
-  border: 2px solid rgba(255, 255, 255, 0.7); /* Subtle white border */
+  border: 2px solid rgba(255, 255, 255, 0.7);
   border-radius: 50%;
-  width: 35px; /* Slightly larger */
-  height: 35px; /* Slightly larger */
-  font-size: 1.3rem; /* Slightly larger font */
-  font-weight: bold; /* Make the X bolder */
+  width: 35px;
+  height: 35px;
+  font-size: 1.3rem;
+  font-weight: bold;
   cursor: pointer;
   display: flex;
   -webkit-box-pack: center;
@@ -887,7 +858,7 @@ body.light-mode #scroll-progress-bar {
   transition: background-color 0.2s ease-in-out, -webkit-transform 0.2s ease-in-out, -webkit-box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
   transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
   transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out, -webkit-transform 0.2s ease-in-out, -webkit-box-shadow 0.2s ease-in-out;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Stronger shadow */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
 #lightbox-close-btn:hover {
@@ -896,23 +867,23 @@ body.light-mode #scroll-progress-bar {
   -ms-transform: scale(1.1);
   transform: scale(1.1);
   -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6); /* Even stronger shadow on hover */
-  border-color: white; /* Solid white border on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+  border-color: white;
 }
 
 /* Class to blur the body content when lightbox is active */
 body.blur-content > *:not(#lightbox-overlay) {
   -webkit-filter: blur(3px);
   filter: blur(3px);
-  pointer-events: none; /* Disable interaction with blurred content */
+  pointer-events: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  user-select: none; /* Prevent selection of blurred content */
+  user-select: none;
 }
 body.blur-content {
-    overflow: hidden; /* Prevent scrolling of main content when lightbox is open */
-    padding-right: 10px; /* Adjust this value to match your scrollbar width */
+    overflow: hidden;
+    padding-right: 10px;
 }
 
 
@@ -971,9 +942,7 @@ body.blur-content {
     -webkit-box-align: start;
     -ms-flex-align: start;
     align-items: flex-start;
-    /* Removed margin-top as sticky is now removed from .project-image */
   }
-  /* Specific text alignment rules for mobile (maintained for explicit control) */
   .github-project-item .project-details h3,
   .github-project-item .project-details p,
   .github-project-item .project-details h4,
@@ -984,14 +953,13 @@ body.blur-content {
     width: 80%;
     max-width: 200px;
     margin-bottom: 15px;
-    position: static; /* Disable sticky for mobile */
-    top: auto; /* Reset top property */
+    position: static;
+    top: auto;
   }
-  /* NEW: Ensure images within project-details are responsive on mobile */
   .project-details img {
     max-width: 100%;
     height: auto;
-    margin-top: 10px; /* Slightly less margin on mobile for tighter spacing */
+    margin-top: 10px;
     margin-bottom: 10px;
   }
   .github-project-item h3 { font-size: 1.5rem; }
