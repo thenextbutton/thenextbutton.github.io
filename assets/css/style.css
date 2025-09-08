@@ -612,6 +612,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   border-radius: 4px;
 }
 
+
 /* --- Social Share Controls --- */
 .share-container {
   display: flex;
@@ -661,11 +662,21 @@ body.light-mode .share-btn:hover {
   background-color: transparent;
   color: #a0a0a0;
   border: none;
-  font-size: 1.714rem;
   cursor: pointer;
   transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
   display: inline-block;
   padding: 0;
+}
+
+.social-icons-wrapper a i,
+.social-icons-wrapper button i {
+    font-size: 1.714rem;
+    line-height: 1;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 1.2em;
+    height: 1.2em;
 }
 
 .social-icons-wrapper .fa-twitter:hover { color: #1da1f2; }
@@ -685,6 +696,7 @@ body.light-mode .share-btn:hover {
 .social-icons-wrapper a:hover .fa-whatsapp {
   color: #25d366;
 }
+
 
 body.light-mode .content-column .social-icons-wrapper a, body.light-mode .content-column .social-icons-wrapper button {
   color: #333333;
