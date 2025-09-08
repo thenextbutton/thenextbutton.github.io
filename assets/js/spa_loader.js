@@ -1,3 +1,13 @@
+window.triggerHeaderScrollCheck = function() {
+  const header = document.querySelector('.main-header-fixed');
+  if (window.scrollY > 0) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+};
+
+
 document.addEventListener('DOMContentLoaded', () => {
     const contentArea = document.getElementById('content-area');
 
