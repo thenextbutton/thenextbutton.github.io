@@ -9,6 +9,17 @@ window.triggerHeaderScrollCheck = function() {
 
 window.addEventListener('scroll', window.triggerHeaderScrollCheck);
 
+// NEW: This listener will execute before the browser's default anchor jump
+window.addEventListener('hashchange', () => {
+  const { pageName, anchor } = getCurrentPageFromHash();
+  const url = `/content/${pageName}_content.html`;
+  // Reset scroll to top immediately to prevent the browser's default jump
+  if (anchor) {
+    window.scrollTo(0, 0);
+  }
+  loadContent(url, pageName, anchor, true);
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     const contentArea = document.getElementById('content-area');
 
@@ -65,120 +76,115 @@ document.addEventListener('DOMContentLoaded', () => {
         return { pageName: 'home', anchor: null };
     }
 
-/**
- * Loads content into the main content area with a fade effect.
- * @param {string} url - The URL of the content to load.
- * @param {string} pageName - The name of the page.
- * @param {string|null} anchor - The anchor ID to scroll to.
- * @param {boolean} isInitialLoad - True if this is the initial page load.
- */
-async function loadContent(url, pageName, anchor = null, isInitialLoad = false) {
-    try {
-        // Fix for browser's default anchor jump on initial load
-        if (isInitialLoad && anchor) {
-            window.scrollTo(0, 0);
-        }
+    /**
+     * Loads content into the main content area with a fade effect.
+     * @param {string} url - The URL of the content to load.
+     * @param {string} pageName - The name of the page.
+     * @param {string|null} anchor - The anchor ID to scroll to.
+     * @param {boolean} isInitialLoad - True if this is the initial page load.
+     */
+    async function loadContent(url, pageName, anchor = null, isInitialLoad = false) {
+        try {
+            document.body.classList.add('hide-scrollbar-visually');
+            contentArea.style.opacity = '0';
 
-        document.body.classList.add('hide-scrollbar-visually');
-        contentArea.style.opacity = '0';
-
-        await new Promise(resolve => {
-            let transitionEndTimeout;
-            const handleTransitionEnd = (event) => {
-                if (event.propertyName === 'opacity') {
+            await new Promise(resolve => {
+                let transitionEndTimeout;
+                const handleTransitionEnd = (event) => {
+                    if (event.propertyName === 'opacity') {
+                        contentArea.removeEventListener('transitionend', handleTransitionEnd);
+                        clearTimeout(transitionEndTimeout);
+                        resolve();
+                    }
+                };
+                contentArea.addEventListener('transitionend', handleTransitionEnd);
+                transitionEndTimeout = setTimeout(() => {
                     contentArea.removeEventListener('transitionend', handleTransitionEnd);
-                    clearTimeout(transitionEndTimeout);
                     resolve();
+                }, parseFloat(getComputedStyle(contentArea).transitionDuration) * 1000 + 100);
+            });
+
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.text();
+
+            let contentColumn = contentArea.querySelector('.content-column');
+            if (!contentColumn) {
+                contentColumn = document.createElement('div');
+                contentColumn.classList.add('content-column');
+                contentArea.appendChild(contentColumn);
+            }
+
+            contentColumn.innerHTML = data;
+            document.body.classList.remove('hide-scrollbar-visually');
+
+            if (typeof initScrollAnimations === 'function') {
+                // initScrollAnimations();
+            }
+            if (typeof window.initAutoLinker === 'function') {
+                window.initAutoLinker();
+            }
+            if (typeof initLightbox === 'function') {
+                initLightbox();
+            }
+
+            if (typeof window.initSocialShare === 'function') {
+                window.initSocialShare();
+            }
+
+            const filePath = `content/${pageName}_content.html`;
+            if (typeof window.updateGithubFileCommitDate === 'function') {
+                window.updateGithubFileCommitDate(filePath);
+            }
+
+            await new Promise(resolve => setTimeout(resolve, 50));
+            contentArea.style.opacity = '1';
+
+            if (!isInitialLoad) {
+                window.location.hash = `#/${pageName}.html${anchor ? '#' + anchor : ''}`;
+            }
+            setActiveNavLink(pageName);
+
+            // Dynamically get project title and description for metadata updates
+            let projectTitle = null;
+            let projectDescription = null;
+            if (anchor) {
+                const projectElement = document.getElementById(anchor);
+                if (projectElement) {
+                    projectTitle = projectElement.querySelector('h3').innerText;
+                    projectDescription = projectElement.querySelector('.project-details p').innerText;
+
+                    // Scroll to the anchor
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                    const headerHeight = document.querySelector('.main-header-fixed').offsetHeight;
+                    const offset = 15;
+                    const topPosition = projectElement.getBoundingClientRect().top + window.scrollY - headerHeight - offset;
+                    window.scrollTo({
+                        top: topPosition,
+                        behavior: 'smooth'
+                    });
+                } else {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
-            };
-            contentArea.addEventListener('transitionend', handleTransitionEnd);
-            transitionEndTimeout = setTimeout(() => {
-                contentArea.removeEventListener('transitionend', handleTransitionEnd);
-                resolve();
-            }, parseFloat(getComputedStyle(contentArea).transitionDuration) * 1000 + 100);
-        });
-
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.text();
-
-        let contentColumn = contentArea.querySelector('.content-column');
-        if (!contentColumn) {
-            contentColumn = document.createElement('div');
-            contentColumn.classList.add('content-column');
-            contentArea.appendChild(contentColumn);
-        }
-
-        contentColumn.innerHTML = data;
-        document.body.classList.remove('hide-scrollbar-visually');
-
-        if (typeof initScrollAnimations === 'function') {
-            // initScrollAnimations();
-        }
-        if (typeof window.initAutoLinker === 'function') {
-            window.initAutoLinker();
-        }
-        if (typeof initLightbox === 'function') {
-            initLightbox();
-        }
-
-        if (typeof window.initSocialShare === 'function') {
-            window.initSocialShare();
-        }
-
-        const filePath = `content/${pageName}_content.html`;
-        if (typeof window.updateGithubFileCommitDate === 'function') {
-            window.updateGithubFileCommitDate(filePath);
-        }
-
-        await new Promise(resolve => setTimeout(resolve, 50));
-        contentArea.style.opacity = '1';
-
-        if (!isInitialLoad) {
-            window.location.hash = `#/${pageName}.html${anchor ? '#' + anchor : ''}`;
-        }
-        setActiveNavLink(pageName);
-
-        // Dynamically get project title and description for metadata updates
-        let projectTitle = null;
-        let projectDescription = null;
-        if (anchor) {
-            const projectElement = document.getElementById(anchor);
-            if (projectElement) {
-                projectTitle = projectElement.querySelector('h3').innerText;
-                projectDescription = projectElement.querySelector('.project-details p').innerText;
-
-                // Scroll to the anchor
-                await new Promise(resolve => setTimeout(resolve, 100));
-                const headerHeight = document.querySelector('.main-header-fixed').offsetHeight;
-                const offset = 15;
-                const topPosition = projectElement.getBoundingClientRect().top + window.scrollY - headerHeight - offset;
-                window.scrollTo({
-                    top: topPosition,
-                    behavior: 'smooth'
-                });
             } else {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
-        } else {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
 
-        // Call the metadata update function with the correct info
-        updatePageMetadata(pageName, projectTitle, projectDescription);
+            // Call the metadata update function with the correct info
+            updatePageMetadata(pageName, projectTitle, projectDescription);
 
-        if (typeof window.triggerHeaderScrollCheck === 'function') {
-            window.triggerHeaderScrollCheck();
+            if (typeof window.triggerHeaderScrollCheck === 'function') {
+                window.triggerHeaderScrollCheck();
+            }
+        } catch (error) {
+            console.error('Error loading content:', error);
+            contentArea.innerHTML = '<p>Failed to load content.</p>';
+            contentArea.style.opacity = '1';
+            document.body.classList.remove('hide-scrollbar-visually');
         }
-    } catch (error) {
-        console.error('Error loading content:', error);
-        contentArea.innerHTML = '<p>Failed to load content.</p>';
-        contentArea.style.opacity = '1';
-        document.body.classList.remove('hide-scrollbar-visually');
     }
-}
 
     // Corrected logic for event handlers
     document.querySelectorAll('.main-nav a').forEach(link => {
@@ -222,4 +228,4 @@ async function loadContent(url, pageName, anchor = null, isInitialLoad = false) 
     }
 
     setActiveNavLink(initialPage);
-});
+});s
