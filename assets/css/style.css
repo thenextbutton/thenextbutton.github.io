@@ -663,9 +663,9 @@ body.light-mode .share-btn:hover {
   color: #a0a0a0;
   border: none;
   cursor: pointer;
-  transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
-  display: inline-block;
   padding: 0;
+  /* Add all transitions to a single rule for a smoother effect */
+  transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 
 .social-icons-wrapper a i,
@@ -679,6 +679,11 @@ body.light-mode .share-btn:hover {
     height: 1.2em;
 }
 
+.social-icons-wrapper a:hover, .social-icons-wrapper button:hover {
+    transform: translateY(-2px) scale(1.05); /* Lifts and slightly enlarges the icon */
+}
+
+/* Specific hover colors */
 .social-icons-wrapper .fa-twitter:hover { color: #1da1f2; }
 .social-icons-wrapper .fa-linkedin-in:hover { color: #0077b5; }
 .social-icons-wrapper .fa-facebook-f:hover { color: #1877f2; }
@@ -702,6 +707,7 @@ body.light-mode .content-column .social-icons-wrapper a, body.light-mode .conten
   color: #333333;
   transition: color 0.3s ease-in-out;
 }
+
 
 body.light-mode .content-column .social-icons-wrapper a:hover {
   color: #666666;
