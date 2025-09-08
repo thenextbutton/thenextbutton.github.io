@@ -612,7 +612,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   border-radius: 4px;
 }
 
-
 /* --- Social Share Controls --- */
 .share-container {
   display: flex;
@@ -634,15 +633,18 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   align-items: center;
   gap: 10px;
 }
+
 .share-btn:hover {
   background-color: #383b48;
   transform: translateY(-2px);
 }
+
 body.light-mode .share-btn {
   background-color: #d0d0d0;
   color: #333333;
   border-color: #bbb;
 }
+
 body.light-mode .share-btn:hover {
   background-color: #e0e0e0;
 }
@@ -650,12 +652,15 @@ body.light-mode .share-btn:hover {
 .social-icons-wrapper {
   display: flex;
   gap: 15px;
-  max-height: 0;
+  height: 0;
   overflow: hidden;
-  transition: max-height 0.5s ease-in-out;
+  transition: height 0.5s ease-in-out, padding 0.5s ease-in-out;
+  padding: 0;
 }
+
 .social-icons-wrapper.active {
-  max-height: 60px;
+  height: auto;
+  padding: 10px 0;
 }
 
 .social-icons-wrapper a, .social-icons-wrapper button {
@@ -664,7 +669,6 @@ body.light-mode .share-btn:hover {
   border: none;
   cursor: pointer;
   padding: 0;
-  /* Add all transitions to a single rule for a smoother effect */
   transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 
@@ -680,7 +684,7 @@ body.light-mode .share-btn:hover {
 }
 
 .social-icons-wrapper a:hover, .social-icons-wrapper button:hover {
-    transform: translateY(-2px) scale(1.05); /* Lifts and slightly enlarges the icon */
+    transform: translateY(-2px) scale(1.05);
 }
 
 /* Specific hover colors */
@@ -688,6 +692,7 @@ body.light-mode .share-btn:hover {
 .social-icons-wrapper .fa-linkedin-in:hover { color: #0077b5; }
 .social-icons-wrapper .fa-facebook-f:hover { color: #1877f2; }
 .social-icons-wrapper .fa-clipboard:hover { color: #7dbeff; }
+
 .social-icons-wrapper a .fa-reddit-alien,
 .social-icons-wrapper a .fa-whatsapp {
   color: var(--secondary-text-color);
