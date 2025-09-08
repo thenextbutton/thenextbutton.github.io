@@ -79,6 +79,19 @@ body::-webkit-scrollbar-thumb:hover {
   transition: background-color 1.5s ease-in-out, color 1.5s ease-in-out;
 }
 
+/* Glass Header Effect when Scrolled */
+.main-header-fixed.scrolled {
+  background-color: rgba(23, 28, 38, 0.85); 
+  backdrop-filter: blur(10px); 
+  -webkit-backdrop-filter: blur(10px); 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+body.light-mode .main-header-fixed.scrolled {
+  background-color: rgba(245, 245, 245, 0.85); /* Light background with transparency */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
 h1 {
   font-family: "Consolas", monospace;
   text-align: center;
