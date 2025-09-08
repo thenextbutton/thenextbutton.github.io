@@ -9,6 +9,14 @@ window.triggerHeaderScrollCheck = function() {
 
 window.addEventListener('scroll', window.triggerHeaderScrollCheck);
 
+// NEW: This listener prevents the browser from handling anchor scrolling
+window.addEventListener('hashchange', (event) => {
+    event.preventDefault(); // Stop the default browser scroll behavior
+    const { pageName, anchor } = getCurrentPageFromHash();
+    const url = `/content/${pageName}_content.html`;
+    loadContent(url, pageName, anchor);
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     const contentArea = document.getElementById('content-area');
 
@@ -100,15 +108,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             if (typeof window.initAutoLinker === 'function') {
                 window.initAutoLinker();
-            } 
+            }
             if (typeof initLightbox === 'function') {
                 initLightbox();
             }
-
             if (typeof window.initSocialShare === 'function') {
                 window.initSocialShare();
             }
-
             const filePath = `content/${pageName}_content.html`;
             if (typeof window.updateGithubFileCommitDate === 'function') {
                 window.updateGithubFileCommitDate(filePath);
@@ -122,6 +128,27 @@ document.addEventListener('DOMContentLoaded', () => {
             let projectTitle = null;
             let projectDescription = null;
             
+            if (anchor) {
+                await new Promise(resolve => setTimeout(resolve, 300));
+                const projectElement = document.getElementById(anchor);
+                if (projectElement) {
+                    projectTitle = projectElement.querySelector('h3').innerText;
+                    projectDescription = projectElement.querySelector('.project-details p').innerText;
+
+                    const headerHeight = document.querySelector('.main-header-fixed').offsetHeight;
+                    const offset = 15;
+                    const topPosition = projectElement.getBoundingClientRect().top + window.scrollY - headerHeight - offset;
+                    
+                    window.scrollTo({
+                        top: topPosition,
+                        behavior: 'smooth'
+                    });
+                } else {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
 
             updatePageMetadata(pageName, projectTitle, projectDescription);
             
@@ -136,10 +163,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    const { pageName: initialPage, anchor: initialAnchor } = getCurrentPageFromHash();
-    const initialUrl = `/content/${initialPage}_content.html`;
-    loadContent(initialUrl, initialPage, initialAnchor);
-
     document.querySelectorAll('.main-nav a').forEach(link => {
         link.addEventListener('click', (event) => {
             event.preventDefault();
@@ -148,12 +171,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (clickedPageData && clickedPageData !== currentPageFromHash) {
                 const url = `/content/${clickedPageData}_content.html`;
-                loadContent(url, clickedPageData, null);
+                loadContent(url, clickedPageData, null, false);
             } else if (!clickedPageData && link.href) {
                 const defaultPage = link.href.split('/').pop().split('.')[0].replace('_content', '');
                 if (defaultPage && defaultPage !== currentPageFromHash) {
                     const url = `/content/${defaultPage}_content.html`;
-                    loadContent(url, defaultPage, null);
+                    loadContent(url, defaultPage, null, false);
                 }
             }
         });
@@ -162,8 +185,12 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('popstate', () => {
         const { pageName, anchor } = getCurrentPageFromHash();
         const url = `/content/${pageName}_content.html`;
-        loadContent(url, pageName, anchor);
+        loadContent(url, pageName, anchor, false);
     });
+
+    const { pageName: initialPage, anchor: initialAnchor } = getCurrentPageFromHash();
+    const initialUrl = `/content/${initialPage}_content.html`;
+    loadContent(initialUrl, initialPage, initialAnchor, true);
 
     function setActiveNavLink(pageName) {
         document.querySelectorAll('.main-nav a').forEach(link => {
