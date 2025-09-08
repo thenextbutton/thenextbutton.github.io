@@ -7,6 +7,7 @@ window.triggerHeaderScrollCheck = function() {
   }
 };
 
+window.addEventListener('scroll', window.triggerHeaderScrollCheck);
 
 document.addEventListener('DOMContentLoaded', () => {
     const contentArea = document.getElementById('content-area');
