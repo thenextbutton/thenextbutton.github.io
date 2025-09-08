@@ -1,11 +1,3 @@
-(() => {
-    // Check if the URL has an anchor tag
-    if (window.location.hash.split('#')[2]) {
-        // Scroll to the top of the page immediately
-        window.scrollTo(0, 0);
-    }
-})();
-
 window.triggerHeaderScrollCheck = function() {
     const header = document.querySelector('.main-header-fixed');
     if (window.scrollY > 0) {
