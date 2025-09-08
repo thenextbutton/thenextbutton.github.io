@@ -724,7 +724,7 @@ body.light-mode .share-btn:hover {
 
 /* Light Mode Overrides for Icons */
 body.light-mode .social-icons-wrapper a, body.light-mode .social-icons-wrapper button {
-  color: #4a90e2; /* New default color to match the copy button */
+  color: #333333; /* New default color to match the copy button */
   transition: color 0.3s ease-in-out;
 }
 
