@@ -710,40 +710,47 @@ body.light-mode .share-btn:hover {
 }
 
 /* Light Mode Overrides for Icons */
-body.light-mode .social-icons-wrapper a, body.light-mode .social-icons-wrapper button {
+body.light-mode .content-column .social-icons-wrapper a, body.light-mode .content-column .social-icons-wrapper button {
   color: #333333; /* New default color to match the copy button */
   transition: color 0.3s ease-in-out;
 }
 
 /* Hover effects for individual social icons in light mode */
-body.light-mode .social-icons-wrapper a:hover {
+body.light-mode .content-column .social-icons-wrapper a:hover {
   color: #666666; /* Lighter grey hover color for social icons */
 }
 
-body.light-mode .social-icons-wrapper .fa-twitter:hover { color: #1da1f2; }
-body.light-mode .social-icons-wrapper .fa-linkedin-in:hover { color: #0077b5; }
-body.light-mode .social-icons-wrapper .fa-facebook-f:hover { color: #1877f2; }
-body.light-mode .social-icons-wrapper .fa-clipboard:hover { color: #4a90e2; }
+body.light-mode .content-column .social-icons-wrapper .fa-twitter:hover { color: #1da1f2; }
+body.light-mode .content-column .social-icons-wrapper .fa-linkedin-in:hover { color: #0077b5; }
+body.light-mode .content-column .social-icons-wrapper .fa-facebook-f:hover { color: #1877f2; }
+body.light-mode .content-column .social-icons-wrapper .fa-clipboard:hover { color: #4a90e2; }
 
-body.light-mode .social-icons-wrapper a:hover .fa-reddit-alien {
+body.light-mode .content-column .social-icons-wrapper a:hover .fa-reddit-alien {
   color: #ff4500;
 }
 
-body.light-mode .social-icons-wrapper a:hover .fa-whatsapp {
+body.light-mode .content-column .social-icons-wrapper a:hover .fa-whatsapp {
   color: #25d366;
 }
 
-/* Corrected rule to exclude social icons from the external link icon */
-a[target="_blank"]:not(.github-content-corner-logo):not(.social-icons-wrapper a) {
+/* Corrected rule to exclude external link icon from social media links */
+a[target="_blank"]:not(.github-content-corner-logo):not(.powered-by-github) {
   padding-right: 15px;
   background: url('../images/external_link_icon_wht.webp') no-repeat right center;
   background-size: 12px 12px;
 }
-body.light-mode a[target="_blank"]:not(.github-content-corner-logo):not(.social-icons-wrapper a) {
+body.light-mode a[target="_blank"]:not(.github-content-corner-logo):not(.powered-by-github) {
   padding-right: 15px;
   background: url('../images/external_link_icon_blk.webp') no-repeat right center;
   background-size: 12px 12px;
 }
+
+/* --- Explicit override for social icons to fix external link image issue */
+.social-icons-wrapper a, .social-icons-wrapper a:hover {
+    background: none !important;
+    padding-right: 0 !important;
+}
+
 
 /* --- Light Mode Overrides --- */
 body.light-mode {
