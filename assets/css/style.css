@@ -12,10 +12,14 @@ body {
   color: #fafafa;
   margin: 0 auto;
   padding: 0;
-  padding-top: 120px;
+/*  padding-top: 120px; */
   max-width: 1200px;
   transition: background-color 1.5s ease-in-out, color 1.5s ease-in-out;
   overflow-y: scroll;
+}
+
+:target {
+    scroll-margin-top: 150px;
 }
 
 /* --- Scrollbar Styling for Webkit browsers --- */

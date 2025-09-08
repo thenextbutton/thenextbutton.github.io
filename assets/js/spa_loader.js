@@ -122,27 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
             let projectTitle = null;
             let projectDescription = null;
             
-            if (anchor) {
-                await new Promise(resolve => setTimeout(resolve, 300));
-                const projectElement = document.getElementById(anchor);
-                if (projectElement) {
-                    projectTitle = projectElement.querySelector('h3').innerText;
-                    projectDescription = projectElement.querySelector('.project-details p').innerText;
-
-                    const headerHeight = document.querySelector('.main-header-fixed').offsetHeight;
-                    const offset = 15;
-                    const topPosition = projectElement.getBoundingClientRect().top + window.scrollY - headerHeight - offset;
-                    
-                    window.scrollTo({
-                        top: topPosition,
-                        behavior: 'smooth'
-                    });
-                } else {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                }
-            } else {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
 
             updatePageMetadata(pageName, projectTitle, projectDescription);
             
