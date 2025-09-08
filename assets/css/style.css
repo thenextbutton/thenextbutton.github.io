@@ -655,7 +655,7 @@ body.light-mode .share-btn:hover {
   transition: max-height 0.5s ease-in-out;
 }
 .social-icons-wrapper.active {
-  max-height: 55px;
+  max-height: 60px;
 }
 
 .social-icons-wrapper a, .social-icons-wrapper button {
