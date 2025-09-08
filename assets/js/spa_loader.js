@@ -1,3 +1,14 @@
+// This function runs immediately to prevent the browser's default anchor jump
+(() => {
+    // Check if the URL has an anchor tag
+    if (window.location.hash) {
+        // Prevent the browser's default scroll
+        history.pushState('', document.title, window.location.pathname + window.location.search);
+        // Scroll to the top of the page immediately
+        window.scrollTo(0, 0);
+    }
+})();
+
 window.triggerHeaderScrollCheck = function() {
     const header = document.querySelector('.main-header-fixed');
     if (window.scrollY > 0) {
@@ -9,21 +20,15 @@ window.triggerHeaderScrollCheck = function() {
 
 window.addEventListener('scroll', window.triggerHeaderScrollCheck);
 
-// NEW: This listener prevents the browser from handling anchor scrolling
-window.addEventListener('hashchange', (event) => {
-    event.preventDefault(); // Stop the default browser scroll behavior
-    const { pageName, anchor } = getCurrentPageFromHash();
-    const url = `/content/${pageName}_content.html`;
-    loadContent(url, pageName, anchor);
-});
-
 document.addEventListener('DOMContentLoaded', () => {
     const contentArea = document.getElementById('content-area');
 
     function updatePageMetadata(pageName, projectTitle = null, projectDescription = null) {
+        // Default values for all pages
         let pageTitle = "My Corner of the Internet";
         let metaDescription = "A portfolio showcasing my projects and professional journey.";
 
+        // Update based on the current page
         switch(pageName) {
             case 'github':
                 if (projectTitle) {
@@ -46,11 +51,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         document.title = pageTitle;
+        // Update Open Graph tags for better social sharing previews
         document.querySelector('meta[property="og:title"]').setAttribute('content', pageTitle);
         document.querySelector('meta[property="og:description"]').setAttribute('content', metaDescription);
         document.querySelector('meta[property="og:url"]').setAttribute('content', window.location.href);
     }
 
+    /**
+     * Determines the current page name and anchor ID from the URL hash.
+     * @returns {{pageName: string, anchor: string|null}}
+     */
     function getCurrentPageFromHash() {
         const hash = window.location.hash;
         if (hash) {
@@ -66,6 +76,12 @@ document.addEventListener('DOMContentLoaded', () => {
         return { pageName: 'home', anchor: null };
     }
 
+    /**
+     * Loads content into the main content area with a fade effect.
+     * @param {string} url - The URL of the content to load.
+     * @param {string} pageName - The name of the page.
+     * @param {string|null} anchor - The anchor ID to scroll to.
+     */
     async function loadContent(url, pageName, anchor = null) {
         try {
             document.body.classList.add('hide-scrollbar-visually');
@@ -171,12 +187,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (clickedPageData && clickedPageData !== currentPageFromHash) {
                 const url = `/content/${clickedPageData}_content.html`;
-                loadContent(url, clickedPageData, null, false);
+                loadContent(url, clickedPageData, null);
             } else if (!clickedPageData && link.href) {
                 const defaultPage = link.href.split('/').pop().split('.')[0].replace('_content', '');
                 if (defaultPage && defaultPage !== currentPageFromHash) {
                     const url = `/content/${defaultPage}_content.html`;
-                    loadContent(url, defaultPage, null, false);
+                    loadContent(url, defaultPage, null);
                 }
             }
         });
@@ -185,12 +201,12 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('popstate', () => {
         const { pageName, anchor } = getCurrentPageFromHash();
         const url = `/content/${pageName}_content.html`;
-        loadContent(url, pageName, anchor, false);
+        loadContent(url, pageName, anchor);
     });
 
     const { pageName: initialPage, anchor: initialAnchor } = getCurrentPageFromHash();
     const initialUrl = `/content/${initialPage}_content.html`;
-    loadContent(initialUrl, initialPage, initialAnchor, true);
+    loadContent(initialUrl, initialPage, initialAnchor);
 
     function setActiveNavLink(pageName) {
         document.querySelectorAll('.main-nav a').forEach(link => {
