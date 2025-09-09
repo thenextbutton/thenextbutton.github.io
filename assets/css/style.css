@@ -1129,18 +1129,15 @@ body.blur-content {
     line-height: 1.2;
     padding: 0 10px;
     margin-bottom: 0;
-    transform: none;
-    transition: all 0.5s ease-in-out;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    transform-origin: center center;
+    transform: scale(1);
   }
 
   .main-header-fixed.scrolled h1 {
-    font-size: 1rem;
-    padding: 0;
-    margin: 0;
+    transform: scale(0.8);
     opacity: 0;
-    visibility: hidden;
-    height: 0;
-    overflow: hidden;
+    pointer-events: none;
   }
 
   .main-nav {
@@ -1169,15 +1166,11 @@ body.blur-content {
     height: 60px;
   }
 
-  .main-header-fixed.scrolled .profile-image.hidden,
-  .main-header-fixed.scrolled .corner-logo-fixed.hidden {
-      transform: none; /* Make them visible again on scroll */
-      opacity: 0; /* But keep them hidden */
-  }
   .main-header-fixed.scrolled .profile-image,
   .main-header-fixed.scrolled .corner-logo-fixed {
-      transform: translateY(-100px); /* Hide them on scroll */
-      opacity: 0;
+    transform: translateY(-100px); /* Hide them on scroll */
+    opacity: 0;
+    pointer-events: none;
   }
 
   .content-column {
@@ -1186,7 +1179,7 @@ body.blur-content {
     line-height: 1.6;
     margin-bottom: 100px;
   }
-  
+
   /* GitHub project items: now stacks cleanly */
   .github-project-item {
     flex-direction: column;
@@ -1283,7 +1276,7 @@ body.blur-content {
   #font-plus {
     font-size: 18px;
   }
-  
+
   /* Share Buttons */
   .share-btn {
     font-size: 0.9rem;
