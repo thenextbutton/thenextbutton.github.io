@@ -466,7 +466,8 @@ body.dark-mode .github-content-corner-logo .light-mode-img {
   justify-content: center;
   width: 100%;
   position: relative;
-  margin: 0 10px;
+  margin: 0 8px;
+  flex-wrap: nowrap;
 }
 .theme-switch-checkbox {
   height: 0;
@@ -475,10 +476,10 @@ body.dark-mode .github-content-corner-logo .light-mode-img {
 }
 .theme-switch-label {
   cursor: pointer;
-  width: 80px;
-  height: 20px;
+  width: 100px;
+  height: 25px;
   background: #282a36;
-  border-radius: 10px;
+  border-radius: 12.5px;
   position: relative;
   transition: background 1s;
   border: 1px solid #555;
@@ -489,10 +490,10 @@ body.dark-mode .github-content-corner-logo .light-mode-img {
 .theme-switch-label:after {
   content: '';
   position: absolute;
-  top: 1.5px;
-  left: 1.5px;
-  width: 17px;
-  height: 17px;
+  top: 2px;
+  left: 2px;
+  width: 21px;
+  height: 21px;
   background: #fafafa;
   border-radius: 50%;
   transition: 1s;
@@ -503,13 +504,13 @@ body.dark-mode .github-content-corner-logo .light-mode-img {
   border-color: #4a90e2;
 }
 .theme-switch-checkbox:checked + .theme-switch-label:after {
-  left: calc(100% - 1.5px);
+  left: calc(100% - 2px);
   transform: translateX(-100%);
   background: #333333;
 }
 
 .theme-icon {
-  font-size: 20px;
+  font-size: 18px;
   transition: opacity 1s ease-in-out, transform 1s ease-in-out, color 1s ease-in-out;
   position: absolute;
   top: 50%;
