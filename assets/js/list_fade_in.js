@@ -12,7 +12,7 @@ function fadeInLists() {
       }
     });
   }, {
-    threshold: 0.2 // Trigger when 20% of the element is visible
+    threshold: 0.5 // Trigger when % of the element is visible
   });
 
   // Select all lists with the .content-list class
