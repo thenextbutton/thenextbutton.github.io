@@ -864,7 +864,7 @@ body.light-mode .content-column .social-icons-wrapper a:hover .fa-whatsapp {
 
 a[target="_blank"]:not(.github-content-corner-logo):not(.powered-by-github) {
   padding-right: 15px;
-  background: url('../images/external_link_icon_blk.webp') no-repeat right center;
+  background: url('../images/external_link_icon_wht.webp') no-repeat right center;
   background-size: 12px 12px;
 }
 
