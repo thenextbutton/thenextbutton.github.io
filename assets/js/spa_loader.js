@@ -92,7 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 contentArea.appendChild(contentColumn);
             }
             
-            // This is the CRITICAL change
             contentColumn.innerHTML = data;
 
             document.body.classList.remove('hide-scrollbar-visually');
@@ -111,6 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             const filePath = `content/${pageName}_content.html`;
             if (typeof window.updateGithubFileCommitDate === 'function') {
+                // This is the CRITICAL change
+                // It calls the update function only after the content has been added to the DOM
                 window.updateGithubFileCommitDate(filePath);
             }
 
