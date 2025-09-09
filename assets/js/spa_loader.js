@@ -13,11 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const contentArea = document.getElementById('content-area');
 
     function updatePageMetadata(pageName, projectTitle = null, projectDescription = null) {
-        // Default values for all pages
         let pageTitle = "My Corner of the Internet";
         let metaDescription = "A portfolio showcasing my projects and professional journey.";
 
-        // Update based on the current page
         switch(pageName) {
             case 'github':
                 if (projectTitle) {
@@ -40,16 +38,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         document.title = pageTitle;
-        // Update Open Graph tags for better social sharing previews
         document.querySelector('meta[property="og:title"]').setAttribute('content', pageTitle);
         document.querySelector('meta[property="og:description"]').setAttribute('content', metaDescription);
         document.querySelector('meta[property="og:url"]').setAttribute('content', window.location.href);
     }
 
-    /**
-     * Determines the current page name and anchor ID from the URL hash.
-     * @returns {{pageName: string, anchor: string|null}}
-     */
     function getCurrentPageFromHash() {
         const hash = window.location.hash;
         if (hash) {
@@ -65,12 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return { pageName: 'home', anchor: null };
     }
 
-    /**
-     * Loads content into the main content area with a fade effect.
-     * @param {string} url - The URL of the content to load.
-     * @param {string} pageName - The name of the page.
-     * @param {string|null} anchor - The anchor ID to scroll to.
-     */
     async function loadContent(url, pageName, anchor = null) {
         try {
             document.body.classList.add('hide-scrollbar-visually');
@@ -98,10 +85,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             const data = await response.text();
 
-            // This is the CRITICAL change:
-            // It replaces the entire content area, ensuring a clean slate.
-            contentArea.innerHTML = data;
+            let contentColumn = contentArea.querySelector('.content-column');
+            if (!contentColumn) {
+                contentColumn = document.createElement('div');
+                contentColumn.classList.add('content-column');
+                contentArea.appendChild(contentColumn);
+            }
             
+            // This is the CRITICAL change
+            contentColumn.innerHTML = data;
+
             document.body.classList.remove('hide-scrollbar-visually');
 
             if (typeof initScrollAnimations === 'function') {
