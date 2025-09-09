@@ -930,81 +930,168 @@ body.blur-content {
 
 /* --- Media Queries (Mobile Specific Adjustments) --- */
 @media (max-width: 768px) {
-  html { font-size: 16px; }
-  body { padding-top: 170px; }
-  .main-header-fixed { padding: 10px 0; min-height: 140px; }
-  h1 {
-    font-size: 2.2rem;
-    line-height: 1.2;
-    padding: 0 15px;
-    margin-bottom: 15px;
-    position: relative;
-    z-index: 1;
-    -webkit-transform: translateY(30px);
-    -ms-transform: translateY(30px);
-    transform: translateY(30px);
-  }
-  h1.slide-up { -webkit-transform: translateY(0); -ms-transform: translateY(0); transform: translateY(0); }
-  .main-nav { margin-top: 10px; padding: 0 10px; }
-  .main-nav ul { gap: 20px; }
-  .main-nav li a {
-    font-size: 1.1rem;
-    padding: 8px 12px;
-    -webkit-transition: color 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out, -webkit-box-shadow 0.3s ease-in-out;
-    transition: color 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out, -webkit-box-shadow 0.3s ease-in-out;
-    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out, -webkit-box-shadow 0.3s ease-in-out;
-  }
-  .profile-image { top: 10px; left: 10px; width: 60px; height: 60px; z-index: 1001; }
-  .corner-logo-fixed { top: 10px; right: 10px; width: 90px; height: 60px; z-index: 1001; }
-  .bottom-right-controls-wrapper { max-width: 140px; padding: 8px 6px; bottom: 10px; right: 5px; }
-  .theme-switch-label { width: 60px; height: 20px; border-radius: 10px; margin: 0 8px; }
-  .theme-switch-label:after { top: 1.5px; left: 1.5px; width: 17px; height: 17px; }
-  .theme-switch-checkbox:checked + .theme-switch-label:after { left: calc(100% - 1.5px); }
-  .theme-icon { font-size: 18px; }
-  .font-controls { gap: 6px; }
-  .font-controls span { width: 35px; height: 35px; font-size: 16px; }
-  #font-minus { font-size: 12px; }
-  #font-reset { font-size: 16px; }
-  #font-plus { font-size: 20px; }
-  .content-column { padding: 0px 15px 15px 15px; font-size: 1rem; line-height: 1.6; margin-bottom: 100px; }
-  .github-project-item {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    padding: 15px;
-  }
-  .project-details {
-    width: 100%;
-    -webkit-box-align: start;
-    -ms-flex-align: start;
-    align-items: flex-start;
-  }
-  .github-project-item .project-details h3,
-  .github-project-item .project-details p,
-  .github-project-item .project-details h4,
-  .github-project-item .project-details ul,
-  .github-project-item .project-details ul li { text-align: left; }
-  .github-project-item .project-details ul { padding-left: 20px; }
-  .project-image {
-    width: 80%;
-    max-width: 200px;
-    margin-bottom: 15px;
-    position: static;
-    top: auto;
-  }
-  .project-details img {
-    max-width: 100%;
-    height: auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
-  .github-project-item h3 { font-size: 1.5rem; }
-  .github-project-item p { font-size: 0.95rem; line-height: 1.4; }
-  .github-content-corner-logo { top: 8px; right: 8px; }
-  .github-content-corner-logo img { width: 20px; }
+    html {
+        font-size: 16px;
+    }
+
+    body {
+        padding-top: 170px;
+    }
+
+    .main-header-fixed {
+        padding: 10px 0;
+        min-height: 100px; /* Reduced header height */
+    }
+
+    h1 {
+        font-size: 1.8rem; /* Smaller font for a less imposing title */
+        line-height: 1.2;
+        padding: 0 10px; /* Reduced padding */
+        margin-bottom: 0; /* Align with nav */
+        transform: none; /* Removed the slide-up transform */
+    }
+    
+    .main-nav {
+        margin-top: 5px; /* Less space between title and nav */
+        padding: 0 10px;
+    }
+    
+    .main-nav ul {
+        gap: 20px;
+    }
+
+    .main-nav li a {
+        font-size: 1.1rem;
+        padding: 8px 12px;
+        transition: color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    .profile-image {
+        top: 10px;
+        left: 10px;
+        width: 60px;
+        height: 60px;
+        z-index: 1001;
+    }
+
+    .corner-logo-fixed {
+        top: 10px;
+        right: 10px;
+        width: 90px;
+        height: 60px;
+        z-index: 1001;
+    }
+
+    .bottom-right-controls-wrapper {
+        max-width: 140px;
+        padding: 8px 6px;
+        bottom: 10px;
+        right: 5px;
+    }
+
+    .theme-switch-label {
+        width: 60px;
+        height: 20px;
+        border-radius: 10px;
+        margin: 0 8px;
+    }
+
+    .theme-switch-label:after {
+        top: 1.5px;
+        left: 1.5px;
+        width: 17px;
+        height: 17px;
+    }
+
+    .theme-switch-checkbox:checked + .theme-switch-label:after {
+        left: calc(100% - 1.5px);
+    }
+
+    .theme-icon {
+        font-size: 18px;
+    }
+
+    .font-controls {
+        gap: 6px;
+    }
+
+    .font-controls span {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+    }
+
+    #font-minus {
+        font-size: 12px;
+    }
+    #font-reset {
+        font-size: 16px;
+    }
+    #font-plus {
+        font-size: 20px;
+    }
+
+    .content-column {
+        padding: 0 20px 15px 20px; /* Added 20px padding to the left and right */
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 100px;
+    }
+
+    .github-project-item {
+        flex-direction: column;
+        /* Removed align-items: center to let the content align left */
+        padding: 15px;
+    }
+
+    .project-details {
+        width: 100%;
+        align-items: flex-start;
+        padding: 0 5px; /* Added 5px padding on the left and right */
+    }
+
+    .github-project-item .project-details h3,
+    .github-project-item .project-details p,
+    .github-project-item .project-details h4,
+    .github-project-item .project-details ul,
+    .github-project-item .project-details ul li {
+        text-align: left;
+    }
+
+    .github-project-item .project-details ul {
+        padding-left: 20px;
+    }
+
+    .project-image {
+        width: 100%;
+        max-width: none;
+        margin-bottom: 15px;
+        position: static;
+        top: auto;
+    }
+
+    .project-details img {
+        max-width: 100%;
+        height: auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .github-project-item h3 {
+        font-size: 1.5rem;
+    }
+
+    .github-project-item p {
+        font-size: 0.95rem;
+        line-height: 1.4;
+    }
+
+    .github-content-corner-logo {
+        top: 8px;
+        right: 8px;
+    }
+
+    .github-content-corner-logo img {
+        width: 20px;
+    }
 }
