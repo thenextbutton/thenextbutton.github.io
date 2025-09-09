@@ -1211,10 +1211,11 @@ body.blur-content {
     padding-left: 20px;
   }
   .project-image {
-    max-width: 100%;
+    max-width: 100px;
     max-height: 100px;
-    width: auto;
-    height: auto;
+    object-fit: contain;
+    /* width: auto; */
+    /* height: auto; */
     margin: 0;
     position: static;
     top: auto;
