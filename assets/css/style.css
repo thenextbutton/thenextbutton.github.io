@@ -580,6 +580,9 @@ body.dark-mode .github-content-corner-logo .light-mode-img {
   margin-bottom: 2px;
   display: flex;
   align-items: center;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
 .console-list li::before,
 .content-list li::before {
@@ -592,6 +595,11 @@ body.dark-mode .github-content-corner-logo .light-mode-img {
   background-position: center;
   margin-right: 5px;
   flex-shrink: 0;
+}
+
+.content-list li.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .switch-list li::before {
