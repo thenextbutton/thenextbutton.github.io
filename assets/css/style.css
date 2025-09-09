@@ -1101,99 +1101,93 @@ body.blur-content {
   padding-right: 10px;
 }
 
-
 /* --- Media Queries (Mobile Specific Adjustments) --- */
 @media (max-width: 768px) {
   html {
     font-size: 16px;
   }
   body {
-    padding-top: 80px;
+    padding-top: 75px; /* Adjust based on new header height */
   }
+
+  /* Compact Header & Glass Effect */
   .main-header-fixed {
     padding: 10px 0;
-    min-height: 100px;
+    min-height: 75px;
+    transition: all 0.5s ease-in-out;
   }
+
+  .main-header-fixed.scrolled {
+    min-height: 60px;
+    background-color: rgba(23, 28, 38, 0.85);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+
   h1 {
-    font-size: 1.8rem;
+    font-size: clamp(1.2rem, 5vw, 2.5rem); /* Fluid typography */
     line-height: 1.2;
     padding: 0 10px;
     margin-bottom: 0;
     transform: none;
+    transition: all 0.5s ease-in-out;
   }
+
+  .main-header-fixed.scrolled h1 {
+    font-size: 1rem;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+  }
+
   .main-nav {
     margin-top: 5px;
     padding: 0 10px;
   }
   .main-nav ul {
-    gap: 20px;
+    gap: 15px;
   }
   .main-nav li a {
-    font-size: 1.1rem;
-    padding: 8px 12px;
-    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    font-size: 1rem;
+    padding: 6px 10px;
   }
+
+  /* Profile image and logo positioning */
   .profile-image {
     top: 10px;
     left: 10px;
     width: 60px;
     height: 60px;
-    z-index: 1001;
   }
   .corner-logo-fixed {
     top: 10px;
     right: 10px;
     width: 90px;
     height: 60px;
-    z-index: 1001;
   }
-  .bottom-right-controls-wrapper {
-    max-width: 140px;
-    padding: 8px 6px;
-    bottom: 10px;
-    right: 5px;
+
+  .main-header-fixed.scrolled .profile-image.hidden,
+  .main-header-fixed.scrolled .corner-logo-fixed.hidden {
+      transform: none; /* Make them visible again on scroll */
+      opacity: 0; /* But keep them hidden */
   }
-  .theme-switch-label {
-    width: 60px;
-    height: 20px;
-    border-radius: 10px;
-    margin: 0 8px;
+  .main-header-fixed.scrolled .profile-image,
+  .main-header-fixed.scrolled .corner-logo-fixed {
+      transform: translateY(-100px); /* Hide them on scroll */
+      opacity: 0;
   }
-  .theme-switch-label:after {
-    top: 1.5px;
-    left: 1.5px;
-    width: 17px;
-    height: 17px;
-  }
-  .theme-switch-checkbox:checked + .theme-switch-label:after {
-    left: calc(100% - 1.5px);
-  }
-  .theme-icon {
-    font-size: 18px;
-  }
-  .font-controls {
-    gap: 6px;
-  }
-  .font-controls span {
-    width: 35px;
-    height: 35px;
-    font-size: 16px;
-  }
-  #font-minus {
-    font-size: 12px;
-  }
-  #font-reset {
-    font-size: 16px;
-  }
-  #font-plus {
-    font-size: 20px;
-  }
+
   .content-column {
     padding: 0 20px 15px 20px;
     font-size: 1rem;
     line-height: 1.6;
     margin-bottom: 100px;
   }
+  
+  /* GitHub project items: now stacks cleanly */
   .github-project-item {
     flex-direction: column;
     align-items: center;
@@ -1242,5 +1236,64 @@ body.blur-content {
   }
   .github-content-corner-logo img {
     width: 20px;
+  }
+
+  /* Controls Wrapper (Bottom Right) */
+  .bottom-right-controls-wrapper {
+    max-width: 120px;
+    padding: 6px 4px;
+    bottom: 10px;
+    right: 5px;
+  }
+  .theme-toggle-container {
+    margin: 0 8px;
+  }
+  .theme-switch-label {
+    width: 50px;
+    height: 16px;
+    border-radius: 8px;
+  }
+  .theme-switch-label:after {
+    top: 1.5px;
+    left: 1.5px;
+    width: 13px;
+    height: 13px;
+  }
+  .theme-switch-checkbox:checked + .theme-switch-label:after {
+    left: calc(100% - 1.5px);
+  }
+  .theme-icon {
+    font-size: 16px;
+  }
+  .font-controls {
+    gap: 6px;
+    padding: 0 5px;
+  }
+  .font-controls span {
+    width: 30px;
+    height: 30px;
+    font-size: 15px;
+  }
+  #font-minus {
+    font-size: 10px;
+  }
+  #font-reset {
+    font-size: 14px;
+  }
+  #font-plus {
+    font-size: 18px;
+  }
+  
+  /* Share Buttons */
+  .share-btn {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+  }
+  .social-icons-wrapper.active {
+    padding: 8px 0;
+  }
+  .social-icons-wrapper a i,
+  .social-icons-wrapper button i {
+    font-size: 1.5rem;
   }
 }
