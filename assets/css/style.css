@@ -1,1097 +1,142 @@
-/* --- Base Styles --- */
-html {
-  font-size: 14px;
-  transition: font-size 0.3s ease-in-out;
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-  line-height: 1.6;
-  background-color: #171c26;
-  color: #fafafa;
-  margin: 0 auto;
-  padding: 0;
-  padding-top: 80px;
-  max-width: 1200px;
-  transition: background-color 1.5s ease-in-out, color 1.5s ease-in-out;
-  overflow-y: scroll;
-}
-
-:target {
-    scroll-margin-top: 150px;
-}
-
-/* --- Scrollbar Styling for Webkit browsers --- */
-body::-webkit-scrollbar {
-  width: 10px;
-}
-
-body::-webkit-scrollbar-track {
-  background: transparent;
-  border-radius: 5px;
-}
-
-body::-webkit-scrollbar-thumb {
-  background-color: transparent;
-  border-radius: 5px;
-  border: 2px solid transparent;
-}
-
-body:hover::-webkit-scrollbar-thumb {
-  background-color: #555;
-  border-color: #282a36;
-}
-
-body::-webkit-scrollbar-thumb:hover {
-  background-color: #777;
-}
-
-/* Scroll Progress Bar */
-#scroll-progress-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 2.5px;
-  background-color: #7dbeff;
-  z-index: 1000;
-  width: 0%;
-  transition: width 0.2s ease-out;
-}
-
-.hide-scrollbar-visually::-webkit-scrollbar-thumb,
-.hide-scrollbar-visually::-webkit-scrollbar-track {
-  background-color: transparent !important;
-  border-color: transparent !important;
-}
-
-
-/* --- Main Header & Navigation --- */
-.main-header-fixed {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: transparent; 
-  padding: 10px 0;
-  box-sizing: border-box;
-  z-index: 900;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 120px; 
-  transition: background-color 0.5s ease-in-out, backdrop-filter 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
-}
-
-/* Glass Header Effect when Scrolled */
-.main-header-fixed.scrolled {
-  background-color: rgba(23, 28, 38, 0.85);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-}
-
-body.light-mode .main-header-fixed.scrolled {
-  background-color: rgba(245, 245, 245, 0.85);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-  font-family: "Consolas", monospace;
-  text-align: center;
-  color: #a0a0a0;
-  margin: 0;
-  font-size: 2.5rem;
-  line-height: 1.2;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding: 0 40px;
-  box-sizing: border-box;
-  transition: transform 0.7s ease-out;
-}
-
-h2, h3, h4, h5, h6 {
-  font-family: "Consolas", monospace;
-}
-
-h4 {
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
-
-ul {
-  margin-top: 0px;
-  margin-bottom: 10px;
-  padding-left: 20px;
-}
-ul li {
-  margin-bottom: 5px;
-}
-
-.profile-image {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  z-index: 999;
-  transition: transform 0.7s ease-out;
-}
-
-.corner-logo-fixed {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  width: 150px;
-  height: auto;
-  z-index: 1000;
-  transition: transform 0.7s ease-in-out;
-}
-
-.corner-logo-fixed img {
-  object-fit: contain;
-  width: 100%;
-  height: 100%;
-}
-
-.profile-image.hidden {
-  transform: translateX(-150%);
-}
-
-.corner-logo-fixed.hidden {
-  transform: translateX(150%);
-}
-
-.main-nav {
-  text-align: center;
-  margin-top: 10px;
-  margin-bottom: 0;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0 20px;
-  box-sizing: border-box;
-}
-
-.main-nav ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 30px;
-}
-
-.main-nav li a {
-  text-decoration: none;
-  color: #a0a0a0;
-  font-weight: bold;
-  font-size: 1.1rem;
-  padding: 5px 10px;
-  border-radius: 4px;
-  transition: color 0.3s ease-in-out, font-weight 0.2s ease-in-out, background-color 0.3s ease-in-out, border-radius 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
-  display: inline-block;
-}
-
-.main-nav li a:hover {
-  color: #c0c0c0;
-  font-weight: bolder;
-  background-color: #333;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  transform: translateY(-2px);
-}
-
-.main-nav li a.active {
-  color: #7dbeff;
-  font-weight: bolder;
-  background-color: #333;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-a[target="_blank"]:not(.github-content-corner-logo):not(.powered-by-github) {
-  padding-right: 15px;
-  background: url('../images/external_link_icon_wht.webp') no-repeat right center;
-  background-size: 12px 12px;
-}
-
-.main-nav li a[href*="github.com"]:hover::after {
-  content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="%23c0c0c0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>');
-}
-
-body.light-mode .main-nav li a[href*="github.com"]::after {
-  content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="%23333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>');
-}
-
-body.light-mode .main-nav li a[href*="github.com"]:hover::after {
-  content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="%23000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>');
-}
-
-/* --- Content Area & General Text --- */
-.content-column {
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 20px;
-  box-sizing: border-box;
-  margin-top: 0;
-  font-size: 1rem;
-  color: #fafafa;
-  transition: opacity 0.7s ease-out, transform 0.7s ease-out, color 1.5s ease-in-out;
-}
-
-.content-column p a {
-  color: #7dbeff;
-  text-decoration: none;
-  font-weight: bold;
-  transition: color 1.5s ease-in-out, text-decoration 0.3s ease-in-out;
-}
-
-.content-column p a:hover {
-  text-decoration: none;
-}
-
-
-#content-area {
-  opacity: 1;
-  transition: opacity 0.3s ease-in-out;
-}
-#content-area.fade-out { opacity: 0; }
-#content-area.fade-in { opacity: 1; }
-
-.content-column a {
-  color: #7dbeff;
-  text-decoration: none;
-  font-weight: bold;
-  transition: color 1.5s ease-in-out;
-}
-.content-column a:hover { text-decoration: none; }
-.content-column h2 { margin-bottom: 5px; }
-
-#last-updated-text {
-  color: #888;
-  font-style: italic;
-  font-size: 0.9em;
-  display: block;
-  margin-top: 0px;
-  margin-bottom: 20px;
-  text-align: left;
-}
-
-/* --- GitHub Project Items --- */
-.github-project-item {
-  background-color: #282a36;
-  padding: 20px;
-  margin-top: 30px;
-  min-height: 220px;
-  margin-bottom: 30px;
-  border-radius: 8px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
-  text-align: left;
-  transition: background-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out, opacity 2s ease-out, transform 2s ease-out;
-  position: relative;
-}
-
-.github-project-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
-}
-
-.github-project-item.hidden-scroll {
-  opacity: 0;
-  transform: scale(0.5);
-}
-
-.project-image {
-  flex-shrink: 0;
-  width: 200px;
-  height: auto;
-  border-radius: 8px;
-  display: block;
-  max-width: 100%;
-  object-fit: contain;
-  align-self: flex-start;
-
-  position: sticky;
-  top: 130px;
-  z-index: 1;
-  margin-bottom: 15px;
-}
-
-.project-details {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  text-align: left;
-}
-
-.project-details img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  display: block;
-  cursor: pointer;
-  transition: transform 0.2s ease-in-out;
-}
-
-.project-details img:hover {
-    transform: scale(1.02);
-}
-
-
-.github-project-item h3 {
-  font-size: 1.5rem;
-  color: #7dbeff;
-  margin-top: 0;
-  margin-bottom: 10px;
-}
-
-.github-project-item p {
-  font-size: 1rem;
-  margin-bottom: 15px;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-}
-
-.github-content-corner-logo {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  z-index: 10;
-}
-
-.github-content-corner-logo img {
-  width: 30px;
-  height: auto;
-  border-radius: 4px;
-  transition: transform 0.3s ease-in-out;
-}
-
-.github-content-corner-logo:hover img {
-  transform: scale(1.1);
-}
-
-.project-image.dark-mode-img,
-.github-content-corner-logo .dark-mode-img {
-  display: none;
-}
-body.dark-mode .project-image.dark-mode-img,
-body.dark-mode .github-content-corner-logo .dark-mode-img {
-  display: block;
-}
-body.dark-mode .project-image.light-mode-img,
-body.dark-mode .github-content-corner-logo .light-mode-img {
-  display: none;
-}
-.project-image.light-mode-img,
-.github-content-corner-logo .light-mode-img {
-  opacity: 1;
-  transition: opacity 0.3s ease-in-out;
-}
-body.dark-mode .project-image.light-mode-img,
-body.dark-mode .github-content-corner-logo .light-mode-img {
-  opacity: 0;
-}
-
-
-/* --- Controls Wrapper (Bottom Right) --- */
-.bottom-right-controls-wrapper {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1000;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  background-color: rgba(34, 34, 34, 0.8);
-  padding: 10px 8px;
-  border-radius: 12px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  transition: background-color 1.5s ease-in-out, border-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out, opacity 0.75s ease-out;
-  width: 160px;
-  align-items: center;
-}
-.bottom-right-controls-wrapper:hover {
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
-}
-.bottom-right-controls-wrapper.fade-out-controls {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.theme-toggle-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  position: relative;
-  margin: 0 10px;
-}
-.theme-switch-checkbox { height: 0; width: 0; visibility: hidden; }
-.theme-switch-label {
-  cursor: pointer;
-  width: 80px;
-  height: 20px;
-  background: #282a36;
-  border-radius: 10px;
-  position: relative;
-  transition: background 1s;
-  border: 1px solid #555;
-  overflow: hidden;
-  flex-shrink: 0;
-  margin: 0 10px;
-}
-.theme-switch-label:after {
-  content: '';
-  position: absolute;
-  top: 1.5px;
-  left: 1.5px;
-  width: 17px;
-  height: 17px;
-  background: #fafafa;
-  border-radius: 50%;
-  transition: 1s;
-  z-index: 1;
-}
-.theme-switch-checkbox:checked + .theme-switch-label { background: linear-gradient(to right, #4a90e2, #2e60a3); border-color: #4a90e2; }
-.theme-switch-checkbox:checked + .theme-switch-label:after { left: calc(100% - 1.5px); transform: translateX(-100%); background: #333333; }
-
-.theme-icon {
-  font-size: 20px;
-  transition: opacity 1s ease-in-out, transform 1s ease-in-out, color 1s ease-in-out;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 20px;
-  text-align: center;
-}
-#moon-icon { right: 0px; color: #fafafa; }
-#sun-icon { left: 0px; color: #FFD700; }
-.theme-switch-checkbox:not(:checked) ~ #moon-icon { opacity: 0; }
-.theme-switch-checkbox:checked ~ #sun-icon { opacity: 0; }
-
-.font-controls {
-  display: flex;
-  justify-content: space-between;
-  gap: 0px;
-  width: 100%;
-}
-.font-controls span {
-  width: 30px;
-  height: 30px;
-  background-color: #333;
-  color: #fafafa;
-  border: 1px solid #555;
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-  cursor: pointer;
-  user-select: none;
-  transition: background-color 1.5s, color 1.5s, border-color 1.5s;
-}
-#font-minus { font-size: 13px; }
-#font-reset { font-size: 17px; }
-#font-plus { font-size: 21px; }
-.font-controls span:hover { background-color: #555; }
-
-/* --- Custom List Styling (Image-based bullets) --- */
-.console-list, .content-list {
-  list-style-type: none;
-  padding-left: 0;
-}
-.console-list li, .content-list li {
-  position: relative;
-  padding-left: 30px;
-  margin-bottom: 2px;
-  display: flex;
-  align-items: center;
-}
-.console-list li::before, .content-list li::before {
-  content: "";
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  margin-right: 12px;
-  flex-shrink: 0;
-}
-
-.switch-list li::before { background-image: url('../images/switch.webp'); }
-.xbox-list li::before { background-image: url('../images/xbox.webp'); }
-.playstation-list li::before { background-image: url('../images/playstation.webp'); }
-.steam-list li::before { background-image: url('../images/steam.webp'); }
-.gamecube-list li::before { background-image: url('../images/gamecube.webp'); }
-.gameboy-list li::before { background-image: url('../images/gameboy_og.webp'); }
-.movie-item::before { background-image: url('../images/movie.webp'); }
-.tv-show-item::before { background-image: url('../images/television.webp'); }
-.podcast-item::before { background-image: url('../images/ipod.webp'); }
-.music-item::before { background-image: url('../images/loud-speaker.webp'); }
-
-/* * This CSS file handles the styling and animation for the scroll-to-bottom button.
- */
-
-/* Scroll Button Container */
-.scroll-to-bottom-container {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1000;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease-in-out;
-}
-
-/* Scroll Button Styling */
-#scroll-to-bottom-btn {
-  background-color: #282a36;
-  color: #fafafa;
-  border: 1px solid #555;
-  border-radius: 50%;
-  width: 45px;
-  height: 45px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-  transition: transform 0.2s ease-in-out, background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  user-select: none;
-  -webkit-user-select: none;
-  font-size: 1.5rem;
-}
-
-#scroll-to-bottom-btn:hover {
-  transform: translateY(-2px);
-  background-color: #333;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
-}
-
-.scroll-to-bottom-container.active {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-body.light-mode .scroll-to-bottom-container {
-  opacity: 0;
-}
-
-body.light-mode .scroll-to-bottom-container.active {
-  opacity: 1;
-}
-
-body.light-mode #scroll-to-bottom-btn {
-  background-color: #eee;
-  color: #333333;
-  border-color: #ccc;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-body.light-mode #scroll-to-bottom-btn:hover {
-  background-color: #ddd;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-}
-
-/* --- Footer --- */
-.powered-by-github {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  font-size: 13px;
-  color: #888;
-  z-index: 990;
-  transition: color 1.5s ease-in-out;
-}
-.powered-by-github a { color: #888; text-decoration: none; transition: color 1.5s ease-in-out; }
-.powered-by-github a:hover { text-decoration: none; }
-
-/* --- General Focus States --- */
-a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible,
-.theme-switch-label:focus-visible, .font-controls span:focus-visible, .bottom-right-controls-wrapper:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 2px #7dbeff;
-  border-color: #7dbeff;
-  transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
-  border-radius: 4px;
-}
-
-/* --- Social Share Controls --- */
-.share-container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 15px;
-}
-
-.share-btn {
-  background-color: #282a36;
-  color: #a0a0a0;
-  border: 1px solid #444;
-  padding: 8px 15px;
-  border-radius: 50px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.share-btn:hover {
-  background-color: #383b48;
-  transform: translateY(-2px);
-}
-
-body.light-mode .share-btn {
-  background-color: #d0d0d0;
-  color: #333333;
-  border-color: #bbb;
-}
-
-body.light-mode .share-btn:hover {
-  background-color: #e0e0e0;
-}
-
-.social-icons-wrapper {
-  display: flex;
-  gap: 15px;
-  height: 0;
-  overflow: hidden;
-  transition: height 0.5s ease-in-out, padding 0.5s ease-in-out;
-  padding: 0;
-}
-
-.social-icons-wrapper.active {
-  height: auto;
-  padding: 10px 0;
-}
-
-.social-icons-wrapper a, .social-icons-wrapper button {
-  background-color: transparent;
-  color: #a0a0a0;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
-}
-
-.social-icons-wrapper a i,
-.social-icons-wrapper button i {
-    font-size: 1.714rem;
-    line-height: 1;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    width: 1.2em;
-    height: 1.2em;
-}
-
-.social-icons-wrapper a:hover, .social-icons-wrapper button:hover {
-    transform: translateY(-2px) scale(1.05);
-}
-
-/* Specific hover colors */
-.social-icons-wrapper .fa-twitter:hover { color: #1da1f2; }
-.social-icons-wrapper .fa-linkedin-in:hover { color: #0077b5; }
-.social-icons-wrapper .fa-facebook-f:hover { color: #1877f2; }
-.social-icons-wrapper .fa-clipboard:hover { color: #7dbeff; }
-
-.social-icons-wrapper a .fa-reddit-alien,
-.social-icons-wrapper a .fa-whatsapp {
-  color: var(--secondary-text-color);
-  transition: color 0.3s ease-in-out;
-}
-
-.social-icons-wrapper a:hover .fa-reddit-alien {
-  color: #ff4500;
-}
-
-.social-icons-wrapper a:hover .fa-whatsapp {
-  color: #25d366;
-}
-
-
-body.light-mode .content-column .social-icons-wrapper a, body.light-mode .content-column .social-icons-wrapper button {
-  color: #333333;
-  transition: color 0.3s ease-in-out;
-}
-
-
-body.light-mode .content-column .social-icons-wrapper a:hover {
-  color: #666666;
-}
-
-body.light-mode .content-column .social-icons-wrapper .fa-twitter:hover { color: #1da1f2; }
-body.light-mode .content-column .social-icons-wrapper .fa-linkedin-in:hover { color: #0077b5; }
-body.light-mode .content-column .social-icons-wrapper .fa-facebook-f:hover { color: #1877f2; }
-body.light-mode .content-column .social-icons-wrapper .fa-clipboard:hover { color: #4a90e2; }
-
-body.light-mode .content-column .social-icons-wrapper a:hover .fa-reddit-alien {
-  color: #ff4500;
-}
-
-body.light-mode .content-column .social-icons-wrapper a:hover .fa-whatsapp {
-  color: #25d366;
-}
-
-a[target="_blank"]:not(.github-content-corner-logo):not(.powered-by-github) {
-  padding-right: 15px;
-  background: url('../images/external_link_icon_wht.webp') no-repeat right center;
-  background-size: 12px 12px;
-}
-body.light-mode a[target="_blank"]:not(.github-content-corner-logo):not(.powered-by-github) {
-  padding-right: 15px;
-  background: url('../images/external_link_icon_blk.webp') no-repeat right center;
-  background-size: 12px 12px;
-}
-
-.social-icons-wrapper a, .social-icons-wrapper a:hover {
-    background: none !important;
-    padding-right: 0 !important;
-}
-
-/* --- Light Mode Overrides --- */
-body.light-mode {
-  background-color: #fafafa;
-  color: #333333;
-}
-body.light-mode::-webkit-scrollbar-track { background: #e0e0e0; }
-body.light-mode::-webkit-scrollbar-thumb { background-color: transparent; border: 2px solid transparent; }
-body.light-mode:hover::-webkit-scrollbar-thumb { background-color: #888; border-color: #e0e0e0; }
-body.light-mode::-webkit-scrollbar-thumb:hover { background-color: #666; }
-
-body.light-mode .main-header-fixed { background-color: #fafafa; }
-body.light-mode h1 { color: #333333; }
-body.light-mode .main-nav li a { color: #333333; }
-body.light-mode .main-nav li a:hover { color: #000; background-color: #e0e0e0; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); transform: translateY(-2px); }
-body.light-mode .main-nav li a.active { color: #4a90e2; background-color: #e0e0e0; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); }
-body.light-mode .content-column a { color: #4a90e2; }
-body.light-mode .content-column p, body.light-mode .content-column h4, body.light-mode .content-column ul, body.light-mode .content-column ul li { color: #333333; }
-body.light-mode .content-column h2 { color: #333333; }
-body.light-mode .github-project-item { background-color: #d0d0d0; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); }
-body.light-mode .github-project-item:hover { box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25); }
-body.light-mode .github-project-item h3 { color: #333333; }
-body.light-mode .powered-by-github, body.light-mode .powered-by-github a { color: #666; }
-body.light-mode .powered-by-github a:hover { color: #444; }
-body.light-mode .font-controls span { background-color: #eee; color: #333333; border-color: #bbb; }
-body.light-mode .bottom-right-controls-wrapper { background-color: rgba(240, 240, 240, 0.8); box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); border-color: rgba(0, 0, 0, 0.1); }
-body.light-mode .bottom-right-controls-wrapper:hover { box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25); }
-body.light-mode a:focus-visible, body.light-mode button:focus-visible, body.light-mode input:focus-visible, body.light-mode textarea:focus-visible, body.light-mode select:focus-visible, body.light-mode .theme-switch-label:focus-visible, body.light-mode .font-controls span:focus-visible, body.light-mode .bottom-right-controls-wrapper:focus-visible {
-  box-shadow: 0 0 0 2px #4a90e2;
-  border-color: #4a90e2;
-}
-
-body.light-mode a[target="_blank"]:not(.github-content-corner-logo):not(.powered-by-github) {
-  padding-right: 15px;
-  background: url('../images/external_link_icon_blk.webp') no-repeat right center;
-  background-size: 12px 12px;
-}
-
-
-body.light-mode #lightbox-content {
-  background-color: #fafafa;
-  border-color: #4a90e2;
-}
-
-body.light-mode #lightbox-description {
-  color: #333333;
-}
-
-body.light-mode #scroll-progress-bar {
-  background-color: #4a90e2;
-}
-
-/* --- Lightbox Styles --- */
-#lightbox-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 2000;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-}
-
-#lightbox-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-#lightbox-content {
-  position: relative;
-  background-color: #282a36;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-  max-width: 90%;
-  max-height: 90%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  border: 2px solid #7dbeff;
-}
-
-#lightbox-image {
-  max-width: 100%;
-  max-height: 75vh;
-  height: auto;
-  display: block;
-  border-radius: 8px;
-  object-fit: contain;
-}
-
-#lightbox-description {
-  color: #fafafa;
-  font-size: 0.9rem;
-  margin-top: 15px;
-  text-align: center;
-  max-width: 80%;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-}
-
-#lightbox-close-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: #ff3333;
-  color: white;
-  border: 2px solid rgba(255, 255, 255, 0.7);
-  border-radius: 50%;
-  width: 35px;
-  height: 35px;
-  font-size: 1.3rem;
-  font-weight: bold;
-  cursor: pointer;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-transition: background-color 0.2s ease-in-out, -webkit-transform 0.2s ease-in-out, -webkit-box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
-  transition: background-color 0.2s ease-in-out, -webkit-transform 0.2s ease-in-out, -webkit-box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
-  transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
-  transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out, -webkit-transform 0.2s ease-in-out, -webkit-box-shadow 0.2s ease-in-out;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-}
-
-#lightbox-close-btn:hover {
-  background-color: #cc0000;
-  -webkit-transform: scale(1.1);
-  -ms-transform: scale(1.1);
-  transform: scale(1.1);
-  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
-  border-color: white;
-}
-
-/* Class to blur the body content when lightbox is active */
-body.blur-content > *:not(#lightbox-overlay) {
-  -webkit-filter: blur(3px);
-  filter: blur(3px);
-  pointer-events: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-body.blur-content {
-    overflow: hidden;
-    padding-right: 10px;
-}
-
-
-/* --- Media Queries (Mobile Specific Adjustments) --- */
 @media (max-width: 768px) {
-    html {
-        font-size: 16px;
-    }
-
-    body {
-        padding-top: 170px;
-    }
-
-    .main-header-fixed {
-        padding: 10px 0;
-        min-height: 100px; /* Reduced header height */
-    }
-
-    h1 {
-        font-size: 1.8rem; /* Smaller font for a less imposing title */
-        line-height: 1.2;
-        padding: 0 10px; /* Reduced padding */
-        margin-bottom: 0; /* Align with nav */
-        transform: none; /* Removed the slide-up transform */
-    }
-    
-    .main-nav {
-        margin-top: 5px; /* Less space between title and nav */
-        padding: 0 10px;
-    }
-    
-    .main-nav ul {
-        gap: 20px;
-    }
-
-    .main-nav li a {
-        font-size: 1.1rem;
-        padding: 8px 12px;
-        transition: color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    }
-
-    .profile-image {
-        top: 10px;
-        left: 10px;
-        width: 60px;
-        height: 60px;
-        z-index: 1001;
-    }
-
-    .corner-logo-fixed {
-        top: 10px;
-        right: 10px;
-        width: 90px;
-        height: 60px;
-        z-index: 1001;
-    }
-
-    .bottom-right-controls-wrapper {
-        max-width: 140px;
-        padding: 8px 6px;
-        bottom: 10px;
-        right: 5px;
-    }
-
-    .theme-switch-label {
-        width: 60px;
-        height: 20px;
-        border-radius: 10px;
-        margin: 0 8px;
-    }
-
-    .theme-switch-label:after {
-        top: 1.5px;
-        left: 1.5px;
-        width: 17px;
-        height: 17px;
-    }
-
-    .theme-switch-checkbox:checked + .theme-switch-label:after {
-        left: calc(100% - 1.5px);
-    }
-
-    .theme-icon {
-        font-size: 18px;
-    }
-
-    .font-controls {
-        gap: 6px;
-    }
-
-    .font-controls span {
-        width: 35px;
-        height: 35px;
-        font-size: 16px;
-    }
-
-    #font-minus {
-        font-size: 12px;
-    }
-    #font-reset {
-        font-size: 16px;
-    }
-    #font-plus {
-        font-size: 20px;
-    }
-
-    .content-column {
-        padding: 0 20px 15px 20px; /* Added 20px padding to the left and right */
-        font-size: 1rem;
-        line-height: 1.6;
-        margin-bottom: 100px;
-    }
-
-    .github-project-item {
-        flex-direction: column;
-        /* Removed align-items: center to let the content align left */
-        padding: 15px;
-    }
-
-    .project-details {
-        width: 100%;
-        align-items: flex-start;
-        padding: 0 5px; /* Added 5px padding on the left and right */
-    }
-
-    .github-project-item .project-details h3,
-    .github-project-item .project-details p,
-    .github-project-item .project-details h4,
-    .github-project-item .project-details ul,
-    .github-project-item .project-details ul li {
-        text-align: left;
-    }
-
-    .github-project-item .project-details ul {
-        padding-left: 20px;
-    }
-
-    .project-image {
-        width: 100%;
-        max-width: none;
-        margin-bottom: 15px;
-        position: static;
-        top: auto;
-    }
-
-    .project-details img {
-        max-width: 100%;
-        height: auto;
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-
-    .github-project-item h3 {
-        font-size: 1.5rem;
-    }
-
-    .github-project-item p {
-        font-size: 0.95rem;
-        line-height: 1.4;
-    }
-
-    .github-content-corner-logo {
-        top: 8px;
-        right: 8px;
-    }
-
-    .github-content-corner-logo img {
-        width: 20px;
-    }
+  html {
+    font-size: 16px;
+  }
+  body {
+    padding-top: 170px;
+  }
+  .main-header-fixed {
+    padding: 10px 0;
+    min-height: 100px;
+  }
+  h1 {
+    font-size: 1.8rem;
+    line-height: 1.2;
+    padding: 0 10px;
+    margin-bottom: 0;
+    transform: none;
+  }
+  .main-nav {
+    margin-top: 5px;
+    padding: 0 10px;
+  }
+  .main-nav ul {
+    gap: 20px;
+  }
+  .main-nav li a {
+    font-size: 1.1rem;
+    padding: 8px 12px;
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+  .profile-image {
+    top: 10px;
+    left: 10px;
+    width: 60px;
+    height: 60px;
+    z-index: 1001;
+  }
+  .corner-logo-fixed {
+    top: 10px;
+    right: 10px;
+    width: 90px;
+    height: 60px;
+    z-index: 1001;
+  }
+  .bottom-right-controls-wrapper {
+    max-width: 140px;
+    padding: 8px 6px;
+    bottom: 10px;
+    right: 5px;
+  }
+  .theme-switch-label {
+    width: 60px;
+    height: 20px;
+    border-radius: 10px;
+    margin: 0 8px;
+  }
+  .theme-switch-label:after {
+    top: 1.5px;
+    left: 1.5px;
+    width: 17px;
+    height: 17px;
+  }
+  .theme-switch-checkbox:checked + .theme-switch-label:after {
+    left: calc(100% - 1.5px);
+  }
+  .theme-icon {
+    font-size: 18px;
+  }
+  .font-controls {
+    gap: 6px;
+  }
+  .font-controls span {
+    width: 35px;
+    height: 35px;
+    font-size: 16px;
+  }
+  #font-minus {
+    font-size: 12px;
+  }
+  #font-reset {
+    font-size: 16px;
+  }
+  #font-plus {
+    font-size: 20px;
+  }
+  .content-column {
+    padding: 0 20px 15px 20px;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 100px;
+  }
+  .github-project-item {
+    flex-direction: row; /* Change to row to put items next to each other */
+    align-items: flex-start; /* Align items to the top of the container */
+    padding: 15px;
+    gap: 15px; /* Add space between the image and text */
+  }
+  .project-details {
+    flex-grow: 1; /* Allow project details to take up remaining space */
+    width: auto;
+    align-items: flex-start;
+    padding: 0; /* Removed padding here to prevent double padding */
+  }
+  .github-project-item .project-details h3,
+  .github-project-item .project-details p,
+  .github-project-item .project-details h4,
+  .github-project-item .project-details ul,
+  .github-project-item .project-details ul li {
+    text-align: left;
+  }
+  .github-project-item .project-details ul {
+    padding-left: 20px;
+  }
+  .project-image {
+    max-width: 300px; /* Set max-width to 300px */
+    width: 100%; /* Keep it responsive on smaller screens */
+    margin: 0; /* Remove old margins */
+    position: static;
+    top: auto;
+    object-fit: contain; /* Ensure the image doesn't get distorted */
+  }
+  .project-details img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .github-project-item h3 {
+    font-size: 1.5rem;
+  }
+  .github-project-item p {
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+  .github-content-corner-logo {
+    top: 8px;
+    right: 8px;
+  }
+  .github-content-corner-logo img {
+    width: 20px;
+  }
 }
