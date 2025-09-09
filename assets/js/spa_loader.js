@@ -85,14 +85,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             const data = await response.text();
 
-            let contentColumn = contentArea.querySelector('.content-column');
-            if (!contentColumn) {
-                contentColumn = document.createElement('div');
-                contentColumn.classList.add('content-column');
-                contentArea.appendChild(contentColumn);
-            }
-
-            contentColumn.innerHTML = data;
+            // This is the CRITICAL change:
+            // It replaces the entire content area, ensuring a clean slate.
+            contentArea.innerHTML = data;
+            
             document.body.classList.remove('hide-scrollbar-visually');
 
             if (typeof initScrollAnimations === 'function') {
