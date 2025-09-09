@@ -1185,11 +1185,15 @@ body.blur-content {
     margin-bottom: 100px;
   }
 
+@media (max-width: 768px) {
+  /* ... existing code ... */
+  
   /* GitHub project items: now stacks cleanly */
   .github-project-item {
     flex-direction: column;
     align-items: center;
     padding: 15px;
+    gap: 10px; /* Reduces the gap between the image and details */
   }
   .project-details {
     width: 100%;
@@ -1222,6 +1226,7 @@ body.blur-content {
   }
   .github-project-item h3 {
     font-size: 1.5rem;
+    margin-top: 0; /* Ensures there is no extra margin at the top of the h3 */
   }
   .github-project-item p {
     font-size: 0.95rem;
