@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+function fadeInLists() {
   const listItems = document.querySelectorAll('.content-list li');
   let delay = 0;
 
@@ -6,6 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
       item.classList.add('show');
     }, delay);
-    delay += 100; // Adjust this value to change the delay between each item
+    delay += 100;
   });
-});
+}
