@@ -576,7 +576,7 @@ body.dark-mode .github-content-corner-logo .light-mode-img {
 .console-list li,
 .content-list li {
   position: relative;
-  padding-left: 30px;
+  padding-left: 5px;
   margin-bottom: 2px;
   display: flex;
   align-items: center;
