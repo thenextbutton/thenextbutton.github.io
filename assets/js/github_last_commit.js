@@ -65,15 +65,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const repo = item.getAttribute('data-repo');
         const path = item.getAttribute('data-path');
 
-        if (repo && path) {
-            const [owner, repoName] = repo.split('/'); // Assuming 'owner/repo' format
-
-            // Find the element to update. It's either the span with 'last-updated' class,
-            // or the one with 'last-updated-text' ID.
+        // Check if the div has a data-repo attribute
+        if (repo) {
+            const owner = 'thenextbutton'; // Assuming your GitHub username is static
             const lastUpdatedElement = item.querySelector('.last-updated') || document.getElementById('last-updated-text');
 
             if (lastUpdatedElement) {
-                fetchAndDisplayLastCommitDate(owner, repoName, lastUpdatedElement, path);
+                fetchAndDisplayLastCommitDate(owner, repo, lastUpdatedElement, path);
             }
         }
     });
