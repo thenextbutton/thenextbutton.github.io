@@ -392,7 +392,7 @@ body.light-mode .main-nav li a[href*="github.com"]:hover::after {
   font-size: 1.5rem;
   color: #7dbeff;
   margin-top: 0;
-  margin-bottom: 5px;
+  margin-bottom: 1px;
 }
 
 .github-project-item p {
@@ -1256,7 +1256,7 @@ body.blur-content {
     .github-project-item h3 {
         font-size: 1.5rem;
         margin-top: 0;
-        margin-bottom: 5px;
+        margin-bottom: 1px;
     }
 
     .github-project-item p {
