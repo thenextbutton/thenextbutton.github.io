@@ -114,9 +114,10 @@ async function loadContent(url, pageName, anchor = null) {
         if (typeof window.initSocialShare === 'function') {
             window.initSocialShare();
         }
-        const filePath = `content/${pageName}_content.html`;
-        if (typeof window.updateGithubFileCommitDate === 'function') {
-            window.updateGithubFileCommitDate(filePath);
+
+        // CORRECTED LINE: This now calls the new initialization function
+        if (typeof window.initGithubLastCommit === 'function') {
+            window.initGithubLastCommit();
         }
 
         await new Promise(resolve => setTimeout(resolve, 50));
