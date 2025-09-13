@@ -311,6 +311,16 @@ body.light-mode .main-nav li a[href*="github.com"]:hover::after {
   text-align: left;
 }
 
+#last-updated {
+  color: #888;
+  font-style: italic;
+  font-size: 0.9em;
+  display: block;
+  margin-top: 0px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
 /* --- GitHub Project Items --- */
 .github-project-item {
   background-color: #282a36;
