@@ -298,7 +298,7 @@ body.light-mode .main-nav li a[href*="github.com"]:hover::after {
   text-decoration: none;
 }
 .content-column h2 {
-  margin-bottom: 5px;
+  margin-bottom: 1px;
 }
 
 #last-updated-text {
@@ -307,7 +307,7 @@ body.light-mode .main-nav li a[href*="github.com"]:hover::after {
   font-size: 0.9em;
   display: block;
   margin-top: 0px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   text-align: left;
 }
 
@@ -317,7 +317,7 @@ body.light-mode .main-nav li a[href*="github.com"]:hover::after {
   font-size: 0.9em;
   display: block;
   margin-top: 0px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   text-align: left;
 }
 
