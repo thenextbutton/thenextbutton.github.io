@@ -1,0 +1,76 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # Or your default branch name
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+
+      - name: Install Eleventy and Dependencies
+        run: |
+          npm init -y
+          npm install @11ty/eleventy --save-dev
+          npm install @11ty/eleventy-fetch --save-dev
+
+      - name: Create Eleventy Source and Data Files
+        run: |
+          mkdir -p src/_data
+          echo '{ "scripts": { "start": "eleventy" } }' > package.json
+          echo "module.exports = async function() {
+            const EleventyFetch = require('@11ty/eleventy-fetch');
+            const token = process.env.GH_TOKEN;
+            const headers = { 'Authorization': 'token ' + token };
+            
+            const urls = [
+                'https://api.github.com/repos/thenextbutton/thenextbutton.github.io/commits?path=content/now_content.html&per_page=1',
+                // Add more GitHub API URLs for your other projects here
+            ];
+
+            const dates = await Promise.all(urls.map(async (url) => {
+                try {
+                    const json = await EleventyFetch(url, {
+                        type: 'json',
+                        duration: '1d', // Cache for 1 day
+                        directory: '.cache',
+                        fetchOptions: { headers: headers }
+                    });
+                    if (json.length > 0) {
+                        const commitDate = new Date(json[0].commit.committer.date);
+                        const now = new Date();
+                        const diffDays = Math.floor(Math.abs(now - commitDate) / (1000 * 60 * 60 * 24));
+                        return diffDays === 0 ? 'Last updated: today' : \`Last updated: \${diffDays} days ago\`;
+                    }
+                    return 'Last updated: N/A';
+                } catch (error) {
+                    return 'Last updated: N/A (Build error)';
+                }
+            }));
+            return { nowUpdated: dates[0] };
+          };" > src/_data/github.js
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      - name: Copy existing files to Eleventy source folder
+        run: |
+          rsync -av --exclude 'node_modules/' --exclude '.git/' --exclude '.github/' --exclude 'src/' . src
+
+      - name: Build site with Eleventy
+        run: npm run start
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          publish_dir: ./_site
+          cname: your-domain.com # Only if you have a custom domain
