@@ -1,42 +1,42 @@
-// assets/js/github_last_commit.js
+/**
+ * github_last_commit.js
+ *
+ * This script fetches the last commit date for a specified GitHub repository,
+ * optionally for a specific file, and displays it on the webpage,
+ * calculating the difference in days.
+ * It's designed to work for both project listings and individual files.
+ */
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    async function fetchAndDisplayLastCommitDate(owner, repo, elementId, filePath = null) {
+    /**
+     * Fetches the last commit date for a given GitHub repository and updates a specified HTML element.
+     * Can optionally fetch for a specific file path within the repository.
+     * @param {string} owner - The GitHub repository owner (e.g., 'thenextbutton').
+     * @param {string} repo - The GitHub repository name (e.g., 'thenextbutton.github.io').
+     * @param {HTMLElement} elementToUpdate - The HTML element to update with the last commit info.
+     * @param {string|null} filePath - Optional. The path to the specific file (e.g., 'content/now_content.html').
+     */
+    async function fetchAndDisplayLastCommitDate(owner, repo, elementToUpdate, filePath = null) {
         let apiUrl = `https://api.github.com/repos/${owner}/${repo}/commits?per_page=1`;
 
         if (filePath) {
-
+            // Encode the file path to handle special characters correctly in URL
             apiUrl = `https://api.github.com/repos/${owner}/${repo}/commits?path=${encodeURIComponent(filePath)}&per_page=1`;
-        }
-
-        const lastCommitElement = document.getElementById(elementId);
-
-        if (!lastCommitElement) {
-            console.warn(`Element with ID '${elementId}' not found. Cannot display last commit date.`);
-            return;
         }
 
         try {
             const response = await fetch(apiUrl);
             if (!response.ok) {
-                console.error(`GitHub API error for path '${filePath || 'repository'}': ${response.status} - ${response.statusText}`);
-                lastCommitElement.textContent = 'Last updated: N/A (API error)';
-                return;
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
-
             const data = await response.json();
 
-            if (data && data.length > 0) {
-                const lastCommitDateStr = data[0].commit.author.date;
-                const lastCommitDate = new Date(lastCommitDateStr);
-                const today = new Date();
-
-                lastCommitDate.setHours(0, 0, 0, 0);
-                today.setHours(0, 0, 0, 0);
-
-                const diffTime = Math.abs(today.getTime() - lastCommitDate.getTime());
-                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            if (data.length > 0) {
+                const commitDate = new Date(data[0].commit.committer.date);
+                const now = new Date();
+                const diffTime = Math.abs(now - commitDate);
+                const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
                 let displayText = '';
                 if (diffDays === 0) {
@@ -47,37 +47,34 @@ document.addEventListener('DOMContentLoaded', () => {
                     displayText = `Last updated: ${diffDays} days ago`;
                 }
 
-                lastCommitElement.textContent = displayText;
+                elementToUpdate.textContent = displayText;
             } else {
-                lastCommitElement.textContent = 'Last updated: N/A (No commits found for this path)';
+                elementToUpdate.textContent = 'Last updated: N/A (No commits found for this path)';
             }
         } catch (error) {
             console.error('Failed to fetch last commit date:', error);
-            lastCommitElement.textContent = 'Last updated: N/A (Network error)';
+            elementToUpdate.textContent = 'Last updated: N/A (Network error)';
         }
     }
 
-    function updateAllGithubProjectCommitDates() {
-        const githubProjects = document.querySelectorAll('.github-project-item');
-        if (githubProjects.length > 0) {
-            githubProjects.forEach(project => {
-                const repoName = project.getAttribute('data-repo');
+    // This section automatically finds all elements with the 'github-project-item' class
+    // and updates them with the last commit date from their data attributes.
+    const projectItems = document.querySelectorAll('.github-project-item');
 
-                const filePath = project.getAttribute('data-path'); 
-                if (repoName) {
-                    const elementId = `last-updated-${project.id}`;
+    projectItems.forEach(item => {
+        const repo = item.getAttribute('data-repo');
+        const path = item.getAttribute('data-path');
 
-                    fetchAndDisplayLastCommitDate('thenextbutton', repoName, elementId, filePath);
-                }
-            });
-            return true;
+        if (repo && path) {
+            const [owner, repoName] = repo.split('/'); // Assuming 'owner/repo' format
+
+            // Find the element to update. It's either the span with 'last-updated' class,
+            // or the one with 'last-updated-text' ID.
+            const lastUpdatedElement = item.querySelector('.last-updated') || document.getElementById('last-updated-text');
+
+            if (lastUpdatedElement) {
+                fetchAndDisplayLastCommitDate(owner, repoName, lastUpdatedElement, path);
+            }
         }
-        return false;
-    }
-
-    window.updateGithubFileCommitDate = function(pageFilePath) {
-        if (!updateAllGithubProjectCommitDates()) {
-            fetchAndDisplayLastCommitDate('thenextbutton', 'thenextbutton.github.io', 'last-updated-text', pageFilePath);
-        }
-    };
+    });
 });

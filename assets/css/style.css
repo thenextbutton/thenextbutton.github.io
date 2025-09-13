@@ -301,7 +301,7 @@ body.light-mode .main-nav li a[href*="github.com"]:hover::after {
   margin-bottom: 1px;
 }
 
-#last-updated-text {
+.last-updated-text {
   color: #888;
   font-style: italic;
   font-size: 0.9em;
