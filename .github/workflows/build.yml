@@ -32,17 +32,22 @@ jobs:
             const token = process.env.GH_TOKEN;
             const headers = { 'Authorization': 'token ' + token };
             
-            const urls = [
-                { id: 'now', url: 'https://api.github.com/repos/thenextbutton/thenextbutton.github.io/commits?path=content/now_content.html&per_page=1' },
-                { id: 'pi-cow-garage', url: 'https://api.github.com/repos/thenextbutton/PiCOW-Garage/commits?per_page=1' },
+            const projectsToTrack = [
+                { id: 'now', repo: 'thenextbutton.github.io', path: 'content/now_content.html' },
+                { id: 'pi-cow-garage', repo: 'PiCOW-Garage' },
+                { id: 'plex-webhooks', repo: 'home_assistant', path: 'blueprints/plex_webhook_handler/plex_webhook_release.yaml' }
                 // Add more projects here
-                // { id: 'project-id', url: 'https://api.github.com/repos/thenextbutton/Your-Project-Repo/commits?per_page=1' }
             ];
 
             const projects = {};
-            await Promise.all(urls.map(async (project) => {
+            await Promise.all(projectsToTrack.map(async (project) => {
+                let apiUrl = `https://api.github.com/repos/thenextbutton/${project.repo}/commits?per_page=1`;
+                if (project.path) {
+                    apiUrl += `&path=${encodeURIComponent(project.path)}`;
+                }
+
                 try {
-                    const json = await EleventyFetch(project.url, {
+                    const json = await EleventyFetch(apiUrl, {
                         type: 'json',
                         duration: '1d', // Cache for 1 day
                         directory: '.cache',
