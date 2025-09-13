@@ -33,13 +33,16 @@ jobs:
             const headers = { 'Authorization': 'token ' + token };
             
             const urls = [
-                'https://api.github.com/repos/thenextbutton/thenextbutton.github.io/commits?path=content/now_content.html&per_page=1',
-                // Add more GitHub API URLs for your other projects here
+                { id: 'now', url: 'https://api.github.com/repos/thenextbutton/thenextbutton.github.io/commits?path=content/now_content.html&per_page=1' },
+                { id: 'pi-cow-garage', url: 'https://api.github.com/repos/thenextbutton/PiCOW-Garage/commits?per_page=1' },
+                // Add more projects here
+                // { id: 'project-id', url: 'https://api.github.com/repos/thenextbutton/Your-Project-Repo/commits?per_page=1' }
             ];
 
-            const dates = await Promise.all(urls.map(async (url) => {
+            const projects = {};
+            await Promise.all(urls.map(async (project) => {
                 try {
-                    const json = await EleventyFetch(url, {
+                    const json = await EleventyFetch(project.url, {
                         type: 'json',
                         duration: '1d', // Cache for 1 day
                         directory: '.cache',
@@ -49,14 +52,15 @@ jobs:
                         const commitDate = new Date(json[0].commit.committer.date);
                         const now = new Date();
                         const diffDays = Math.floor(Math.abs(now - commitDate) / (1000 * 60 * 60 * 24));
-                        return diffDays === 0 ? 'Last updated: today' : \`Last updated: \${diffDays} days ago\`;
+                        projects[project.id] = diffDays === 0 ? 'Last updated: today' : `Last updated: ${diffDays} days ago`;
+                    } else {
+                        projects[project.id] = 'Last updated: N/A (No commits found)';
                     }
-                    return 'Last updated: N/A';
                 } catch (error) {
-                    return 'Last updated: N/A (Build error)';
+                    projects[project.id] = 'Last updated: N/A (Build error)';
                 }
             }));
-            return { nowUpdated: dates[0] };
+            return { lastUpdated: projects };
           };" > src/_data/github.js
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
