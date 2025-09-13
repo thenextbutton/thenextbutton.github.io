@@ -2,17 +2,11 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    /**
-     * Fetches the last commit date for a given GitHub repository.
-     * @param {string} owner - The GitHub repository owner.
-     * @param {string} repo - The GitHub repository name.
-     * @param {string} elementId - The ID of the HTML element to update.
-     * @param {string|null} filePath - Optional. The path to the specific file.
-     */
     async function fetchAndDisplayLastCommitDate(owner, repo, elementId, filePath = null) {
         let apiUrl = `https://api.github.com/repos/${owner}/${repo}/commits?per_page=1`;
 
         if (filePath) {
+
             apiUrl = `https://api.github.com/repos/${owner}/${repo}/commits?path=${encodeURIComponent(filePath)}&per_page=1`;
         }
 
@@ -63,25 +57,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // New function to update all GitHub project commit dates.
     function updateAllGithubProjectCommitDates() {
-        const githubProjects = document.querySelectorAll('.github-project-item[data-repo]');
+        const githubProjects = document.querySelectorAll('.github-project-item');
         if (githubProjects.length > 0) {
             githubProjects.forEach(project => {
                 const repoName = project.getAttribute('data-repo');
+
+                const filePath = project.getAttribute('data-path'); 
                 if (repoName) {
                     const elementId = `last-updated-${project.id}`;
-                    fetchAndDisplayLastCommitDate('thenextbutton', repoName, elementId);
+
+                    fetchAndDisplayLastCommitDate('thenextbutton', repoName, elementId, filePath);
                 }
             });
-            return true; // Return true if it found projects to update
+            return true;
         }
-        return false; // Return false if no projects were found
+        return false;
     }
 
-    // Expose this function globally so it can be called by spa_loader.js.
-    // It will first try to update all projects on the page.
-    // If no projects are found, it will fall back to updating the single "now" page element.
     window.updateGithubFileCommitDate = function(pageFilePath) {
         if (!updateAllGithubProjectCommitDates()) {
             fetchAndDisplayLastCommitDate('thenextbutton', 'thenextbutton.github.io', 'last-updated-text', pageFilePath);
