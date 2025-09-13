@@ -1,26 +1,18 @@
-/**
- * github_last_commit.js
- *
- * This script fetches the last commit date for a specified GitHub repository,
- * optionally for a specific file, and displays it on the webpage,
- * calculating the difference in days.
- * It's designed to be called by spa_loader.js after content is loaded.
- */
+// assets/js/github_last_commit.js
 
 document.addEventListener('DOMContentLoaded', () => {
+
     /**
-     * Fetches the last commit date for a given GitHub repository and updates a specified HTML element.
-     * Can optionally fetch for a specific file path within the repository.
-     * @param {string} owner - The GitHub repository owner (e.g., 'thenextbutton').
-     * @param {string} repo - The GitHub repository name (e.g., 'thenextbutton.github.io').
-     * @param {string} elementId - The ID of the HTML element to update with the last commit info.
-     * @param {string|null} filePath - Optional. The path to the specific file (e.g., 'content/now_content.html').
+     * Fetches the last commit date for a given GitHub repository.
+     * @param {string} owner - The GitHub repository owner.
+     * @param {string} repo - The GitHub repository name.
+     * @param {string} elementId - The ID of the HTML element to update.
+     * @param {string|null} filePath - Optional. The path to the specific file.
      */
     async function fetchAndDisplayLastCommitDate(owner, repo, elementId, filePath = null) {
         let apiUrl = `https://api.github.com/repos/${owner}/${repo}/commits?per_page=1`;
 
         if (filePath) {
-            // Encode the file path to handle special characters correctly in URL
             apiUrl = `https://api.github.com/repos/${owner}/${repo}/commits?path=${encodeURIComponent(filePath)}&per_page=1`;
         }
 
@@ -33,9 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             const response = await fetch(apiUrl);
-
             if (!response.ok) {
-                // More detailed error logging
                 console.error(`GitHub API error for path '${filePath || 'repository'}': ${response.status} - ${response.statusText}`);
                 lastCommitElement.textContent = 'Last updated: N/A (API error)';
                 return;
@@ -48,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const lastCommitDate = new Date(lastCommitDateStr);
                 const today = new Date();
 
-                // Normalize dates to midnight for accurate day difference calculation
                 lastCommitDate.setHours(0, 0, 0, 0);
                 today.setHours(0, 0, 0, 0);
 
@@ -74,14 +63,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Expose this function globally so it can be called by spa_loader.js
-    window.updateGithubFileCommitDate = function(pageFilePath) {
-        // These are your repository details, and the element ID for displaying the date.
-        // You can change 'last-updated-text' if your content pages use different IDs.
-        fetchAndDisplayLastCommitDate('thenextbutton', 'thenextbutton.github.io', 'last-updated-text', pageFilePath);
-    };
+    // New function to update all GitHub project commit dates.
+    function updateAllGithubProjectCommitDates() {
+        const githubProjects = document.querySelectorAll('.github-project-item[data-repo]');
+        if (githubProjects.length > 0) {
+            githubProjects.forEach(project => {
+                const repoName = project.getAttribute('data-repo');
+                if (repoName) {
+                    const elementId = `last-updated-${project.id}`;
+                    fetchAndDisplayLastCommitDate('thenextbutton', repoName, elementId);
+                }
+            });
+            return true; // Return true if it found projects to update
+        }
+        return false; // Return false if no projects were found
+    }
 
-    // Note: The previous direct call for 'now-page-last-updated' has been removed.
-    // The SPA loader will now be responsible for calling `window.updateGithubFileCommitDate`
-    // with the appropriate file path after content is loaded.
+    // Expose this function globally so it can be called by spa_loader.js.
+    // It will first try to update all projects on the page.
+    // If no projects are found, it will fall back to updating the single "now" page element.
+    window.updateGithubFileCommitDate = function(pageFilePath) {
+        if (!updateAllGithubProjectCommitDates()) {
+            fetchAndDisplayLastCommitDate('thenextbutton', 'thenextbutton.github.io', 'last-updated-text', pageFilePath);
+        }
+    };
 });
