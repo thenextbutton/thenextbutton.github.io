@@ -1,0 +1,87 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '15 00 * * *'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+
+      - name: Install Eleventy and Dependencies
+        run: |
+          npm init -y
+          npm install @11ty/eleventy --save-dev
+          npm install @11ty/eleventy-fetch --save-dev
+
+      - name: Create Eleventy Source and Data Files
+        run: |
+          mkdir -p src/_data
+          echo '{ "scripts": { "start": "eleventy" } }' > package.json
+          echo "module.exports = async function() {
+            const EleventyFetch = require('@11ty/eleventy-fetch');
+            const token = process.env.GH_TOKEN;
+            const headers = { 'Authorization': 'token ' + token };
+            
+            const projectsToTrack = [
+                { id: 'now', repo: 'thenextbutton.github.io', path: 'content/now_content.html' },
+                { id: 'pi-cow-garage', repo: 'PiCOW-Garage' },
+                { id: 'plex-webhooks', repo: 'home_assistant', path: 'blueprints/plex_webhook_handler/plex_webhook_release.yaml' }
+                // Add more projects here
+            ];
+
+            const projects = {};
+            await Promise.all(projectsToTrack.map(async (project) => {
+                let apiUrl = `https://api.github.com/repos/thenextbutton/${project.repo}/commits?per_page=1`;
+                if (project.path) {
+                    apiUrl += `&path=${encodeURIComponent(project.path)}`;
+                }
+
+                try {
+                    const json = await EleventyFetch(apiUrl, {
+                        type: 'json',
+                        duration: '1d', // Cache for 1 day
+                        directory: '.cache',
+                        fetchOptions: { headers: headers }
+                    });
+                    if (json.length > 0) {
+                        const commitDate = new Date(json[0].commit.committer.date);
+                        const now = new Date();
+                        const diffDays = Math.floor(Math.abs(now - commitDate) / (1000 * 60 * 60 * 24));
+                        projects[project.id] = diffDays === 0 ? 'Last updated: today' : `Last updated: ${diffDays} days ago`;
+                    } else {
+                        projects[project.id] = 'Last updated: N/A (No commits found)';
+                    }
+                } catch (error) {
+                    projects[project.id] = 'Last updated: N/A (Build error)';
+                }
+            }));
+            return { lastUpdated: projects };
+          };" > src/_data/github.js
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      - name: Copy existing files to Eleventy source folder
+        run: |
+          rsync -av --exclude 'node_modules/' --exclude '.git/' --exclude '.github/' --exclude 'src/' . src
+
+      - name: Build site with Eleventy
+        run: npm run start
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          publish_dir: ./_site
+          cname: chrishoch.co.uk
