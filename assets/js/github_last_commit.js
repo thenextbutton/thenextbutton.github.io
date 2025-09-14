@@ -1,5 +1,5 @@
 // Fetch and display repo update timestamps in friendly format
-fetch('repo-updates.json')
+fetch('../../repo-updates.json')
   .then(res => res.json())
   .then(data => {
     for (const [key, isoDate] of Object.entries(data)) {
