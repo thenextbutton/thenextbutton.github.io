@@ -25,7 +25,7 @@ jobs:
           npm install @11ty/eleventy --save-dev
           npm install @11ty/eleventy-fetch --save-dev
 
-      - name: Create Eleventy Source and Data Files
+- name: Create Eleventy Source and Data Files
         run: |
           mkdir -p src/_data
           echo '{ "scripts": { "start": "eleventy" } }' > package.json
@@ -70,6 +70,7 @@ jobs:
             return { lastUpdated: projects };
           };
           EOF
+          
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
