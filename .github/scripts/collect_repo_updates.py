@@ -56,5 +56,5 @@ for name, info in file_targets.items():
         continue
 
 # Write to JSON
-with open(".assets/github/repo-updates.json", "w") as f:
+with open("./assets/github/repo-updates.json", "w") as f:
     json.dump(output, f, indent=2)
