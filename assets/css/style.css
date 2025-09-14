@@ -420,47 +420,26 @@ body.light-mode .main-nav li a[href*="github.com"]:hover::after {
   transform: scale(1.1);
 }
 
-.filter-controls {
-  margin-bottom: 1rem;
-  display: flex;
-  gap: 1rem;
-  font-family: sans-serif;
-  font-size: 0.95rem;
-}
-
-.filter-controls label {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.3rem 0.6rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  cursor: pointer;
-  background-color: #f9f9f9;
-  transition: background-color 0.2s ease;
-}
-
-.filter-controls label:hover {
-  background-color: #eef;
-}
-
-.filter-controls input[type="checkbox"] {
-  accent-color: #007acc;
-  transform: scale(1.2);
-}
-
 .github-project-item {
   overflow: hidden;
   transition: max-height 0.4s ease, opacity 0.3s ease;
-  max-height: 1000px; /* large enough to fit content */
+  max-height: 1000px;
   opacity: 1;
+  margin-bottom: 1rem;
+  transform: scaleY(1);
+  transform-origin: top;
+}
+
+.github-project-item.collapsing {
+  max-height: 0;
+  opacity: 0;
+  transform: scaleY(0.95);
 }
 
 .github-project-item.hidden {
-  max-height: 0;
-  opacity: 0;
-  pointer-events: none;
+  display: none;
 }
+
 
 
 
