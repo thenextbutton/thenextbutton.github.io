@@ -1,7 +1,10 @@
 name: Deploy to GitHub Pages
 
 on:
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+
+  # Existing triggers for automated runs
   push:
     branches:
       - main
@@ -25,6 +28,10 @@ jobs:
           npm init -y
           npm install @11ty/eleventy --save-dev
           npm install @11ty/eleventy-fetch --save-dev
+
+      - name: Create Eleventy Configuration File
+        run: |
+          echo "module.exports = function(eleventyConfig) { eleventyConfig.addGlobalData(\"permalink\", \"{{ page.fileSlug }}.html\"); };" > .eleventy.js
 
       - name: Create Eleventy Source and Data Files
         run: |
@@ -88,3 +95,8 @@ jobs:
           github_token: ${{ secrets.GH_TOKEN }}
           publish_dir: ./_site
           cname: chrishoch.co.uk
+```eof
+
+The new step `Create Eleventy Configuration File` will be executed before the build step, ensuring that Eleventy creates the files in the correct format (`.html`) to match your Single-Page Application (SPA) loader script.
+
+The next time your workflow runs, the deployed files should have the `.html` extension as you expect.
