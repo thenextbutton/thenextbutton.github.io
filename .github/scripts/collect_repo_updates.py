@@ -12,6 +12,10 @@ repo_targets = {
 
 # File-level targets (use last commit date)
 file_targets = {
+    "now_page": {
+        "repo": "thenextbutton/thenextbutton.github.io",
+        "path": "content/now_content.html"
+    },
     "camera_offline_v2": {
         "repo": "thenextbutton/home_assistant",
         "path": "blueprints/camera_offline_v2/camera_offline_v2_release.yaml"
