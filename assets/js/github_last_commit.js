@@ -7,11 +7,10 @@ window.initGithubLastCommit = function () {
 
         if (el && isoDate) {
           const dateObj = new Date(isoDate);
-          el.textContent = timeAgo(dateObj);
+          el.textContent = `Last updated: ${timeAgo(dateObj)}`;
           // el.title = dateObj.toLocaleString(); // optional tooltip
         } else {
-          const wrapper = el?.closest('.last-updated');
-          if (wrapper) wrapper.style.display = 'none';
+        if (el) el.style.display = 'none';
         }
       }
     })
