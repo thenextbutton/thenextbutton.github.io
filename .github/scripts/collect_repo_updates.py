@@ -7,6 +7,7 @@ HEADERS = {"Authorization": f"token {TOKEN}"}
 repo_targets = {
     "jellyfin_status": "thenextbutton/jellyfin_status",
     "PiCOW-Garage": "thenextbutton/PiCOW-Garage",
+    "docker_compose": "thenextbutton/docker_compose",
     "powershell": "thenextbutton/powershell"
 }
 
