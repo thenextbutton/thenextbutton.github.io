@@ -1,7 +1,6 @@
 name: Deploy to GitHub Pages
 
 on:
-
   workflow_dispatch:
 
   push:
@@ -14,7 +13,6 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     env:
-
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
     steps:
       - name: Checkout repository
@@ -33,11 +31,18 @@ jobs:
 
       - name: Configure Eleventy Project
         run: |
-          # Add the 'start' script to package.json to run Eleventy
           npm pkg set scripts.start="eleventy"
-          # Create the Eleventy config file to set permalinks and input/output directories
           echo "module.exports = function(eleventyConfig) { eleventyConfig.addGlobalData(\"permalink\", \"{{ page.fileSlug }}.html\"); return { dir: { input: 'src', output: '_site' } }; };" > .eleventy.js
 
+      - name: Copy existing files to Eleventy source folder
+        run: |
+
+          rsync -av --exclude 'node_modules/' --exclude '.git/' --exclude '.github/' --exclude 'src/' . src
+
+      - name: Add Permalink to index.html
+        run: |
+          sed -i '1s/^/---\npermalink: "index.html"\n---\n\n/' src/index.html
+        
       - name: Create Eleventy Source and Data Files
         run: |
           mkdir -p src/_data
@@ -83,12 +88,6 @@ jobs:
           };
           EOF
           
-      - name: Copy existing files to Eleventy source folder
-        run: |
-          # This simpler rsync command copies everything into src/, and because
-          # Eleventy is now configured to only look there, we avoid all conflicts.
-          rsync -av --exclude 'node_modules/' --exclude '.git/' --exclude '.github/' --exclude 'src/' . src
-
       - name: Build site with Eleventy
         run: npm run start
 
