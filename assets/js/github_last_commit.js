@@ -36,11 +36,12 @@ function timeAgo(date) {
   if (diffHr < 24) return `${diffHr} hour${plural(diffHr)} ago`;
   if (diffDay === 1) return "yesterday";
   if (diffDay < 7) return `${diffDay} day${plural(diffDay)} ago`;
+  if (diffDay < 14) return "last week";
   if (diffDay < 30) return `${Math.floor(diffDay / 7)} week${plural(Math.floor(diffDay / 7))} ago`;
+  if (diffMonth === 1) return "last month";
   if (diffMonth < 12) return `${diffMonth} month${plural(diffMonth)} ago`;
   return `${diffYear} year${plural(diffYear)} ago`;
 }
-
 
 function plural(n) {
   return n !== 1 ? "s" : "";
