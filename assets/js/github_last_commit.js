@@ -7,7 +7,7 @@ window.initGithubLastCommit = function () {
         if (el) {
           const dateObj = new Date(isoDate);
           el.textContent = timeAgo(dateObj);
-          el.title = dateObj.toLocaleString();
+          // el.title = dateObj.toLocaleString();
         }
       }
     })
