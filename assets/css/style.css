@@ -430,17 +430,6 @@ body.light-mode .main-nav li a[href*="github.com"]:hover::after {
   transform-origin: top;
 }
 
-.github-project-item.collapsing {
-  max-height: 0;
-  opacity: 0;
-  transform: scaleY(0.95);
-}
-
-.github-project-item.hidden {
-  display: none;
-}
-
-
 
 
 .project-image.dark-mode-img,
