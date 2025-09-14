@@ -1,3 +1,4 @@
+window.initGithubCategoryFilter = function () {
   const checkboxes = document.querySelectorAll('.filter-controls input[type="checkbox"]');
   const items = document.querySelectorAll('.github-project-item');
 
@@ -8,13 +9,10 @@
 
     items.forEach(item => {
       const category = item.getAttribute('data-category');
-      if (activeCategories.includes(category)) {
-        item.style.display = 'block';
-      } else {
-        item.style.display = 'none';
-      }
+      item.style.display = activeCategories.includes(category) ? 'block' : 'none';
     });
   }
 
   checkboxes.forEach(cb => cb.addEventListener('change', applyFilters));
   applyFilters(); // initial run
+};
