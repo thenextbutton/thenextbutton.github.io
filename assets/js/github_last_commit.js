@@ -1,20 +1,19 @@
-document.addEventListener("DOMContentLoaded", () => {
-// Fetch and display repo update timestamps in friendly format
-fetch('/repo-updates.json')
-  .then(res => res.json())
-  .then(data => {
-    for (const [key, isoDate] of Object.entries(data)) {
-      const el = document.getElementById(`${key}-date`);
-      if (el) {
-        const friendly = timeAgo(new Date(isoDate));
-        el.textContent = friendly;
-        el.title = new Date(isoDate).toLocaleString(); // optional tooltip
+window.initGithubLastCommit = function () {
+  fetch('/repo-updates.json')
+    .then(res => res.json())
+    .then(data => {
+      for (const [key, isoDate] of Object.entries(data)) {
+        const el = document.getElementById(`${key}-date`);
+        if (el) {
+          const dateObj = new Date(isoDate);
+          el.textContent = timeAgo(dateObj);
+          el.title = dateObj.toLocaleString();
+        }
       }
-    }
-  })
-  .catch(err => console.error("Failed to load repo-updates.json:", err));
+    })
+    .catch(err => console.error("Failed to load repo-updates.json:", err));
+};
 
-// Convert ISO date to human-friendly "x ago" format
 function timeAgo(date) {
   const now = new Date();
   const diffMs = now - date;
@@ -35,8 +34,6 @@ function timeAgo(date) {
   return `${diffYear} year${plural(diffYear)} ago`;
 }
 
-// Helper for plural suffix
 function plural(n) {
   return n !== 1 ? "s" : "";
 }
-});
