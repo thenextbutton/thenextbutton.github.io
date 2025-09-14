@@ -84,8 +84,8 @@ jobs:
           
       - name: Copy existing files to Eleventy source folder
         run: |
-          # The --exclude '404.html' prevents Eleventy from processing the file twice
-          rsync -av --exclude 'node_modules/' --exclude '.git/' --exclude '.github/' --exclude 'src/' --exclude '404.html' . src
+          # The --exclude flags prevent Eleventy from processing the same file twice
+          rsync -av --exclude 'node_modules/' --exclude '.git/' --exclude '.github/' --exclude 'src/' --exclude '404.html' --exclude 'content/github_content.html' . src
 
       - name: Build site with Eleventy
         run: npm run start
