@@ -1,5 +1,6 @@
+document.addEventListener("DOMContentLoaded", () => {
 // Fetch and display repo update timestamps in friendly format
-fetch('../../repo-updates.json')
+fetch('/repo-updates.json')
   .then(res => res.json())
   .then(data => {
     for (const [key, isoDate] of Object.entries(data)) {
@@ -38,3 +39,4 @@ function timeAgo(date) {
 function plural(n) {
   return n !== 1 ? "s" : "";
 }
+});
