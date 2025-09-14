@@ -14,6 +14,9 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    env:
+      # This makes the GH_TOKEN available to all steps in this job
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -79,12 +82,10 @@ jobs:
           };
           EOF
           
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-
       - name: Copy existing files to Eleventy source folder
         run: |
-          rsync -av --exclude 'node_modules/' --exclude '.git/' --exclude '.github/' --exclude 'src/' . src
+          # The --exclude '404.html' prevents Eleventy from processing the file twice
+          rsync -av --exclude 'node_modules/' --exclude '.git/' --exclude '.github/' --exclude 'src/' --exclude '404.html' . src
 
       - name: Build site with Eleventy
         run: npm run start
