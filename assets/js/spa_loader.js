@@ -115,6 +115,11 @@ async function loadContent(url, pageName, anchor = null) {
             window.initSocialShare();
         }
 
+        if (typeof window.initGithubCategoryFilter === 'function') {
+             window.initGithubCategoryFilter();
+        }
+
+
         // CORRECTED LINE: This now calls the new initialization function
         if (typeof window.initGithubLastCommit === 'function') {
             window.initGithubLastCommit();

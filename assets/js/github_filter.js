@@ -1,4 +1,3 @@
-document.addEventListener("DOMContentLoaded", () => {
   const checkboxes = document.querySelectorAll('.filter-controls input[type="checkbox"]');
   const items = document.querySelectorAll('.github-project-item');
 
@@ -19,4 +18,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
   checkboxes.forEach(cb => cb.addEventListener('change', applyFilters));
   applyFilters(); // initial run
-});
