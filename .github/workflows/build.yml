@@ -95,8 +95,3 @@ jobs:
           github_token: ${{ secrets.GH_TOKEN }}
           publish_dir: ./_site
           cname: chrishoch.co.uk
-```eof
-
-The new step `Create Eleventy Configuration File` will be executed before the build step, ensuring that Eleventy creates the files in the correct format (`.html`) to match your Single-Page Application (SPA) loader script.
-
-The next time your workflow runs, the deployed files should have the `.html` extension as you expect.
