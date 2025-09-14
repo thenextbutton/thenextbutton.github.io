@@ -4,15 +4,20 @@ window.initGithubLastCommit = function () {
     .then(data => {
       for (const [key, isoDate] of Object.entries(data)) {
         const el = document.getElementById(`${key}-date`);
-        if (el) {
+
+        if (el && isoDate) {
           const dateObj = new Date(isoDate);
           el.textContent = timeAgo(dateObj);
-          // el.title = dateObj.toLocaleString();
+          // el.title = dateObj.toLocaleString(); // optional tooltip
+        } else {
+          const wrapper = el?.closest('.last-updated');
+          if (wrapper) wrapper.style.display = 'none';
         }
       }
     })
     .catch(err => console.error("Failed to load repo-updates.json:", err));
 };
+
 
 function timeAgo(date) {
   const now = new Date();
