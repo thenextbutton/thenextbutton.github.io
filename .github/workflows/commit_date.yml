@@ -1,9 +1,10 @@
-name: Simple Last Updated Deploy
+name: Simple GitHub Workflow
 
 on:
-
+  # This trigger allows you to manually run the workflow from the GitHub Actions UI.
   workflow_dispatch:
 
+  #  existing triggers for automated deployments.
   push:
     branches:
       - main
@@ -14,12 +15,13 @@ jobs:
   update-and-deploy:
     runs-on: ubuntu-latest
     env:
-      # The GH_TOKEN is now available to ALL steps within this job,
-      # which prevents the "403 Forbidden" error on API calls.
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
       # Project list with their repository and file paths
       PROJECTS: '[{"id": "plex-webhooks", "repo": "home_assistant", "path": "blueprints/plex_webhook_handler/plex_webhook_release.yaml"}, {"id": "jellyfin_status", "repo": "jellyfin_status"}, {"id": "PiCOW-Garage", "repo": "PiCOW-Garage"}, {"id": "powershell", "repo": "powershell"}, {"id": "jellyfin_webhook_handler_v2", "repo": "home_assistant", "path": "blueprints/jellyfin_webhook_handler_v2/jellyfin_webhook_release_v2.yaml"}]'
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
       - name: Fetch and format last commit dates
         id: get_dates
         run: |
