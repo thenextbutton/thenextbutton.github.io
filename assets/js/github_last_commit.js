@@ -19,6 +19,7 @@ window.initGithubLastCommit = function () {
 };
 
 
+
 function timeAgo(date) {
   const now = new Date();
 
