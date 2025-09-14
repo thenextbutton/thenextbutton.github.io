@@ -29,7 +29,8 @@ jobs:
         run: |
           mkdir -p src/_data
           echo '{ "scripts": { "start": "eleventy" } }' > package.json
-          echo "module.exports = async function() {
+          cat << 'EOF' > src/_data/github.js
+          module.exports = async function() {
             const EleventyFetch = require('@11ty/eleventy-fetch');
             const token = process.env.GH_TOKEN;
             const headers = { 'Authorization': 'token ' + token };
@@ -38,7 +39,6 @@ jobs:
                 { id: 'now', repo: 'thenextbutton.github.io', path: 'content/now_content.html' },
                 { id: 'pi-cow-garage', repo: 'PiCOW-Garage' },
                 { id: 'plex-webhooks', repo: 'home_assistant', path: 'blueprints/plex_webhook_handler/plex_webhook_release.yaml' }
-                // Add more projects here
             ];
 
             const projects = {};
@@ -51,7 +51,7 @@ jobs:
                 try {
                     const json = await EleventyFetch(apiUrl, {
                         type: 'json',
-                        duration: '1d', // Cache for 1 day
+                        duration: '1d',
                         directory: '.cache',
                         fetchOptions: { headers: headers }
                     });
@@ -68,7 +68,8 @@ jobs:
                 }
             }));
             return { lastUpdated: projects };
-          };" > src/_data/github.js
+          };
+          EOF
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
