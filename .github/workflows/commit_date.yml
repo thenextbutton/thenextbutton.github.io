@@ -17,7 +17,7 @@ jobs:
     env:
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
       # Project list with their repository and file paths
-      PROJECTS: '[{"id": "plex-webhooks", "repo": "home_assistant", "path": "blueprints/plex_webhook_handler/plex_webhook_release.yaml"}, {"id": "jellyfin_status", "repo": "jellyfin_status"}, {"id": "PiCOW-Garage", "repo": "PiCOW-Garage"}, {"id": "powershell", "repo": "powershell"}, {"id": "jellyfin_webhook_handler_v2", "repo": "home_assistant", "path": "blueprints/jellyfin_webhook_handler_v2/jellyfin_webhook_release_v2.yaml"}]'
+      PROJECTS: '[{"id": "plex-webhooks", "repo": "home_assistant", "path": "blueprints/plex_webhook_handler/plex_webhook_release.yaml"}, {"id": "jellyfin_status", "repo": "jellyfin_status"}, {"id": "PiCOW-Garage", "repo": "PiCOW-Garage"}, {"id": "powershell", "repo": "powershell"}]'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
