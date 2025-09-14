@@ -9,7 +9,7 @@ window.initGithubCategoryFilter = function () {
 
     items.forEach(item => {
       const category = item.getAttribute('data-category');
-      item.style.display = activeCategories.includes(category) ? 'block' : 'none';
+      item.classList.toggle('hidden', !activeCategories.includes(category));
     });
   }
 
