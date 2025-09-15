@@ -1,59 +1,97 @@
-function initAutoLinker(){
-  let e = {
-    Plex:"https://plex.tv/",
-    Plexamp:"https://www.plex.tv/en-gb/plexamp/",
-    Jellyfin:"https://jellyfin.org/",
-    "Home Assistant":"https://www.home-assistant.io/",
-    Frigate:"https://frigate.video/",
-    Powershell:"https://learn.microsoft.com/en-us/powershell/",
-    Docker:"https://www.docker.com/",
-    Proxmox:"https://www.proxmox.com/",
-    ESPHome:"https://esphome.io/",
-    CarPlay:"https://www.apple.com/uk/ios/carplay/",
-    "Android Auto":"https://www.android.com/intl/en_uk/auto/"
-  };
-  let t = document.getElementById("content-area");
+function initAutoLinker() {
+    let links = {
+        Plex: "https://plex.tv/",
+        Plexamp: "https://www.plex.tv/en-gb/plexamp/",
+        Jellyfin: "https://jellyfin.org/",
+        "Home Assistant": "https://www.home-assistant.io/",
+        Frigate: "https://frigate.video/",
+        Powershell: "https://learn.microsoft.com/en-us/powershell/",
+        Docker: "https://www.docker.com/",
+        Proxmox: "https://www.proxmox.com/",
+        ESPHome: "https://esphome.io/",
+        CarPlay: "https://www.apple.com/uk/ios/carplay/",
+        "Android Auto": "https://www.android.com/intl/en_uk/auto/"
+    };
+    let contentArea = document.getElementById("content-area");
 
-  if(!t){
-    console.warn("Content area not found for auto-linker. Auto-linking skipped.");
-    return;
-  }
-
-  let n = document.createTreeWalker(t,NodeFilter.SHOW_TEXT,{
-    acceptNode:function(e){
-      return"A"===e.parentNode.nodeName||"SCRIPT"===e.parentNode.nodeName||"STYLE"===e.parentNode.nodeName||"BUTTON"===e.parentNode.nodeName||e.parentNode.nodeName.match(/^H[1-3]$/)||0===e.nodeValue.trim().length?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT
+    if (!contentArea) {
+        console.warn("Content area not found for auto-linker. Auto-linking skipped.");
+        return;
     }
-  },!1);
 
-  let o, r=[];
-  for(;o=n.nextNode();)r.push(o);
-
-  r.forEach(t=>{
-    let n=[t];
-    for(let o in e){
-      let r=e[o];
-      // MODIFIED LINE: Changed the trailing \b to (?!\w) for more robust matching with punctuation
-      let a=RegExp(`\\b(${o})(?!\\w)`,"gi");
-      let l=[];
-
-      n.forEach(e=>{
-        if(e.nodeType===Node.TEXT_NODE){
-          let t=e.nodeValue,n=0,o;
-          for(;null!==(o=a.exec(t));){
-            o.index>n&&l.push(document.createTextNode(t.substring(n,o.index)));
-            let i=document.createElement("a");
-            i.href=r,
-            i.target="_blank",
-            i.rel="noopener noreferrer",
-            i.textContent=o[0],
-            l.push(i),
-            n=o.index+o[0].length
-          }
-          n<t.length&&l.push(document.createTextNode(t.substring(n))),
-          l.forEach(e=>e.parentNode.insertBefore(e,e)),
-          l.length>1&&e.parentNode.removeChild(e)
+    let treeWalker = document.createTreeWalker(contentArea, NodeFilter.SHOW_TEXT, {
+        acceptNode: function(node) {
+            // Reject nodes that are inside specific tags or are empty
+            const parentName = node.parentNode.nodeName;
+            if (parentName === "A" || parentName === "SCRIPT" || parentName === "STYLE" || parentName === "BUTTON" || parentName.match(/^H[1-3]$/) || node.nodeValue.trim().length === 0) {
+                return NodeFilter.FILTER_REJECT;
+            }
+            return NodeFilter.FILTER_ACCEPT;
         }
-      })
+    }, false);
+
+    let currentNode;
+    let nodesToProcess = [];
+
+    // Collect all text nodes first to avoid issues with DOM modifications
+    while (currentNode = treeWalker.nextNode()) {
+        nodesToProcess.push(currentNode);
     }
-  });
+
+    nodesToProcess.forEach(textNode => {
+        let newNodes = [textNode]; // Start with the original text node
+
+        for (let keyword in links) {
+            const url = links[keyword];
+            // Negative lookahead `(?!\w)` ensures the word is not part of another word.
+            const regex = new RegExp(`\\b(${keyword})(?!\\w)`, "gi");
+            let nextNodes = []; // Nodes for the next iteration
+
+            newNodes.forEach(node => {
+                // Only process text nodes
+                if (node.nodeType === Node.TEXT_NODE) {
+                    let text = node.nodeValue;
+                    let lastIndex = 0;
+                    let match;
+                    
+                    while (null !== (match = regex.exec(text))) {
+                        // Add text before the match
+                        if (match.index > lastIndex) {
+                            nextNodes.push(document.createTextNode(text.substring(lastIndex, match.index)));
+                        }
+                        
+                        // Create the link and add it
+                        let link = document.createElement("a");
+                        link.href = url;
+                        link.target = "_blank";
+                        link.rel = "noopener noreferrer";
+                        link.textContent = match[0];
+                        nextNodes.push(link);
+                        
+                        lastIndex = regex.lastIndex;
+                    }
+                    
+                    // Add any remaining text after the last match
+                    if (lastIndex < text.length) {
+                        nextNodes.push(document.createTextNode(text.substring(lastIndex)));
+                    }
+
+                } else {
+                    // If the node isn't a text node (e.g., it's a link from a previous pass),
+                    // just add it to the next pass without modification.
+                    nextNodes.push(node);
+                }
+            });
+            // Replace the nodes for the next iteration
+            newNodes = nextNodes;
+        }
+
+
+        if (newNodes.length > 1) {
+            // Insert the new nodes before the original node
+            newNodes.forEach(newNode => textNode.parentNode.insertBefore(newNode, textNode));
+            // Remove the original text node once all new nodes are in place
+            textNode.parentNode.removeChild(textNode);
+        }
+    });
 }
