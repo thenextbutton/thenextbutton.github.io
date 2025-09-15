@@ -31,5 +31,5 @@ jobs:
           git config user.name "GitHub Action"
           git config user.email "action@github.com"
           git add repo-updates.json
-          git commit -m "Update repo timestamps"
+          git diff --cached --quiet || git commit -m "Update repo timestamps"
           git push
