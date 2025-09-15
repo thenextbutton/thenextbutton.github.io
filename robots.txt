@@ -1,2 +1,5 @@
 User-agent: *
 Disallow: /content/
+Disallow: /assets/
+
+Sitemap: https://www.chrishoch.co.uk/sitemap.xml
