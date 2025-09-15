@@ -21,7 +21,7 @@ function initAutoLinker(){
 
   let n = document.createTreeWalker(t,NodeFilter.SHOW_TEXT,{
     acceptNode:function(e){
-      return"A"===e.parentNode.nodeName||"SCRIPT"===e.parentNode.nodeName||"STYLE"===e.parentNode.nodeName||e.parentNode.nodeName.match(/^H[1-3]$/)||0===e.nodeValue.trim().length?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT
+      return"A"===e.parentNode.nodeName||"SCRIPT"===e.parentNode.nodeName||"STYLE"===e.parentNode.nodeName||"BUTTON"===e.parentNode.nodeName||e.parentNode.nodeName.match(/^H[1-3]$/)||0===e.nodeValue.trim().length?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT
     }
   },!1);
 
@@ -47,18 +47,13 @@ function initAutoLinker(){
             i.rel="noopener noreferrer",
             i.textContent=o[0],
             l.push(i),
-            n=a.lastIndex;
+            n=o.index+o[0].length
           }
           n<t.length&&l.push(document.createTextNode(t.substring(n))),
-          0===l.length&&l.push(e);
-        } else {
-          l.push(e);
+          l.forEach(e=>e.parentNode.insertBefore(e,e)),
+          l.length>1&&e.parentNode.removeChild(e)
         }
-      });
-      n=l;
+      })
     }
-    n.forEach(e=>{t.parentNode.insertBefore(e,t)}),
-    t.parentNode.removeChild(t);
   });
 }
-document.addEventListener("DOMContentLoaded",initAutoLinker);

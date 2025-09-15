@@ -1358,3 +1358,68 @@ body.blur-content {
         font-size: 1.5rem;
     }
 }
+
+/* --- Github Content Tag System Styles --- */
+.tag-filter-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.tag-filter-btn {
+    padding: 8px 16px;
+    border: 1px solid #5a5a5a;
+    border-radius: 20px;
+    background-color: transparent;
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.tag-filter-btn:hover {
+    background-color: #5a5a5a;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.tag-filter-btn.active {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+}
+
+/* Light mode specific styles for tags */
+.light-mode .tag-filter-btn {
+    border-color: #dcdcdc;
+    color: #333;
+}
+
+.light-mode .tag-filter-btn:hover {
+    background-color: #dcdcdc;
+    color: #333;
+}
+
+.light-mode .tag-filter-btn.active {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+}
+
+/* --- Project Item Filtering Animation --- */
+.github-project-item {
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out, margin 0.5s ease-in-out, height 0.5s ease-in-out, padding 0.5s ease-in-out;
+    transform-origin: center top;
+}
+
+.github-project-item.hidden-by-tag {
+    opacity: 0;
+    transform: scaleY(0);
+    height: 0;
+    margin: 0 !important; /* Override existing margins */
+    padding: 0 !important; /* Override existing padding */
+    overflow: hidden;
+}
