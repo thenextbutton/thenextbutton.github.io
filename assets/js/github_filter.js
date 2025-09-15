@@ -1,35 +1,39 @@
-document.addEventListener('DOMContentLoaded', () => {
+function initGitHubFilter() {
+  // Select all the filter buttons and all the project items.
+  const filterTagsContainer = document.querySelector('.all-tags');
+  const projectItems = document.querySelectorAll('.github-project-item');
+  const tags = document.querySelectorAll('.tag');
 
-  const tagContainer = document.querySelector('.all-tags');
-  const projectCards = document.querySelectorAll('.github-project-item');
+  // Check if the necessary elements exist before proceeding.
+  if (!filterTagsContainer || projectItems.length === 0 || tags.length === 0) {
+    console.warn('One or more necessary elements for filtering are missing.');
+    return;
+  }
 
-  if (tagContainer) {
-    tagContainer.addEventListener('click', (event) => {
-      const target = event.target;
-      if (target.matches('.tag')) {
-        const selectedCategory = target.getAttribute('data-category');
+  // Use event delegation on the parent container.
+  filterTagsContainer.addEventListener('click', (event) => {
+    // Check if the clicked element is a filter tag.
+    const clickedTag = event.target.closest('.tag');
+    if (!clickedTag) {
+      return;
+    }
 
-        // Remove 'active' class from all tags and add it to the clicked one
-        document.querySelectorAll('.tag').forEach(tag => tag.classList.remove('active'));
-        target.classList.add('active');
+    const selectedCategory = clickedTag.dataset.category;
 
-        projectCards.forEach(card => {
-          const cardCategory = card.getAttribute('data-category');
+    // Remove the 'active' class from the previously active tag.
+    tags.forEach(tag => tag.classList.remove('active'));
+    // Add the 'active' class to the newly clicked tag.
+    clickedTag.classList.add('active');
 
-          if (selectedCategory === 'all' || cardCategory === selectedCategory) {
-            // Show the card
-            card.classList.remove('slide-out');
-            card.style.display = 'flex'; // Revert to original display property
-          } else {
-            // Hide the card with a smooth animation
-            card.classList.add('slide-out');
-            // Use a timeout to fully remove the card from the layout after the animation
-            setTimeout(() => {
-              card.style.display = 'none';
-            }, 300); // 300ms matches the animation duration
-          }
-        });
+    // Loop through all project items and show/hide them based on the category.
+    projectItems.forEach(item => {
+      const itemCategory = item.dataset.category;
+      // If the selected category is 'all' or the item's category matches the selected one, show it.
+      if (selectedCategory === 'all' || itemCategory === selectedCategory) {
+        item.style.display = 'block'; // Or 'flex' or 'grid' depending on your CSS display property.
+      } else {
+        item.style.display = 'none';
       }
     });
-  }
-});
+  });
+}
