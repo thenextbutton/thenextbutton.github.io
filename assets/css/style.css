@@ -336,9 +336,6 @@ body.light-mode .main-nav li a[href*="github.com"]:hover::after {
   text-align: left;
   transition: background-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out, opacity 2s ease-out, transform 2s ease-out;
   position: relative;
-  transition: opacity 0.5s ease, transform 0.5s ease, max-height 0.5s ease-out, margin 0.5s ease-out, padding 0.5s ease-out;
-  overflow: hidden;
-  will-change: opacity, transform, max-height; 
 }
 
 .github-project-item:hover {
@@ -1360,91 +1357,4 @@ body.blur-content {
     .social-icons-wrapper button i {
         font-size: 1.5rem;
     }
-}
-
-
-/* GitHub Filtering Styles */
-.all-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: flex-start;
-  margin-bottom: 20px;
-}
-
-.tag {
-    padding: 6px 12px;
-    border: 1px solid #d1d5db;
-    border-radius: 9999px;
-    font-size: 0.875rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    background-color: #f3f4f6;
-    color: #4b5563;
-}
-
-.light-theme .tag {
-  background-color: #e5e7eb;
-  color: #333;
-  border-color: #ccc;
-}
-
-.tag:hover {
-    background-color: #e5e7eb;
-}
-
-.tag.active {
-    background-color: #2563eb;
-    color: white;
-}
-
-.project-tags {
-    margin-bottom: 8px;
-}
-
-.project-tag-item {
-    display: inline-block;
-    padding: 4px 8px;
-    border-radius: 9999px;
-    font-size: 0.75rem;
-    font-weight: 500;
-    background-color: #d1d5db;
-    color: #4b5563;
-}
-
-.light-theme .project-tag-item {
-  background-color: #ccc;
-  color: #333;
-}
-
-@keyframes slideOut {
-    from {
-      opacity: 1;
-      transform: scale(1);
-      height: auto;
-      margin-bottom: 24px;
-    }
-    to {
-      opacity: 0;
-      transform: scale(0.95);
-      height: 0;
-      margin-bottom: 0;
-    }
-}
-
-.slide-out {
-    animation: slideOut 0.3s forwards;
-    pointer-events: none;
-    overflow: hidden;
-}
-
-.github-project-item.hidden {
-  opacity: 0;
-  transform: translateY(-20px);
-  max-height: 0;
-  margin-top: 0;
-  margin-bottom: 0;
-  padding-top: 0;
-  padding-bottom: 0;
 }
