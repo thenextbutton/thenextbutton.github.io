@@ -1,67 +1,82 @@
-function initAutoLinker(){
-  let e = {
-    Plex:"https://plex.tv/",
-    Plexamp:"https://www.plex.tv/en-gb/plexamp/",
-    Jellyfin:"https://jellyfin.org/",
-    "Home Assistant":"https://www.home-assistant.io/",
-    Frigate:"https://frigate.video/",
-    Powershell:\"https://learn.microsoft.com/en-us/powershell/\",
-    Docker:"https://www.docker.com/",
-    Proxmox:"https://www.proxmox.com/",
-    ESPHome:"https://esphome.io/",
-    CarPlay:"https://www.apple.com/uk/ios/carplay/",
-    "Android Auto":"https://www.android.com/intl/en_uk/auto/"
+function initAutoLinker() {
+  const links = {
+    Plex: "https://plex.tv/",
+    Plexamp: "https://www.plex.tv/en-gb/plexamp/",
+    Jellyfin: "https://jellyfin.org/",
+    "Home Assistant": "https://www.home-assistant.io/",
+    Frigate: "https://frigate.video/",
+    Powershell: "https://learn.microsoft.com/en-us/powershell/",
+    Docker: "https://www.docker.com/",
+    Proxmox: "https://www.proxmox.com/",
+    ESPHome: "https://esphome.io/",
+    CarPlay: "https://www.apple.com/uk/ios/carplay/",
+    "Android Auto": "https://www.android.com/intl/en_uk/auto/"
   };
-  let t = document.getElementById("content-area");
+  const contentArea = document.getElementById("content-area");
 
-  if(!t){
+  if (!contentArea) {
     console.warn("Content area not found for auto-linker. Auto-linking skipped.");
     return;
   }
 
-  let n = document.createTreeWalker(t,NodeFilter.SHOW_TEXT,{
-    acceptNode:function(e){
-      // MODIFIED: This new condition prevents auto-linking within elements that have the 'tag' class.
-      return"A"===e.parentNode.nodeName||\"SCRIPT\"===e.parentNode.nodeName||\"STYLE\"===e.parentNode.nodeName||e.parentNode.closest(".tag")||e.parentNode.nodeName.match(/^H[1-3]$/)||0===e.nodeValue.trim().length?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT
+  const treeWalker = document.createTreeWalker(contentArea, NodeFilter.SHOW_TEXT, {
+    acceptNode: function(node) {
+      if (node.parentNode.nodeName === "A" ||
+          node.parentNode.nodeName === "SCRIPT" ||
+          node.parentNode.nodeName === "STYLE" ||
+          node.parentNode.closest(".tag") ||
+          node.parentNode.nodeName.match(/^H[1-3]$/) ||
+          node.nodeValue.trim().length === 0) {
+        return NodeFilter.FILTER_REJECT;
+      }
+      return NodeFilter.FILTER_ACCEPT;
     }
-  },!1);
+  }, false);
 
-  let o, r=[];
-  for(;o=n.nextNode();)r.push(o);
+  const textNodes = [];
+  let currentNode;
+  while ((currentNode = treeWalker.nextNode())) {
+    textNodes.push(currentNode);
+  }
 
-  r.forEach(t=>{
-    let n=[t];
-    for(let o in e){
-      let r=e[o];
-      // MODIFIED LINE: Changed the trailing \\b to (?!\\w) for more robust matching with punctuation
-      let a=RegExp(`\\\\b(${o})(?!\\\\w)`,"gi");
-      let l=[];
+  textNodes.forEach(node => {
+    let parentNodes = [node];
+    for (const term in links) {
+      const url = links[term];
+      const regex = new RegExp(`\\b(${term})(?!\\w)`, "gi");
+      let newNodes = [];
 
-      n.forEach(e=>{
-        if(e.nodeType===Node.TEXT_NODE){
-          let t=e.nodeValue,n=0,o;
-          for(;null!==(o=a.exec(t));){
-            o.index>n&&l.push(document.createTextNode(t.substring(n,o.index)));
-            let i=document.createElement("a");
-            i.href=r,
-            i.target="_blank",
-            i.rel="noopener noreferrer",
-            i.textContent=o[0],
-            l.push(i),
-            n=o.index+o[0].length
+      parentNodes.forEach(parentNode => {
+        if (parentNode.nodeType === Node.TEXT_NODE) {
+          let text = parentNode.nodeValue;
+          let lastIndex = 0;
+          let match;
+          while ((match = regex.exec(text)) !== null) {
+            if (match.index > lastIndex) {
+              newNodes.push(document.createTextNode(text.substring(lastIndex, match.index)));
+            }
+            const link = document.createElement("a");
+            link.href = url;
+            link.target = "_blank";
+            link.rel = "noopener noreferrer";
+            link.textContent = match[0];
+            newNodes.push(link);
+            lastIndex = match.index + match[0].length;
           }
-          n<t.length&&l.push(document.createTextNode(t.substring(n))),
-          l.length&&l.forEach(e=>t.parentNode.insertBefore(e,t)),
-          t.parentNode.removeChild(t)
+          if (lastIndex < text.length) {
+            newNodes.push(document.createTextNode(text.substring(lastIndex)));
+          }
+          if (newNodes.length) {
+            newNodes.forEach(newNode => parentNode.parentNode.insertBefore(newNode, parentNode));
+            parentNode.parentNode.removeChild(parentNode);
+          }
         } else {
-          l.push(e);
+          newNodes.push(parentNode);
         }
       });
-
-      n=l;
+      parentNodes = newNodes;
     }
-  })
+  });
 }
 
-// Ensure the linker runs after content is loaded.
 document.addEventListener('DOMContentLoaded', initAutoLinker);
