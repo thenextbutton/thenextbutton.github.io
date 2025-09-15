@@ -1,25 +1,34 @@
-function initGitHubFilter() {
-  const filterButtons = document.querySelectorAll('.all-tags .tag');
-  const projectItems = document.querySelectorAll('.github-project-item');
+const filterTags = document.querySelectorAll('.all-tags .tag');
+const projectItems = document.querySelectorAll('.github-project-item');
 
-  filterButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      // Remove 'active' class from all buttons
-      filterButtons.forEach(btn => btn.classList.remove('active'));
+filterTags.forEach(tag => {
+    tag.addEventListener('click', () => {
+        const category = tag.getAttribute('data-category');
 
-      // Add 'active' class to the clicked button
-      button.classList.add('active');
+        // Update active state of tags
+        filterTags.forEach(t => t.classList.remove('active'));
+        tag.classList.add('active');
 
-      const category = button.getAttribute('data-category');
+        projectItems.forEach(item => {
+            const itemCategory = item.getAttribute('data-category');
 
-      // Iterate through project items and show/hide based on category
-      projectItems.forEach(item => {
-        if (category === 'all' || item.getAttribute('data-category') === category) {
-          item.classList.remove('hidden');
-        } else {
-          item.classList.add('hidden');
-        }
-      });
+            if (category === 'all' || itemCategory === category) {
+                // Show the item
+                item.style.display = ''; // Reset display to default (e.g., 'block' or 'grid-item')
+                setTimeout(() => {
+                    item.classList.remove('hidden');
+                }, 10); // A small delay to allow the browser to register the display change before starting the animation
+            } else {
+                // Hide the item
+                item.classList.add('hidden');
+                // Wait for the transition to finish, then set display to none
+                item.addEventListener('transitionend', function handler(event) {
+                    if (event.propertyName === 'opacity' && item.classList.contains('hidden')) {
+                        item.style.display = 'none';
+                        item.removeEventListener('transitionend', handler);
+                    }
+                });
+            }
+        });
     });
-  });
-}
+});
