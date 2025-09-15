@@ -58,117 +58,115 @@ document.addEventListener('DOMContentLoaded', () => {
         return { pageName: 'home', anchor: null };
     }
 
-    async function loadContent(url, pageName, anchor = null) {
-        try {
-            document.body.classList.add('hide-scrollbar-visually');
-            contentArea.style.opacity = '0';
+// Inside spa_loader.js
+async function loadContent(url, pageName, anchor = null) {
+    try {
+        document.body.classList.add('hide-scrollbar-visually');
+        contentArea.style.opacity = '0';
 
-            await new Promise(resolve => {
-                let transitionEndTimeout;
-                const handleTransitionEnd = (event) => {
-                    if (event.propertyName === 'opacity') {
-                        contentArea.removeEventListener('transitionend', handleTransitionEnd);
-                        clearTimeout(transitionEndTimeout);
-                        resolve();
-                    }
-                };
-                contentArea.addEventListener('transitionend', handleTransitionEnd);
-                transitionEndTimeout = setTimeout(() => {
+        await new Promise(resolve => {
+            let transitionEndTimeout;
+            const handleTransitionEnd = (event) => {
+                if (event.propertyName === 'opacity') {
                     contentArea.removeEventListener('transitionend', handleTransitionEnd);
+                    clearTimeout(transitionEndTimeout);
                     resolve();
-                }, parseFloat(getComputedStyle(contentArea).transitionDuration) * 1000 + 100);
-            });
-
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            const data = await response.text();
-
-            let contentColumn = contentArea.querySelector('.content-column');
-            if (!contentColumn) {
-                contentColumn = document.createElement('div');
-                contentColumn.classList.add('content-column');
-                contentArea.appendChild(contentColumn);
-            }
-            
-            contentColumn.innerHTML = data;
-            document.body.classList.remove('hide-scrollbar-visually');
-
-            // NEW: This is where you call the fadeInLists() function.
-            // It's crucial to call it here, after the new content is in the DOM.
-            if (typeof fadeInLists === 'function') {
-                fadeInLists();
-            }
-
-            if (typeof initScrollAnimations === 'function') {
-                // initScrollAnimations();
-            }
-            if (typeof window.initAutoLinker === 'function') {
-                window.initAutoLinker();
-            }
-            if (typeof initLightbox === 'function') {
-                initLightbox();
-            }
-            if (typeof window.initSocialShare === 'function') {
-                window.initSocialShare();
-            }
-            // THIS IS THE NEWLY ADDED LINE
-            if (pageName === 'github' && typeof window.initTagFilter === 'function') {
-                window.initTagFilter();
-            }
-            if (typeof window.initGithubCategoryFilter === 'function') {
-                 window.initGithubCategoryFilter();
-            }
-
-
-            // CORRECTED LINE: This now calls the new initialization function
-            if (typeof window.initGithubLastCommit === 'function') {
-                window.initGithubLastCommit();
-            }
-
-            await new Promise(resolve => setTimeout(resolve, 50));
-            contentArea.style.opacity = '1';
-            window.location.hash = `#/${pageName}.html${anchor ? '#' + anchor : ''}`;
-            setActiveNavLink(pageName);
-
-            let projectTitle = null;
-            let projectDescription = null;
-            
-            if (anchor) {
-                await new Promise(resolve => setTimeout(resolve, 300));
-                const projectElement = document.getElementById(anchor);
-                if (projectElement) {
-                    projectTitle = projectElement.querySelector('h3').innerText;
-                    projectDescription = projectElement.querySelector('.project-details p').innerText;
-
-                    const headerHeight = document.querySelector('.main-header-fixed').offsetHeight;
-                    const offset = 15;
-                    const topPosition = projectElement.getBoundingClientRect().top + window.scrollY - headerHeight - offset;
-                    
-                    window.scrollTo({
-                        top: topPosition,
-                        behavior: 'smooth'
-                    });
-                } else {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
+            };
+            contentArea.addEventListener('transitionend', handleTransitionEnd);
+            transitionEndTimeout = setTimeout(() => {
+                contentArea.removeEventListener('transitionend', handleTransitionEnd);
+                resolve();
+            }, parseFloat(getComputedStyle(contentArea).transitionDuration) * 1000 + 100);
+        });
+
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.text();
+
+        let contentColumn = contentArea.querySelector('.content-column');
+        if (!contentColumn) {
+            contentColumn = document.createElement('div');
+            contentColumn.classList.add('content-column');
+            contentArea.appendChild(contentColumn);
+        }
+        
+        contentColumn.innerHTML = data;
+        document.body.classList.remove('hide-scrollbar-visually');
+
+        // NEW: This is where you call the fadeInLists() function.
+        // It's crucial to call it here, after the new content is in the DOM.
+        if (typeof fadeInLists === 'function') {
+            fadeInLists();
+        }
+
+        if (typeof initScrollAnimations === 'function') {
+            // initScrollAnimations();
+        }
+        if (typeof window.initAutoLinker === 'function') {
+            window.initAutoLinker();
+        }
+        if (typeof initLightbox === 'function') {
+            initLightbox();
+        }
+        if (typeof window.initSocialShare === 'function') {
+            window.initSocialShare();
+        }
+
+        if (typeof window.initGithubCategoryFilter === 'function') {
+             window.initGithubCategoryFilter();
+        }
+
+
+        // CORRECTED LINE: This now calls the new initialization function
+        if (typeof window.initGithubLastCommit === 'function') {
+            window.initGithubLastCommit();
+        }
+
+        await new Promise(resolve => setTimeout(resolve, 50));
+        contentArea.style.opacity = '1';
+        window.location.hash = `#/${pageName}.html${anchor ? '#' + anchor : ''}`;
+        setActiveNavLink(pageName);
+
+        let projectTitle = null;
+        let projectDescription = null;
+        
+        if (anchor) {
+            await new Promise(resolve => setTimeout(resolve, 300));
+            const projectElement = document.getElementById(anchor);
+            if (projectElement) {
+                projectTitle = projectElement.querySelector('h3').innerText;
+                projectDescription = projectElement.querySelector('.project-details p').innerText;
+
+                const headerHeight = document.querySelector('.main-header-fixed').offsetHeight;
+                const offset = 15;
+                const topPosition = projectElement.getBoundingClientRect().top + window.scrollY - headerHeight - offset;
+                
+                window.scrollTo({
+                    top: topPosition,
+                    behavior: 'smooth'
+                });
             } else {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
-
-            updatePageMetadata(pageName, projectTitle, projectDescription);
-            
-            if (typeof window.triggerHeaderScrollCheck === 'function') {
-                window.triggerHeaderScrollCheck();
-            }
-        } catch (error) {
-            console.error('Error loading content:', error);
-            contentArea.innerHTML = '<p>Failed to load content.</p>';
-            contentArea.style.opacity = '1';
-            document.body.classList.remove('hide-scrollbar-visually');
+        } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+        updatePageMetadata(pageName, projectTitle, projectDescription);
+        
+        if (typeof window.triggerHeaderScrollCheck === 'function') {
+            window.triggerHeaderScrollCheck();
+        }
+    } catch (error) {
+        console.error('Error loading content:', error);
+        contentArea.innerHTML = '<p>Failed to load content.</p>';
+        contentArea.style.opacity = '1';
+        document.body.classList.remove('hide-scrollbar-visually');
     }
+}
 
     document.querySelectorAll('.main-nav a').forEach(link => {
         link.addEventListener('click', (event) => {
