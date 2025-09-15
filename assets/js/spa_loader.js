@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } catch (error) {
             console.error('Error loading content:', error);
+            console.error('Failed to fetch URL:', url);
             contentArea.innerHTML = `<p>Error loading page. Please try again later.</p>`;
         }
     }
@@ -102,11 +103,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const { pageName: currentPageFromHash } = getCurrentPageFromHash();
 
             if (clickedPageData && clickedPageData !== currentPageFromHash) {
+                // Corrected path to include the content folder
                 const url = `/content/${clickedPageData}_content.html`;
                 loadContent(url, clickedPageData, null);
             } else if (!clickedPageData && link.href) {
                 const defaultPage = link.href.split('/').pop().split('.')[0].replace('_content', '');
                 if (defaultPage && defaultPage !== currentPageFromHash) {
+                    // Corrected path to include the content folder
                     const url = `/content/${defaultPage}_content.html`;
                     loadContent(url, defaultPage, null);
                 }
@@ -116,11 +119,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('popstate', () => {
         const { pageName, anchor } = getCurrentPageFromHash();
+        // Corrected path to include the content folder
         const url = `/content/${pageName}_content.html`;
         loadContent(url, pageName, anchor);
     });
 
     const { pageName: initialPage, anchor: initialAnchor } = getCurrentPageFromHash();
+    // Corrected path to include the content folder
     const initialUrl = `/content/${initialPage}_content.html`;
     loadContent(initialUrl, initialPage, initialAnchor);
 
