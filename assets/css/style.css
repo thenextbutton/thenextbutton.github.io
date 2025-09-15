@@ -336,6 +336,9 @@ body.light-mode .main-nav li a[href*="github.com"]:hover::after {
   text-align: left;
   transition: background-color 1.5s ease-in-out, box-shadow 0.3s ease-in-out, opacity 2s ease-out, transform 2s ease-out;
   position: relative;
+  transition: opacity 0.5s ease, transform 0.5s ease, max-height 0.5s ease-out, margin 0.5s ease-out, padding 0.5s ease-out;
+  overflow: hidden;
+  will-change: opacity, transform, max-height; 
 }
 
 .github-project-item:hover {
@@ -1362,11 +1365,11 @@ body.blur-content {
 
 /* GitHub Filtering Styles */
 .all-tags {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start;
+  margin-bottom: 20px;
 }
 
 .tag {
@@ -1434,4 +1437,14 @@ body.blur-content {
     animation: slideOut 0.3s forwards;
     pointer-events: none;
     overflow: hidden;
+}
+
+.github-project-item.hidden {
+  opacity: 0;
+  transform: translateY(-20px);
+  max-height: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
 }
