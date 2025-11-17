@@ -1357,4 +1357,17 @@ body.blur-content {
     .social-icons-wrapper button i {
         font-size: 1.5rem;
     }
+	
 }
+
+    .image-pair {
+        display: flex;
+        justify-content: space-between; 
+        align-items: flex-start; 
+        width: 100%; 
+    }
+
+    .image-pair .lightbox-trigger-img {
+        width: 48%; 
+        height: auto;
+    }
