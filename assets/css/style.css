@@ -1360,14 +1360,16 @@ body.blur-content {
 	
 }
 
-    .image-pair {
-        display: flex;
-        justify-content: space-between; 
-        align-items: flex-start; 
-        width: 100%; 
-    }
+.image-pair {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; 
+    width: 100%;
+    margin: 0 auto; 
+}
 
-    .image-pair .lightbox-trigger-img {
-        width: 48%; 
-        height: auto;
-    }
+.image-pair .lightbox-trigger-img {
+    width: 100%; 
+    height: auto;
+    object-fit: cover; 
+}
